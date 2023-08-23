@@ -1,6 +1,4 @@
 // < 홈 페이지 >
-
-import React, { useEffect, useState } from "react";
 import * as S from "./StyledHome";
 import HomeSecondImg1 from "../../assets/images/HomeSecondImg1.png";
 import HomeSecondImg2 from "../../assets/images/HomeSecondImg2.png";
@@ -16,6 +14,10 @@ export const Home = () => {
 
   const handleRecommendWorkout = () => {
     navigate("recommend/workout");
+  };
+
+  const handleSupplement = () => {
+    navigate("recommend/supplementpurpose");
   };
 
   return (
@@ -83,7 +85,7 @@ export const Home = () => {
               <p id="right">AI가 여러분의 정보를 바탕으로 추천해줘요</p>
             </div>
             <div id="right" className="secondBottom">
-              <button className="clickFrame">
+              <button className="clickFrame" onClick={handleSupplement}>
                 <span>보조제 추천 바로 받기</span>
                 <img src={arrow} alt="보조제 추천 바로 받기 버튼"></img>
               </button>
@@ -95,6 +97,7 @@ export const Home = () => {
         <S.ThirdContent>
           <p className="thirdTitle">FITMATE 유저들의 생생한 이용 후기</p>
           <S.ThirdText>
+            {/* dummyData */}
             {[0, 0, 0].map((item) => {
               return (
                 <S.ThirdFrame>

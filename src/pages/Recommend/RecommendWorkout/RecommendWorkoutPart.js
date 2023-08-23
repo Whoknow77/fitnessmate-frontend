@@ -24,12 +24,10 @@ const RecommendWorkoutPart = () => {
   // 운동 부위 배열
   const [isBodyPartSelected, setIsBodyPartSelected] = useState([]);
 
+  // 운동부위 요청
   const fetchData = async () => {
     const response = await userBodyPartAPI.get("", {
       // 나중에 토큰 제거
-      headers: {
-        Authorization: "Bearer " + localStorage.getItem("Jwt"),
-      },
     });
     const newArr = response.data.bodyPartKoreanName.map((obj) => ({
       ...obj,

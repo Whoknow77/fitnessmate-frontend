@@ -1,4 +1,7 @@
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import { useRecoilState } from "recoil";
+import { bodyPartState } from "./../../../recoil/atom";
 import {
   BorderTextCheckboxContainer,
   BorderTextCheckboxInnerContainer,
@@ -13,15 +16,12 @@ import {
   BeforeButton,
   SmallTextCheckbox,
 } from "./../../../components/";
-import { useNavigate } from "react-router-dom";
-import { useRecoilState } from "recoil";
 import theme from "../../../styles/theme";
 import {
-  nonAdminMachineAPI,
   recommendPostAPI,
   recommendWorkoutHistoryAPI,
 } from "./../../../apis/API";
-import { bodyPartState } from "./../../../recoil/atom";
+import TokenApi from "../../../apis/TokenApi";
 
 const RecommendMachine = () => {
   const navigate = useNavigate();
@@ -32,35 +32,30 @@ const RecommendMachine = () => {
   // 운동 기구 배열
   const [isMachineSelected, setIsMachineSelected] = useState([]);
 
+  // 모르겠어요 클릭 상태
+  const [isNotSelected, setIsNotSelected] = useState(false);
+
+  // 전체 선택 상태
+  const [isAllSelected, setIsAllSelected] = useState(false);
+
+  // 부위를 선택했을때만 서버에서 기구 리스트를 받아옴
   const fetchData = async () => {
-    // 부위를 선택했을때만 서버에서 기구 리스트를 받아옴
     if (selectedBodyPart.bodyPartKoreanName.length) {
-      const response = await nonAdminMachineAPI.post(
-        "/list",
-        selectedBodyPart,
-        {
-          headers: {
-            Authorization: "Bearer " + localStorage.getItem("accessToken"),
-          },
-        }
-      );
+      const response = await TokenApi.post("/machines/list", selectedBodyPart);
+      console.log(response);
       const newArr = response.data.map((obj, index) => ({
         ...obj,
         isSelected: false,
       }));
       setIsMachineSelected(newArr);
+    } else {
+      console.log("운동 부위를 선택하지 않았습니다");
     }
   };
   // 최초 렌더링 시 운동기구 목록 받아옴
   useEffect(() => {
     fetchData();
   }, []);
-
-  // 모르겠어요 클릭 상태
-  const [isNotSelected, setIsNotSelected] = useState(false);
-
-  // 전체 선택 상태
-  const [isAllSelected, setIsAllSelected] = useState(false);
 
   // 운동 기구 선택
   const handleSelect = (idx) => {

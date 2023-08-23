@@ -48,7 +48,7 @@ export const NavbarContainer = styled.div`
 
 export const NavLink = styled.div`
   display: flex;
-  gap: 43px;
+  gap: 24px;
 `;
 
 export const NavTextContainer = styled.div`
@@ -81,19 +81,50 @@ export const NavButton = styled.button`
   }
 `;
 
-export const NavLoginButton = styled(NavButton)`
-  background: ${theme.Brand};
-  color: ${theme.White};
-  display: block;
+export const NavLoginButtonContainer = styled(NavButton)`
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  padding: 0;
+  position: relative;
+  .profileName {
+    color: #000;
+    font-size: 18px;
+    line-height: 150%;
+    letter-spacing: -0.36px;
+  }
 `;
 
-export const NoneScrollContainerWrapper = styled.div`
-  width: 100%;
-  min-height: calc(100vh - 64px);
+export const NavProfileBox = styled.div`
+  transition: transform 0.2s ease-in-out 0s;
+  transform-origin: center top;
+  transform: scaleY(${({ isprofileBox }) => (isprofileBox ? "1" : "0")});
+  position: absolute;
+  top: 50px;
+  right: 10px;
   display: flex;
-  align-items: center;
-  margin-top: 0;
-  margin-left: auto;
-  margin-right: auto;
+  flex-direction: column;
+  gap: 16px;
   justify-content: center;
+  align-items: center;
+  border-radius: 16px;
+  border: 1px solid ${theme.Gray30};
+  background: #f8f8f8;
+  box-shadow: 0px 4px 8px 0px rgba(0, 0, 0, 0.1);
+  width: 150px;
+  height: 220px;
+  .profileBoxTitle {
+    color: #000;
+    text-align: center;
+    font-size: 16px;
+    line-height: 150%; /* 24px */
+    letter-spacing: -0.32px;
+  }
+  .profileBoxItem {
+    color: ${theme.Black};
+    text-align: center;
+    font-size: 16px;
+    line-height: 150%; /* 24px */
+    letter-spacing: -0.32px;
+  }
 `;

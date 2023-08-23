@@ -12,16 +12,15 @@ const SignupBodyFigureDirect = () => {
   useEffect(() => {
     setIsValidState((pre) => ({
       ...pre,
-      upperBodyFat: ["", false, false],
-      lowerBodyFat: ["", false, false],
-      upperMuscleMass: ["", false, false],
-      lowerMuscleMass: ["", false, false],
+      upperBodyFat: ["", false],
+      lowerBodyFat: ["", false],
+      upperMuscleMass: ["", false],
+      lowerMuscleMass: ["", false],
     }));
   }, []);
 
   const navigate = useNavigate();
   const [isValidState, setIsValidState] = useRecoilState(validationState);
-  console.log(isValidState);
 
   const handleBackPage = (e) => {
     e.preventDefault();
@@ -49,9 +48,22 @@ const SignupBodyFigureDirect = () => {
         }
       }
 
-      const response = await userPostAPI.post("", submission);
-      if (response.data === "ok") {
-        localStorage.setItem("Jwt", "tmp");
+      const res = await userPostAPI.post("", submission);
+      if (res.data.accessToken) {
+        const accessToken = res.data.accessToken;
+        const refreshToken = res.data.refreshToken;
+        // 토큰 저장
+        localStorage.setItem("accessToken", accessToken);
+        localStorage.setItem("refreshToken", refreshToken);
+        localStorage.setItem("rememberMe", false);
+
+        // 회원가입 객체 초기화
+        const updatedState = Object.keys(isValidState).reduce((acc, key) => {
+          acc[key] = ["", false];
+          return acc;
+        }, {});
+
+        setIsValidState(updatedState);
         navigate("/signup/complete", { replace: false }); // 절대 경로로 이동
       } else {
         console.log("회원가입 오류");

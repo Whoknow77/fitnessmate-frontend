@@ -1,11 +1,15 @@
 import axios from "axios";
 import { getAccessAPI } from "./API";
 
+// accessToken을 통해 요청하는 API
+
 // api 생성
 const TokenApi = axios.create({
   baseURL: "/api",
   withCredentials: true,
-  Authorization: "Bearer " + localStorage.getItem("accessToken"),
+  headers: {
+    Authorization: "Bearer " + localStorage.getItem("accessToken"),
+  },
 });
 
 // 요청(config), 응답(response)
