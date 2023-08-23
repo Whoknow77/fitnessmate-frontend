@@ -1,5 +1,4 @@
 import { React } from "react";
-
 import { ThemeProvider } from "styled-components";
 import theme from "./styles/theme";
 import Navigator from "./routes/Navigator";

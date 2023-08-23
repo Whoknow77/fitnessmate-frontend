@@ -5,9 +5,9 @@ import * as S from "./StyledButton";
 
 function BeforeButton({ handleSubmit }) {
   return (
-    <S.BeforeButton className="Button" onClick={handleSubmit}>
+    <S.BeforeButtonWrapper className="Button" onClick={handleSubmit}>
       이전
-    </S.BeforeButton>
+    </S.BeforeButtonWrapper>
   );
 }
 

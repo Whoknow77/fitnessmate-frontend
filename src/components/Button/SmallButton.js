@@ -6,9 +6,9 @@ import "./StyledButtons.css";
 
 function SmallButton({ children, handleSubmit }) {
   return (
-    <S.SmallButton className="Button" onClick={handleSubmit}>
+    <S.SmallButtonWrapper className="Button" onClick={handleSubmit}>
       {children}
-    </S.SmallButton>
+    </S.SmallButtonWrapper>
   );
 }
 

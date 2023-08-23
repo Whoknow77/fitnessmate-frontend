@@ -2,86 +2,108 @@
 
 import { React, useState } from "react";
 import * as S from "./StyledLogin";
-import { Form, redirect } from "react-router-dom";
+import { BigButton } from "../../components/index";
+import { useNavigate } from "react-router-dom";
 import theme from "../../styles/theme";
-// import { LoginEmailInput, LoginPWInput } from "./LoginInput";
-import { Link } from "react-router-dom";
 import { loginPostAPI } from "../../apis/API";
-import { NoneScrollContainerWrapper } from "./NoneScrollContainer";
-import { BigButton } from "./../../components/";
+import TokenApi from "../../apis/TokenApi";
 
 const Login = (props) => {
-  // const [isEmailClicked, setIsEmailClicked] = useState(false);
-  // const [isPWClicked, setIsPWClicked] = useState(false);
-  return (
-    <NoneScrollContainerWrapper>
-      <S.LoginContainer>
-        <S.Title>로그인</S.Title>
-        <Form method="post" action="/login">
-          <S.InputFrame>
-            <S.LoginInput
-              placeholder="아이디"
-              type="text"
-              name="email"
-              required
-            ></S.LoginInput>
-            <S.LoginInput
-              placeholder="비밀번호"
-              type="password"
-              name="password"
-              required
-            ></S.LoginInput>
-          </S.InputFrame>
-          <S.AutomaticLogin>
-            <input type="checkbox" />
-            자동 로그인
-          </S.AutomaticLogin>
-          <BigButton email={props.email} onClick={props.onClick} type="submit">
-            로그인
-          </BigButton>
-        </Form>
-        <Link to="/">
-          <BigButton backcolor={theme.White} fontcolor={theme.Brand}>
-            홈으로
-          </BigButton>
-        </Link>
-      </S.LoginContainer>
-    </NoneScrollContainerWrapper>
-  );
-};
+  // placeholder
 
-export const signInAction = async ({ request }) => {
-  const data = await request.formData();
-  console.log(data);
+  const [isEmailClicked, setIsEmailClicked] = useState(false);
+  const [isPWClicked, setIsPWClicked] = useState(false);
+  // 로그인 유지
+  const [isKeepLoginClicked, setIsKeppLoginClicked] = useState(false);
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
-  const submission = {
-    loginEmail: data.get("email"),
-    password: data.get("password"),
+  const navigate = useNavigate();
+
+  const handleSignup = () => {
+    navigate("/signup");
   };
-  console.log(submission);
 
-  //post요청
-  let response;
-  if (submission.loginEmail === "admin") {
-    response = await loginPostAPI.post("", submission);
-  } else {
-    const response = await loginPostAPI.post("", submission);
-    if (response === "ok") {
-      console.log(response.data);
+  const handleLogin = async (e) => {
+    e.preventDefault();
+
+    const submission = {
+      loginEmail: email,
+      password: password,
+      rememberMe: isKeepLoginClicked,
+    };
+
+    const res = await TokenApi.post("auth/login", submission);
+    if (res.status === 200) {
+      const accessToken = res.data.accessToken;
+      const refreshToken = res.data.refreshToken;
+      // 토큰 저장
+      localStorage.setItem("accessToken", accessToken);
+      localStorage.setItem("refreshToken", refreshToken);
+      localStorage.setItem("rememberMe", isKeepLoginClicked);
+      navigate("/");
     } else {
-      return false;
+      alert("로그인 실패");
     }
-  }
+  };
 
-  //ok / fail check
-  const responseStatus = response.data;
-  console.log(responseStatus);
-  if (responseStatus === "ok") {
-    localStorage.setItem("Jwt", "tmp");
-    return redirect("/");
-  } else {
-    return { error: "Wrong login Info" };
-  }
+  return (
+    <S.LoginContainer>
+      <S.Title>로그인</S.Title>
+      <form onSubmit={handleLogin}>
+        <S.InputFrame>
+          <S.LoginInput
+            type="text"
+            name="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            onFocus={() => {
+              setIsEmailClicked(true);
+            }}
+            onBlur={() => {
+              setIsEmailClicked(false);
+            }}
+            placeholder={isEmailClicked ? "" : "이메일"}
+            pattern="[a-z0-9]+@[a-z]+\.[a-z]{2,3}"
+            title="fit@mate.com와 같은 형식을 준수해주세요"
+            required
+          />
+          <S.LoginInput
+            type="password"
+            name="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            onFocus={() => {
+              setIsPWClicked(true);
+            }}
+            onBlur={() => {
+              setIsPWClicked(false);
+            }}
+            placeholder={isPWClicked ? "" : "비밀번호"}
+            autoComplete="on"
+            required
+          />
+        </S.InputFrame>
+        <S.AutomaticLogin>
+          <input
+            type="checkbox"
+            onClick={() => setIsKeppLoginClicked(!isKeepLoginClicked)}
+          />
+          로그인 유지
+        </S.AutomaticLogin>
+        <BigButton email={props.email} type="submit">
+          로그인
+        </BigButton>
+      </form>
+      <BigButton
+        backcolor={theme.White}
+        fontcolor={theme.Brand}
+        handleSubmit={handleSignup}
+      >
+        회원가입
+      </BigButton>
+    </S.LoginContainer>
+  );
 };
 
 export default Login;

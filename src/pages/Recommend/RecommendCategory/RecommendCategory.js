@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import { SmallButton } from "../../../components/Button/index";
+import { SmallButton } from "../../../components/";
 import theme from "../../../styles/theme";
 import {
   RecommendButtonContainer,
@@ -9,40 +9,31 @@ import {
 } from "../StyledRecommend";
 import { ImgCheckbox } from "../../../components";
 import { useState } from "react";
-import { useRecoilState } from "recoil";
-import { recommendcategory } from "../../../recoil/atom";
 
 // 버튼과 이미지의 간격을 어떻게 줄지 고민해 봐야함.
 const RecommendCategory = () => {
   const navigate = useNavigate();
 
-  // 카테고리 배열
-  const [isRecommendCategory, setIsRecommendCategory] = useState([]);
-
-  // 카테고리 상태 객체
-  const [RecommendCategoryState, setRecommendCategoryState] =
-    useRecoilState(recommendcategory);
+  const [category, setCategory] = useState({
+    보조제: [false, "protein"],
+    운동: [false, "fitness"],
+  });
 
   const goNextPage = () => {
-    if (isRecommendCategory[1]) {
+    if (category.보조제[0]) {
+      navigate("/recommend/supplementpurpose");
+    } else if (category.운동[0]) {
       navigate("/recommend/workout");
     }
   };
 
+  // 카테고리 선택
   const handleSelect = (idx) => {
-    const entries = Object.entries(RecommendCategoryState);
-
-    // 배열 업데이트
-    const newArr = Array(entries.length).fill(false);
-    newArr[idx] = true;
-    setIsRecommendCategory(newArr);
-
-    // 객체(atom) 업데이트
-    // key: 보조제, value: [false, "protein"], index: 0
-    const updatedRecommendCatgory = Object.fromEntries(
+    const entries = Object.entries(category);
+    const updatedCategory = Object.fromEntries(
       entries.map(([key, value], index) => [key, [index === idx, value[1]]])
     );
-    setRecommendCategoryState(updatedRecommendCatgory);
+    setCategory(updatedCategory);
   };
 
   return (
@@ -61,12 +52,12 @@ const RecommendCategory = () => {
         </RecommendTitle>
       </div>
       <RecommendImgContainer>
-        {Object.entries(RecommendCategoryState).map(([key, value], index) => {
+        {Object.entries(category).map(([key, value], index) => {
           return (
             <ImgCheckbox
               key={key}
               handleClick={handleSelect}
-              isSelected={isRecommendCategory[index]}
+              isSelected={value[0]}
               elementidx={index}
               articleimg={value[1]}
             >
