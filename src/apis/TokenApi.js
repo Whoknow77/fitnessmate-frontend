@@ -7,19 +7,29 @@ import { getAccessAPI } from "./API";
 const TokenApi = axios.create({
   baseURL: "/api",
   withCredentials: true,
-  headers: {
-    Authorization: "Bearer " + localStorage.getItem("accessToken"),
-  },
 });
 
-// 요청(config), 응답(response)
+//  HTTP 요청을 서버로 보내기 전에 실행
+// 주로 전역적인 요청 설정(예: 헤더 추가), 로깅, 로딩 인디케이터 표시 등의 용도
+TokenApi.interceptors.request.use((config) => {
+  const token = localStorage.getItem("accessToken");
+  if (token) {
+    config.headers.Authorization = `Bearer ${token}`;
+  }
+  return config;
+});
+
+// 버로부터 HTTP 응답을 받은 후 실행
+// 응답 데이터의 전처리, 오류 처리, 로깅 등의 용도
 TokenApi.interceptors.response.use(
   (response) => {
+    console.log(response);
     // 응답이 성공적으로 왔을 때의 처리
     return response;
   },
   // 에러가 발생했을 때의 처리(4xx,5xx 에러 => 토큰 만료)
   async (error) => {
+    console.log(error);
     // 토큰 만료
     if (error.response.data.status === "EXPIRED_ACCESS_TOKEN_EXCEPTION") {
       console.log("Access Token 만료");

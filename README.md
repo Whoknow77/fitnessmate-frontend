@@ -17,4 +17,4 @@
 
 ## 주소
 
-https://fitmate-testing.vercel.app/
+https://fitnessmate-frontend.vercel.app/

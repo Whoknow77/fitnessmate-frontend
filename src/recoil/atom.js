@@ -31,3 +31,9 @@ export const bodyPartState = atom({
     bodyPartKoreanName: [],
   },
 });
+
+// 로그인 상태
+export const isLoggedInState = atom({
+  key: "isLoggedInState",
+  default: false,
+});

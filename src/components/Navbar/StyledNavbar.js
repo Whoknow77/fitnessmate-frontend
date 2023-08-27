@@ -86,9 +86,13 @@ export const NavLoginButton = styled(NavButton)`
   display: block;
 `;
 
-export const NoneScrollContainerWrapper = styled.div`
-  width: 100%;
-  min-height: calc(100vh - 64px);
+export const NavProfileBox = styled.div`
+  transition: transform 0.2s ease-in-out 0s;
+  transform-origin: center top;
+  transform: scaleY(${({ isprofileBox }) => (isprofileBox ? "1" : "0")});
+  position: absolute;
+  top: 50px;
+  right: 15px;
   display: flex;
   align-items: center;
   margin-top: 0;
@@ -98,28 +102,27 @@ export const NoneScrollContainerWrapper = styled.div`
 `;
 
 export const navbar = styled.div`
-	.likes__wrapper{
-  display:flex;
-  align-content:center;
-  justify-content:center;
-}
+  .likes__wrapper {
+    display: flex;
+    align-content: center;
+    justify-content: center;
+  }
 
-.likes__relavance{
-  position:relative;
-  padding:0 80px;
-}
+  .likes__relavance {
+    position: relative;
+    padding: 0 80px;
+  }
 
-.likes__list{
-  position:absolute;
-  box-sizing: border-box;
-  overflow-y:scroll;
-  max-height:150px;
-  left:0%;
-  z-index:999;
-  background:white;
-  padding:10px;
-  border:1px solid grey;
-  box-shadow: 0 0 2px 2px grey;
-}
-
-`
+  .likes__list {
+    position: absolute;
+    box-sizing: border-box;
+    overflow-y: scroll;
+    max-height: 150px;
+    left: 0%;
+    z-index: 999;
+    background: white;
+    padding: 10px;
+    border: 1px solid grey;
+    box-shadow: 0 0 2px 2px grey;
+  }
+`;

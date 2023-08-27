@@ -6,9 +6,12 @@ import { BigButton } from "../../components/index";
 import { useNavigate } from "react-router-dom";
 import theme from "../../styles/theme";
 import { loginPostAPI } from "../../apis/API";
+import { useRecoilState } from "recoil";
+import { isLoggedInState } from "../../recoil/atom";
 
 const Login = (props) => {
   // placeholder
+  const [isLoggedIn, setIsLoggedIn] = useRecoilState(isLoggedInState);
 
   const [isEmailClicked, setIsEmailClicked] = useState(false);
   const [isPWClicked, setIsPWClicked] = useState(false);
@@ -40,6 +43,7 @@ const Login = (props) => {
       localStorage.setItem("accessToken", accessToken);
       localStorage.setItem("refreshToken", refreshToken);
       localStorage.setItem("rememberMe", isKeepLoginClicked);
+      setIsLoggedIn(true);
       navigate("/");
     } else {
       alert("로그인 실패");
