@@ -35,7 +35,6 @@ export const NavbarContainer = styled.div`
   display: flex;
   position: sticky;
   top: 0;
-  z-index: 999;
   justify-content: space-between;
   align-items: center;
   background: ${theme.White};
@@ -48,7 +47,7 @@ export const NavbarContainer = styled.div`
 
 export const NavLink = styled.div`
   display: flex;
-  gap: 24px;
+  gap: 43px;
 `;
 
 export const NavTextContainer = styled.div`
@@ -69,7 +68,7 @@ export const NavButton = styled.button`
   border-radius: 12px;
   color: ${theme.Black};
   display: flex;
-  padding: 10px 14px;
+  padding: 10px 24px;
   justify-content: center;
   align-items: center;
   font-size: 15px;
@@ -81,50 +80,46 @@ export const NavButton = styled.button`
   }
 `;
 
-export const NavLoginButtonContainer = styled(NavButton)`
-  display: flex;
-  gap: 8px;
-  align-items: center;
-  padding: 0;
-  position: relative;
-  .profileName {
-    color: #000;
-    font-size: 18px;
-    line-height: 150%;
-    letter-spacing: -0.36px;
-  }
+export const NavLoginButton = styled(NavButton)`
+  background: ${theme.BrandLight};
+  color: ${theme.Brand};
+  display: block;
 `;
 
-export const NavProfileBox = styled.div`
-  transition: transform 0.2s ease-in-out 0s;
-  transform-origin: center top;
-  transform: scaleY(${({ isprofileBox }) => (isprofileBox ? "1" : "0")});
-  position: absolute;
-  top: 50px;
-  right: 10px;
+export const NoneScrollContainerWrapper = styled.div`
+  width: 100%;
+  min-height: calc(100vh - 64px);
   display: flex;
-  flex-direction: column;
-  gap: 16px;
-  justify-content: center;
   align-items: center;
-  border-radius: 16px;
-  border: 1px solid ${theme.Gray30};
-  background: #f8f8f8;
-  box-shadow: 0px 4px 8px 0px rgba(0, 0, 0, 0.1);
-  width: 150px;
-  height: 220px;
-  .profileBoxTitle {
-    color: #000;
-    text-align: center;
-    font-size: 16px;
-    line-height: 150%; /* 24px */
-    letter-spacing: -0.32px;
-  }
-  .profileBoxItem {
-    color: ${theme.Black};
-    text-align: center;
-    font-size: 16px;
-    line-height: 150%; /* 24px */
-    letter-spacing: -0.32px;
-  }
+  margin-top: 0;
+  margin-left: auto;
+  margin-right: auto;
+  justify-content: center;
 `;
+
+export const navbar = styled.div`
+	.likes__wrapper{
+  display:flex;
+  align-content:center;
+  justify-content:center;
+}
+
+.likes__relavance{
+  position:relative;
+  padding:0 80px;
+}
+
+.likes__list{
+  position:absolute;
+  box-sizing: border-box;
+  overflow-y:scroll;
+  max-height:150px;
+  left:0%;
+  z-index:999;
+  background:white;
+  padding:10px;
+  border:1px solid grey;
+  box-shadow: 0 0 2px 2px grey;
+}
+
+`
