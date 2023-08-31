@@ -75,61 +75,13 @@ export const Toggle = styled.div`
 	gap: 20px;
 	align-items: center;
 }
-.toggleSwitch_wrap span {
-	display: block;
-	font-size: 20px;
-	height: 100%;
-}
+
 .toggleSwitch {
 	position: relative;
 	display: inline-block;
 	width: 201px;
 	height: 50px;
 }
-.toggleSwitch input {
-	opacity: 0;
-	width: 0;
-	height: 0;
-}
-.toggleSwitch_ball {
-	position: absolute;
-	cursor: pointer;
-	top: 0;
-	left: 0;
-	right: 0;
-	bottom: 0;
-	background: ${({ theme }) => theme.Gray10};
-	border: 1px solid ${({ theme }) => theme.Gray20};
-	transition: .4s;
-	border-radius: 50px;
-}
-.toggleSwitch_ball:before {
-	position: absolute;
-	box-shadow: 0px 4px 7px rgba(0, 0, 0, 0.05);
-	display: flex;
-  align-items: center;
-  justify-content: center;
-	content: "내 운동";
-	font-size: 16px;
-	font-weight: 600;
-	height: 40px;
-	width: 94px;
-	left: 5px;
-	bottom: 4px;
-	background: #fff;
-	transition: .4s;
-	border-radius: 50px;
-}
-.switchInput:checked + .toggleSwitch_ball {
-}
-.switchInput:focus + .toggleSwitch_ball {
-	box-shadow: 0 0 1px #eee;
-}
-.switchInput:checked + .toggleSwitch_ball:before {
-	transform: translateX(94px);
-	content: "내 보조제";
-}
-.switchInput:checked ~ #second { display: flex; } 
 `
 
 export const SecondContent = styled.div`
@@ -137,6 +89,7 @@ export const SecondContent = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+	flex-direction: column;
 	margin-bottom: 1000px;
 `;
 
@@ -145,8 +98,10 @@ export const ContentsTitle = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+	gap: 32px;
 	background: ${({ theme }) => theme.Gray10};
 	height: 75px;
+	margin-bottom: 24px;
 
 	.contents-title {
 		font-size: 18px;
@@ -154,4 +109,38 @@ export const ContentsTitle = styled.div`
 		font-weight: 500;
 	}
 	
+`;
+
+export const ButtonContainer = styled.div`
+	display: flex;
+	gap: 12px;
+	align-items: center;
+
+  .btn {
+    display: flex;
+		align-items: center;
+		justify-content: center;
+    width: 83px;
+		height: 47px;
+    color: ${({ theme }) => theme.Brand};
+		font-size: 18px;
+		letter-spacing: -0.36px;
+    background-color: ${({ theme }) => theme.White};
+		box-shadow: 0px 4px 8px #0000000d;
+    border-radius: 6px;
+
+    &.active {
+			color: ${({ theme }) => theme.White};
+      background-color: ${({ theme }) => theme.Brand};
+    }
+	}
+`;
+
+
+export const Content = styled.div`
+  width: 100%;
+  height: 100%;
+	div{
+		font-size: 100px;
+	}
 `;

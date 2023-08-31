@@ -2,12 +2,12 @@ import styled from "styled-components";
 import theme from "../../styles/theme";
 
 export const SearchContainer = styled.div`
-  width: 686px;
+  width: 100%;
   height: 56px;
   padding: 14px;
   border-radius: 10px;
   border: 1px solid
-    ${({ theme, isClicked }) => (isClicked ? theme.Gray10 : theme.Gray10)};
+    ${({ theme, isClicked }) => (isClicked ? theme.Gray10 : theme.Gray70)};
   display: flex;
   gap: 14px;
   align-items: center;

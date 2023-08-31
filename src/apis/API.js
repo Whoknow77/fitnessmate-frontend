@@ -159,7 +159,7 @@ export const userPostAPI = axios.create({
 // 사용자 정보 수정(토큰)
 export const userPutAPI = axios.create({
   method: "put",
-  baseURL: "/api/user",
+  baseURL: "/api/user/private",
   withCredentials: true,
 });
 

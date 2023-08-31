@@ -8,6 +8,10 @@ export const NavbarContainer = styled.div`
   width: 100%;
   height: 64px;
   padding: 10px 40px;
+<<<<<<< HEAD
+=======
+  font-size: 18px;
+>>>>>>> pr-31
   font-weight: 700;
   display: flex;
   position: sticky;

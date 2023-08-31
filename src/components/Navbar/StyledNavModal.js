@@ -6,11 +6,11 @@ import theme from "./../../styles/theme";
 // nav modal button
 
 export const NavButton = styled.button`
-  font-size: 15px;
+  font-size: 18px;
   padding: 10px 24px;
   border-radius: 12px;
   font-weight: 700;
-  color: ${theme.Black};
+  color: ${theme.Brand};
   cursor: pointer;
   &:hover {
     background-color: ${theme.Gray10};
@@ -28,13 +28,14 @@ export const AppWrap = styled.div`
 
 export const ModalWrap = styled.div`
   width: 200px;
+	height: 220px;
   border-radius: 16px;
   box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
   border: 1px solid ${theme.Gray30};
-  background-color: ${theme.Gray10};
+  background-color: ${theme.White};
   position: absolute;
-  top: 240%;
-  left: 89%;
+  top: 260%;
+  left: 92%;
   transform: translate(-50%, -50%);
 `;
 
@@ -46,13 +47,18 @@ export const Contents = styled.div`
   flex-direction: column;
   p {
     font-size: 16px;
-    color: ${theme.Black};
+    color: #000;
     letter-spacing: -0.02em;
     font-family: Pretendard;
     text-align: center;
     text-align: center;
     font-weight: 500;
+		font-size: 16px;
+		letter-spacing: -0.02em;
   }
+	.modalheader {
+		background-color: #f8f8f8;
+	}
 `;
 
 export const Button = styled.button`
@@ -62,6 +68,7 @@ export const Button = styled.button`
   padding: 8px 12px;
   color: ${theme.Black};
   letter-spacing: -0.02em;
+	background-color: #f8f8f8;
   &:hover {
     background-color: ${theme.Gray20};
   }

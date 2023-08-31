@@ -8,6 +8,8 @@ const ProfileInputContent = ({
   name,
   isFocused,
   setIsFocused,
+	defaultValue,
+	value,
 }) => {
   const [isValidState, setIsValidState] = useRecoilState(validationState);
   const [isEmailState, setIsEmailState] = useRecoilState(EmailState);
@@ -44,6 +46,8 @@ const ProfileInputContent = ({
       isFocused={isFocused}
       isEmailState={isEmailState}
       isValidState={isValidState[name][1]}
+			defaultValue={defaultValue}
+			value={value}
       onFocus={() => {
         setIsFocused(true);
       }}

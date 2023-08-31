@@ -3,7 +3,7 @@
 import React, { useEffect, useState } from "react";
 import * as S from "./StyledNavbar";
 import { useNavigate } from "react-router-dom";
-import ModalButton from "./ModalButton";
+import NavModal from "./NavModal";
 import TokenApi from "../../apis/TokenApi";
 
 const Navbar = () => {
@@ -62,7 +62,7 @@ const Navbar = () => {
             로그인
           </S.NavLoginButton>
         ) : (
-          <ModalButton userName={userName}>{userName} 님</ModalButton>
+          <NavModal userName={userName}>{userName} 님</NavModal>
         )}
       </S.NavLink>
     </S.NavbarContainer>

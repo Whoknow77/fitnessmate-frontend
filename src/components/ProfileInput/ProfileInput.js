@@ -8,7 +8,7 @@ import { useState } from "react";
 // placeholder : Input창 마다 다양해서 Home에서 받아옴
 // children : 아이디/비밀번호/이메일 등등..
 
-const ProfileInput = ({ placeholder, children, name }) => {
+const ProfileInput = ({ placeholder, children, name, defaultValue, value }) => {
   // 유효성 검사
   const isValidState = useRecoilValue(validationState);
   // 포커스 검사
@@ -56,6 +56,8 @@ const ProfileInput = ({ placeholder, children, name }) => {
         name={name}
         isFocused={isFocused}
         setIsFocused={setIsFocused}
+				defaultValue={defaultValue}
+				value={value}
       />
       {name === "loginEmail" && (
         <button

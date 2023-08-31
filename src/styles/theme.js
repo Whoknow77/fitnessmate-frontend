@@ -13,6 +13,7 @@ const theme = {
   BrandDark: "#0A89E5",
   BrandMid: "#36ABFF",
   BrandLight: "#D0EBFF",
+	BrandLighter: "#E5F4FF",
   BrondPale: "#EDF7FF",
   BrandNon: "#A6CEEC",
   Error: "#EB444C",
