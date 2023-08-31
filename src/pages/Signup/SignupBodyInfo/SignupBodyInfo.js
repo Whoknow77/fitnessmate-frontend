@@ -69,7 +69,10 @@ const SignupBodyInfo = () => {
 
   return (
     <S.SignupContainer>
-      <S.SignupTitle>
+      <S.SignupTitle status="2">
+        <div className="statusBar">
+          <div className="statusBar2"></div>
+        </div>
         간단한
         <br />
         <S.TitleEmphasis>신체 정보</S.TitleEmphasis>를 입력해주세요

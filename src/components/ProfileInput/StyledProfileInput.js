@@ -51,6 +51,7 @@ export const ProfileInputContentWrapper = styled.input`
     color: ${theme.Gray50};
   }
   border-radius: 10px;
+  border: 1px solid ${theme.Gray20};
   padding: 14px;
   background: ${theme.Gray10};
   width: 100%;

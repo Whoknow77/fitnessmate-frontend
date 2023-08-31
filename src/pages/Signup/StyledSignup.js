@@ -6,7 +6,6 @@ export const SignupContainer = styled.form`
   flex-direction: column;
   align-items: flex-start;
   justify-content: space-between;
-  padding-top: 62px;
   gap: 36px;
 
   .recommendText {
@@ -60,6 +59,20 @@ export const SignupTitle = styled.span`
     display: inline-block;
     color: ${theme.Gray80};
     font-size: 24px;
+  }
+
+  .statusBar {
+    position: relative;
+    height: 4px;
+    background: ${theme.BrandLight};
+    margin-bottom: 24px;
+
+    .statusBar2 {
+      position: absolute;
+      width: ${({ status }) => `${(100 / 5) * status}%`};
+      height: 4px;
+      background: ${theme.Brand};
+    }
   }
 `;
 

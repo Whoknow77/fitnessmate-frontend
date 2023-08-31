@@ -22,13 +22,6 @@ const BodyCompositionInput = ({ children }) => {
       <BodyCompositionInputContent
         children={children}
         name={`upper${inbody}`}
-        bodypart="상체"
-      />
-      <BodyCompositionInputContent
-        children={children}
-        name={`lower${inbody}`}
-        bodypart="하체"
-        enbodypart="lower"
       />
     </S.BodyCompositionInputContainer>
   );

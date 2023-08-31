@@ -83,7 +83,10 @@ const SignupBodyFigure = () => {
   return (
     <S.SignupContainer>
       <S.SignupTitleContainer>
-        <S.SignupTitle>
+        <S.SignupTitle status="3">
+          <div className="statusBar">
+            <div className="statusBar2"></div>
+          </div>
           <S.TitleEmphasis>어떤 체형</S.TitleEmphasis>을 가지고 계신가요?
           <br />
           <span className="recommendText">정확한 추천을 위해 필요해요</span>
