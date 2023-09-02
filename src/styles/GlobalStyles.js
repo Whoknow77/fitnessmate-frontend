@@ -26,6 +26,7 @@ ${reset}
 
     }
     body{
+        overflow-x:hidden;
         line-height: 1;
         background-color: white; 
     }

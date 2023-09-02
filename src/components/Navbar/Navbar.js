@@ -13,7 +13,7 @@ const Navbar = () => {
   const [userName, setuserName] = useState(null);
   const [isLoginModal, setIsLoginModal] = useState(false);
   const handleSearch = () => {
-    navigate("search");
+    navigate("search/1");
   };
 
   const handleMyPage = () => {
@@ -38,7 +38,7 @@ const Navbar = () => {
 
       setuserName(response.data.userName);
     } catch (error) {
-      console.log(error);
+      localStorage.clear();
     }
   };
 

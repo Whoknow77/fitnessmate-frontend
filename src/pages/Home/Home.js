@@ -12,7 +12,7 @@ export const Home = () => {
   const [isLoginModal, setIsLoginModal] = useState(false);
 
   const handleSearch = () => {
-    navigate("search");
+    navigate("search/1");
   };
 
   const handleMyPage = () => {
