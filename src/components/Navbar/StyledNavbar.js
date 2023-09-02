@@ -4,25 +4,30 @@ import styled from "styled-components";
 import theme from "./../../styles/theme";
 
 export const NavbarContainer = styled.div`
-  max-width: 1440px;
-  width: 100%;
-  height: 64px;
-  padding: 10px 40px;
-<<<<<<< HEAD
-=======
-  font-size: 18px;
->>>>>>> pr-31
-  font-weight: 700;
-  display: flex;
   position: sticky;
   top: 0;
-  justify-content: space-between;
-  align-items: center;
   background: ${theme.White};
+  z-index: 999;
+
+  .stickyContainer {
+    max-width: 1440px;
+    margin: 0 auto;
+    height: 64px;
+    padding: 10px 40px;
+    font-size: 18px;
+    font-weight: 700;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
   .nav-logo {
     background-color: #ff7373;
     width: 110px;
     height: 20px;
+  }
+  .underline {
+    border-bottom: 1px solid ${theme.Gray20};
+    width: 100vw;
   }
 `;
 

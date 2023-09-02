@@ -1,0 +1,129 @@
+/* 내 운동 페이지 스타일 */
+
+input[type="radio"] {
+  display: none;
+}
+
+label {
+  color: #c8c8c8;
+  cursor: pointer;
+}
+
+label h4 {
+  margin: 0;
+  font-weight: 600;
+  font-size: 16px;
+}
+
+.black-font {
+  color: #2f3233 !important;
+}
+
+.main-container {
+  display: inline-block;
+  vertical-align: middle;
+  width: 201px;
+  height: 50px;
+  border-radius: 100px;
+  background-color: #f4f4f4;
+  border: 1px solid #e7e7e7;
+  display: flex;
+  align-items: center;
+}
+
+.switch {
+  height: 40px;
+  width: 94px;
+  background-color: white;
+  border-radius: 100px;
+  position: absolute;
+  left: 5px;
+  top: 5px;
+  transition: ease-in;
+  box-shadow: 0px 4px 7px rgba(0, 0, 0, 0.05);
+}
+
+/* 내 운동 */
+
+.switch.left-to-right {
+  animation-name: leftToRight;
+  animation-duration: 0.4s;
+}
+
+.switch.left-position {
+  left: 6px;
+}
+
+.left-label {
+  position: absolute;
+  left: 4px;
+}
+
+#left + label {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 40px;
+  width: 94px;
+  border-radius: 100px;
+}
+
+#left:checked + label {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 40px;
+  width: 94px;
+  border-radius: 100px;
+}
+
+@keyframes leftToRight {
+  from {
+    left: 5px;
+  }
+  to {
+    left: 101px;
+  }
+}
+
+/* 내 보조제 */
+.switch.right-to-left {
+  animation-name: rightToLeft;
+  animation-duration: 0.4s;
+}
+
+.switch.right-position {
+  left: 101px;
+}
+
+.right-label {
+  position: absolute;
+  right: 6px;
+}
+
+#right + label {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 40px;
+  width: 94px;
+  border-radius: 100px;
+}
+
+#right:checked + label {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 40px;
+  width: 94px;
+  border-radius: 100px;
+}
+
+@keyframes rightToLeft {
+  from {
+    left: 101px;
+  }
+  to {
+    left: 5px;
+  }
+}

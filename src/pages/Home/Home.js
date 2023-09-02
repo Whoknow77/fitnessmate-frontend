@@ -3,20 +3,32 @@ import * as S from "./StyledHome";
 import HomeSecondImg1 from "../../assets/images/HomeSecondImg1.png";
 import { useNavigate } from "react-router-dom";
 import arrow from "../../assets/images/arrow.svg";
-
+import { useState } from "react";
+import LoginModal from "../../components/Modal/LoginModal";
 export const Home = () => {
   const navigate = useNavigate();
+
+  const loginState = localStorage.length;
+  const [isLoginModal, setIsLoginModal] = useState(false);
 
   const handleSearch = () => {
     navigate("search");
   };
 
   const handleMyPage = () => {
-    navigate("mypage");
+    if (loginState) {
+      navigate("mypage");
+    } else {
+      setIsLoginModal(true);
+    }
   };
 
   const handleRecommend = () => {
-    navigate("recommend");
+    if (loginState) {
+      navigate("recommend");
+    } else {
+      setIsLoginModal(true);
+    }
   };
 
   return (
@@ -87,6 +99,7 @@ export const Home = () => {
           </div>
         </section>
       </S.HomeContent>
+      {isLoginModal && <LoginModal setIsLoginModal={setIsLoginModal} />}
     </S.HomeContainer>
   );
 };

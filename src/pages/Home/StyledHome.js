@@ -3,6 +3,8 @@
 import styled from "styled-components";
 import theme from "./../../styles/theme";
 
+// 화면 가리기
+
 // 홈
 export const HomeContainer = styled.ul`
   width: 100%;

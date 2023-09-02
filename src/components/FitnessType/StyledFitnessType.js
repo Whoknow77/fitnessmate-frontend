@@ -1,6 +1,14 @@
 import styled from "styled-components";
 export const CardContainer = styled.div`
-  position: relative;
+  width: 23%;
+  @media screen and (max-width: 1400px) {
+    width: 30%;
+  }
+
+  @media screen and (max-width: 1100px) {
+    width: 47%;
+  }
+
   .fitnessImg {
     border-radius: 16px 16px 0px 0px;
     width: 333px;
@@ -43,6 +51,11 @@ export const CardContainer = styled.div`
       font-size: 16px;
       font-weight: 600;
       letter-spacing: -0.32px;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
   }
 `;
