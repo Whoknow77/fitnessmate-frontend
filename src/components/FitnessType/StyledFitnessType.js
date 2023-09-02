@@ -1,38 +1,49 @@
 import styled from "styled-components";
 export const CardContainer = styled.div`
+  display: inline-block;
   width: 23%;
+  margin: 10px 12px;
+  text-align: center;
+  position: relative;
+
   @media screen and (max-width: 1400px) {
-    width: 30%;
+    width: 31%;
   }
 
   @media screen and (max-width: 1100px) {
     width: 47%;
   }
 
-  .fitnessImg {
-    border-radius: 16px 16px 0px 0px;
-    width: 333px;
-    height: 250px;
-  }
-  .fitnessPart {
-    position: absolute;
-    left: 22px;
-    top: 20px;
-    border-radius: 10px;
-    background: ${({ theme }) => theme.BrandLight};
-    display: flex;
-    padding: 6px 13px;
-    justify-content: center;
-    align-items: center;
-    gap: 10px;
-    color: ${({ theme }) => theme.Brand};
-    font-size: 12px;
-    font-weight: 700;
-    letter-spacing: -0.24px;
+  @media screen and (max-width: 825px) {
+    width: 88%;
   }
 
+  .fitnessImg {
+    border-radius: 16px 16px 0px 0px;
+    width: 100%;
+  }
+  .fitnessPartContainer {
+    position: absolute;
+    left: 5%;
+    top: 3%;
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    .fitnessPart {
+      border-radius: 10px;
+      background: ${({ theme }) => theme.BrandLight};
+      display: flex;
+      padding: 6px 13px;
+      justify-content: center;
+      align-items: center;
+      gap: 10px;
+      color: ${({ theme }) => theme.Brand};
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: -0.24px;
+    }
+  }
   .fitnessInfo {
-    width: 333px;
     height: 145px;
     padding: 24px 10px 20px 16px;
     border-radius: 0px 0px 16px 16px;
@@ -40,6 +51,7 @@ export const CardContainer = styled.div`
     display: flex;
     flex-direction: column;
     gap: 7px;
+    align-items: flex-start;
     .fitnessTitle {
       color: ${({ theme }) => theme.Black};
       font-size: 24px;
@@ -49,7 +61,7 @@ export const CardContainer = styled.div`
     .fitnessExplain {
       color: ${({ theme }) => theme.Gray80};
       font-size: 16px;
-      font-weight: 600;
+      text-align: left;
       letter-spacing: -0.32px;
       display: -webkit-box;
       -webkit-line-clamp: 2;

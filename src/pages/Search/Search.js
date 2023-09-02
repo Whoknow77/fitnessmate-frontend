@@ -69,7 +69,7 @@ const Search = () => {
           return (
             // 부위 map으로 처리해야함
             <FitnessType
-              part={machine.bodyPartKoreanName}
+              parts={machine.bodyPartKoreanName}
               description={machine.description}
               imgPath={machine.imgPath}
             >
