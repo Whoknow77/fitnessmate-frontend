@@ -283,3 +283,33 @@ export const userBodyPartAPI = axios.create({
   baseURL: "/api/bodyParts/all",
   withCredentials: true,
 });
+
+/* 이메일 인증 관련 API */
+
+// 메일 인증 요청
+export const verifyMailPost = axios.create({
+  method: "post",
+  baseURL: "/api/register/verify/mail",
+  withCredentials: true,
+});
+
+// // 메일 인증 코드 확인
+export const verifyMailCheck = axios.create({
+  method: "post",
+  baseURL: "/api/register/verify/code",
+  withCredentials: true,
+});
+
+// // 메일 인증 요청
+// export const verifyMail = axios.create({
+//   method: "post",
+//   baseURL: "/api/register/verify/mail",
+//   withCredentials: true,
+// });
+
+// // 메일 인증 요청
+// export const verifyMail = axios.create({
+//   method: "post",
+//   baseURL: "/api/register/verify/mail",
+//   withCredentials: true,
+// });

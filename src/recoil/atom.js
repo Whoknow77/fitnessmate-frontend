@@ -15,13 +15,14 @@ export const validationState = atom({
     password: ["", false],
     sex: ["", false],
     birthDate: ["", false],
-    height: ["", false, false],
+    height: ["", false],
     weight: ["", false],
     password2: ["", false],
     upperBodyFat: ["", false],
     lowerBodyFat: ["", false],
     upperMuscleMass: ["", false],
     lowerMuscleMass: ["", false],
+    emailModal: ["", false],
   },
 });
 

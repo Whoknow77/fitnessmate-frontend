@@ -43,7 +43,9 @@ const Navbar = () => {
   };
 
   useEffect(() => {
-    fetchData();
+    if (loginState) {
+      fetchData();
+    }
   });
 
   return (

@@ -25,7 +25,7 @@ const LoginModal = ({ setIsLoginModal }) => {
   };
   return (
     <S.ModalBox>
-      <S.LoginModalWrapper>
+      <S.ModalWrapper>
         <span className="loginModalTitle">
           로그인해야 이용 가능한 서비스입니다.
           <br />
@@ -39,7 +39,7 @@ const LoginModal = ({ setIsLoginModal }) => {
             로그인 하러 갈래요
           </button>
         </div>
-      </S.LoginModalWrapper>
+      </S.ModalWrapper>
     </S.ModalBox>
   );
 };

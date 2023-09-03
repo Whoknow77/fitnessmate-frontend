@@ -3,7 +3,7 @@ import { useRecoilValue } from "recoil";
 import { BeforeButton, MiddleButton, ProfileInput } from "../../../components";
 import { useNavigate } from "react-router-dom";
 import { validationState } from "./../../../recoil/atom";
-import { BigButton } from "./../../../components/";
+import { useState } from "react";
 
 // 회원가입 페이지에 대한 정보를 모두 담는 컴포넌트
 // 우선 이메일은
