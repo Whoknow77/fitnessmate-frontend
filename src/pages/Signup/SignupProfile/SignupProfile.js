@@ -10,6 +10,8 @@ import { useState } from "react";
 const SignupProfile = () => {
   const navigate = useNavigate();
   const isValidState = useRecoilValue(validationState);
+  console.log(isValidState);
+  // 6가지 validState의 상태만을 담은 배열
 
   const handleBackPage = (e) => {
     e.preventDefault();
@@ -22,7 +24,7 @@ const SignupProfile = () => {
     if (
       Object.entries(isValidState)?.filter(([key, value]) => {
         return value[1] === true;
-      }).length === 5
+      }).length === 6
     ) {
       navigate(`bodyinfo`);
     }
@@ -39,23 +41,17 @@ const SignupProfile = () => {
         <S.TitleEmphasis>회원정보</S.TitleEmphasis>를 입력해주세요.
       </S.SignupTitle>
       <S.ProfileInputcontainer>
-        <ProfileInput
-          placeholder="이름을 입력해주세요 (2자리 이상)"
-          name="userName"
-        >
+        <ProfileInput placeholder="2자리 이상" name="userName">
           이름
         </ProfileInput>
-        <ProfileInput
-          placeholder="생년월일을 입력해주세요 ex) 1998-06-16"
-          name="birthDate"
-        >
+        <ProfileInput placeholder="YYYY-MM-DD" name="birthDate">
           생년월일
         </ProfileInput>
         <ProfileInput placeholder="이메일을 입력해주세요" name="loginEmail">
           이메일
         </ProfileInput>
         <ProfileInput
-          placeholder="비밀번호를 입력해주세요 (영문 숫자 조합 8자리 이상)"
+          placeholder="8자리 이상의 영문 숫자 조합 "
           name="password"
         >
           비밀번호

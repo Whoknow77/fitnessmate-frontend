@@ -2,29 +2,33 @@ import * as S from "./StyledEmailModal";
 import { useNavigate } from "react-router-dom";
 import xbutton from "../../assets/images/xbutton.svg";
 import EmailModalInput from "../EmailModalInput/EmailModalInput";
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import { useRecoilValue } from "recoil";
 import { validationState } from "../../recoil/atom";
 import { verifyMailPost } from "../../apis/API";
 
 const EmailModal = ({ setIsEmailModal }) => {
-  const navigate = useNavigate();
   const isValidState = useRecoilValue(validationState);
   // 코드 보내기
+
   const handleTransmit = async () => {
     try {
       const request = { mailAddress: isValidState.loginEmail[0] };
-      const response = await verifyMailPost.post("", request);
+      await verifyMailPost.post("", request);
     } catch (err) {
       console.log(err);
     }
   };
 
+  useEffect(() => {
+    handleTransmit();
+  }, []);
+
   return (
     <S.ModalBox>
       <S.ModalWrapper>
         <div className="emailModalTextWrapper">
-          <div1 className="xButton">
+          <div className="xButton">
             <img
               src={xbutton}
               alt="닫기 버튼"
@@ -32,7 +36,7 @@ const EmailModal = ({ setIsEmailModal }) => {
                 setIsEmailModal(false);
               }}
             />
-          </div1>
+          </div>
           <span className="emailModalTitle">
             이메일로 전송된
             <br />
@@ -52,10 +56,6 @@ const EmailModal = ({ setIsEmailModal }) => {
           </div>
         </div>
         <EmailModalInput setIsEmailModal={setIsEmailModal} />
-        {/* {
-            // 포커스 안 된 상태(이메일 유효성 검사)
-            isValidState.emailModal[1] ? "" : NotEmailCodeChecked
-          } */}
       </S.ModalWrapper>
     </S.ModalBox>
   );

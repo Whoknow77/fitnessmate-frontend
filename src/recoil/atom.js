@@ -12,17 +12,16 @@ export const validationState = atom({
     // [value, 유효성검사, 빨/파 테두리 구분]
     userName: ["", false],
     loginEmail: ["", false],
+    emailModal: ["", false],
     password: ["", false],
+    password2: ["", false],
     sex: ["", false],
     birthDate: ["", false],
     height: ["", false],
     weight: ["", false],
-    password2: ["", false],
-    upperBodyFat: ["", false],
-    lowerBodyFat: ["", false],
-    upperMuscleMass: ["", false],
-    lowerMuscleMass: ["", false],
-    emailModal: ["", false],
+    bodyFat: ["", false],
+    muscleMass: ["", false],
+    upDownBalance: ["", false],
   },
 });
 
