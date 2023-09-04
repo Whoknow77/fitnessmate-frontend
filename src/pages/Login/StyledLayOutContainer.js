@@ -2,30 +2,6 @@
 
 import styled from "styled-components";
 
-// < 스크롤이 있는 nav 아래 container 스타일 >
-
-export const ScrollContainer = styled.div`
-  width: 100%;
-  display: flex;
-  margin-top: 64px;
-  margin-left: auto;
-  margin-right: auto;
-  padding-bottom: 200px;
-`;
-
-// < 스크롤이 없는 nav 아래 container 스타일 >
-
-export const NoneScrollContainer = styled.div`
-  width: 100%;
-  min-height: calc(100vh - 64px);
-  display: flex;
-  align-items: center;
-  margin-top: 0;
-  margin-left: auto;
-  margin-right: auto;
-  justify-content: center;
-`;
-
 // < 전체적인 layout container 스타일 >
 
 export const LayoutContainer = styled.div`

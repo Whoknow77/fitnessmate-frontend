@@ -1,14 +1,10 @@
-// 이 목록에 추가하기 모달
-
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState } from "react";
 import * as S from "./StyledFixModal";
-import { BigButton } from "../../../../components/index";
-import fix from "../../../../assets/images/Fix_Icon.svg";
 import x from "../../../../assets/images/X_Icon.svg";
 import trash from "../../../../assets/images/Trash_Icon.svg";
 import plus from "../../../../assets/images/Plus_Icon.svg";
+import { BigButton } from "../../../../components/index";
 
-// 더미데이터
 export const DUMMY_DATA = [
   {
     id: 1,
@@ -22,96 +18,117 @@ export const DUMMY_DATA = [
   },
 ];
 
-function FixModal() {
-  const [isOpen, setIsOpen] = useState(false);
-
+function FixModal({ onClose }) {
   const handleClose = () => {
-    setIsOpen(false);
+    onClose?.();
   };
 
-  // 모달 띄워져 있을 때는 바깥쪽 스크롤 안되도록
-  useEffect(() => {
-    const $body = document.querySelector("body");
-    const overflow = $body.style.overflow;
-    $body.style.overflow = "hidden";
-    return () => {
-      $body.style.overflow = overflow;
-    };
-  }, []);
+  const [text, setText] = useState("");
+  const [editableItemId, setEditableItemId] = useState(null); // 수정 중인 항목의 ID를 관리
 
-  // 클릭하면 편집할 수 있도록 시도하였으나 현재 수정하려고 하면 모달창이 닫힘
-  const [text, setText] = useState();
-  const [isEditable, setIsEditable] = useState(false);
+  const [items, setItems] = useState(DUMMY_DATA);
 
-  const handleDoubleClick = () => {
-    setIsEditable(true);
+  const handleDoubleClick = (id) => {
+    setEditableItemId(id);
+    // 모달이 열릴 때 text 상태 초기화
+    setText("");
   };
 
-  const handleChange = (e) => {
-    setText(e.target.defaultValue);
+  const handleChange = (e, id) => {
+    const updatedItems = items.map((item) => {
+      if (item.id === id) {
+        item.text = e.target.value; // 해당 항목의 text 값을 변경
+      }
+      return item;
+    });
+    setItems(updatedItems);
   };
 
-  const handleKeyDown = (e) => {
+  const handleKeyDown = (e, id) => {
     if (e.key === "Enter") {
-      setIsEditable(false);
+      const updatedItems = items.map((item) => {
+        if (item.id === id) {
+          item.text = e.target.value;
+        }
+        return item;
+      });
+      setItems(updatedItems);
+      setEditableItemId(null);
+    } else if (e.key === "Backspace" || e.key === "Delete") {
+      e.preventDefault();
+      const updatedItems = items.map((item) => {
+        if (item.id === id) {
+          item.text = e.target.value.slice(0, -1);
+        }
+        return item;
+      });
+      setItems(updatedItems);
+    } else {
+      // 다른 키 이벤트에 대해서는 모달을 닫지 않도록 설정
+      e.preventDefault();
+      e.stopPropagation();
+    }
+  };
+
+  const handleAddItem = () => {
+    if (text.trim() !== "") {
+      setItems([...items, { id: Date.now(), text: text }]);
+      setText(""); // 입력 필드 초기화
     }
   };
 
   return (
     <S.AppWrap>
-      <S.NavButton
-        onClick={() => {
-          setIsOpen(!isOpen);
-        }}
-      >
-        <img src={fix} alt="편집하기 버튼" />
-        <p>편집</p>
-      </S.NavButton>
-      {isOpen && (
-        <S.Overlay>
-          <S.ModalContainer>
-            <S.ModalWrap>
-              <S.Header>
+      <S.Overlay>
+        <S.ModalContainer>
+          <S.ModalWrap>
+            <S.Header>
+              <S.ModalTitle>
                 <h1>내 운동 목록</h1>
-                <span>이름을 더블클릭하여 변경하세요.</span>
-                <S.Contents>
-                  {isEditable
-                    ? DUMMY_DATA.map((data) => {
-                        return (
-                          <div>
-                            <input
-                              type="text"
-                              name={data.text}
-                              defaultValue={data.text}
-                              onChange={handleChange}
-                              onKeyDown={handleKeyDown}
-                              placeholder={data.text}
-                            />
-                            <img src={trash} alt="삭제 버튼" />
-                          </div>
-                        );
-                      })
-                    : DUMMY_DATA.map((data) => {
-                        return (
-                          <div onDoubleClick={handleDoubleClick}>
-                            <p>{data.text}</p>
-                            <img src={trash} alt="삭제 버튼" />
-                          </div>
-                        );
-                      })}
-                </S.Contents>
-                <S.AddButton>
-                  <img src={plus} alt="목록 추가 버튼" />
-                </S.AddButton>
-              </S.Header>
-              <BigButton>수정 완료</BigButton>
-            </S.ModalWrap>
-            <S.CloseButton onClick={handleClose}>
-              <img src={x} alt="닫기 버튼" />
-            </S.CloseButton>
-          </S.ModalContainer>
-        </S.Overlay>
-      )}
+                <S.CloseButton onClick={handleClose}>
+                  <img src={x} alt="닫기 버튼" />
+                </S.CloseButton>
+              </S.ModalTitle>
+              <span>이름을 더블클릭하여 변경하세요.</span>
+              <S.Contents>
+                {items.map((data) => {
+                  return (
+                    <div key={data.id}>
+                      {editableItemId === data.id ? (
+                        <input
+                          type="text"
+                          name={data.text}
+                          value={data.text}
+                          onChange={(e) => handleChange(e, data.id)}
+                          onKeyDown={(e) => handleKeyDown(e, data.id)}
+                        />
+                      ) : (
+                        <p onDoubleClick={() => handleDoubleClick(data.id)}>
+                          {data.text}
+                        </p>
+                      )}
+                      <img src={trash} alt="삭제 버튼" />
+                    </div>
+                  );
+                })}
+                <div>
+                  <input
+                    type="text"
+                    value={text}
+                    onChange={(e) => setText(e.target.value)}
+                    onKeyDown={handleKeyDown}
+                    placeholder="새 항목 추가"
+                  />
+                </div>
+              </S.Contents>
+              <S.AddButton onClick={handleAddItem}>
+                <img src={plus} alt="목록 추가 버튼" />
+              </S.AddButton>
+            </S.Header>
+            <BigButton>수정 완료</BigButton>
+          </S.ModalWrap>
+        </S.ModalContainer>
+      </S.Overlay>
     </S.AppWrap>
   );
 }

@@ -57,7 +57,6 @@ const Navbar = () => {
             navigate("/");
           }}
         />
-
         <S.NavLink>
           <S.NavTextContainer>
             <i className="fa-solid fa-bars"></i>

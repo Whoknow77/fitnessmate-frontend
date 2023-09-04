@@ -15,13 +15,11 @@ export const NavButton = styled.button`
   &:hover {
     background-color: ${theme.Gray10};
   }
-
-  position: relative;
 `;
 
 export const AppWrap = styled.div`
   text-align: center;
-  margin: 10px auto;
+	position: relative;
 `;
 
 // modal
@@ -34,9 +32,8 @@ export const ModalWrap = styled.div`
   border: 1px solid ${theme.Gray30};
   background-color: ${theme.White};
   position: absolute;
-  top: 260%;
-  left: 92%;
-  transform: translate(-50%, -50%);
+  top: 57px;
+  left: -11px;
 `;
 
 export const Contents = styled.div`

@@ -4,34 +4,6 @@ import styled from "styled-components";
 import theme from "./../../../../styles/theme";
 
 
-// nav modal button
-
-export const NavButton = styled.button`
-	width: 109px;
-  height: 48px;
-  border-radius: 6px;
-	background-color: ${theme.BrandLighter};
-	box-shadow: 0px 4px 8px #0000000d;
-  cursor: pointer;
-	display: flex;
-  align-items: center;
-	justify-content: center;
-	gap: 10px;
-
-	img {
-		width: 28px;
-		height: 28px;
-	}
-
-	p {
-		font-weight: 500;
-		color: ${theme.Brand};
-		font-size: 18px;
-		letter-spacing: -0.36px;
-	}
-
-`;
-
 export const AppWrap = styled.div`
   text-align: center;
   margin: 10px auto;
@@ -40,9 +12,6 @@ export const AppWrap = styled.div`
   align-items: center;
   justify-content: center;
 `;
-
-
-// modal
 
 export const Overlay = styled.div`
   position: fixed;
@@ -88,16 +57,6 @@ export const Header = styled.div`
 	width: 100%;
 	margin-bottom: 32px;
 
-h1 {
-	display: flex;
-	justify-content: center;
-	font-size: 24px;
-	font-weight: 500;
-	color: ${theme.Black};
-	font-family: Pretendard;
-	margin-bottom: 32px;
-}
-
 span {
 	color: ${theme.BrandMid};
 	font-size: 16px;
@@ -108,6 +67,45 @@ span {
 	margin-bottom: 8px;
 }
 `
+
+export const ModalTitle = styled.div`
+
+	display: grid;
+  grid-template-columns: 24px 1fr 24px;
+  grid-template-rows: 24px;
+	width: 100%;
+	margin-bottom: 32px;
+
+h1 {
+	grid-column: 2;
+	display: flex;
+	justify-content: center;
+	font-size: 24px;
+	font-weight: 500;
+	color: ${theme.Black};
+	font-family: Pretendard;
+	margin-bottom: 32px;
+}
+`;
+
+export const CloseButton = styled.div`
+	grid-column: 3;
+  border-radius: 23.5px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+  cursor: pointer;
+  img {
+    color: ${theme.Black};
+    font-size: 30px;
+		width: 17px;
+		height: 17px;
+
+		&:hover {
+			opacity: 0.5;
+		}
+  }
+`;
 
 
 export const Contents = styled.div`
@@ -176,23 +174,5 @@ export const Button = styled.button`
   cursor: pointer;
   &:hover {
     background-color: #898989;
-  }
-`;
-
-export const CloseButton = styled.div`
-  float: right;
-  width: 47px;
-  height: 47px;
-  border-radius: 23.5px;
-	background-color: ${theme.Gray20};
-	display: flex;
-	justify-content: center;
-	align-items: center;
-  cursor: pointer;
-  img {
-    color: ${theme.Black};
-    font-size: 30px;
-		width: 17px;
-		height: 17px;
   }
 `;

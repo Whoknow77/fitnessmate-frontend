@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import theme from "../../../styles/theme";
+import theme from "../../styles/theme";
 
 export const HomeContainer = styled.ul`
   width: 100%;
@@ -133,10 +133,6 @@ export const ButtonContainer = styled.div`
 			color: ${({ theme }) => theme.White};
       background-color: ${({ theme }) => theme.Brand};
     }
-
-		&:hover {
-			opacity: 0.5;
-		}
 	}
 `;
 
@@ -147,65 +143,4 @@ export const Content = styled.div`
 	div{
 		font-size: 100px;
 	}
-`;
-
-
-// modal button
-
-export const FixModalButton = styled.button`
-	width: 109px;
-  height: 48px;
-  border-radius: 6px;
-	background-color: ${theme.BrandLighter};
-	box-shadow: 0px 4px 8px #0000000d;
-  cursor: pointer;
-	display: flex;
-  align-items: center;
-	justify-content: center;
-	gap: 10px;
-
-	img {
-		width: 28px;
-		height: 28px;
-	}
-
-	p {
-		font-weight: 500;
-		color: ${theme.Brand};
-		font-size: 18px;
-		letter-spacing: -0.36px;
-	}
-
-`;
-
-
-export const AddModalButton = styled.button`
-	width: 237px;
-  height: 56px;
-  border-radius: 35px;
-	background-color: ${theme.Brand};
-	box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.25);
-	border: 1px solid ${theme.BrandLight};
-  cursor: pointer;
-	display: flex;
-  align-items: center;
-	justify-content: center;
-	gap: 12px;
-
-  &:hover {
-    background-color: ${theme.BrandDark};
-  }
-
-	img {
-		width: 24px;
-		height: 24px;
-	}
-
-	p {
-		font-weight: 500;
-		color: ${theme.White};
-		font-size: 18px;
-		letter-spacing: -0.36px;
-	}
-
 `;

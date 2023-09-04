@@ -36,7 +36,7 @@ function NavModal({ children, userName }) {
     <S.AppWrap ref={modalRef}>
 			<S.NavButton onClick={() => {  setIsOpen(!isOpen) }} >{children}</S.NavButton>
       {isOpen && (
-        <S.ModalWrap>
+      <S.ModalWrap>
 				<S.Contents>
 					<div className="modalheader">
 						<p>안녕하세요.</p>

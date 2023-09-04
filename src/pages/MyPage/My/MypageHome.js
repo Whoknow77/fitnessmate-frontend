@@ -5,6 +5,8 @@ import "./style.css";
 import { useState } from "react";
 import AddModal from "./Modal/AddModal";
 import FixModal from "./Modal/FixModal";
+import fix from "../../../assets/images/Fix_Icon.svg";
+import add from "../../../assets/images/Add_Icon.svg";
 import ToggleSwitch from "./toggle";
 
 // 루틴 목록용 더미데이터
@@ -23,17 +25,29 @@ export const DUMMY_DATA = [
 ];
 
 const Mypagehome = () => {
+  // Modal
+
+  const [isFixOpen, setIsFixOpen] = useState(false);
+
+  const onClickFixButton = () => {
+    setIsFixOpen(true);
+  };
+
+  const [isAddOpen, setIsAddOpen] = useState(false);
+
+  const onClickAddButton = () => {
+    setIsAddOpen(true);
+  };
+
   // 루틴 목록
 
   const [content, setContent] = useState("first");
   const [btnActive, setBtnActive] = useState(0);
 
   const handleClickButton = (e) => {
-    const { name } = e.target;
+    const { name, value } = e.target;
     setContent(name);
-    setBtnActive((prev) => {
-      return e.target.value;
-    });
+    setBtnActive(value);
   };
 
   const selectComponent = {
@@ -105,7 +119,10 @@ const Mypagehome = () => {
                     </button>
                   );
                 })}
-                <FixModal />
+                <S.FixModalButton onClick={onClickFixButton}>
+                  <img src={fix} alt="편집하기 버튼" />
+                  <p>편집</p>
+                </S.FixModalButton>
               </S.ButtonContainer>
             </S.ContentsTitle>
             <div className="height">
@@ -114,10 +131,34 @@ const Mypagehome = () => {
             </div>
           </S.SecondContent>
         )}
-        <div className="modalbutton">
-          <AddModal />
-        </div>
       </S.HomeContent>
+
+      <div className="modalbutton">
+        <S.AddModalButton onClick={onClickAddButton}>
+          <img src={add} alt="추가하기 버튼" />
+          <p>이 목록에 운동 추가하기</p>
+        </S.AddModalButton>
+      </div>
+
+      {/* 편집 버튼 */}
+      {isFixOpen && (
+        <FixModal
+          open={isFixOpen}
+          onClose={() => {
+            setIsFixOpen(false);
+          }}
+        />
+      )}
+
+      {/* 이 목록에 운동 추가하기 버튼 */}
+      {isAddOpen && (
+        <AddModal
+          open={isAddOpen}
+          onClose={() => {
+            setIsAddOpen(false);
+          }}
+        />
+      )}
     </S.HomeContainer>
   );
 };
