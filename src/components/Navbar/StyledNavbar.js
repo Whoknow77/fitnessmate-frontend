@@ -14,8 +14,6 @@ export const NavbarContainer = styled.div`
     margin: 0 auto;
     height: 64px;
     padding: 10px 40px;
-    font-size: 18px;
-    font-weight: 700;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -57,7 +55,7 @@ export const NavButton = styled.button`
   justify-content: center;
   align-items: center;
   font-size: 18px;
-  font-weight: 700;
+  font-weight: 500;
   line-height: 150%; /* 22.5px */
   letter-spacing: -0.3px;
   @media (max-width: 1000px) {

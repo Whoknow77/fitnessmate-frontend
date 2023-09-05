@@ -27,7 +27,7 @@ const SignupBodyInfo = () => {
     if (
       Object.entries(isValidState).filter(([key, value]) => {
         return value[1] === true;
-      }).length === 8
+      }).length >= 9
     ) {
       navigate("/signup/bodyfigure", { replace: false }); // 절대 경로로 이동
     }
@@ -39,14 +39,14 @@ const SignupBodyInfo = () => {
     if (sex[0] === 1) {
       setIsValidState((pre) => ({
         ...pre,
-        sex: ["남성", true, isValidState.sex[2]],
+        sex: ["남성", true],
       }));
     }
     // 여성
     else if (sex[1] === 1) {
       setIsValidState((pre) => ({
         ...pre,
-        sex: ["여성", true, isValidState.sex[2]],
+        sex: ["여성", true],
       }));
     }
   };
@@ -73,9 +73,9 @@ const SignupBodyInfo = () => {
         <div className="statusBar">
           <div className="statusBar2"></div>
         </div>
-        간단한
+        신체 정보를 입력해주세요
         <br />
-        <S.TitleEmphasis>신체 정보</S.TitleEmphasis>를 입력해주세요
+        <span className="recommendText">맞춤 추천을 위해 필요해요</span>
       </S.SignupTitle>
       <S.BodyInfoContainer>
         <div className="sexSelect">
@@ -99,13 +99,10 @@ const SignupBodyInfo = () => {
             <span className="bodyInfoWarning">성별을 선택해 주세요.</span>
           )}
         </div>
-        <ProfileInput
-          placeholder="키를 입력해주세요 (숫자만) ex)175"
-          name="height"
-        >
+        <ProfileInput placeholder="숫자만 입력" name="height">
           키
         </ProfileInput>
-        <ProfileInput placeholder="몸무게를 입력해주세요" name="weight">
+        <ProfileInput placeholder="숫자만 입력" name="weight">
           몸무게
         </ProfileInput>
       </S.BodyInfoContainer>

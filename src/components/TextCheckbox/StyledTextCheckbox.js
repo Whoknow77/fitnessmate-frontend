@@ -16,7 +16,7 @@ export const TextCheckboxWrapper = styled.button`
   align-items: center;
 
   border: 2px solid
-    ${({ theme, isSelected }) => (isSelected ? theme.Brand : `transparent`)};
+    ${({ theme, isSelected }) => (isSelected ? theme.Brand : `${theme.Gray20}`)};
 
   .choice-article {
     // 텍스트가 새로운 줄로 넘어가지 않게됨

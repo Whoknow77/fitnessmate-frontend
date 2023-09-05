@@ -73,23 +73,22 @@ const SignupBodyFigureDirect = () => {
 
   return (
     <S.SignupContainer>
-      <S.SignupTitle>
-        정확한 추천을 위해
-        <br />
-        <S.TitleEmphasis>골격근령과 체지방량</S.TitleEmphasis>
+      <S.SignupTitle status="3">
+        <div className="statusBar">
+          <div className="statusBar2"></div>
+        </div>
+        <S.TitleEmphasis>골격근량과 체지방량</S.TitleEmphasis>
         을 입력해주세요
         <br />
-        <span className="warningNoWrite">
-          입력하지 않으면 기본값이 입력돼요
-        </span>
+        <span className="recommendText">정밀한 추천을 위해 필요해요</span>
       </S.SignupTitle>
       <S.BodyCompositionInputList>
-        <BodyCompositionInput>골격근량</BodyCompositionInput>
-        <BodyCompositionInput>체지방량</BodyCompositionInput>
+        <BodyCompositionInput name="muscleMass">골격근량</BodyCompositionInput>
+        <BodyCompositionInput name="bodyFat">체지방량</BodyCompositionInput>
       </S.BodyCompositionInputList>
       <S.ButtonContainer>
         <BeforeButton handleSubmit={handleBackPage} />
-        <MiddleButton handleSubmit={handleSubmit}>가입 완료하기</MiddleButton>
+        <MiddleButton handleSubmit={handleSubmit}>다음</MiddleButton>
       </S.ButtonContainer>
     </S.SignupContainer>
   );

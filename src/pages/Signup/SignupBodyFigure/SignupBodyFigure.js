@@ -13,12 +13,20 @@ const SignupBodyFigure = () => {
   const [isValidState, setIsValidState] = useRecoilState(validationState);
   const [isCategorySelect, setIsCategorySelect] = useState(false);
 
+  // bodyFat, muscleMass
   const categorylist = [
-    ["마른 편이에요", [12, 12, 25, 25]],
-    ["보통이에요", [15, 15, 25, 25]],
-    ["조금 통통한 편이에요", [25, 25, 25, 25]],
-    ["뚱뚱해요", [35, 35, 25, 25]],
+    ["마른 편이에요", [12, 30]],
+    ["보통이에요", [15, 30]],
+    ["조금 통통한 편이에요", [25, 30]],
+    ["뚱뚱해요", [35, 30]],
   ];
+
+  const updownBalanceTextList = [
+    "하체가 상체보다 더 발달했어요",
+    "둘 다 발달했거나 큰 차이 없어요",
+    "상체가 하체보다 더 발달했어요",
+  ];
+
   console.log(isValidState);
 
   const handleClick = (idx) => {
@@ -27,10 +35,8 @@ const SignupBodyFigure = () => {
     setIsCategorySelect(newArr);
     setIsValidState((pre) => ({
       ...pre,
-      upperBodyFat: [categorylist[idx][1][0], true, false],
-      lowerBodyFat: [categorylist[idx][1][1], true, false],
-      upperMuscleMass: [categorylist[idx][1][2], true, false],
-      lowerMuscleMass: [categorylist[idx][1][3], true, false],
+      BodyFat: [categorylist[idx][1][0], true],
+      muscleMass: [categorylist[idx][1][1], true],
     }));
   };
 
@@ -82,50 +88,55 @@ const SignupBodyFigure = () => {
   };
   return (
     <S.SignupContainer>
-      <S.SignupTitleContainer>
-        <S.SignupTitle status="3">
-          <div className="statusBar">
-            <div className="statusBar2"></div>
-          </div>
-          <S.TitleEmphasis>어떤 체형</S.TitleEmphasis>을 가지고 계신가요?
-          <br />
-          <span className="recommendText">정확한 추천을 위해 필요해요</span>
-        </S.SignupTitle>
-      </S.SignupTitleContainer>
-      <S.SignupTextContainer>
-        {categorylist?.map((item, index) => {
-          return (
-            <TextCheckbox
-              key={index}
-              handleClick={handleClick}
-              isSelected={isCategorySelect[index]}
-              elementidx={index}
-            >
-              {item[0]}
-            </TextCheckbox>
-          );
-        })}
-        <div className="directButtonContainer">
-          <button
-            className="directbutton"
-            onClick={(e) => {
-              e.preventDefault();
-              navigate(`${currenturl}/direct`);
-            }}
-          >
-            직접 입력하기
-            <img
-              src={rightarrow}
-              className="rightArrow"
-              alt="직접 입력하기 버튼 이미지"
-            />
-          </button>
+      <S.SignupTitle status="3">
+        <div className="statusBar">
+          <div className="statusBar2"></div>
         </div>
-        <S.ButtonContainer>
-          <BeforeButton handleSubmit={handleBackPage} />
-          <MiddleButton handleSubmit={handleSubmit}>가입 완료하기</MiddleButton>
-        </S.ButtonContainer>
-      </S.SignupTextContainer>
+        체형 정보를 입력해주세요
+        <br />
+        <span className="recommendText">맞춤 추천을 위해 필요해요</span>
+      </S.SignupTitle>
+      <S.SignupUpdonwBalanceWrapper>
+        <span className="updownBalanceTitle">상/하체 균형을 조절해주세요</span>
+        <div className="updownBalanceBox">
+          <span className="updownBalanceBoxTitle">가나다</span>
+        </div>
+        <S.SignupTextContainer>
+          <span className="bodyfigureText">어떤 체형인가요?</span>
+          {categorylist?.map((item, index) => {
+            return (
+              <TextCheckbox
+                key={index}
+                handleClick={handleClick}
+                isSelected={isCategorySelect[index]}
+                elementidx={index}
+              >
+                {item[0]}
+              </TextCheckbox>
+            );
+          })}
+          <div className="directButtonContainer">
+            <button
+              className="directbutton"
+              onClick={(e) => {
+                e.preventDefault();
+                navigate(`${currenturl}/direct`);
+              }}
+            >
+              직접 입력하기
+              <img
+                src={rightarrow}
+                className="rightArrow"
+                alt="직접 입력하기 버튼 이미지"
+              />
+            </button>
+          </div>
+          <S.ButtonContainer>
+            <BeforeButton handleSubmit={handleBackPage} />
+            <MiddleButton handleSubmit={handleSubmit}>다음</MiddleButton>
+          </S.ButtonContainer>
+        </S.SignupTextContainer>
+      </S.SignupUpdonwBalanceWrapper>
     </S.SignupContainer>
   );
 };

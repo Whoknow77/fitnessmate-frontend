@@ -3,15 +3,11 @@ import { useRecoilValue } from "recoil";
 import { BeforeButton, MiddleButton, ProfileInput } from "../../../components";
 import { useNavigate } from "react-router-dom";
 import { validationState } from "./../../../recoil/atom";
-import { useState } from "react";
 
 // 회원가입 페이지에 대한 정보를 모두 담는 컴포넌트
-// 우선 이메일은
 const SignupProfile = () => {
   const navigate = useNavigate();
   const isValidState = useRecoilValue(validationState);
-  console.log(isValidState);
-  // 6가지 validState의 상태만을 담은 배열
 
   const handleBackPage = (e) => {
     e.preventDefault();
@@ -24,12 +20,10 @@ const SignupProfile = () => {
     if (
       Object.entries(isValidState)?.filter(([key, value]) => {
         return value[1] === true;
-      }).length === 6
+      }).length >= 6
     ) {
       navigate(`bodyinfo`);
     }
-
-    // 모든 유효성 검사 + 이메일 중복 확인을 만족해야 다음 페이지로 넘어감
   };
 
   return (
@@ -38,7 +32,7 @@ const SignupProfile = () => {
         <div className="statusBar">
           <div className="statusBar2"></div>
         </div>
-        <S.TitleEmphasis>회원정보</S.TitleEmphasis>를 입력해주세요.
+        회원 정보를 입력해주세요
       </S.SignupTitle>
       <S.ProfileInputcontainer>
         <ProfileInput placeholder="2자리 이상" name="userName">

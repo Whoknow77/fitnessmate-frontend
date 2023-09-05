@@ -6,11 +6,14 @@ export const SignupContainer = styled.form`
   flex-direction: column;
   align-items: flex-start;
   justify-content: space-between;
-  gap: 36px;
+  gap: 70px;
+  width: 474px;
 
   .recommendText {
     color: ${theme.Gray80};
     font-size: 22px;
+    font-weight: 600;
+    letter-spacing: -0.44px;
   }
   .buttonContainer {
     display: flex;
@@ -45,10 +48,10 @@ export const SignupTitle = styled.span`
   flex-direction: ${({ flex }) => (flex ? "column" : "")};
   align-items: center;
   width: 100%;
-
-  color: ${({ theme }) => theme.Gray70};
-  font-size: 28px;
-  font-weight: 700;
+  color: #333d4b;
+  font-size: 30px;
+  font-weight: 600;
+  letter-spacing: -0.6px;
   .warningNoWrite {
     display: inline-block;
     color: ${theme.Gray80};
@@ -69,7 +72,7 @@ export const SignupTitle = styled.span`
 
     .statusBar2 {
       position: absolute;
-      width: ${({ status }) => `${(100 / 5) * status}%`};
+      width: ${({ status }) => `${(100 / 4) * status}%`};
       height: 4px;
       background: ${theme.Brand};
     }
@@ -91,7 +94,6 @@ export const BodyInfoContainer = styled.div`
     display: flex;
     flex-direction: column;
     gap: 8px;
-    padding-top: 34px;
     .bodyInfoWarning {
       color: ${theme.Error};
       font-size: 16px;
@@ -146,11 +148,17 @@ export const SexItem = styled.button`
 `;
 
 export const SignupTextContainer = styled.div`
-  padding-top: 45px;
   display: flex;
   flex-direction: column;
   gap: 14px;
   width: 100%;
+  .bodyfigureText {
+    padding-bottom: 10px;
+    color: ${theme.Gray80};
+    font-size: 20px;
+    font-weight: 600;
+    letter-spacing: -0.4px;
+  }
   .directButtonContainer {
     display: flex;
     justify-content: flex-end;
@@ -180,5 +188,20 @@ export const BodyCompositionInputList = styled.div`
 export const ButtonContainer = styled.div`
   display: flex;
   align-items: center;
-  padding-top: 117px;
+  position: absolute;
+  top: 917px;
+`;
+
+export const SignupUpdonwBalanceWrapper = styled.div`
+  width: 100%;
+  .updownBalanceTitle {
+    color: var(--Gray80, #4e5968);
+    font-size: 20px;
+    font-weight: 600;
+    letter-spacing: -0.4px;
+    .updownBalanceBox {
+      .updownBalanceBoxTitle {
+      }
+    }
+  }
 `;

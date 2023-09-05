@@ -16,7 +16,7 @@ export const BigButtonWrapper = styled.button`
 // < 가로 길이가 중간인 버튼 >
 
 export const MiddleButtonWrapper = styled.button`
-  width: 294px;
+  width: 354px;
   height: 62px;
   padding: 22px 24px;
 
@@ -30,7 +30,6 @@ export const SmallButtonWrapper = styled.button`
   width: 204px;
   padding: 22px 24px;
   height: 54px;
-
   background: ${theme.Brand};
   color: ${theme.White};
 `;
@@ -38,11 +37,9 @@ export const SmallButtonWrapper = styled.button`
 // < 이전 버튼 >
 
 export const BeforeButtonWrapper = styled.button`
-  width: 139px;
+  width: 134px;
   height: 62px;
   padding: 22px 10px;
-  font-weight: 700;
-
   background: ${theme.White};
   color: ${theme.Brand};
 `;

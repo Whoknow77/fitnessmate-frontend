@@ -2,7 +2,7 @@
 
 const theme = {
   Black: "#2F3233",
-  Gray80: "#555555",
+  Gray80: "#4E5968",
   Gray70: "#707070",
   Gray50: "#9A9798",
   Gray30: "#C2C0C1",
@@ -13,7 +13,7 @@ const theme = {
   BrandDark: "#0A89E5",
   BrandMid: "#36ABFF",
   BrandLight: "#D0EBFF",
-	BrandLighter: "#E5F4FF",
+  BrandLighter: "#E5F4FF",
   BrondPale: "#EDF7FF",
   BrandNon: "#A6CEEC",
   Error: "#EB444C",

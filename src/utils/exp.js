@@ -3,7 +3,10 @@ const ValidateTest = (name) => {
   const passwordExp = /^(?=.*[a-zA-Z])(?=.*[0-9]).{8,25}$/;
   const birthDateExp = /^\d{4}-\d{2}-\d{2}$/;
   const loginEmailExp = /^(.+)@(\S+)$/;
-  const bodyinfoExp = /^\d{2,3}$/;
+  const bodyFatExp = /^\d{2}$/;
+  const muscleMassExp = /^\d{2}$/;
+  const heightExp = /^\d{3}$/;
+  const weightExp = /^\d{2,3}$/;
 
   switch (name) {
     case "userName":
@@ -22,10 +25,16 @@ const ValidateTest = (name) => {
       return loginEmailExp;
 
     case "height":
-      return bodyinfoExp;
+      return heightExp;
 
     case "weight":
-      return bodyinfoExp;
+      return weightExp;
+
+    case "bodyFat":
+      return bodyFatExp;
+
+    case "muscleMass":
+      return muscleMassExp;
 
     default:
       break;
