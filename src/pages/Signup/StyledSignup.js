@@ -32,7 +32,42 @@ export const SignupContainer = styled.form`
   }
 
   .buttonCompleteContainer {
-    padding-top: 159px;
+    margin: 0 auto;
+  }
+  .signupCompleteNavBox {
+    padding-top: 33px;
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    width: 100%;
+    .signupCompleteTitle {
+      color: ${theme.Gray80};
+      font-size: 22px;
+      font-weight: 600;
+      letter-spacing: -0.44px;
+    }
+    .signupCompleteNavItem {
+      width: 100%;
+      display: flex;
+      padding: 24px;
+      justify-content: space-between;
+      align-items: center;
+      align-self: stretch;
+      border-radius: 10px;
+      background: var(--Gray10, #f8f8f8);
+      text-align: left;
+      .signupCompleteNavItemText {
+        color: #333d4b;
+        font-size: 20px;
+        letter-spacing: -0.4px;
+        font-weight: 600;
+      }
+      .signupCompleteNavItemText2 {
+        color: #333d4b;
+        font-size: 16px;
+        letter-spacing: -0.32px;
+      }
+    }
   }
 `;
 
@@ -58,11 +93,6 @@ export const SignupTitle = styled.span`
     font-size: 22px;
     padding-top: 12px;
   }
-  .congratu {
-    display: inline-block;
-    color: ${theme.Gray80};
-    font-size: 24px;
-  }
 
   .statusBar {
     position: relative;
@@ -76,6 +106,12 @@ export const SignupTitle = styled.span`
       height: 4px;
       background: ${theme.Brand};
     }
+  }
+  .signupCompleteTitle {
+    color: ${theme.Gray80};
+    font-size: 22px;
+    font-weight: 600;
+    letter-spacing: -0.44px;
   }
 `;
 
@@ -194,13 +230,50 @@ export const ButtonContainer = styled.div`
 
 export const SignupUpdonwBalanceWrapper = styled.div`
   width: 100%;
-  .updownBalanceTitle {
-    color: var(--Gray80, #4e5968);
-    font-size: 20px;
-    font-weight: 600;
-    letter-spacing: -0.4px;
-    .updownBalanceBox {
-      .updownBalanceBoxTitle {
+  display: flex;
+  flex-direction: column;
+  gap: 48px;
+  .updownBalanceBox {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    .updownBalanceTitle {
+      color: ${theme.Gray80};
+      font-size: 20px;
+      font-weight: 600;
+      letter-spacing: -0.4px;
+    }
+    .updownBalanceBar {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      .updownBalanceBarTitle {
+        color: ${theme.Gray80};
+        font-size: 14px;
+        text-align: center;
+      }
+      .updownBalanceBarContent {
+        justify-content: space-between;
+        gap: 28px;
+        height: 58px;
+        display: flex;
+        align-items: center;
+        .balanceRatioBox {
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          align-items: center;
+          gap: 4px;
+          .balanceRatio {
+            color: var(--Gray80, #4e5968);
+            font-size: 18px;
+          }
+          .balanceRatioPercent {
+            color: var(--Gray80, #4e5968);
+            font-size: 18px;
+            font-weight: 700;
+          }
+        }
       }
     }
   }

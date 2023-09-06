@@ -6,6 +6,7 @@ import { useRecoilState } from "recoil";
 import { validationState } from "../../../recoil/atom";
 import { useState } from "react";
 import { userPostAPI } from "../../../apis/API";
+import { FilterPriceSlide, FilterPriceSlideInner } from "./StyledBalanceBar";
 
 const SignupBodyFigure = () => {
   const navigate = useNavigate();
@@ -13,6 +14,11 @@ const SignupBodyFigure = () => {
   const [isValidState, setIsValidState] = useRecoilState(validationState);
   const [isCategorySelect, setIsCategorySelect] = useState(false);
 
+  const [volume, setVolume] = useState();
+
+  const handleVolumeChange = () => {
+    setVolume((prev) => prev + 1);
+  };
   // bodyFat, muscleMass
   const categorylist = [
     ["마른 편이에요", [12, 30]],
@@ -97,9 +103,33 @@ const SignupBodyFigure = () => {
         <span className="recommendText">맞춤 추천을 위해 필요해요</span>
       </S.SignupTitle>
       <S.SignupUpdonwBalanceWrapper>
-        <span className="updownBalanceTitle">상/하체 균형을 조절해주세요</span>
         <div className="updownBalanceBox">
-          <span className="updownBalanceBoxTitle">가나다</span>
+          <span className="updownBalanceTitle">
+            상/하체 균형을 조절해주세요
+          </span>
+          <div className="updownBalanceBar">
+            <span className="updownBalanceBarTitle">
+              하체가 상체보다 더 발달했어요
+            </span>
+            <div className="updownBalanceBarContent">
+              <div className="balanceRatioBox">
+                <span className="balanceRatio">상체 비중</span>
+                <span className="balanceRatioPercent">40%</span>
+              </div>
+              <div className="balnaceBar">
+                <FilterPriceSlide>
+                  <FilterPriceSlideInner
+                    rangeMinPercent={1}
+                    rangeMaxPercent={10}
+                  />
+                </FilterPriceSlide>
+              </div>
+              <div className="balanceRatioBox">
+                <span className="balanceRatio">하체 비중</span>
+                <span className="balanceRatioPercent">60%</span>
+              </div>
+            </div>
+          </div>
         </div>
         <S.SignupTextContainer>
           <span className="bodyfigureText">어떤 체형인가요?</span>

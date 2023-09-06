@@ -8,57 +8,55 @@ import theme from "./../../styles/theme";
 // 홈
 export const HomeContainer = styled.ul`
   width: 100%;
-  margin: 0 auto;
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 36px;
-  margin-bottom: 300px;
 
   // 1
   .firstContent {
-    height: 800px;
+    max-width: 1920px;
+    padding: 0 calc((100% - 1440px) / 2);
     display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-    gap: 12px;
     width: 100%;
-
-    .firstTitle1 {
+    justify-content: space-between;
+    align-items: center;
+    height: 800px;
+    background: #1c1f2c;
+    .firstCotntentItem {
       display: flex;
-      align-items: center;
-      justify-content: center;
-      color: ${theme.BrandDark};
-      font-size: 32px;
-      font-weight: 600;
-      letter-spacing: -0.64px;
-    }
-
-    .firstTitle2 {
-      p {
-        color: ${theme.Black};
-        text-align: center;
-        font-size: 86px;
-        font-weight: 700;
-        line-height: 120%; /* 103.2px */
-        letter-spacing: -1.72px;
+      flex-direction: column;
+      gap: 12px;
+      .firstTitle1 {
+        color: ${theme.White};
+        font-size: 32px;
+        line-height: 120%; /* 38.4px */
+        letter-spacing: -0.64px;
       }
-    }
-    .recommendBtn {
-      margin-top: 30px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      border-radius: 10px;
-      font-size: 24px;
-      font-weight: 600;
-      padding: 24px 28px;
-      background: ${({ theme }) => theme.Brand};
-      color: ${({ theme }) => theme.White};
 
-      &:hover {
-        opacity: 0.5;
+      .firstTitle2 {
+        color: ${theme.White};
+        font-size: 82px;
+        font-weight: 600;
+        line-height: 120%; /* 98.4px */
+        letter-spacing: -1.64px;
+      }
+      .recommendBtn {
+        margin-top: 48px;
+        width: 176px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: 10px;
+        font-size: 24px;
+        padding: 18px 24px;
+        background: ${({ theme }) => theme.Brand};
+        color: ${({ theme }) => theme.White};
+        letter-spacing: -0.48px;
+
+        &:hover {
+          opacity: 0.5;
+        }
       }
     }
   }
@@ -66,7 +64,6 @@ export const HomeContainer = styled.ul`
   // 2
   .secondContent {
     height: 700px;
-    color: ${theme.Black};
     display: flex;
     align-items: center;
     text-align: center;
@@ -74,13 +71,14 @@ export const HomeContainer = styled.ul`
     font-weight: 600;
     line-height: 130%; /* 57.2px */
     letter-spacing: -0.88px;
+    color: #333d4b;
   }
 
   // 3
   .thirdContent {
     display: flex;
     align-items: flex-start;
-    justify-content: space-between;
+    justify-content: space-around;
     width: 83%;
     height: 662px;
     .thirdTitle {
@@ -91,12 +89,12 @@ export const HomeContainer = styled.ul`
         width: 100%;
       }
       .thirdTitleText {
-        color: ${theme.Black};
+        color: #333d4b;
         text-align: center;
-        font-size: 64px;
-        font-weight: 700;
-        line-height: 130%; /* 83.2px */
-        letter-spacing: -1.28px;
+        font-size: 58px;
+        font-weight: 600;
+        line-height: 130%; /* 75.4px */
+        letter-spacing: -1.16px;
       }
       .myFitnessBtn {
         padding: 10px;
@@ -130,7 +128,7 @@ export const HomeContainer = styled.ul`
     display: flex;
     gap: 24px;
     align-items: center;
-    justify-content: space-between;
+    justify-content: space-around;
     width: 79%;
     height: 493px;
 
@@ -142,12 +140,12 @@ export const HomeContainer = styled.ul`
         width: 100%;
       }
       .fourthTitleText {
-        color: ${theme.Black};
+        color: #333d4b;
         text-align: center;
-        font-size: 64px;
-        font-weight: 700;
-        line-height: 130%; /* 83.2px */
-        letter-spacing: -1.28px;
+        font-size: 58px;
+        font-weight: 600;
+        line-height: 130%; /* 75.4px */
+        letter-spacing: -1.16px;
       }
     }
     .searchBtn {

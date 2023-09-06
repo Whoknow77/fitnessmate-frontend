@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import arrow from "../../assets/images/arrow.svg";
 import { useState } from "react";
 import LoginModal from "../../components/Modal/LoginModal";
+import homebanner from "../../assets/images/homebanner.png";
 export const Home = () => {
   const navigate = useNavigate();
 
@@ -35,19 +36,26 @@ export const Home = () => {
     <S.HomeContainer>
       <S.HomeContent>
         <section className="firstContent">
-          <div className="firstTitle1">AI 운동 추천 서비스</div>
-          <div className="firstTitle2">
-            <p>AI의 정확하고 빠른</p>
-            <p>운동 추천</p>
+          <div className="firstCotntentItem">
+            <span className="firstTitle1">
+              전문가 없이도
+              <br />
+            </span>
+            <span className="firstTitle2">
+              정확하고 빠른
+              <br />
+              개인맞춤 추천
+            </span>
+            <button className="recommendBtn" onClick={handleRecommend}>
+              바로 추천받기
+            </button>
           </div>
-          <button className="recommendBtn" onClick={handleRecommend}>
-            바로 추천받기
-          </button>
+          <img className="homebanner" src={homebanner} alt="홈 배너" />
         </section>
       </S.HomeContent>
       <S.HomeContent>
         <section className="secondContent">
-          지금까지는 경험하지 못했던
+          이제껏 경험하지 못했던
           <br />
           운동 코칭 경험을 핏메이트에서 경험해보세요
         </section>
@@ -57,7 +65,7 @@ export const Home = () => {
           <div className="thirdTitle">
             <span className="thirdTitleText">
               내 운동 루틴,
-              <br />내 몸에 핏하게 플래닝
+              <br />내 몸에 FIT하게!
             </span>
             <button className="myFitnessBtn" onClick={handleMyPage}>
               <span className="myFitnessBtnText">내 운동 바로 가기</span>
@@ -84,7 +92,7 @@ export const Home = () => {
           />
           <div className="fourthTitle">
             <span className="fourthTitleText">
-              운동과 보조제 정보
+              운동, 보조제 정보
               <br />
               검색 지원
             </span>

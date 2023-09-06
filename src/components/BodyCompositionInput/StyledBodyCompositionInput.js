@@ -18,6 +18,12 @@ export const BodyCompositionInputContainer = styled.div`
     gap: 4px;
     border-radius: 10px;
     background: ${({ theme }) => theme.Gray10};
+    border: ${({ isFocused, name, valueHistory, isValidState }) =>
+      !isFocused && valueHistory
+        ? isValidState[name][1]
+          ? `1.5px solid ${theme.Gray20}`
+          : `1.5px solid ${theme.Error}`
+        : `1.5px solid ${theme.Gray20}`};
     .inputContent {
       &::-webkit-input-placeholder {
         color: ${({ theme }) => theme.Gray50};

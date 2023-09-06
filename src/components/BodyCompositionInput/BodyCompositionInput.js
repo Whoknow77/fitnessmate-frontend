@@ -31,9 +31,13 @@ const BodyCompositionInput = ({ children, name }) => {
     <span className="profileInputWarning">{children}을 다시 입력해주세요</span>
   );
 
-  console.log(isValidState);
   return (
-    <S.BodyCompositionInputContainer>
+    <S.BodyCompositionInputContainer
+      isFocused={isFocused}
+      valueHistory={valueHistory}
+      isValidState={isValidState}
+      name={name}
+    >
       <span className="inputName">{children}</span>
       <div className="bodyCompositionInputContent">
         <input

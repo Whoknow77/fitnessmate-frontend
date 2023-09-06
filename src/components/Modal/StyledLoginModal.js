@@ -38,7 +38,7 @@ export const ModalWrapper = styled.div`
     justify-content: center;
     button {
       font-size: 20px;
-      font-weight: 700;
+      font-weight: 500;
       letter-spacing: -0.4px;
       border-radius: 12px;
       display: flex;

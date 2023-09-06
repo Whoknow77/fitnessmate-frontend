@@ -6,26 +6,21 @@ import theme from "./../../styles/theme";
 export const NavbarContainer = styled.div`
   position: sticky;
   top: 0;
-  background: ${theme.White};
+  max-width: 1920px;
+  width: 100%;
   z-index: 999;
-
-  .stickyContainer {
-    max-width: 1440px;
-    margin: 0 auto;
-    height: 64px;
-    padding: 10px 40px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
+  height: 64px;
+  display: flex;
+  padding: 0 calc((100% - 1440px) / 2);
+  justify-content: space-between;
+  align-items: center;
+  background-color: rgba(255, 255, 255, 0.4);
+  backdrop-filter: ${({ isLoginModal }) =>
+    isLoginModal ? "none" : "blur(4px)"};
   .nav-logo {
     background-color: #ff7373;
     width: 110px;
     height: 20px;
-  }
-  .underline {
-    border-bottom: 1px solid ${theme.Gray20};
-    width: 100vw;
   }
 `;
 
@@ -54,8 +49,7 @@ export const NavButton = styled.button`
   padding: 10px 14px;
   justify-content: center;
   align-items: center;
-  font-size: 18px;
-  font-weight: 500;
+  font-size: 16px;
   line-height: 150%; /* 22.5px */
   letter-spacing: -0.3px;
   @media (max-width: 1000px) {

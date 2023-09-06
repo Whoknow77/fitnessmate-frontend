@@ -6,7 +6,7 @@ import theme from "./../../styles/theme";
 // < 가로 길이가 긴 버튼 >
 
 export const BigButtonWrapper = styled.button`
-  width: 433px;
+  width: 474px;
   height: 62px;
   padding: 22px 24px;
   background: ${(props) => props.backcolor || props.theme.Brand};

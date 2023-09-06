@@ -6,6 +6,8 @@ import { useNavigate } from "react-router-dom";
 import NavModal from "./NavModal";
 import TokenApi from "../../apis/TokenApi";
 import LoginModal from "../Modal/LoginModal";
+import { useRecoilState } from "recoil";
+import { isModalState } from "../../recoil/atom";
 
 const Navbar = () => {
   const navigate = useNavigate();
@@ -49,37 +51,34 @@ const Navbar = () => {
   });
 
   return (
-    <S.NavbarContainer>
-      <div className="stickyContainer">
-        <button
-          className="nav-logo"
-          onClick={() => {
-            navigate("/");
-          }}
-        />
-        <S.NavLink>
-          <S.NavTextContainer>
-            <i className="fa-solid fa-bars"></i>
-            <S.NavButton onClick={handleSearch}>검색하기</S.NavButton>
-            <S.NavButton onClick={handleRecommend}>추천받기</S.NavButton>
-            <S.NavButton onClick={handleMyPage}>내 운동</S.NavButton>
-          </S.NavTextContainer>
-          {!loginState ? (
-            <S.NavLoginButton
-              className="login"
-              onClick={() => {
-                navigate("login");
-              }}
-            >
-              로그인
-            </S.NavLoginButton>
-          ) : (
-            <NavModal userName={userName}>{userName} 님</NavModal>
-          )}
-        </S.NavLink>
-        {isLoginModal && <LoginModal setIsLoginModal={setIsLoginModal} />}
-      </div>
-      <div className="underline"></div>
+    <S.NavbarContainer isLoginModal={isLoginModal}>
+      <button
+        className="nav-logo"
+        onClick={() => {
+          navigate("/");
+        }}
+      />
+      <S.NavLink>
+        <S.NavTextContainer>
+          <i className="fa-solid fa-bars"></i>
+          <S.NavButton onClick={handleSearch}>검색하기</S.NavButton>
+          <S.NavButton onClick={handleRecommend}>추천받기</S.NavButton>
+          <S.NavButton onClick={handleMyPage}>내 운동</S.NavButton>
+        </S.NavTextContainer>
+        {!loginState ? (
+          <S.NavLoginButton
+            className="login"
+            onClick={() => {
+              navigate("login");
+            }}
+          >
+            로그인
+          </S.NavLoginButton>
+        ) : (
+          <NavModal userName={userName}>{userName} 님</NavModal>
+        )}
+      </S.NavLink>
+      {isLoginModal && <LoginModal setIsLoginModal={setIsLoginModal} />}
     </S.NavbarContainer>
   );
 };
