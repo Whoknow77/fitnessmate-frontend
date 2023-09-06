@@ -97,6 +97,11 @@ const ProfileInput = ({ placeholder, children, name, defaultValue, value }) => {
             exp && exp.test(value) && passwordSame,
           ],
         }));
+      } else {
+        setIsValidState((pre) => ({
+          ...pre,
+          [name]: [value, exp && exp.test(value)],
+        }));
       }
     }
 
