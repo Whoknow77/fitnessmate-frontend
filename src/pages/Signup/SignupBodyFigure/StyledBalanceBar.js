@@ -11,10 +11,31 @@ export const FilterPriceSlide = styled.div`
 
 export const FilterPriceSlideInner = styled.div`
   position: absolute;
-  left: 30%;
-  right: 30%;
-  width: 97px;
+  left: 0%;
+  right: ${({ rangePercent }) => 99 - rangePercent}%;
   height: 4px;
-  border-radius: 3px;
-  background: ${theme.BrandDark};
+  border-radius: 10px;
+  background-color: ${theme.Brand};
+`;
+
+export const FilterPriceRangeWrap = styled.div`
+  position: relative;
+`;
+
+export const FilterPriceRange = styled.input`
+  position: absolute;
+  top: -11px;
+  left: -3px;
+  width: 102%;
+  -webkit-appearance: none;
+  background: none;
+  &::-webkit-slider-thumb {
+    height: 35px;
+    width: 35px;
+    border-radius: 50%;
+    background: ${theme.Gray20};
+    -webkit-appearance: none;
+    position: relative;
+    top: -10px;
+  }
 `;

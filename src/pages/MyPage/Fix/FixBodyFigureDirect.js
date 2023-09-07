@@ -21,7 +21,6 @@ const SignupBodyFigureDirect = () => {
 
   const navigate = useNavigate();
   const [isValidState, setIsValidState] = useRecoilState(validationState);
-  console.log(isValidState);
 
   const handleBackPage = (e) => {
     e.preventDefault();
@@ -77,7 +76,9 @@ const SignupBodyFigureDirect = () => {
       </S.BodyCompositionInputList>
       <S.ButtonContainer>
         <BeforeButton handleSubmit={handleBackPage} />
-        <MiddleButton handleSubmit={handleSubmit}>변경사항 저장하기</MiddleButton>
+        <MiddleButton handleSubmit={handleSubmit}>
+          변경사항 저장하기
+        </MiddleButton>
       </S.ButtonContainer>
     </S.SignupContainer>
   );

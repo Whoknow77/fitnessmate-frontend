@@ -4,9 +4,14 @@ import rightarrow from "../../../assets/images/rightarrow.svg";
 import { MiddleButton, BeforeButton, TextCheckbox } from "../../../components/";
 import { useRecoilState } from "recoil";
 import { validationState } from "../../../recoil/atom";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { userPostAPI } from "../../../apis/API";
-import { FilterPriceSlide, FilterPriceSlideInner } from "./StyledBalanceBar";
+import {
+  FilterPriceSlide,
+  FilterPriceRangeWrap,
+  FilterPriceRange,
+  FilterPriceSlideInner,
+} from "./StyledBalanceBar";
 
 const SignupBodyFigure = () => {
   const navigate = useNavigate();
@@ -14,11 +19,26 @@ const SignupBodyFigure = () => {
   const [isValidState, setIsValidState] = useRecoilState(validationState);
   const [isCategorySelect, setIsCategorySelect] = useState(false);
 
-  const [volume, setVolume] = useState();
+  const [rangeValue, setRangeValue] = useState(5);
+  const [rangeText, setRangeText] = useState("둘 다 발달했거나 큰 차이 없어요");
 
-  const handleVolumeChange = () => {
-    setVolume((prev) => prev + 1);
+  const prcieRangeValueHandler = (e) => {
+    setRangeValue(parseInt(e.target.value));
+
+    setRangeText(handleBalanceText(e.target.value));
+    setIsValidState((pre) => ({
+      ...pre,
+      upDownBalance: [e.target.value / 10, true],
+    }));
   };
+
+  useEffect(() => {
+    setIsValidState((pre) => ({
+      ...pre,
+      upDownBalance: [5 / 10, true],
+    }));
+  }, []);
+
   // bodyFat, muscleMass
   const categorylist = [
     ["마른 편이에요", [12, 30]],
@@ -27,11 +47,16 @@ const SignupBodyFigure = () => {
     ["뚱뚱해요", [35, 30]],
   ];
 
-  const updownBalanceTextList = [
-    "하체가 상체보다 더 발달했어요",
-    "둘 다 발달했거나 큰 차이 없어요",
-    "상체가 하체보다 더 발달했어요",
-  ];
+  const handleBalanceText = (value) => {
+    const rangevalue = Number(value);
+    if (rangevalue >= 1 && rangevalue <= 4) {
+      return "하체가 상체보다 더 발달했어요";
+    } else if (rangevalue === 5) {
+      return "둘 다 발달했거나 큰 차이 없어요";
+    } else if (rangevalue >= 6 && rangevalue <= 9) {
+      return "상체가 하체보다 더 발달했어요";
+    }
+  };
 
   console.log(isValidState);
 
@@ -41,7 +66,7 @@ const SignupBodyFigure = () => {
     setIsCategorySelect(newArr);
     setIsValidState((pre) => ({
       ...pre,
-      BodyFat: [categorylist[idx][1][0], true],
+      bodyFat: [categorylist[idx][1][0], true],
       muscleMass: [categorylist[idx][1][1], true],
     }));
   };
@@ -55,8 +80,8 @@ const SignupBodyFigure = () => {
     e.preventDefault();
     if (
       Object.entries(isValidState)?.filter(([key, value]) => {
-        return value[1] === true;
-      }).length === 12
+        return value[1];
+      }).length >= 12
     ) {
       // 회원가입 post 요청
       const submission = {};
@@ -108,25 +133,36 @@ const SignupBodyFigure = () => {
             상/하체 균형을 조절해주세요
           </span>
           <div className="updownBalanceBar">
-            <span className="updownBalanceBarTitle">
-              하체가 상체보다 더 발달했어요
-            </span>
+            <span className="updownBalanceBarTitle">{rangeText}</span>
             <div className="updownBalanceBarContent">
               <div className="balanceRatioBox">
-                <span className="balanceRatio">상체 비중</span>
-                <span className="balanceRatioPercent">40%</span>
+                <span className="balanceRatio">하체 비중</span>
+                <span className="balanceRatioPercent">{rangeValue * 10}%</span>
               </div>
               <div className="balnaceBar">
                 <FilterPriceSlide>
                   <FilterPriceSlideInner
-                    rangeMinPercent={1}
-                    rangeMaxPercent={10}
+                    rangePercent={Number(rangeValue) * 10}
                   />
                 </FilterPriceSlide>
+                <FilterPriceRangeWrap>
+                  <FilterPriceRange
+                    type="range"
+                    min={1}
+                    max={9}
+                    step="1"
+                    value={rangeValue}
+                    onChange={(e) => {
+                      prcieRangeValueHandler(e);
+                    }}
+                  />
+                </FilterPriceRangeWrap>
               </div>
               <div className="balanceRatioBox">
-                <span className="balanceRatio">하체 비중</span>
-                <span className="balanceRatioPercent">60%</span>
+                <span className="balanceRatio">상체 비중</span>
+                <span className="balanceRatioPercent">
+                  {100 - rangeValue * 10}%
+                </span>
               </div>
             </div>
           </div>
@@ -163,7 +199,9 @@ const SignupBodyFigure = () => {
           </div>
           <S.ButtonContainer>
             <BeforeButton handleSubmit={handleBackPage} />
-            <MiddleButton handleSubmit={handleSubmit}>다음</MiddleButton>
+            <MiddleButton handleSubmit={handleSubmit}>
+              회원가입 완료
+            </MiddleButton>
           </S.ButtonContainer>
         </S.SignupTextContainer>
       </S.SignupUpdonwBalanceWrapper>

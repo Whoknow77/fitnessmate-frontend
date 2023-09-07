@@ -1,10 +1,7 @@
 import { useNavigate } from "react-router-dom";
-import confetti from "../../../assets/images/confetti.png";
 import * as S from "../StyledSignup";
 import { BigButton } from "./../../../components/";
-import theme from "../../../styles/theme";
-import { useEffect, useState } from "react";
-import { userAPI } from "../../../apis/API";
+import rightarrow2 from "../../../assets/images/rightarrow2.svg";
 
 const SignupComplete = () => {
   const navigate = useNavigate();
@@ -47,6 +44,11 @@ const SignupComplete = () => {
               AI가 신체 정보에 알맞은 운동/보조제를 추천해드려요
             </span>
           </span>
+          <img
+            src={rightarrow2}
+            alt="추천 받기 버튼"
+            className="signupCompleteNavItemBTn"
+          />
         </button>
         <button className="signupCompleteNavItem" onClick={GoRoutine}>
           <span className="signupCompleteNavItemText">
@@ -56,6 +58,11 @@ const SignupComplete = () => {
               추천 받은 운동으로 루틴을 만들어 보세요
             </span>
           </span>
+          <img
+            src={rightarrow2}
+            alt="루틴 만들기 버튼"
+            className="signupCompleteNavItemBTn"
+          />
         </button>
         <button className="signupCompleteNavItem" onClick={GoSearch}>
           <span className="signupCompleteNavItemText">
@@ -65,6 +72,11 @@ const SignupComplete = () => {
               다양한 종류의 운동/보조제를 검색해보세요
             </span>
           </span>
+          <img
+            src={rightarrow2}
+            alt="검색 버튼"
+            className="signupCompleteNavItemBTn"
+          />
         </button>
       </div>
 

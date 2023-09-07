@@ -12,10 +12,8 @@ const SignupBodyFigureDirect = () => {
   useEffect(() => {
     setIsValidState((pre) => ({
       ...pre,
-      upperBodyFat: ["", false],
-      lowerBodyFat: ["", false],
-      upperMuscleMass: ["", false],
-      lowerMuscleMass: ["", false],
+      bodyFat: ["", false],
+      muscleMass: ["", false],
     }));
   }, []);
 
@@ -32,16 +30,13 @@ const SignupBodyFigureDirect = () => {
     if (
       Object.entries(isValidState)?.filter(([key, value]) => {
         return value[1] === true;
-      }).length === 12
+      }).length >= 12
     ) {
       // 회원가입 post 요청
       const submission = {};
       for (const key in isValidState) {
         if (key !== "password2") {
           submission[key] = isValidState[key][0];
-        }
-        if (key === "birthDate") {
-          submission[key] = new Date();
         }
         if (key === "height" || key === "weight") {
           submission[key] = Number(isValidState[key][0]);
@@ -88,7 +83,7 @@ const SignupBodyFigureDirect = () => {
       </S.BodyCompositionInputList>
       <S.ButtonContainer>
         <BeforeButton handleSubmit={handleBackPage} />
-        <MiddleButton handleSubmit={handleSubmit}>다음</MiddleButton>
+        <MiddleButton handleSubmit={handleSubmit}>회원가입 완료</MiddleButton>
       </S.ButtonContainer>
     </S.SignupContainer>
   );

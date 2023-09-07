@@ -52,9 +52,8 @@ export const SignupContainer = styled.form`
       padding: 24px;
       justify-content: space-between;
       align-items: center;
-      align-self: stretch;
       border-radius: 10px;
-      background: var(--Gray10, #f8f8f8);
+      background: ${theme.Gray10};
       text-align: left;
       .signupCompleteNavItemText {
         color: #333d4b;
@@ -254,7 +253,6 @@ export const SignupUpdonwBalanceWrapper = styled.div`
       }
       .updownBalanceBarContent {
         justify-content: space-between;
-        gap: 28px;
         height: 58px;
         display: flex;
         align-items: center;
@@ -265,11 +263,11 @@ export const SignupUpdonwBalanceWrapper = styled.div`
           align-items: center;
           gap: 4px;
           .balanceRatio {
-            color: var(--Gray80, #4e5968);
+            color: ${theme.Gray80};
             font-size: 18px;
           }
           .balanceRatioPercent {
-            color: var(--Gray80, #4e5968);
+            color: ${theme.Gray80};
             font-size: 18px;
             font-weight: 700;
           }
