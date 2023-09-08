@@ -16,10 +16,9 @@ const Search = () => {
 	let { pageNum } = useParams();
 	const navigate = useNavigate();
 
-	// 모달
-	const [visible, setVisible] = useState(false);
-
 	// Toggle
+
+	const [visible, setVisible] = useState(false);
 
 	const labels = {
 		left: {
@@ -71,8 +70,8 @@ const Search = () => {
 		}
 	};
 
-	// 필터 토글
-	const [isSearchFilterModal, setIsSearchFilterModal] = useState(false);
+	// 운동 필터 토글 모달
+	const [isSearchFitFilterModal, setIsSearchFitFilterModal] = useState(false);
 
 	// 필터 목록
 	const [searchFilterValue, setSearchFilterValue] = useState({
@@ -221,6 +220,9 @@ const Search = () => {
 		}
 	};
 
+	// 운동 필터 토글 모달
+	const [isSearchSupFilterModal, setIsSearchSupFilterModal] = useState(false);
+
 	// 보조제 종류 데이터
 	const [categories, setCategories] = useState({
 		프로틴: [false, "protein"],
@@ -345,13 +347,13 @@ const Search = () => {
 								<img
 									src={plusCircle}
 									alt="보조제 검색 필터 토글 버튼"
-									className={`searchBarFilterToggleBtn ${isSearchFilterModal ? 'rotate-right' : 'rotate-left'}`}
+									className={`searchBarFilterToggleBtn ${isSearchSupFilterModal ? 'rotate-right' : 'rotate-left'}`}
 									onClick={() => {
-										setIsSearchFilterModal(!isSearchFilterModal);
+										setIsSearchSupFilterModal(!isSearchSupFilterModal);
 									}}
 								/>
 							</div>
-							{isSearchFilterModal && (
+							{isSearchSupFilterModal && (
 								<div className="searchFilterModalWrapper">
 									{Object.entries(categories).map(([key, _], index) => {
 										const categoryName = categories[key][1];
@@ -455,13 +457,13 @@ const Search = () => {
 								<img
 									src={plusCircle}
 									alt="운동 검색 필터 토글 버튼"
-									className={`searchBarFilterToggleBtn ${isSearchFilterModal ? 'rotate-right' : 'rotate-left'}`}
+									className={`searchBarFilterToggleBtn ${isSearchFitFilterModal ? 'rotate-right' : 'rotate-left'}`}
 									onClick={() => {
-										setIsSearchFilterModal(!isSearchFilterModal);
+										setIsSearchFitFilterModal(!isSearchFitFilterModal);
 									}}
 								/>
 							</div>
-							{isSearchFilterModal && (
+							{isSearchFitFilterModal && (
 								<div className="searchFilterModalWrapper fitness">
 									{Object.entries(bodyparts).map(([key, _], index) => {
 										const bodypartName = bodyparts[key][1];
