@@ -13,7 +13,6 @@ export const CardContainer = styled.div`
 		box-shadow: 0px 4px 30px #00000040;
 	}
 
-
   @media screen and (max-width: 1400px) {
     width: 31%;
   }
@@ -26,18 +25,31 @@ export const CardContainer = styled.div`
     width: 88%;
   }
 
-  .fitnessImg {
+  .supplementImg {
     border-radius: 16px 16px 0px 0px;
     width: 100%;
   }
-  .fitnessPartContainer {
+  .supplementPartContainer {
     position: absolute;
     left: 5%;
     top: 3%;
     display: flex;
     gap: 8px;
     flex-wrap: wrap;
-    .fitnessPart {
+    .supplementFlavor {
+      border-radius: 4px;
+      background: ${({ theme }) => theme.BrandLighter};
+      display: flex;
+      padding: 6px 13px;
+      justify-content: center;
+      align-items: center;
+      gap: 10px;
+      color: ${({ theme }) => theme.Brand};
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: -0.24px;
+    }
+		.supplementSource {
       border-radius: 4px;
       background: ${({ theme }) => theme.BrandLight};
       display: flex;
@@ -51,23 +63,23 @@ export const CardContainer = styled.div`
       letter-spacing: -0.24px;
     }
   }
-  .fitnessInfo {
-    height: 145px;
-    padding: 24px 10px 20px 16px;
+  .supplementInfo {
+    height: 169px;
+    padding: 24px 16px 20px 16px;
     border-radius: 0px 0px 16px 16px;
     background: ${({ theme }) => theme.Gray10};
     display: flex;
     flex-direction: column;
-    gap: 7px;
     align-items: flex-start;
-    .fitnessTitle {
+    .supplementTitle {
       color: ${({ theme }) => theme.Black};
       font-size: 24px;
-      font-weight: 700;
+      font-weight: 600;
       letter-spacing: -0.48px;
+			margin-bottom: 7px;
     }
-    .fitnessExplain {
-      color: ${({ theme }) => theme.Gray80};
+    .supplementExplain {
+      color: ${({ theme }) => theme.Black};
       font-size: 16px;
       text-align: left;
       letter-spacing: -0.32px;
@@ -76,6 +88,14 @@ export const CardContainer = styled.div`
       -webkit-box-orient: vertical;
       overflow: hidden;
       text-overflow: ellipsis;
+			margin-bottom: 14px;
     }
+		.supplementPrice {
+			color: ${({ theme }) => theme.Black};
+      font-size: 24px;
+			font-weight: 600;
+      text-align: left;
+      letter-spacing: -0.32px;
+		}
   }
 `;

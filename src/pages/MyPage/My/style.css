@@ -47,7 +47,7 @@ label h4 {
 
 .switch.left-to-right {
   animation-name: leftToRight;
-  animation-duration: 0.4s;
+  animation-duration: 0.2s;
 }
 
 .switch.left-position {

@@ -82,7 +82,6 @@ export const navbar = styled.div`
     overflow-y: scroll;
     max-height: 150px;
     left: 0%;
-    z-index: 999;
     background: white;
     padding: 10px;
     border: 1px solid grey;

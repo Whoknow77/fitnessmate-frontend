@@ -106,14 +106,17 @@ export const Contents = styled.div`
   justify-content: center;
 	flex-direction: column;
 	width: 422px;
+	height: 332px;
+	padding-top: 70px;
 	margin-bottom: 10px;
 	gap: 8px;
+	overflow-y: scroll;
 `;
 
 export const CheckboxArea = styled.div`
 	display: flex;
   justify-content: center;
-	width: 422px;
+	width: 400px;
 	height: 60px;
 `;
 
@@ -129,5 +132,28 @@ export const Button = styled.button`
   cursor: pointer;
   &:hover {
     background-color: #898989;
+  }
+`;
+
+export const SaveButton = styled.button`
+  width: 433px;
+  height: 68px;
+  padding: 22px 24px;
+
+  background: ${({ theme }) => theme.Brand};
+  color: ${({ theme }) => theme.White};
+
+	display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 3px;
+  border-radius: 12px;
+  font-family: Pretendard;
+  font-size: 22px;
+  font-weight: 600;
+  cursor: pointer;
+
+  &:hover {
+    opacity: 0.5;
   }
 `;

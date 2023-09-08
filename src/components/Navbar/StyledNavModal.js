@@ -30,7 +30,7 @@ export const ModalWrap = styled.div`
   border-radius: 16px;
   box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
   border: 1px solid ${theme.Gray30};
-  background-color: ${theme.White};
+  background-color: ${theme.Gray10};
   position: absolute;
   top: 57px;
   left: -11px;
@@ -53,8 +53,10 @@ export const Contents = styled.div`
 		font-size: 16px;
 		letter-spacing: -0.02em;
   }
-	.modalheader {
-		background-color: #f8f8f8;
+	.modalButton {
+		display: flex;
+		flex-direction: column;
+		gap: 1px;
 	}
 `;
 
@@ -65,7 +67,7 @@ export const Button = styled.button`
   padding: 8px 12px;
   color: ${theme.Black};
   letter-spacing: -0.02em;
-	background-color: #f8f8f8;
+	background-color: ${theme.White};;
   &:hover {
     background-color: ${theme.Gray20};
   }

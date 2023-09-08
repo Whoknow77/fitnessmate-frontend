@@ -17,7 +17,7 @@ export const HomeContainer = styled.ul`
 	}
 `;
 
-export const HomeContent = styled.li`
+export const HomeContent = styled.div`
   width: 100%;
   height: 100%;
   display: flex;
@@ -32,7 +32,6 @@ export const FirstContent = styled.div`
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  background: #f9fbfe;
   width: 100%;
 	height: 246px;
 	border-bottom: 1px solid ${({ theme }) => theme.Gray20};
@@ -86,11 +85,15 @@ export const Toggle = styled.div`
 
 export const SecondContent = styled.div`
   width: 100%;
+	min-height: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
 	flex-direction: column;
-	margin-bottom: 1000px;
+
+	.dummy-height {
+		height: 1000px;
+	}
 `;
 
 export const ContentsTitle = styled.div`
@@ -102,6 +105,8 @@ export const ContentsTitle = styled.div`
 	background: ${({ theme }) => theme.Gray10};
 	height: 75px;
 	margin-bottom: 24px;
+	position: sticky;
+	top: 64px;
 
 	.contents-title {
 		font-size: 18px;
@@ -120,7 +125,7 @@ export const ButtonContainer = styled.div`
     display: flex;
 		align-items: center;
 		justify-content: center;
-    width: 83px;
+    padding: 10px 20px;
 		height: 47px;
     color: ${({ theme }) => theme.Brand};
 		font-size: 18px;

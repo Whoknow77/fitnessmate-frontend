@@ -284,6 +284,25 @@ export const userBodyPartAPI = axios.create({
   withCredentials: true,
 });
 
+// 보조제 검색
+export const userSupplementSearchAPI = axios.create({
+  method: "post",
+  baseURL: "/api/supplements/search/list",
+  withCredentials: true,
+});
+
+// 보조제 단일 조회
+export const userSupplementSingleAPI = axios.create({
+  baseURL: "/api/supplements",
+  withCredentials: true,
+});
+
+// 보조제 batch 조회
+export const userSupplementBatchAPI = axios.create({
+  baseURL: "/api/supplements/list",
+  withCredentials: true,
+});
+
 /* 이메일 인증 관련 API */
 
 // 메일 인증 요청

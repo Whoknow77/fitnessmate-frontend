@@ -12,7 +12,7 @@ export const ModalWrapper = styled.div`
   transform: translate(-50%, -50%);
   display: flex;
   flex-direction: column;
-  z-index: 2;
+  z-index: 9999;
   img {
     position: absolute;
     width: 24px;

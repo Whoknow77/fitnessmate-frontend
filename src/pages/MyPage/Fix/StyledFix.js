@@ -75,6 +75,7 @@ export const BodyInfoContainer = styled.div`
   flex-direction: column;
   align-items: flex-start;
   gap: 24px;
+	padding-bottom: 67px;
   .sexSelect {
     display: flex;
     flex-direction: column;
@@ -110,7 +111,7 @@ export const SexItem = styled.button`
   border-radius: 16px;
   background: ${({ sex, theme }) => (sex ? theme.Gray10 : theme.White)};
   border: ${({ sex, theme }) =>
-    sex ? `2px solid ${theme.Brand}` : `2px solid transparent`};
+		sex ? `2px solid ${theme.Brand}` : `2px solid transparent`};
   display: flex;
   width: 126px;
   height: 126px;
@@ -134,11 +135,12 @@ export const SexItem = styled.button`
 `;
 
 export const SignupTextContainer = styled.div`
-  padding-top: 45px;
+  padding-top: 8px;
   display: flex;
   flex-direction: column;
   gap: 14px;
   width: 100%;
+	padding-bottom: 200px;
   .directButtonContainer {
     display: flex;
     justify-content: flex-end;
@@ -177,3 +179,75 @@ export const FixPassword = styled.button`
 	text-decoration: underline;
 	font-weight: 700;
 `
+
+export const NonFix = styled.div`
+	display: flex;
+	gap: 8px;
+	flex-direction: column;
+
+	.nonfix-title {
+		font-size: 18px;
+		font-weight: 500;
+		color: ${({ theme }) => theme.Black};
+	}
+
+	.nonfix-content {
+		background-color: ${({ theme }) => theme.Gray10};
+		border: 1.5px solid ${({ theme }) => theme.Gray20};
+		display: flex;
+		align-items: center;
+		height: 56px;
+		width: 474px;
+		border-radius: 10px;
+		padding-left: 14px;
+		color: ${({ theme }) => theme.Gray50};
+		font-size: 18px;
+		font-weight: 500;
+		margin-bottom: 55px;
+	}
+	
+`
+
+export const CancelButton = styled.button`
+  width: 180px;
+  height: 62px;
+  padding: 22px 10px;
+  background: ${({ theme }) => theme.White};
+  color: ${({ theme }) => theme.Brand};
+	display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 3px;
+  border-radius: 12px;
+  font-family: Pretendard;
+  font-size: 22px;
+  font-weight: 600;
+  cursor: pointer;
+
+  &:hover {
+    opacity: 0.5;
+  }
+`;
+
+export const SaveButton = styled.button`
+  width: 294px;
+  height: 62px;
+  padding: 22px 24px;
+
+  background: ${({ theme }) => theme.Brand};
+  color: ${({ theme }) => theme.White};
+
+	display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 3px;
+  border-radius: 12px;
+  font-family: Pretendard;
+  font-size: 22px;
+  font-weight: 600;
+  cursor: pointer;
+
+  &:hover {
+    opacity: 0.5;
+  }
+`;

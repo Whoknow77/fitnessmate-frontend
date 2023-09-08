@@ -4,41 +4,95 @@ import { useRecoilValue } from "recoil";
 import { useNavigate } from "react-router-dom";
 import { validationState } from "./../../../recoil/atom";
 import { userPutAPI } from "../../../apis/API";
-import {
-	MiddleButton,
-	BeforeButton,
-	ProfileInput,
-} from "./../../../components/";
+import ProfileInput from "./ProfileInput/ProfileInput";
 import TokenApi from "../../../apis/TokenApi";
+import ValidateTest from "../../../utils/exp";
+import { useRecoilState } from "recoil";
 
 // 회원가입 페이지에 대한 정보를 모두 담는 컴포넌트
 // 우선 이메일은
 const FixProfile = (props) => {
+
 	const navigate = useNavigate();
 
-	const isValidState = useRecoilValue(validationState);
+	const [name, setuserName] = useState("");
+	const [birth, setbirthDate] = useState("");
+	const [email, setloginEmail] = useState("");
+
+	const handleNameChange = (e) => {
+		setuserName(e.target.value);
+		console.log(e.target.value)
+	};
+
+	const handleBirthDateChange = (e) => {
+		setbirthDate(e.target.value);
+	}
 
 	const handleBackPage = (e) => {
 		e.preventDefault();
 		navigate(-1);
 	};
 
-	const [name, setName] = useState("");
+	// input onchange
 
+	// 유효성 검사
+  const [isValidState, setIsValidState] = useRecoilState(validationState);
+  // 포커스 검사
+  const [isFocused, setIsFocused] = useState(false);
+
+  // 입력했는지 체크(한 번 입력한 순간 쭉 true)
+  const [valueHistory, setValueHistory] = useState(false);
+
+
+	// 이메일 중복검사 + 유효성검사를 입력할때마다 해야함
+  const handleChange = (e) => {
+    const value = e.currentTarget.value;
+    const name = e.target.name;
+    let exp = ValidateTest(name);
+
+		if (name === "userName") {
+			setuserName(e.target.value);
+		}  else if (name === "birthDate") {
+			setbirthDate(e.target.value);
+		} else if (name === "password") {
+        // 비밀번호 재확인
+        const passwordSame = value === isValidState.password2[0];
+        setIsValidState((pre) => ({
+          ...pre,
+          password2: [
+            isValidState.password2[0],
+            exp && exp.test(value) && passwordSame,
+          ],
+          password: [value, exp && exp.test(value) && passwordSame],
+        }));
+      } else if (name === "password2") {
+        const passwordSame = value === isValidState.password[0];
+        setIsValidState((pre) => ({
+          ...pre,
+          password2: [value, exp && exp.test(value) && passwordSame],
+          password: [
+            isValidState.password[0],
+            exp && exp.test(value) && passwordSame,
+          ],
+        }));
+      }
+    if (!valueHistory) {
+      setValueHistory(true);
+    }
+  };
 	
 	// 제출
 	const handleSubmit = async (e) => {
 		e.preventDefault();
 			const submission = {
+				birthDate: birth,
+				loginEmail: email,
 				userName: name,
-				loginEmail: loginEmail,
-				birthDate: birthDate,
 			};
+			console.log(submission)
 
-			console.log(submission.userName);
-
-			console.log("여기로 못 넘어오니?");
-			const res = await userPutAPI.put("", submission);
+			const res = await TokenApi.put("user/private", submission);
+			console.log(res)
 			if (res.data.accessToken) {
 				const accessToken = res.data.accessToken;
 				const refreshToken = res.data.refreshToken;
@@ -53,11 +107,6 @@ const FixProfile = (props) => {
 		// 모든 유효성 검사 + 이메일 중복 확인을 만족해야 제출
 	};
 
-
-	const [userName, setuserName] = useState(null);
-	const [birthDate, setbirthDate] = useState(null);
-	const [loginEmail, setloginEmail] = useState(null);
-
 	const fetchData = async () => {
 		try {
 			const response = await TokenApi.get("user/private");
@@ -70,41 +119,41 @@ const FixProfile = (props) => {
 	};
 
 	useEffect(() => {
-		fetchData();
-	});
+    fetchData();
+  }, []); // 빈 의존성 배열을 추가하여 이 효과가 한 번만 실행되도록
 
 	return (
 		<S.SignupContainer>
 			<S.SignupTitle>
-				<S.TitleEmphasis>{userName}님의 회원정보</S.TitleEmphasis>
+				<S.TitleEmphasis>{name}님의 회원정보</S.TitleEmphasis>
 			</S.SignupTitle>
 			<form onSubmit={handleSubmit}>
 			<S.ProfileInputcontainer>
 				<ProfileInput
+					placeholder="2자리 이상"
 					name="userName"
-					defaultValue={userName}
+					value={name}
+					handleChange={handleChange}
 				>
 					이름
 				</ProfileInput>
 				<ProfileInput
-					placeholder="생년월일을 입력해주세요 ex) 1998-06-16"
+					placeholder="YYYY-MM-DD"
 					name="birthDate"
-					defaultValue={birthDate}
+					value={birth}
+					handleChange={handleChange}
 				>
 					생년월일
 				</ProfileInput>
-				<ProfileInput
-					placeholder="이메일을 입력해주세요"
-					name="loginEmail"
-					defaultValue={loginEmail}
-				>
-					이메일
-				</ProfileInput>
+				<S.NonFix>
+					<p className="nonfix-title">이메일</p>
+					<div className="nonfix-content">{email}</div>
+				</S.NonFix>
 			</S.ProfileInputcontainer>
 			<S.FixPassword onClick={() => { navigate("../fixpassword"); }}>비밀번호 변경하기</S.FixPassword>
 			<S.ButtonContainer>
-				<BeforeButton handleSubmit={handleBackPage} />
-				<MiddleButton handleSubmit={handleSubmit} type="submit" >변경사항 저장하기</MiddleButton>
+				<S.CancelButton onClick={handleBackPage}>취소</S.CancelButton>
+				<S.SaveButton onClick={handleSubmit} type="submit">변경 사항 저장하기</S.SaveButton>
 			</S.ButtonContainer>
 			</form>
 		</S.SignupContainer>
@@ -112,35 +161,3 @@ const FixProfile = (props) => {
 };
 
 export default FixProfile;
-
-// const isValidState = useRecoilValue(validationState);
-
-// 	const handleBackPage = (e) => {
-// 		e.preventDefault();
-// 		navigate(-1);
-// 	};
-
-// 	const [submission, setSubmission] = useState({
-//     userName: '',
-// 		birthDate: '',
-// 		loginEmail: '',
-//   });
-
-// 	const { userName, birthDate, loginEmail } = submission; //비구조화 할당
-
-//   const onChange = (event) => {
-//     const { value, name } = event.target; //event.target에서 name과 value만 가져오기
-//     setSubmission({
-//       ...submission,
-//       [name]: value,
-//     });
-//   };
-
-// 	const fetchData = async () => {
-// 		try {
-// 			const response = await TokenApi.get("user/private");
-// 			setSubmission(response.data);
-// 		} catch (error) {
-// 			console.log(error);
-// 		}
-// 	};

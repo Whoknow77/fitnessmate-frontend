@@ -1,21 +1,20 @@
 import { useEffect, useState } from "react";
 import * as S from "./StyledFix";
-import { InputName } from "../../../components/ProfileInput/StyledProfileInput";
-import female from "../../../assets/images/female.png";
-import male from "../../../assets/images/male.png";
 import { useNavigate } from "react-router-dom";
 import {
   MiddleButton,
   BeforeButton,
-  ProfileInput,
+  TextCheckbox,
 } from "./../../../components/";
+import ProfileInput from "./ProfileInput/ProfileInput";
 import { useRecoilState } from "recoil";
 import { validationState } from "../../../recoil/atom";
+import TokenApi from "../../../apis/TokenApi";
+import rightarrow from "../../../assets/images/rightarrow.svg";
 
 const FixBodyInfo = () => {
   const navigate = useNavigate();
-  // 성별 선택
-  const [sex, setSex] = useState([0, 0]);
+
   const [isValidState, setIsValidState] = useRecoilState(validationState);
   const handleBackPage = (e) => {
     e.preventDefault();
@@ -34,83 +33,108 @@ const FixBodyInfo = () => {
     }
   };
 
-  // 성별 선택
-  const handleSexState = () => {
-    // 남성
-    if (sex[0] === 1) {
-      setIsValidState((pre) => ({
-        ...pre,
-        sex: ["남성", true, isValidState.sex[2]],
-      }));
-    }
-    // 여성
-    else if (sex[1] === 1) {
-      setIsValidState((pre) => ({
-        ...pre,
-        sex: ["여성", true, isValidState.sex[2]],
-      }));
-    }
+	const [userName, setuserName] = useState(null);
+	const [height, setHeight] = useState(null);
+	const [weight, setWeight] = useState(null);
+
+	const fetchData = async () => {
+		try {
+			const response_private = await TokenApi.get("user/private");
+			setuserName(response_private.data.userName);
+			const response_body = await TokenApi.get("/bodyData", response_private);
+			console.log(response_body)
+			setuserName(response_body.data.height);
+			setuserName(response_body.data.weight);
+		} catch (error) {
+			console.log(error);
+		}
+	};
+
+	// bodyinfo
+
+	const currenturl = window.location.pathname;
+	const [isCategorySelect, setIsCategorySelect] = useState(false);
+
+  const categorylist = [
+    ["마른 편이에요", [1, 1, 1, 1]],
+    ["보통이에요", [2, 2, 2, 2]],
+    ["조금 통통한 편이에요", [3, 3, 3, 3]],
+    ["뚱뚱해요", [4, 4, 4, 4]],
+  ];
+
+  const handleClick = (idx) => {
+    const newArr = Array(categorylist.length).fill(false);
+    newArr[idx] = true;
+    setIsCategorySelect(newArr);
+    setIsValidState((pre) => ({
+      ...pre,
+      upperBodyFat: [categorylist[idx][1][0], true, false],
+      lowerBodyFat: [categorylist[idx][1][1], true, false],
+      upperMuscleMass: [categorylist[idx][1][2], true, false],
+      lowerMuscleMass: [categorylist[idx][1][3], true, false],
+    }));
   };
 
-  // 남성
-  const handleMale = (e) => {
-    e.preventDefault();
-    setSex([1, 0]);
-  };
-
-  // 여성
-  const handleFemale = (e) => {
-    e.preventDefault();
-    setSex([0, 1]);
-  };
-
-  useEffect(() => {
-    handleSexState();
-  }, [sex]);
+	useEffect(() => {
+		fetchData();
+	});
 
   return (
     <S.SignupContainer>
       <S.SignupTitle>
-        간단한
-        <br />
-        <S.TitleEmphasis>신체 정보</S.TitleEmphasis>를 입력해주세요
+        <S.TitleEmphasis>{userName}님의 신체정보</S.TitleEmphasis>
       </S.SignupTitle>
       <S.BodyInfoContainer>
-        <div className="sexSelect">
-          <InputName>
-            성별
-            <span className="essentialSymbol"> *</span>
-          </InputName>
-          <ul className="sexList">
-            <S.SexItem onClick={handleMale} sex={sex[0]}>
-              <img className="sexImg" src={male} alt="성별 이미지(남성)" />
-              <S.SexName sex={sex[0]}>남성</S.SexName>
-            </S.SexItem>
-            <S.SexItem onClick={handleFemale} sex={sex[1]}>
-              <img className="sexImg" src={female} alt="성별 이미지(여성)" />
-              <S.SexName sex={sex[1]}>여성</S.SexName>
-            </S.SexItem>
-          </ul>
-          {isValidState.sex[1] ? (
-            ""
-          ) : (
-            <span className="bodyInfoWarning">성별을 선택해 주세요.</span>
-          )}
-        </div>
         <ProfileInput
-          placeholder="키를 입력해주세요 (숫자만) ex)175"
+          value={height}
           name="height"
         >
           키
         </ProfileInput>
-        <ProfileInput placeholder="몸무게를 입력해주세요" name="weight">
+        <ProfileInput
+					value={weight}
+					name="weight"
+				>
           몸무게
         </ProfileInput>
       </S.BodyInfoContainer>
-      <S.ButtonContainer>
+			<S.SignupTitle>
+        <S.TitleEmphasis>{userName}님의 체형정보</S.TitleEmphasis>
+      </S.SignupTitle>
+			<S.SignupTextContainer>
+        {categorylist?.map((item, index) => {
+          return (
+            <TextCheckbox
+              key={index}
+              handleClick={handleClick}
+              isSelected={isCategorySelect[index]}
+              elementidx={index}
+            >
+              {item[0]}
+            </TextCheckbox>
+          );
+        })}
+        <div className="directButtonContainer">
+          <button
+            className="directbutton"
+            onClick={(e) => {
+              e.preventDefault();
+              navigate(`${currenturl}/direct`);
+            }}
+          >
+            직접 입력하기
+            <img
+              src={rightarrow}
+              className="rightArrow"
+              alt="직접 입력하기 버튼 이미지"
+            />
+          </button>
+        </div>
+				<S.ButtonContainer>
         <BeforeButton handleSubmit={handleBackPage} />
-        <MiddleButton handleSubmit={handleSubmit}>다음</MiddleButton>
+        <MiddleButton handleSubmit={handleSubmit}>변경사항 저장하기</MiddleButton>
       </S.ButtonContainer>
+      </S.SignupTextContainer>
     </S.SignupContainer>
   );
 };

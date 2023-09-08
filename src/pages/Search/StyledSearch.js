@@ -4,7 +4,7 @@ import theme from "./../../styles/theme";
 export const SearchContainer = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 26px;
   width: 100%;
   .searchTopWrapper {
     max-width: 812px;
@@ -12,7 +12,6 @@ export const SearchContainer = styled.div`
     margin: 0 auto;
     display: flex;
     flex-direction: column;
-    gap: 26px;
 
     .searchTitleWrapper {
       display: flex;
@@ -36,57 +35,6 @@ export const SearchContainer = styled.div`
           color: ${theme.Black};
           font-size: 38px;
           font-weight: 700;
-        }
-      }
-    }
-  }
-
-  .searchBarWrapper {
-    display: flex;
-    gap: 8px;
-    height: 131px;
-    position: relative;
-    .searchBarFilter {
-      display: flex;
-      width: 140px;
-      height: 56px;
-      padding: 10px 12px;
-      justify-content: center;
-      align-items: center;
-      border-radius: 10px;
-      border: 1px solid ${theme.Gray70};
-
-      .searchBarFilterText {
-        color: #333d4b;
-        text-align: center;
-        font-size: 18px;
-        line-height: 150%; /* 27px */
-        letter-spacing: -0.36px;
-      }
-    }
-
-    .searchFilterModalWrapper {
-      position: absolute;
-      top: 65px;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: flex-start;
-      width: 119px;
-      padding: 3px 0;
-      border-radius: 10px;
-      background: ${theme.Gray10};
-      box-shadow: 0px 1px 5px 0px rgba(0, 0, 0, 0.25);
-      .searchFilterModalContent {
-        color: ${theme.Gray70};
-        font-size: 16px;
-        line-height: 150%; /* 24px */
-        letter-spacing: -0.32px;
-        padding: 3px 13px;
-        text-align: left;
-        width: 100%;
-        &:hover {
-          opacity: 0.8;
         }
       }
     }
@@ -140,3 +88,129 @@ export const Toggle = styled.div`
     height: 50px;
   }
 `;
+
+export const SectionContainer = styled.div`
+	display: flex;
+	gap: 20px;
+	flex-direction: column;
+	width: 100%;
+
+	.searchBarWrapper {
+		display: flex;
+		flex-direction: column;
+    gap: 8px;
+		max-width: 812px;
+		width: 90%;
+		margin: 0 auto;
+	}
+`
+
+export const Filter = styled.div`
+
+	max-width: 812px;
+	display: flex;
+	position: relative;
+
+	.searchBarFilter {
+			gap: 12px;
+      display: flex;
+			max-width: 100%;
+			min-height: 50px;
+      padding: 10px 12px;
+      justify-content: center;
+      align-items: center;
+      border-radius: 10px;
+			background: ${theme.Gray10};
+
+      .searchBarFilterText {
+        color: ${theme.Gray80};
+        text-align: center;
+        font-size: 18px;
+				font-weight: 500;
+				min-width: 63px;
+      }
+
+			img {
+				cursor: pointer;
+				z-index: 800;
+			}
+
+			.rotate-right {
+				transform: rotate(45deg);
+				transition: transform 0.3s ease;
+			}
+
+			.rotate-left {
+				transform: rotate(-90deg);
+				transition: transform 0.3s ease;
+			}
+
+			.addFilter {
+				display: flex;
+				flex-wrap: wrap;
+				gap: 4px;
+
+				button {
+					display: flex;
+					gap: 4px;
+					align-items: center;
+					padding: 4px 8px;
+					border-radius: 4px;
+					background: ${theme.Gray20};
+					color: ${theme.Gray80};
+					font-size: 18px;
+					font-weight: 500;
+				}
+			}
+	}
+
+	.searchFilterModalWrapper {
+		position: absolute;
+		bottom: -118px;
+		display: flex;
+		flex-wrap: wrap;
+		width: 247px;
+    height: 108px;
+		padding: 19px 18px;
+		gap: 12px;
+		border-radius: 10px;
+		border: 1px solid ${theme.Gray20};
+		background: ${theme.White};
+		box-shadow: 0px 1px 5px 0px rgba(0, 0, 0, 0.25);
+		z-index: 900;
+	}
+	.searchFilterModalWrapper.fitness {
+		width: 342px;
+    height: 190px;
+		bottom: -200px;
+	}
+	}
+
+	.searchFilterModalContent {
+		display: flex;
+		align-items: center;
+		gap: 8px;
+		color: ${theme.Gray80};
+		border: 1px solid ${theme.Gray30};
+		background: ${theme.Gray10};
+		border-radius: 4px;
+		font-size: 18px;
+		font-weight: 500;
+		padding: 4px 8px;
+		margin-top: -1px;
+
+		&:hover {
+			opacity: 0.8;
+		}
+		
+	}
+	.searchFilterModalContent.active {
+		background: ${theme.Gray20};
+		color: ${theme.Gray30};
+	}
+
+	.searchFilterModalContent.active img {
+		opacity: 0.3;
+	}
+
+`

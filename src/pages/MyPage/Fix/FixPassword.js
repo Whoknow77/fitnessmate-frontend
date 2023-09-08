@@ -5,8 +5,8 @@ import { validationState } from "./../../../recoil/atom";
 import {
   MiddleButton,
   BeforeButton,
-  ProfileInput,
 } from "./../../../components/";
+import ProfileInput from "./ProfileInput/ProfileInput";
 
 // 회원가입 페이지에 대한 정보를 모두 담는 컴포넌트
 // 우선 이메일은
@@ -49,12 +49,8 @@ const FixPassword = () => {
           placeholder="신규 비밀번호 8자리를 입력해주세요 "
           name="password"
         >
-          신규비밀번호
+          신규 비밀번호
         </ProfileInput>
-				<ProfileInput
-          placeholder="신규 비밀번호 8자리를 입력해주세요 "
-          name="password"
-        />
       </S.ProfileInputcontainer>
       <S.ButtonContainer>
         <BeforeButton handleSubmit={handleBackPage} />

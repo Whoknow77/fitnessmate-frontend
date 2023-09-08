@@ -38,11 +38,11 @@ function NavModal({ children, userName }) {
       {isOpen && (
       <S.ModalWrap>
 				<S.Contents>
-					<div className="modalheader">
+					<div>
 						<p>안녕하세요.</p>
 						<p>{userName}님!</p>
 					</div>
-					<div>
+					<div className="modalButton">
 						<S.Button onClick={handleLogout}>로그아웃</S.Button>
 						<S.Button onClick={handleFixProfile}>계정 정보 수정</S.Button>
 						<S.Button onClick={handleFixBodyInfo}>신체 정보 수정</S.Button>

@@ -1,7 +1,7 @@
 // 색상표
 
 const theme = {
-  Black: "#2F3233",
+  Black: "#333D4B",
   Gray80: "#4E5968",
   Gray70: "#707070",
   Gray50: "#9A9798",
@@ -12,8 +12,8 @@ const theme = {
   Brand: "#0B98FF",
   BrandDark: "#0A89E5",
   BrandMid: "#36ABFF",
-  BrandLight: "#D0EBFF",
-  BrandLighter: "#E5F4FF",
+  BrandLight: "#E5F4FF",
+  BrandLighter: "#F4FAFF",
   BrondPale: "#EDF7FF",
   BrandNon: "#A6CEEC",
   Error: "#EB444C",
