@@ -160,6 +160,8 @@ export const SpplementInformationMiddle = styled.div`
 	.PerServing {
 		grid-column: 2;
 		display: flex;
+		gap: 10px 32px;
+		flex-wrap: wrap;
 		padding: 15px 0;
 		border-radius: 10px;
 		background: ${theme.Gray10};
@@ -167,11 +169,10 @@ export const SpplementInformationMiddle = styled.div`
 	}
 `
 export const PerServing = styled.div`
-	display: grid;
-	grid-template-column: repeat(3, auto-fill);
-	grid-template-row: 19px 1fr;
-  grid-column-gap: 32px;
-  grid-row-gap: 4px;
+	display: flex;
+	gap: 4;
+	flex-direction: column;
+	justify-content: center;
 
 	.TitleSpan {
 		grid-row: 1;
@@ -193,5 +194,28 @@ export const PerServing = styled.div`
 		display: flex;
 		justify-content: center;
 		align-items: center;
+	}
+`
+
+export const SpplementInformationBottom = styled.div`
+	margin-top: 23px;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+
+	span {
+		display: flex;
+		align-items: center;
+		font-size: 16px;
+		font-weight: 400;
+		color: ${theme.Gray50};
+		letter-spacing: -0.32px;
+	}
+
+	p {
+		font-size: 24px;
+		font-weight: 600;
+		left: 0;
+		letter-spacing: -0.48px;
 	}
 `

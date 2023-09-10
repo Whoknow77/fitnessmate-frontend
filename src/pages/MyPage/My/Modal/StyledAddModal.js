@@ -104,20 +104,32 @@ export const SerchArea = styled.div`
 export const Contents = styled.div`
 	display: flex;
   justify-content: center;
-	flex-direction: column;
 	width: 422px;
 	height: 332px;
-	padding-top: 70px;
 	margin-bottom: 10px;
 	gap: 8px;
-	overflow-y: scroll;
+
+	.ScrollArea {
+		overflow-y: scroll;
+	}
+	.ScrollArea::-webkit-scrollbar {
+		width: 25px;
+	}
+	.ScrollArea::-webkit-scrollbar-track {
+		background: ${({ theme }) => theme.White};
+	}
+	.ScrollArea::-webkit-scrollbar-thumb {
+		background: pink; 
+		background-clip: padding-box;
+		border-left: 10px solid transparent;
+	}
 `;
 
 export const CheckboxArea = styled.div`
 	display: flex;
-  justify-content: center;
-	width: 400px;
-	height: 60px;
+	gap: 8px;
+	width: 100%;
+	flex-direction: column;
 `;
 
 export const Button = styled.button`

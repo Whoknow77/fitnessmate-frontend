@@ -6,7 +6,7 @@ export const SearchWorkoutContainer = styled.div`
 
 	iframe {
 		width: 100%;
-		height: 408px;
+		height: 470px;
 	}
 `
 
@@ -51,25 +51,6 @@ export const TopLeft = styled.div`
 	gap: 10px;
 `
 
-// export const BodyPartContainer = styled.div`
-// 	display: flex;
-// 	gap: 4px;
-
-// 	span {
-// 		font-size: 18px;
-// 		font-weight: 600;
-// 		color: ${theme.Gray30};
-// 		letter-spacing: -0.36px;
-// 	}
-
-// 	p {
-// 		font-size: 18px;
-// 		font-weight: 600;
-// 		color: #d9d9d9;
-// 		letter-spacing: -0.36px;
-// 	}
-// `
-
 export const WorkoutName = styled.div`
 	font-size: 40px;
 	font-weight: 700;
@@ -109,7 +90,7 @@ export const InformationContainer = styled.div`
 		flex-direction: column;
 	}
 
-	p {
+	.description {
 		font-size: 15px;
 		font-weight: 500;
 		color: ${theme.Gray80};

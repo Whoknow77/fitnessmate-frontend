@@ -22,6 +22,39 @@ const SearchSupplementDetail = () => {
 	const [fat, setFat] = useState("");
 	const [carbohydrate, setCarbohydrate] = useState("");
 	const [marketURL, setMarketURL] = useState("");
+	const [leucine, setLeucine] = useState("");
+	const [isoLeucine, setIsoLeucine] = useState("");
+	const [valine, setValine] = useState("");
+	const [methionine, setMethionine] = useState("");
+	const [phenylalanine, setPhenylalanine] = useState("");
+	const [threonine, setThreonine] = useState("");
+	const [lCarnitine, setLCarnitine] = useState("");
+	const [lGlutamine, setLGlutamine] = useState("");
+	const [lAlanine, setLAlanine] = useState("");
+	const [lLysine, setLLysine] = useState("");
+
+	const nutrientData = [
+		{ label: "프로틴 함량", value: protein },
+		{ label: "지방 함량", value: fat },
+		{ label: "탄수화물 함량", value: carbohydrate },
+		{ label: "류신 함량", value: leucine },
+		{ label: "이소류신 함량", value: isoLeucine },
+		{ label: "발린 함량", value: valine },
+		{ label: "메티오닌 함량", value: methionine },
+		{ label: "페닐알라닌 함량", value: phenylalanine },
+		{ label: "트레오닌 함량", value: threonine },
+		{ label: "L-케라틴 함량", value: lCarnitine },
+		{ label: "L-글루타민 함량", value: lGlutamine },
+		{ label: "L-알라닌 함량", value: lAlanine },
+		{ label: "L-라이신 함량", value: lLysine },
+	];
+
+	const [price, setPrice] = useState("");
+	function formatNumberToCurrency(number) {
+		return number.toLocaleString('en-US');
+	}
+	const formattedPrice = formatNumberToCurrency(price);
+
 
 	useEffect(() => {
 		// 페이지가 로드될 때 호출
@@ -32,14 +65,27 @@ const SearchSupplementDetail = () => {
 				console.log(response)
 				setSupplementName(response.data.koreanName);
 				setImgPath(response.data.imageURL);
-				setSource(response.data.source)
 				setFlavor(response.data.flavor)
 				setServings(response.data.servings)
 				setDescription(response.data.description)
+
+				// null값이 출력될 수 있음
+				setSource(response.data.source)
 				setProtein(response.data.proteinPerServing)
 				setFat(response.data.fatPerServing)
 				setCarbohydrate(response.data.carbohydratePerServing)
 				setMarketURL(response.data.marketURL)
+				setPrice(response.data.price)
+				setLeucine(response.data.leucine)
+				setIsoLeucine(response.data.isoLeucine)
+				setValine(response.data.valine)
+				setMethionine(response.data.methionine)
+				setPhenylalanine(response.data.phenylalanine)
+				setThreonine(response.data.threonine)
+				setLCarnitine(response.data.l_Carnitine)
+				setLGlutamine(response.data.l_Glutamine)
+				setLAlanine(response.data.l_Alanine)
+				setLLysine(response.data.l_Lysine)
 			} catch (error) {
 				console.error("Error workout detail:", error);
 			}
@@ -66,30 +112,43 @@ const SearchSupplementDetail = () => {
 				<S.TopLeft>
 					<S.SpplementName>{supplementName}</S.SpplementName>
 				</S.TopLeft>
-					<button>내 보조제에 추가</button>
+				<button>내 보조제에 추가</button>
 			</S.TopContainer>
 			<S.MiddleContainer>
 				<img src={imgPath} alt={`${supplementName} 보조제 이미지`} />
 				<S.InformationContainer>
-				<S.SpplementInformationTop>
-						<span>원료</span><p>{source}</p>
+					<S.SpplementInformationTop>
+						{source && (
+							<>
+								<span>원료</span>
+								<p>{source}</p>
+							</>
+						)}
 						<span>맛</span><p>{flavor}</p>
 						<span>회분</span><p>{servings}회분</p>
-				</S.SpplementInformationTop>
-				<S.SpplementInformationMiddle>
+					</S.SpplementInformationTop>
+					<S.SpplementInformationMiddle>
 						<span>설명</span><p className="DescriptionP">{description}</p>
-						<span>함량</span>
-						<div className="PerServing">
-							<S.PerServing>
-								<span className="TitleSpan">프로틴 함량</span>
-								<span className="TitleSpan">지방 함량</span>
-								<span className="TitleSpan">탄수화물 함량</span>
-								<p className="ContentP">{protein}g</p>
-								<p className="ContentP">{fat}g</p>
-								<p className="ContentP">{carbohydrate}g</p>
-							</S.PerServing>
-						</div>
-				</S.SpplementInformationMiddle>
+						{nutrientData.some((nutrient) => nutrient.value !== null && nutrient.value !== undefined && nutrient.value !== "") && (
+							<>
+								<span>함량</span>
+								<div className="PerServing">
+									{nutrientData
+										.filter((nutrient) => nutrient.value !== null && nutrient.value !== undefined && nutrient.value !== "")
+										.map((nutrient, index) => (
+											<S.PerServing key={index}>
+												<span className="TitleSpan">{nutrient.label}</span>
+												<p className="ContentP">{nutrient.value}g</p>
+											</S.PerServing>
+										))}
+								</div>
+							</>
+						)}
+					</S.SpplementInformationMiddle>
+					<S.SpplementInformationBottom>
+						<span onChange={formatNumberToCurrency}>가격</span>
+						<p>{formattedPrice}원</p>
+					</S.SpplementInformationBottom>
 					<button onClick={() => window.open(marketURL, "_blank")}>구매하러 가기</button>
 				</S.InformationContainer>
 			</S.MiddleContainer>

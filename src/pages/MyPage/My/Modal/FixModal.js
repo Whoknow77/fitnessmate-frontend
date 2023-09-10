@@ -176,20 +176,25 @@ function FixModal({ data, onUpdateData, onClose, onDeleteItem }) {
 										{editableItemId === item.id ? (
 											<input
 												type="text"
-												value={item.text}
-												onChange={(e) => {
+												placeholder={item.text}
+												value={text !== null ? text : item.text} // text가 채워져 있을 때는 text로, 비어있을 때는 item.text로 초기화
+												onChange={(e) => setText(e.target.value)} // text 상태 업데이트
+												onBlur={() => {
 													const updatedData = data.map((dataItem) => {
 														if (dataItem.id === item.id) {
-															dataItem.text = e.target.value;
+															dataItem.text = text !== null ? text : item.text; // text가 채워져 있을 때는 text로, 비어있을 때는 item.text로 업데이트
 														}
 														return dataItem;
 													});
 													onUpdateData(updatedData);
+													setEditableItemId(null);
+													setText(null); // text 상태 초기화
 												}}
-												onBlur={() => setEditableItemId(null)}
 											/>
+
+
 										) : (
-											<p onDoubleClick={() => handleDoubleClick(item.id)}>{item.text}</p>
+											<p onClick={() => handleDoubleClick(item.id)}>{item.text}</p>
 										)}
 										<img
 											src={trash}

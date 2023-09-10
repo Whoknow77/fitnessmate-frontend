@@ -13,7 +13,9 @@ const SupplementType = ({ children, flavor, source, imageURL, price, description
     <CardContainer onClick={onClick}>
       <ul className="supplementPartContainer">
         <div className="supplementFlavor">{flavor}</div>
-				<div className="supplementSource">{source}</div>
+				{source && (
+					<div className="supplementSource">{source}</div>
+				)}
       </ul>
       <img src={imageURL} className="supplementImg" alt="보조제 이미지"/>
       <div className="supplementInfo">

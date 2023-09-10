@@ -57,16 +57,6 @@ const SearchWorkoutDetail = () => {
 			</S.BeforeButton>
 			<S.TopContainer>
 				<S.TopLeft>
-					<S.BodyPartContainer>
-						{bodyPart.map((partName, index) => (
-							<React.Fragment key={index}>
-								<span>{partName}</span>
-								{index < bodyPart.length - 1 && (
-									<p className="intervalText">•</p>
-								)}
-							</React.Fragment>
-						))}
-					</S.BodyPartContainer>
 					<S.WorkoutName>{workoutName}</S.WorkoutName>
 				</S.TopLeft>
 					<button>내 운동에 추가</button>
@@ -76,7 +66,7 @@ const SearchWorkoutDetail = () => {
 				<S.InformationContainer>
 				<div className="TopInformation">
 					<span>운동 설명</span>
-					<p>{description}</p>
+					<p className="description">{description}</p>
 				</div>
 				<div className="TopInformation">		
 						<S.BodyPartContainer>

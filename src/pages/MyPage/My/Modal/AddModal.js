@@ -26,12 +26,10 @@ function AddModal({ onClose }) {
 		// 운동 기구 batch 조회(12개)
 
 		try {
-			console.log('여기 들어오나?')
 			const workoutResponse = await userWorkoutBatchAPI.post(
 				`1`,
 				request
 			);
-			console.log('여기는?')
 			if (workoutResponse.data.length) {
 				setNoSearch(false);
 				setMachineList(workoutResponse.data);
@@ -111,13 +109,13 @@ function AddModal({ onClose }) {
 							</S.Contents>
 						) : (
 							<S.Contents>
-								{machineList.map((machine, idx) => {
-									return (
-										<S.CheckboxArea>
-											<TextCheckbox>{machine.koreanName}</TextCheckbox>
-										</S.CheckboxArea>
-									);
-								})}
+								<S.CheckboxArea className="ScrollArea">
+										{machineList.map((machine, idx) => {
+										return (
+												<TextCheckbox>{machine.koreanName}</TextCheckbox>
+										);
+									})}
+								</S.CheckboxArea>
 							</S.Contents>
 						)}
 						{/* BigButton이랑 크기가 안 맞아서 새로 제작 */}

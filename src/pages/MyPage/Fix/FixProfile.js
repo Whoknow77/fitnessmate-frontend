@@ -84,28 +84,36 @@ const FixProfile = (props) => {
 	// 제출
 	const handleSubmit = async (e) => {
 		e.preventDefault();
-			const submission = {
-				birthDate: birth,
-				loginEmail: email,
-				userName: name,
-			};
-			console.log(submission)
-
-			const res = await TokenApi.put("user/private", submission);
-			console.log(res)
+		const formData = new FormData();
+		formData.append("birthDate", birth);
+		formData.append("userName", name);
+		formData.append("loginEmail", email);
+		console.log("정보:", formData);
+	
+		try {
+			// API 호출 및 form 데이터 전송
+			const res = await TokenApi.put("user/private", formData);
+			console.log("수정:", res);
+	
 			if (res.data.accessToken) {
 				const accessToken = res.data.accessToken;
 				const refreshToken = res.data.refreshToken;
+	
 				// 토큰 저장
 				localStorage.setItem("accessToken", accessToken);
 				localStorage.setItem("refreshToken", refreshToken);
-				navigate("/");
+				alert("수정 성공");
 			} else {
 				alert("수정 실패");
 			}
-
+		} catch (error) {
+			console.error(error);
+			alert("수정 실패");
+		}
+	
 		// 모든 유효성 검사 + 이메일 중복 확인을 만족해야 제출
 	};
+	
 
 	const fetchData = async () => {
 		try {
@@ -153,7 +161,7 @@ const FixProfile = (props) => {
 			<S.FixPassword onClick={() => { navigate("../fixpassword"); }}>비밀번호 변경하기</S.FixPassword>
 			<S.ButtonContainer>
 				<S.CancelButton onClick={handleBackPage}>취소</S.CancelButton>
-				<S.SaveButton onClick={handleSubmit} type="submit">변경 사항 저장하기</S.SaveButton>
+				<S.SaveButton type="submit">변경 사항 저장하기</S.SaveButton>
 			</S.ButtonContainer>
 			</form>
 		</S.SignupContainer>

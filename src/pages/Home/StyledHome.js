@@ -22,7 +22,7 @@ export const HomeContainer = styled.ul`
     justify-content: space-between;
     align-items: center;
     height: 800px;
-    background: #1c1f2c;
+    background: #11131D;
     .firstCotntentItem {
       display: flex;
       flex-direction: column;

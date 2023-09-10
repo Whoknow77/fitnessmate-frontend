@@ -55,6 +55,10 @@ export const NavButton = styled.button`
   @media (max-width: 1000px) {
     display: none;
   }
+	border-radius: 12px;
+  &:hover {
+    background-color: ${theme.Gray10};
+  }
 `;
 
 export const NavLoginButton = styled(NavButton)`
