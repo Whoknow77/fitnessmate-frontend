@@ -6,7 +6,7 @@ export const CardContainer = styled.div`
   text-align: center;
   position: relative;
 	border: 1px solid ${({ theme }) => theme.Gray20};
-	border-radius: 16px;
+	border-radius: 17px;
 	cursor: pointer;
 
 	&:hover {

@@ -286,7 +286,7 @@ export const userBodyPartAPI = axios.create({
 
 // 보조제 검색
 export const userSupplementSearchAPI = axios.create({
-  method: "post",
+  method: "get",
   baseURL: "/api/supplements/search/list",
   withCredentials: true,
 });

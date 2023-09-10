@@ -1,11 +1,11 @@
 import { CardContainer } from "./StyledFitnessType";
 
 // 운동 종목 Card
-const FitnessType = ({ children, parts, description, imgPath }) => {
+const FitnessType = ({ children, parts, description, imgPath, onClick }) => {
   // children : 운동종류
   // part : 부위
   return (
-    <CardContainer>
+    <CardContainer onClick={onClick}>
       <ul className="fitnessPartContainer">
         {parts.map((part, index) => {
           return <div className="fitnessPart">{part}</div>;

@@ -3,10 +3,9 @@ export const CardContainer = styled.div`
   display: inline-block;
   width: 23%;
   margin: 10px 12px;
-  text-align: center;
   position: relative;
 	border: 1px solid ${({ theme }) => theme.Gray20};
-	border-radius: 16px;
+	border-radius: 17px;
 	cursor: pointer;
 
 	&:hover {
