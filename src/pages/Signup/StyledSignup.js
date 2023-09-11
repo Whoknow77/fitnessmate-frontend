@@ -77,7 +77,7 @@ export const SignupTitleContainer = styled.div`
 `;
 
 export const SignupTitle = styled.span`
-  text-align: ${({ flex }) => (flex ? "center" : "")};
+  text-align: ${({ flex }) => (flex ? "center" : "left")};
   display: ${({ flex }) => (flex ? "flex" : "")};
   flex-direction: ${({ flex }) => (flex ? "column" : "")};
   align-items: center;
@@ -97,7 +97,7 @@ export const SignupTitle = styled.span`
     position: relative;
     height: 4px;
     background: ${theme.BrandLight};
-    margin-bottom: 24px;
+    margin-bottom: 36px;
 
     .statusBar2 {
       position: absolute;

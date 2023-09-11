@@ -42,3 +42,9 @@ export const isModalState = atom({
   key: "isModalState",
   default: false,
 });
+
+// 추천 history
+export const RecommendState = atom({
+  key: "RecommendState",
+  default: {},
+});

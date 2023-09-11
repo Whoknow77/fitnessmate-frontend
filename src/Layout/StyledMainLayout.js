@@ -9,4 +9,5 @@ export const MainLayoutWrapper = styled.div`
   justify-content: center;
   align-items: center;
   gap: 64px;
+  position: relative;
 `;

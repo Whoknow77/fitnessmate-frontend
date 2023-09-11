@@ -9,14 +9,18 @@ import {
 } from "../StyledRecommend";
 import { ImgCheckbox } from "../../../components";
 import { useState } from "react";
+import { SignupTitle } from "../../Signup/StyledSignup";
+import { BeforeArrowButton } from "./../../../components/Button/BeforeArrowButton";
+import { AfterArrowButton } from "./../../../components/Button/AfterArrowButton";
 
 // 버튼과 이미지의 간격을 어떻게 줄지 고민해 봐야함.
 const RecommendCategory = () => {
   const navigate = useNavigate();
+  const [isReady, setIsReady] = useState(false);
 
   const [category, setCategory] = useState({
-    보조제: [false, "protein"],
     운동: [false, "fitness"],
+    보조제: [false, "protein"],
   });
 
   const goNextPage = () => {
@@ -27,6 +31,10 @@ const RecommendCategory = () => {
     }
   };
 
+  const goBeforePage = () => {
+    navigate(-1);
+  };
+
   // 카테고리 선택
   const handleSelect = (idx) => {
     const entries = Object.entries(category);
@@ -34,23 +42,20 @@ const RecommendCategory = () => {
       entries.map(([key, value], index) => [key, [index === idx, value[1]]])
     );
     setCategory(updatedCategory);
+    setIsReady(true);
   };
 
   return (
     <RecommendContainer>
-      <div>
-        <RecommendTitle ftsize="32px" ftcolor={theme.Black} ftweight="700">
-          어떤 추천을&nbsp;
+      <SignupTitle status="1">
+        <div className="statusBar">
+          <div className="statusBar2"></div>
+        </div>
+        <RecommendTitle ftsize="32px" ftcolor={theme.Black} ftweight="600">
+          추천받고싶은 유형을 선택해주세요
         </RecommendTitle>
-        <RecommendTitle ftsize="32px" ftcolor={theme.Gray80} ftweight="700">
-          받으시겠어요?
-        </RecommendTitle>
-        <br />
-        <br />
-        <RecommendTitle ftsize="24px" ftcolor={theme.Gray80} ftweight="600">
-          AI가 김정욱님에게 최적화된 솔루션을 제공해줘요
-        </RecommendTitle>
-      </div>
+      </SignupTitle>
+
       <RecommendImgContainer>
         {Object.entries(category).map(([key, value], index) => {
           return (
@@ -67,7 +72,10 @@ const RecommendCategory = () => {
         })}
       </RecommendImgContainer>
       <RecommendButtonContainer>
-        <SmallButton handleSubmit={goNextPage}>다음</SmallButton>
+        <BeforeArrowButton handleClick={goBeforePage} />
+        <AfterArrowButton handleClick={goNextPage} isReady={isReady}>
+          다음
+        </AfterArrowButton>
       </RecommendButtonContainer>
     </RecommendContainer>
   );

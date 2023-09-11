@@ -19,19 +19,25 @@ export const MiddleButtonWrapper = styled.button`
   width: 354px;
   height: 62px;
   padding: 22px 24px;
-
-  background: ${theme.Brand};
+  background: ${({ isReady }) =>
+    isReady === undefined || isReady === true ? theme.Brand : theme.BrandLight};
   color: ${theme.White};
 `;
 
 // < 가로 길이가 짧은 버튼 >
 
 export const SmallButtonWrapper = styled.button`
-  width: 204px;
-  padding: 22px 24px;
-  height: 54px;
-  background: ${theme.Brand};
+  display: flex;
+  height: 62px;
+  padding: 18px 39px;
+  justify-content: center;
+  align-items: center;
+  border-radius: 10px;
+  background: ${({ isReady }) => (isReady ? theme.Brand : theme.BrandNon)};
+  cursor: ${({ isReady }) => (isReady ? "pointer" : "default")};
   color: ${theme.White};
+  font-size: 22px;
+  letter-spacing: -0.44px;
 `;
 
 // < 이전 버튼 >
@@ -57,4 +63,49 @@ export const ListButtonWrapper = styled.button`
 
   background: ${theme.Gray10};
   color: ${theme.Black};
+`;
+
+export const BeforeArrowButtonWrapper = styled.button`
+  display: flex;
+  width: 150px;
+  height: 62px;
+  padding: 22px 10px;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  border-radius: 10px;
+  background: ${theme.White};
+  .beforeArrowBtnImg {
+    width: 24px;
+    height: 24px;
+  }
+  .beforeArrowBtnText {
+    color: ${theme.Brand};
+    font-size: 22px;
+    letter-spacing: -0.44px;
+  }
+`;
+
+export const AfterArrowButtonWrapper = styled.button`
+  display: flex;
+  width: 150px;
+  height: 62px;
+  padding: 22px 10px;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  border-radius: 10px;
+  background: ${({ isReady }) => (isReady ? theme.Brand : theme.BrandNon)};
+  cursor: ${({ isReady }) => (isReady ? "pointer" : "default")};
+
+  .afterArrowBtnText {
+    color: ${theme.White};
+    font-size: 22px;
+    letter-spacing: -0.44px;
+  }
+
+  .afterArrowBtnImg {
+    width: 24px;
+    height: 24px;
+  }
 `;

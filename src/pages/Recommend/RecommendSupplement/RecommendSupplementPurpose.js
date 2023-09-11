@@ -10,12 +10,15 @@ import {
 import theme from "../../../styles/theme";
 import { useEffect, useState } from "react";
 import TokenApi from "../../../apis/TokenApi";
+import AfterArrowButton from "../../../components/Button/AfterArrowButton";
+import BeforeArrowButton from "../../../components/Button/BeforeArrowButton";
 
 const RecommendSupplementPurpose = () => {
   const navigate = useNavigate();
 
   // 목적 객체
   const [purposeList, setPurposeList] = useState([]);
+  const [isReady, setIsReady] = useState(false);
   // 목적리스트 받아옴
   const fetchData = async () => {
     try {
@@ -63,7 +66,7 @@ const RecommendSupplementPurpose = () => {
         </RecommendTitle>
         <RecommendTitleHide>
           {/* 이름 로그인한 사람에게 받아와야 함 */}
-          AI가 김정욱님께 최적화된 솔루션을 제공해줘요
+          근육 발달 정도를 반영하여 정교하게 추천해드려요
         </RecommendTitleHide>
         <br />
       </div>
@@ -80,8 +83,10 @@ const RecommendSupplementPurpose = () => {
         ))}
       </TextCheckboxContainer>
       <RecommendButtonContainer>
-        <BeforeButton handleSubmit={handleBackPage}></BeforeButton>
-        <SmallButton handleSubmit={handleNextPage}>다음</SmallButton>
+        <BeforeArrowButton handleClick={handleBackPage} />
+        <AfterArrowButton handleClick={handleNextPage} isReady={isReady}>
+          다음
+        </AfterArrowButton>
       </RecommendButtonContainer>
     </RecommendContainer>
   );

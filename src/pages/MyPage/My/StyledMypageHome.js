@@ -8,13 +8,13 @@ export const HomeContainer = styled.ul`
 
   flex-direction: column;
   align-items: center;
-	justify-content: center;
+  justify-content: center;
   padding-bottom: 300px;
-	
-	.modalbutton {
-		position: fixed;
-		bottom: 70px;
-	}
+
+  .modalbutton {
+    position: fixed;
+    bottom: 70px;
+  }
 `;
 
 export const HomeContent = styled.div`
@@ -23,8 +23,7 @@ export const HomeContent = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-	flex-direction: column;
-
+  flex-direction: column;
 `;
 
 export const FirstContent = styled.div`
@@ -33,55 +32,54 @@ export const FirstContent = styled.div`
   justify-content: center;
   flex-direction: column;
   width: 100%;
-	height: 246px;
-	border-bottom: 1px solid ${({ theme }) => theme.Gray20};
+  height: 246px;
+  border-bottom: 1px solid ${({ theme }) => theme.Gray20};
 
-	.firstTop {
+  .firstTop {
     display: flex;
     align-items: center;
     justify-content: center;
     color: ${theme.Gray50};
     font-size: 24px;
     font-weight: 600;
-		margin-bottom: 8px;
+    margin-bottom: 8px;
   }
 
-	.firstMiddle {
+  .firstMiddle {
     text-align: center;
     display: flex;
     align-items: center;
     justify-content: center;
     flex-direction: column;
-		margin-bottom: 24px;
+    margin-bottom: 24px;
   }
 
-	.firstMiddle p {
+  .firstMiddle p {
     text-align: center;
     color: ${({ theme }) => theme.Black};
     font-size: 38px;
     font-weight: 700;
   }
-
-`
+`;
 
 export const Toggle = styled.div`
-	display: flex;
-	justify-content: flex-end;
-	align-items: center;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
 
-.toggleSwitch_wrap {
-	display: flex;
-	gap: 20px;
-	align-items: center;
-}
+  .toggleSwitch_wrap {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+  }
 
-.toggleSwitch {
-	position: relative;
-	display: inline-block;
-	width: 201px;
-	height: 50px;
-}
-`
+  .toggleSwitch {
+    position: relative;
+    display: inline-block;
+    width: 201px;
+    height: 50px;
+  }
+`;
 
 export const SecondContent = styled.div`
   width: 100%;
@@ -89,11 +87,16 @@ export const SecondContent = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+<<<<<<< HEAD
+  flex-direction: column;
+  margin-bottom: 1000px;
+=======
 	flex-direction: column;
 
 	.dummy-height {
 		height: 1000px;
 	}
+>>>>>>> fb8d16485a464cdfd20f450ad26220166213e1d1
 `;
 
 export const ContentsTitle = styled.div`
@@ -101,116 +104,124 @@ export const ContentsTitle = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+<<<<<<< HEAD
+  gap: 32px;
+  background: ${({ theme }) => theme.Gray10};
+  height: 75px;
+  margin-bottom: 24px;
+=======
 	gap: 32px;
 	background: ${({ theme }) => theme.Gray10};
 	height: 75px;
 	margin-bottom: 24px;
 	position: sticky;
 	top: 64px;
+>>>>>>> fb8d16485a464cdfd20f450ad26220166213e1d1
 
-	.contents-title {
-		font-size: 18px;
-		color: ${({ theme }) => theme.Gray80};
-		font-weight: 500;
-	}
-	
+  .contents-title {
+    font-size: 18px;
+    color: ${({ theme }) => theme.Gray80};
+    font-weight: 500;
+  }
 `;
 
 export const ButtonContainer = styled.div`
-	display: flex;
-	gap: 12px;
-	align-items: center;
+  display: flex;
+  gap: 12px;
+  align-items: center;
 
   .btn {
     display: flex;
+<<<<<<< HEAD
+    align-items: center;
+    justify-content: center;
+    width: 83px;
+    height: 47px;
+=======
 		align-items: center;
 		justify-content: center;
     padding: 10px 20px;
 		height: 47px;
+>>>>>>> fb8d16485a464cdfd20f450ad26220166213e1d1
     color: ${({ theme }) => theme.Brand};
-		font-size: 18px;
-		letter-spacing: -0.36px;
+    font-size: 18px;
+    letter-spacing: -0.36px;
     background-color: ${({ theme }) => theme.White};
-		box-shadow: 0px 4px 8px #0000000d;
+    box-shadow: 0px 4px 8px #0000000d;
     border-radius: 6px;
 
     &.active {
-			color: ${({ theme }) => theme.White};
+      color: ${({ theme }) => theme.White};
       background-color: ${({ theme }) => theme.Brand};
     }
 
-		&:hover {
-			opacity: 0.5;
-		}
-	}
+    &:hover {
+      opacity: 0.5;
+    }
+  }
 `;
-
 
 export const Content = styled.div`
   width: 100%;
   height: 100%;
-	div{
-		font-size: 100px;
-	}
+  div {
+    font-size: 100px;
+  }
 `;
-
 
 // modal button
 
 export const FixModalButton = styled.button`
-	width: 109px;
+  width: 109px;
   height: 48px;
   border-radius: 6px;
-	background-color: ${theme.BrandLighter};
-	box-shadow: 0px 4px 8px #0000000d;
+  background-color: ${theme.BrandLighter};
+  box-shadow: 0px 4px 8px #0000000d;
   cursor: pointer;
-	display: flex;
+  display: flex;
   align-items: center;
-	justify-content: center;
-	gap: 10px;
+  justify-content: center;
+  gap: 10px;
 
-	img {
-		width: 28px;
-		height: 28px;
-	}
+  img {
+    width: 28px;
+    height: 28px;
+  }
 
-	p {
-		font-weight: 500;
-		color: ${theme.Brand};
-		font-size: 18px;
-		letter-spacing: -0.36px;
-	}
-
+  p {
+    font-weight: 500;
+    color: ${theme.Brand};
+    font-size: 18px;
+    letter-spacing: -0.36px;
+  }
 `;
 
-
 export const AddModalButton = styled.button`
-	width: 237px;
+  width: 237px;
   height: 56px;
   border-radius: 35px;
-	background-color: ${theme.Brand};
-	box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.25);
-	border: 1px solid ${theme.BrandLight};
+  background-color: ${theme.Brand};
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.25);
+  border: 1px solid ${theme.BrandLight};
   cursor: pointer;
-	display: flex;
+  display: flex;
   align-items: center;
-	justify-content: center;
-	gap: 12px;
+  justify-content: center;
+  gap: 12px;
 
   &:hover {
     background-color: ${theme.BrandDark};
   }
 
-	img {
-		width: 24px;
-		height: 24px;
-	}
+  img {
+    width: 24px;
+    height: 24px;
+  }
 
-	p {
-		font-weight: 500;
-		color: ${theme.White};
-		font-size: 18px;
-		letter-spacing: -0.36px;
-	}
-
+  p {
+    font-weight: 500;
+    color: ${theme.White};
+    font-size: 18px;
+    letter-spacing: -0.36px;
+  }
 `;

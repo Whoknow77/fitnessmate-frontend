@@ -1,7 +1,19 @@
 // < 글만 있는 체크박스 >
+import { useEffect, useRef, useState } from "react";
 import * as S from "./StyledTextCheckbox";
 
 const TextCheckbox = ({ handleClick, isSelected, children, elementidx }) => {
+  const [inputvalue, setInputValue] = useState(children);
+  const [isEditing, setIsEditing] = useState(false);
+  const inputRef = useRef(null);
+
+  useEffect(() => {
+    if (isEditing && inputRef.current) {
+      inputRef.current.focus();
+      inputRef.current.select(); // 전체 텍스트 선택
+    }
+  }, [isEditing]);
+
   return (
     <S.TextCheckboxWrapper
       type="button"
@@ -11,7 +23,27 @@ const TextCheckbox = ({ handleClick, isSelected, children, elementidx }) => {
       isSelected={isSelected}
     >
       {/* 문구 */}
-      <span className="choice-article">{children}</span>
+      {isEditing ? (
+        <input
+          ref={inputRef}
+          value={inputvalue}
+          onBlur={() => setIsEditing(false)} // 포커스를 잃을 때 편집 모드 종료
+          onChange={(e) => setInputValue(e.target.value)}
+          onKeyDown={(e) => {
+            if (e.key === "Enter") {
+              setIsEditing(false); // Enter 키를 누를 때 편집 모드 종료
+            }
+          }}
+        />
+      ) : (
+        <span
+          className="choice-article"
+          onDoubleClick={() => setIsEditing(true)}
+        >
+          {inputvalue}
+        </span>
+      )}
+
       {/* 체크 전체(네모박스) */}
       <svg
         xmlns="http://www.w3.org/2000/svg"

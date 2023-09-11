@@ -1,32 +1,30 @@
 import * as S from "./StyeldLeaveModal";
 import { useNavigate } from "react-router-dom";
 
-const LoginModal = ({ setIsLoginModal }) => {
+const CancleModal = ({ setIsCancleModal }) => {
   const navigate = useNavigate();
-
-  const handleCancle = () => {
-    setIsLoginModal(false);
+  const handleCancle = (e) => {
+    setIsCancleModal(false);
+    navigate("/");
   };
 
-  const handleLeave = () => {
-    setIsLoginModal(false);
-    navigate("login");
+  const handleLeave = (e) => {
+    setIsCancleModal(false);
   };
-
   return (
     <S.ModalBox>
       <S.ModalWrapper>
         <span className="leaveModalTitle">
-          로그인해야 이용 가능한 서비스입니다.
+          작성 중인 회원가입 내용이 저장되지 않습니다
           <br />
-          로그인 하시겠습니까?
+          나가시겠습니까?
         </span>
         <div className="leaveModalButtonWrapper">
           <button className="cancleBtn" onClick={handleCancle}>
-            돌아갈래요
+            네 나갈래요
           </button>
           <button className="leaveBtn" onClick={handleLeave}>
-            로그인 하러 갈래요
+            아니요
           </button>
         </div>
       </S.ModalWrapper>
@@ -34,4 +32,4 @@ const LoginModal = ({ setIsLoginModal }) => {
   );
 };
 
-export default LoginModal;
+export default CancleModal;
