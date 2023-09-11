@@ -88,15 +88,15 @@ export const SecondContent = styled.div`
   align-items: center;
   justify-content: center;
 <<<<<<< HEAD
-  flex-direction: column;
-  margin-bottom: 1000px;
-=======
 	flex-direction: column;
 
 	.dummy-height {
 		height: 1000px;
 	}
->>>>>>> fb8d16485a464cdfd20f450ad26220166213e1d1
+=======
+  flex-direction: column;
+  margin-bottom: 1000px;
+>>>>>>> hunoh
 `;
 
 export const ContentsTitle = styled.div`
@@ -105,18 +105,18 @@ export const ContentsTitle = styled.div`
   align-items: center;
   justify-content: center;
 <<<<<<< HEAD
-  gap: 32px;
-  background: ${({ theme }) => theme.Gray10};
-  height: 75px;
-  margin-bottom: 24px;
-=======
 	gap: 32px;
 	background: ${({ theme }) => theme.Gray10};
 	height: 75px;
 	margin-bottom: 24px;
 	position: sticky;
 	top: 64px;
->>>>>>> fb8d16485a464cdfd20f450ad26220166213e1d1
+=======
+  gap: 32px;
+  background: ${({ theme }) => theme.Gray10};
+  height: 75px;
+  margin-bottom: 24px;
+>>>>>>> hunoh
 
   .contents-title {
     font-size: 18px;
@@ -133,16 +133,16 @@ export const ButtonContainer = styled.div`
   .btn {
     display: flex;
 <<<<<<< HEAD
-    align-items: center;
-    justify-content: center;
-    width: 83px;
-    height: 47px;
-=======
 		align-items: center;
 		justify-content: center;
     padding: 10px 20px;
 		height: 47px;
->>>>>>> fb8d16485a464cdfd20f450ad26220166213e1d1
+=======
+    align-items: center;
+    justify-content: center;
+    width: 83px;
+    height: 47px;
+>>>>>>> hunoh
     color: ${({ theme }) => theme.Brand};
     font-size: 18px;
     letter-spacing: -0.36px;

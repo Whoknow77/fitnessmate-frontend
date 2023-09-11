@@ -88,7 +88,7 @@ export const ModifyOptionContent = styled.div`
   width: 168px;
   gap: 26px;
   margin-bottom: 80px;
-  git .modifyInput {
+  .modifyInput {
     text-align: center;
     color: #000;
     font-size: 48px;
