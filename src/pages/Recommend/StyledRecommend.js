@@ -161,43 +161,13 @@ export const RecommendMachineResultContainer = styled.div`
   gap: 28px;
   display: flex;
   flex-direction: column;
-  .recommendNavbarWrapper {
-    z-index: 900;
-    display: flex;
-    gap: 32px;
-    padding: 12px 18px;
-    width: 100vw;
-    justify-content: center;
-    align-items: center;
-    background: var(--Gray10, #f8f8f8);
-    position: sticky;
-    top: 64px;
-    .recommendNavbarTitle {
-      color: ${theme.Gray80};
-      font-size: 18px;
-      line-height: 150%; /* 27px */
-      letter-spacing: -0.36px;
-    }
-    .recommendNavbarBox {
-      display: flex;
-      gap: 12px;
-      align-items: center;
-    }
-  }
 `;
 
 export const RecommendNavbarItem = styled.button`
-  display: flex;
-  padding: 10px 20px;
-  justify-content: center;
-  align-items: center;
-  border-radius: 6px;
-  background: ${({ isSelected }) => (isSelected ? theme.Brand : theme.White)};
-  box-shadow: 0px 4px 8px 0px rgba(0, 0, 0, 0.05);
-  color: ${({ isSelected }) => (isSelected ? theme.White : theme.Gray80)};
-  font-size: 18px;
-  line-height: 150%; /* 27px */
-  letter-spacing: -0.36px;
+  font-size: 20px;
+  line-height: 150%; /* 30px */
+  letter-spacing: -0.4px;
+  color: ${({ isSelected }) => (isSelected ? theme.Brand : theme.Gray50)};
   &:hover {
     opacity: 0.8;
   }
@@ -285,19 +255,42 @@ export const RecommendMain = styled.div`
   gap: 24px;
   max-width: 553px;
   width: 100%;
+  position: relative;
   .fitnessImg {
     border-radius: 5px;
   }
+  .recommendNavbarWrapper {
+    z-index: 900;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    padding: 24px;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top: 0;
+    width: 193px;
+    left: -250px;
+    .recommendNavbarTitle {
+      color: ${theme.Gray80};
+      font-size: 18px;
+      line-height: 150%; /* 27px */
+      letter-spacing: -0.36px;
+    }
+  }
 `;
 export const RecommendMainTopWrapper = styled.div`
-  top: 114px;
+  margin: 0 -18px;
+  top: 64px;
   position: sticky;
   display: flex;
   padding: ${({ showShadow }) => (showShadow ? "18px" : 0)};
-  border: ${({ showShadow }) => (showShadow ? theme.Gray10 : "none")};
+  border: ${({ showShadow }) =>
+    showShadow ? `1px solid ${theme.Gray20}` : "none"};
   box-shadow: ${({ showShadow }) =>
     showShadow ? `0px 11px 9px 0px rgba(0, 0, 0, 0.05)` : "none"};
   background: ${({ showShadow }) => (showShadow ? theme.White : "none")};
+  border-radius: ${({ showShadow }) => (showShadow ? "8px" : "0")};
   justify-content: space-between;
 `;
 export const RecommendMainTopTitleWrapper = styled.div`

@@ -10,15 +10,13 @@ import { useRecoilState } from "recoil";
 import { isLoggedInState } from "../../recoil/atom";
 
 const Login = (props) => {
-  // placeholder
-  const [isLoggedIn, setIsLoggedIn] = useRecoilState(isLoggedInState);
-
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const [isEmailClicked, setIsEmailClicked] = useState(false);
   const [isPWClicked, setIsPWClicked] = useState(false);
   // 로그인 유지
   const [isKeepLoginClicked, setIsKeppLoginClicked] = useState(false);
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [isError, setIsError] = useState(false);
 
   const navigate = useNavigate();
 
@@ -32,21 +30,22 @@ const Login = (props) => {
     const submission = {
       loginEmail: email,
       password: password,
-      rememberMe: isKeepLoginClicked,
+      // 일단 true(false일 경우 토큰관련 오류가 존재)
+      rememberMe: true,
     };
-
-    const res = await loginPostAPI.post("", submission);
-    if (res.status === 200) {
-      const accessToken = res.data.accessToken;
-      const refreshToken = res.data.refreshToken;
-      // 토큰 저장
-      localStorage.setItem("accessToken", accessToken);
-      localStorage.setItem("refreshToken", refreshToken);
-      localStorage.setItem("rememberMe", isKeepLoginClicked);
-      setIsLoggedIn(true);
-      navigate("/");
-    } else {
-      alert("로그인 실패");
+    try {
+      const res = await loginPostAPI.post("", submission);
+      if (res.status === 200) {
+        const accessToken = res.data.accessToken;
+        const refreshToken = res.data.refreshToken;
+        // 토큰 저장
+        localStorage.setItem("accessToken", accessToken);
+        localStorage.setItem("refreshToken", refreshToken);
+        localStorage.setItem("rememberMe", true);
+        navigate("/");
+      }
+    } catch (err) {
+      setIsError(true);
     }
   };
 
@@ -66,10 +65,7 @@ const Login = (props) => {
             onBlur={() => {
               setIsEmailClicked(false);
             }}
-            placeholder={isEmailClicked ? "" : "이메일"}
-            pattern="[a-z0-9]+@[a-z]+\.[a-z]{2,3}"
-            title="fit@mate.com와 같은 형식을 준수해주세요"
-            required
+            placeholder={"이메일"}
           />
           <S.LoginInput
             type="password"
@@ -82,9 +78,7 @@ const Login = (props) => {
             onBlur={() => {
               setIsPWClicked(false);
             }}
-            placeholder={isPWClicked ? "" : "비밀번호"}
-            autoComplete="on"
-            required
+            placeholder={"비밀번호"}
           />
         </S.InputFrame>
         <S.AutomaticLogin>
@@ -94,6 +88,13 @@ const Login = (props) => {
           />
           로그인 유지
         </S.AutomaticLogin>
+        {isError ? (
+          <span className="warning">
+            이메일 또는 비밀번호를 잘못 입력하셨습니다
+          </span>
+        ) : (
+          ""
+        )}
         <BigButton email={props.email} type="submit">
           로그인
         </BigButton>

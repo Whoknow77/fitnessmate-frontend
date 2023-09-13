@@ -23,12 +23,7 @@ const RecommendSupplementPurpose = () => {
   const fetchData = async () => {
     try {
       const response = await TokenApi.get(
-        "/recommendation/supplement/purposes",
-        {
-          headers: {
-            Authorization: "Bearer " + localStorage.getItem("accessToken"),
-          },
-        }
+        "/recommendation/supplement/purposes"
       );
       const newArr = response.data.map((obj) => ({
         name: obj,

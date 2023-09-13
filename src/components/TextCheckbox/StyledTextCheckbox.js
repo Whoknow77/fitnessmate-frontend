@@ -15,7 +15,7 @@ export const TextCheckboxWrapper = styled.button`
   justify-content: space-between;
   align-items: center;
 
-  border: 1px solid
+  border: 2px solid
     ${({ theme, isSelected }) => (isSelected ? theme.Brand : `${theme.Gray20}`)};
 
   .choice-article {
@@ -61,6 +61,16 @@ export const TextCheckboxWrapper = styled.button`
       color: ${({ isSelected, theme }) =>
         isSelected ? theme.Brand : theme.Black};
     }
+  }
+`;
+
+export const MiddleTextCheckboxWrapper = styled(TextCheckboxWrapper)`
+  width: 47%;
+  @media screen and (max-width: 800px) {
+    width: 47%;
+  }
+  @media screen and (max-width: 660px) {
+    width: 100%;
   }
 `;
 

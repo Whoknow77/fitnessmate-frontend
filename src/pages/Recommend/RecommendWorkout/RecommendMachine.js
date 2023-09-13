@@ -188,7 +188,7 @@ const RecommendMachine = () => {
       </RecommendTextContainer>
       <RecommendButtonContainer>
         <BeforeArrowButton handleClick={handleBackPage}></BeforeArrowButton>
-        {<Loading />}
+        {isLoading && <Loading />}
         <SmallButton handleSubmit={handleSubmit} isReady={isReady}>
           추천받기
         </SmallButton>

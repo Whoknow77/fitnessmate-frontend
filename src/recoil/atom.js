@@ -32,12 +32,6 @@ export const bodyPartState = atom({
   },
 });
 
-// 로그인 상태
-export const isLoggedInState = atom({
-  key: "isLoggedInState",
-  default: false,
-});
-
 export const isModalState = atom({
   key: "isModalState",
   default: false,

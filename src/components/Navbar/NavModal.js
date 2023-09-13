@@ -3,23 +3,31 @@ import * as S from "./StyledNavModal";
 import OutSideClick from "./OutSideClick";
 import { useNavigate } from "react-router-dom";
 import TokenApi from "../../apis/TokenApi";
+import { logoutPutAPI } from "../../apis/API";
 
-function NavModal({ children, userName }) {
-	const navigate = useNavigate();
+function NavModal({ children, userName, setuserName }) {
+  const navigate = useNavigate();
 
   const [isOpen, setIsOpen] = useState(false);
 
-	const modalRef = useRef(null);
-	const handleClose = () => {
+  const modalRef = useRef(null);
+  const handleClose = () => {
     setIsOpen(false);
   };
-	OutSideClick(modalRef, handleClose);
+  OutSideClick(modalRef, handleClose);
 
-	// 로그아웃
+  // 로그아웃
   const handleLogout = async () => {
-    await TokenApi.put("auth/logout");
-    localStorage.clear();
-    navigate("/");
+    try {
+      const res = await TokenApi.put("auth/logout");
+      // if (res) {
+      setuserName(null);
+      localStorage.clear();
+      navigate("/");
+      // }
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   const handleFixProfile = async () => {
@@ -34,21 +42,27 @@ function NavModal({ children, userName }) {
 
   return (
     <S.AppWrap ref={modalRef}>
-			<S.NavButton onClick={() => {  setIsOpen(!isOpen) }} >{children}</S.NavButton>
+      <S.NavButton
+        onClick={() => {
+          setIsOpen(!isOpen);
+        }}
+      >
+        {children}
+      </S.NavButton>
       {isOpen && (
-      <S.ModalWrap>
-				<S.Contents>
-					<div>
-						<p>안녕하세요.</p>
-						<p>{userName}님!</p>
-					</div>
-					<div className="modalButton">
-						<S.Button onClick={handleLogout}>로그아웃</S.Button>
-						<S.Button onClick={handleFixProfile}>계정 정보 수정</S.Button>
-						<S.Button onClick={handleFixBodyInfo}>신체 정보 수정</S.Button>
-					</div>
-				</S.Contents>
-			</S.ModalWrap>
+        <S.ModalWrap>
+          <S.Contents>
+            <div>
+              <p>안녕하세요.</p>
+              <p>{userName}님!</p>
+            </div>
+            <div className="modalButton">
+              <S.Button onClick={handleLogout}>로그아웃</S.Button>
+              <S.Button onClick={handleFixProfile}>계정 정보 수정</S.Button>
+              <S.Button onClick={handleFixBodyInfo}>신체 정보 수정</S.Button>
+            </div>
+          </S.Contents>
+        </S.ModalWrap>
       )}
     </S.AppWrap>
   );

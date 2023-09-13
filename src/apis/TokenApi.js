@@ -23,24 +23,29 @@ TokenApi.interceptors.request.use((config) => {
 // 응답 데이터의 전처리, 오류 처리, 로깅 등의 용도
 TokenApi.interceptors.response.use(
   (response) => {
-    console.log(response);
     // 응답이 성공적으로 왔을 때의 처리
     return response;
   },
   // 에러가 발생했을 때의 처리(4xx,5xx 에러 => 토큰 만료)
   async (error) => {
-    console.log(error);
+    if (error.response.data.status === "ROUTINE_NOT_FOUND_EXCEPTION") {
+      console.log("routineId와 일치하는 routine이 없습니다");
+    }
+    if (error.response.data.status === "ALREADY_EXIST_MY_WORKOUT_EXCEPTION") {
+      console.log("이미 존재하는 운동입니다");
+    }
+
     // 토큰 만료
     if (error.response.data.status === "EXPIRED_ACCESS_TOKEN_EXCEPTION") {
       console.log("Access Token 만료");
       // 기존 refreshToken
-      const refreshToken = localStorage.getItem("refreshToken");
+
       try {
         const originalRequest = error.config;
         // 새로운 accessToken 요청
         const response = await getAccessAPI.get("", {
           headers: {
-            Authorization: "Bearer " + refreshToken,
+            Authorization: "Bearer " + localStorage.getItem("refreshToken"),
           },
         });
         const newAccessToken = response.data.accessToken;
@@ -51,6 +56,7 @@ TokenApi.interceptors.response.use(
         // 새로운 accessToken으로 재 요청
         return await axios(originalRequest);
       } catch (err) {
+        console.log(err);
         // refresh token 만료
         if (err.response.data.status === "EXPIRED_REFRESH_TOKEN_EXCEPTION") {
           console.log("Refresh Token 만료 재 로그인 해주세요");

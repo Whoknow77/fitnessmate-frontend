@@ -6,7 +6,6 @@ import { useRecoilState } from "recoil";
 import { RecommendState } from "../../../recoil/atom";
 import TokenApi from "../../../apis/TokenApi";
 import { userWorkoutAPI } from "../../../apis/API";
-import YouTube from "react-youtube";
 import bodypartcircle from "../../../assets/images/bodypartcircle.svg";
 import RecommendAddModal from "../../../components/Modal/RecommendAddModal";
 
@@ -14,7 +13,6 @@ const RecommendMachineResult = () => {
   const [recommendState, setRecommendState] = useRecoilState(RecommendState);
   const [userName, setuserName] = useState(null);
   const [bodyPart, setBodyPart] = useState([]);
-  const [machineList, setMachineList] = useState([]);
   const [videoLink, setVideoLink] = useState(null);
   const [currentIdx, setCureentIdx] = useState(0);
   const [recommendAddModal, setRecommendAddModal] = useState(false);
@@ -28,7 +26,7 @@ const RecommendMachineResult = () => {
   useEffect(() => {
     const handleScroll = () => {
       // 스크롤 위치가 첫 번째 내비게이션바 높이만큼 이동했는지 확인
-      if (window.scrollY >= 260) {
+      if (window.scrollY >= 230) {
         setShowShadow(true);
       } else {
         setShowShadow(false);
@@ -48,7 +46,6 @@ const RecommendMachineResult = () => {
       const response2 = await userWorkoutAPI.get(
         `${recommendState.recommends[currentIdx].workoutId}`
       );
-      console.log(response2);
       const videoId = response2.data.videoLink.split("=")[1];
       setVideoLink(`https://www.youtube.com/embed/${videoId}`);
 
@@ -72,24 +69,21 @@ const RecommendMachineResult = () => {
           </S.RecommendTitle>
         </S.RecommendTitle>
       </S.RecommendTitleContainer>
-      <div className="recommendNavbarWrapper">
-        <span className="recommendNavbarTitle">운동 부위</span>
-        <div className="recommendNavbarBox">
-          {recommendState.recommends.map((machine, idx) => {
-            return (
-              <S.RecommendNavbarItem
-                isSelected={currentIdx === idx}
-                onClick={() => handlecMachineClick(idx)}
-              >
-                {machine.koreanName}
-              </S.RecommendNavbarItem>
-            );
-          })}
-        </div>
-      </div>
       <S.RecommendMain>
         <S.RecommendMainTopWrapper showShadow={showShadow}>
           <S.RecommendMainTopTitleWrapper>
+            <div className="recommendNavbarWrapper">
+              {recommendState.recommends.map((machine, idx) => {
+                return (
+                  <S.RecommendNavbarItem
+                    isSelected={currentIdx === idx}
+                    onClick={() => handlecMachineClick(idx)}
+                  >
+                    {machine.koreanName}
+                  </S.RecommendNavbarItem>
+                );
+              })}
+            </div>
             <S.RecommendMainBodyPart>
               {recommendState.recommends[currentIdx].bodyPartKoreanName.map(
                 (bodypart, idx) => {

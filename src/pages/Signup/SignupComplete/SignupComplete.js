@@ -33,15 +33,15 @@ const SignupComplete = () => {
   return (
     <S.SignupContainer>
       {/* 제목들 중 마지막 페이지만 가운데 정렬 -> 인라인으로 처리 */}
-      <S.SignupTitle>회원가입이 완료되었습니다</S.SignupTitle>
+      <S.SignupTitle>회원가입이 완료되었습니다.</S.SignupTitle>
       <div className="signupCompleteNavBox">
-        <span className="signupCompleteTitle">바로 이용해보세요</span>
+        <span className="signupCompleteTitle">바로 이용해보세요.</span>
         <button className="signupCompleteNavItem" onClick={GoRecommend}>
           <span className="signupCompleteNavItemText">
             추천받기
             <br />
             <span className="signupCompleteNavItemText2">
-              AI가 신체 정보에 알맞은 운동/보조제를 추천해드려요
+              AI가 신체 정보에 알맞은 운동/보조제를 추천해드려요.
             </span>
           </span>
           <img
@@ -55,7 +55,7 @@ const SignupComplete = () => {
             루틴 만들기
             <br />
             <span className="signupCompleteNavItemText2">
-              추천 받은 운동으로 루틴을 만들어 보세요
+              추천 받은 운동으로 루틴을 만들어 보세요.
             </span>
           </span>
           <img
@@ -69,7 +69,7 @@ const SignupComplete = () => {
             검색하기
             <br />
             <span className="signupCompleteNavItemText2">
-              다양한 종류의 운동/보조제를 검색해보세요
+              다양한 종류의 운동/보조제를 검색해보세요.
             </span>
           </span>
           <img

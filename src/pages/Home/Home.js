@@ -6,6 +6,7 @@ import arrow from "../../assets/images/arrow.svg";
 import { useState } from "react";
 import LoginModal from "../../components/Modal/LoginModal";
 import homebanner from "../../assets/images/homebanner.png";
+import { getAccessAPI } from "../../apis/API";
 export const Home = () => {
   const navigate = useNavigate();
 

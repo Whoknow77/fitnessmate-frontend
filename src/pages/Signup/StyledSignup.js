@@ -184,35 +184,9 @@ export const SexItem = styled.button`
 
 export const SignupTextContainer = styled.div`
   display: flex;
-  flex-direction: column;
+  flex-wrap: wrap;
   gap: 14px;
   width: 100%;
-  .bodyfigureText {
-    padding-bottom: 10px;
-    color: ${theme.Gray80};
-    font-size: 20px;
-    font-weight: 600;
-    letter-spacing: -0.4px;
-  }
-  .directButtonContainer {
-    display: flex;
-    justify-content: flex-end;
-    .directbutton {
-      /* 자식 크기에 width 맞추기 */
-      padding: 10px;
-      justify-content: center;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      color: ${theme.Brand};
-      font-size: 20px;
-      font-weight: 600;
-      .rightArrow {
-        width: 24px;
-        height: 24px;
-      }
-    }
-  }
 `;
 
 export const BodyCompositionInputList = styled.div`
@@ -271,7 +245,39 @@ export const SignupUpdonwBalanceWrapper = styled.div`
             font-size: 18px;
             font-weight: 700;
           }
+          .balanceRatioPercent2 {
+            color: ${theme.Brand};
+            font-size: 18px;
+            font-weight: 700;
+          }
         }
+      }
+    }
+    .bodyfigureText {
+      padding-bottom: 10px;
+      color: ${theme.Gray80};
+      font-size: 20px;
+      font-weight: 600;
+      letter-spacing: -0.4px;
+    }
+  }
+  .directButtonContainer {
+    display: flex;
+    justify-content: flex-end;
+    .directbutton {
+      /* 자식 크기에 width 맞추기 */
+      padding: 10px;
+      justify-content: center;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      color: ${theme.Brand};
+      font-size: 20px;
+      font-weight: 600;
+      margin-top: -30px;
+      .rightArrow {
+        width: 24px;
+        height: 24px;
       }
     }
   }

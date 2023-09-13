@@ -9,6 +9,13 @@ export const LoginContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  .warning {
+    color: ${theme.Error};
+    font-size: 16px;
+  }
+  button {
+    margin-top: 37.5px;
+  }
 `;
 
 export const Title = styled.h1`
@@ -66,5 +73,5 @@ export const AutomaticLogin = styled.div`
   }
   color: ${({ theme }) => theme.Gray30};
   font-size: 18px;
-  margin-bottom: 94px;
+  margin-bottom: 37.5px;
 `;

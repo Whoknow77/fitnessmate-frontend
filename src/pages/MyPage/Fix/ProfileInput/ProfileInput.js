@@ -8,7 +8,7 @@ import ValidateTest from "../../../../utils/exp";
 // placeholder : Input창 마다 다양해서 Home에서 받아옴
 // children : 아이디/비밀번호/이메일 등등..
 
-const ProfileInput = ({ placeholder, children, name, defaultValue, value, handleChange }) => {
+const ProfileInput = ({ placeholder, children, name, value, handleChange }) => {
   // 유효성 검사
   const [isValidState, setIsValidState] = useRecoilState(validationState);
   // 포커스 검사
@@ -19,14 +19,11 @@ const ProfileInput = ({ placeholder, children, name, defaultValue, value, handle
 
   return (
     <S.ProfileInputContainer isValidState={isValidState.loginEmail[1]}>
-      <S.InputName>
-        {children}
-      </S.InputName>
+      <S.InputName>{children}</S.InputName>
       {/* 체크가 되지 않았을때만 Warning 문구 */}
       <ProfileInputContentWrapper
         placeholder={isFocused ? "" : placeholder}
         name={name}
-        defaultValue={defaultValue}
         valueHistory={valueHistory}
         isValidState={isValidState}
         isFocused={isFocused}
@@ -37,7 +34,7 @@ const ProfileInput = ({ placeholder, children, name, defaultValue, value, handle
           setIsFocused(false);
         }}
         onChange={handleChange}
-				value={value}
+        value={value}
       />
 
       {/* 비밀번호 입력창에만 재확인 입력창을 하나 더 추가 */}
@@ -57,7 +54,6 @@ const ProfileInput = ({ placeholder, children, name, defaultValue, value, handle
           onChange={handleChange}
         />
       )}
-
     </S.ProfileInputContainer>
   );
 };

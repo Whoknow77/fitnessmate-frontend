@@ -9,8 +9,8 @@ export const Background = styled.div`
   justify-content: center;
   display: flex;
   img {
-    width: 50px;
-    height: 50px;
+    width: 80px;
+    height: 80px;
   }
 `;
 
@@ -19,4 +19,5 @@ export const LoadingText = styled.div`
   font-size: 22px;
   font-weight: 600;
   letter-spacing: -0.44px;
+  margin-left: -10px;
 `;

@@ -10,10 +10,12 @@ const BodyCompositionInput = ({ children, name }) => {
   const [isFocused, setIsFocused] = useState(false);
   const [isValidState, setIsValidState] = useRecoilState(validationState);
   const [valueHistory, setValueHistory] = useState(false);
+  const [inputvalue, setInputValue] = useState(isValidState[name][0]);
 
   const handleChange = (e) => {
     const value = e.currentTarget.value;
     const name = e.target.name;
+    setInputValue(value);
     let exp = ValidateTest(name);
 
     const updatedState = {
@@ -43,6 +45,7 @@ const BodyCompositionInput = ({ children, name }) => {
         <input
           className="inputContent"
           name={name}
+          value={inputvalue}
           placeholder={
             isFocused
               ? ""

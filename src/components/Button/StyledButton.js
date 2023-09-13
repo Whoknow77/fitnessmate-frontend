@@ -21,6 +21,7 @@ export const MiddleButtonWrapper = styled.button`
   padding: 22px 24px;
   background: ${({ isReady }) =>
     isReady === undefined || isReady === true ? theme.Brand : theme.BrandLight};
+  cursor: ${({ isReady }) => (isReady ? "pointer" : "default")};
   color: ${theme.White};
 `;
 

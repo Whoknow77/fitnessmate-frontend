@@ -8,8 +8,8 @@ export const RecommendAddModalWrapper = styled.div`
   padding: 24px;
   gap: 32px;
   border-radius: 12px;
-  border: 1px solid var(--gray-20, #e7e7e7);
-  background: var(--White, #fff);
+  border: 1px solid var ${theme.Gray20};
+  background: ${theme.White};
   box-shadow: 0px 4px 5px 0px rgba(133, 132, 132, 0.05);
   top: 50%;
   left: 50%;
@@ -63,42 +63,43 @@ export const ModifyOptionWrapper = styled.div`
   padding: 12px 18px;
   gap: 12px;
   justify-content: center;
-  .modifyOption {
-    color: ${theme.White};
-    font-size: 18px;
-    line-height: 150%; /* 27px */
-    letter-spacing: -0.36px;
-    display: flex;
-    padding: 10px 20px;
-    justify-content: center;
-    align-items: center;
-    border-radius: 6px;
-    background: ${theme.Brand};
-    box-shadow: 0px 4px 8px 0px rgba(0, 0, 0, 0.05);
-    &:hover {
-      opacity: 0.5;
-    }
+`;
+
+export const ModifyOptionButton = styled.button`
+  color: ${({ isSelected }) => (isSelected ? theme.White : theme.Brand)};
+  font-size: 18px;
+  line-height: 150%; /* 27px */
+  letter-spacing: -0.36px;
+  display: flex;
+  padding: 10px 20px;
+  justify-content: center;
+  align-items: center;
+  border-radius: 6px;
+  background: ${({ isSelected }) => (isSelected ? theme.Brand : theme.White)};
+  box-shadow: 0px 4px 8px 0px rgba(0, 0, 0, 0.05);
+  &:hover {
+    opacity: 0.8;
   }
 `;
 
 export const ModifyOptionContent = styled.div`
-  display: flex;
-  flex-direction: column;
-  margin: 0 auto;
-  width: 168px;
-  gap: 26px;
   margin-bottom: 80px;
+  display: flex;
+  gap: 8px;
+  justify-content: center;
   .modifyInput {
+    width: 90px;
     text-align: center;
     color: #000;
     font-size: 48px;
     line-height: 150%; /* 72px */
     letter-spacing: -0.96px;
+    border-bottom: 2px solid #000;
   }
-  .saveBtn {
-    color: var(--Brand, #0b98ff);
-    font-size: 18px;
-    font-weight: 600;
-    letter-spacing: -0.36px;
+  .modifyInputUnit {
+    color: #000;
+    font-size: 48px;
+    line-height: 150%; /* 72px */
+    letter-spacing: -0.96px;
   }
 `;

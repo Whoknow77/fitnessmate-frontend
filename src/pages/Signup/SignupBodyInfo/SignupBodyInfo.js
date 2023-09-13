@@ -14,21 +14,40 @@ import { validationState } from "../../../recoil/atom";
 
 const SignupBodyInfo = () => {
   const navigate = useNavigate();
-  // 성별 선택
-  const [sex, setSex] = useState([0, 0]);
   const [isValidState, setIsValidState] = useRecoilState(validationState);
+  // 성별 선택
+  const [sex, setSex] = useState([
+    isValidState.sex[0] === "남성" ? 1 : 0,
+    isValidState.sex[0] === "여성" ? 1 : 0,
+  ]);
+  const [isReady, setIsReady] = useState(false);
+
   const handleBackPage = (e) => {
     e.preventDefault();
     navigate(-1);
   };
 
+  // 모든 검사를 통과했는지를 반환하는 함수
+  // 이전 페이지와 성별 키 몸무게 통과해야함
+  const handleValidate = () => {
+    return (
+      Object.entries(isValidState)?.filter(([key, value]) => {
+        return value[1];
+      }).length >= 8
+    );
+  };
+
+  useEffect(() => {
+    if (handleValidate()) {
+      setIsReady(true);
+    } else {
+      setIsReady(false);
+    }
+  }, [isValidState]);
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (
-      Object.entries(isValidState).filter(([key, value]) => {
-        return value[1] === true;
-      }).length >= 9
-    ) {
+    if (handleValidate()) {
       navigate("/signup/bodyfigure", { replace: false }); // 절대 경로로 이동
     }
   };
@@ -36,14 +55,14 @@ const SignupBodyInfo = () => {
   // 성별 선택
   const handleSexState = () => {
     // 남성
-    if (sex[0] === 1) {
+    if (sex[0]) {
       setIsValidState((pre) => ({
         ...pre,
         sex: ["남성", true],
       }));
     }
     // 여성
-    else if (sex[1] === 1) {
+    else if (sex[1]) {
       setIsValidState((pre) => ({
         ...pre,
         sex: ["여성", true],
@@ -74,8 +93,6 @@ const SignupBodyInfo = () => {
           <div className="statusBar2"></div>
         </div>
         신체 정보를 입력해주세요
-        <br />
-        <span className="recommendText">맞춤 추천을 위해 필요해요</span>
       </S.SignupTitle>
       <S.BodyInfoContainer>
         <div className="sexSelect">
@@ -108,7 +125,9 @@ const SignupBodyInfo = () => {
       </S.BodyInfoContainer>
       <S.ButtonContainer>
         <BeforeButton handleSubmit={handleBackPage} />
-        <MiddleButton handleSubmit={handleSubmit}>다음</MiddleButton>
+        <MiddleButton handleSubmit={handleSubmit} isReady={isReady}>
+          다음
+        </MiddleButton>
       </S.ButtonContainer>
     </S.SignupContainer>
   );
