@@ -281,7 +281,7 @@ export const RecommendMain = styled.div`
 `;
 export const RecommendMainTopWrapper = styled.div`
   margin: 0 -18px;
-  top: 64px;
+  top: 62px;
   position: sticky;
   display: flex;
   padding: ${({ showShadow }) => (showShadow ? "18px" : 0)};

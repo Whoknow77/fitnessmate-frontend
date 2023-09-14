@@ -73,7 +73,7 @@ const RecommendAddModal = ({ setRecommendAddModal, machine }) => {
     } catch (err) {}
   };
   // 루틴에 운동 추가하기
-  const handleAdd = async () => {
+  const handleAdd = () => {
     const submission = {
       workoutId: Number(machine.workoutId),
       weight: option[0].value,
@@ -82,25 +82,31 @@ const RecommendAddModal = ({ setRecommendAddModal, machine }) => {
     };
     myDivision.forEach((division) => {
       if (division.isSelected) {
-        try {
-          const response = TokenApi.post(
-            `myfit/routines/workout/${division.routineId}`,
-            submission
-          );
-          console.log(response);
-        } catch (err) {}
+        TokenApi.post(
+          `myfit/routines/workout/${division.routineId}`,
+          submission
+        )
+          .then((response) => {
+            console.log(response);
+          })
+          .catch((err) => {
+            console.log(err);
+          });
       }
     });
   };
 
-  // 루틴이 잘 수정되었는지 확인
-  // const handleRoutine = async () => {
+  // 루틴이 잘 등록되었는지 확인
+  // const handleRoutine = () => {
   //   myDivision.forEach((division) => {
   //     if (division.isSelected) {
-  //       const response = TokenApi.get(
-  //         `myfit/routines/workout/${division.routineIndex}`
-  //       );
-  //       console.log(response);
+  //       TokenApi.get(`myfit/routines/workout/${division.routineId}`)
+  //         .then((response) => {
+  //           console.log(response);
+  //         })
+  //         .catch((err) => {
+  //           console.log(err);
+  //         });
   //     }
   //   });
   // };
