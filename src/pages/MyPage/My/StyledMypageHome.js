@@ -87,16 +87,11 @@ export const SecondContent = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-<<<<<<< HEAD
 	flex-direction: column;
 
 	.dummy-height {
 		height: 1000px;
 	}
-=======
-  flex-direction: column;
-  margin-bottom: 1000px;
->>>>>>> hunoh
 `;
 
 export const ContentsTitle = styled.div`
@@ -104,19 +99,12 @@ export const ContentsTitle = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-<<<<<<< HEAD
 	gap: 32px;
 	background: ${({ theme }) => theme.Gray10};
 	height: 75px;
 	margin-bottom: 24px;
 	position: sticky;
 	top: 64px;
-=======
-  gap: 32px;
-  background: ${({ theme }) => theme.Gray10};
-  height: 75px;
-  margin-bottom: 24px;
->>>>>>> hunoh
 
   .contents-title {
     font-size: 18px;
@@ -132,17 +120,10 @@ export const ButtonContainer = styled.div`
 
   .btn {
     display: flex;
-<<<<<<< HEAD
 		align-items: center;
 		justify-content: center;
     padding: 10px 20px;
 		height: 47px;
-=======
-    align-items: center;
-    justify-content: center;
-    width: 83px;
-    height: 47px;
->>>>>>> hunoh
     color: ${({ theme }) => theme.Brand};
     font-size: 18px;
     letter-spacing: -0.36px;
@@ -200,9 +181,7 @@ export const AddModalButton = styled.button`
   width: 237px;
   height: 56px;
   border-radius: 35px;
-  background-color: ${theme.Brand};
-  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.25);
-  border: 1px solid ${theme.BrandLight};
+	background-color: ${theme.Brand};
   cursor: pointer;
   display: flex;
   align-items: center;

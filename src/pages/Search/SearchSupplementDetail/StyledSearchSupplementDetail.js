@@ -160,7 +160,7 @@ export const SpplementInformationMiddle = styled.div`
 	.PerServing {
 		grid-column: 2;
 		display: flex;
-		gap: 10px 32px;
+		gap: 24px 32px;
 		flex-wrap: wrap;
 		padding: 15px 0;
 		border-radius: 10px;
@@ -170,7 +170,6 @@ export const SpplementInformationMiddle = styled.div`
 `
 export const PerServing = styled.div`
 	display: flex;
-	gap: 4;
 	flex-direction: column;
 	justify-content: center;
 

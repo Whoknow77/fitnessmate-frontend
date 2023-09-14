@@ -1,33 +1,15 @@
 import * as S from "./StyledBodyCompositionInput";
 import { useRecoilState } from "recoil";
-import { validationState } from "../../recoil/atom";
+import { validationState } from "../../../../recoil/atom";
 import { useState } from "react";
-import ValidateTest from "../../utils/exp";
+import ValidateTest from "../../../../utils/exp";
 
 // 체성분 input
-const BodyCompositionInput = ({ children, name }) => {
+const BodyCompositionInput = ({ children, name, value, handleChange }) => {
 	// children : 골격근량 or 체지방량
 	const [isFocused, setIsFocused] = useState(false);
 	const [isValidState, setIsValidState] = useRecoilState(validationState);
 	const [valueHistory, setValueHistory] = useState(false);
-	const [inputvalue, setInputValue] = useState(isValidState[name][0]);
-
-	const handleChange = (e) => {
-		const value = e.currentTarget.value;
-		const name = e.target.name;
-		setInputValue(value);
-		let exp = ValidateTest(name);
-
-		const updatedState = {
-			...isValidState,
-			[name]: [parseFloat(value), exp && exp.test(value)],
-		};
-		setIsValidState(updatedState);
-
-		if (!valueHistory) {
-			setValueHistory(true);
-		}
-	};
 
 	const NotAvailable = (
 		<span className="profileInputWarning">{children}을 다시 입력해주세요</span>
@@ -45,7 +27,7 @@ const BodyCompositionInput = ({ children, name }) => {
 				<input
 					className="inputContent"
 					name={name}
-					value={inputvalue}
+					value={value}
 					placeholder={
 						isFocused
 							? ""

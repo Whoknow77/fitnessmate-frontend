@@ -113,7 +113,7 @@ export const Contents = styled.div`
 		overflow-y: scroll;
 	}
 	.ScrollArea::-webkit-scrollbar {
-		width: 25px;
+		width: 35px;
 	}
 	.ScrollArea::-webkit-scrollbar-track {
 		background: ${({ theme }) => theme.White};
@@ -121,7 +121,7 @@ export const Contents = styled.div`
 	.ScrollArea::-webkit-scrollbar-thumb {
 		background: pink; 
 		background-clip: padding-box;
-		border-left: 10px solid transparent;
+		border-left: 20px solid transparent;
 	}
 `;
 

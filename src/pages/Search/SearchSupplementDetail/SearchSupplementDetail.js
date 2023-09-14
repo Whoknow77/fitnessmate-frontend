@@ -94,8 +94,7 @@ const SearchSupplementDetail = () => {
 		fetchWorkoutDetail();
 	}, [supplementId]);
 
-	const handleBackPage = (e) => {
-		e.preventDefault();
+	const handleBackPage = () => {
 		navigate(-1);
 	};
 

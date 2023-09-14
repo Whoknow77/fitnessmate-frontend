@@ -4,7 +4,8 @@ import { useNavigate } from "react-router-dom";
 import {
 	MiddleButton,
 	BeforeButton,
-} from "../../../components/";
+	TextCheckbox,
+} from "./../../../components/";
 import ProfileInput from "./ProfileInput/ProfileInput";
 import { useRecoilState } from "recoil";
 import { validationState } from "../../../recoil/atom";
@@ -16,7 +17,6 @@ import {
 	FilterPriceRange,
 	FilterPriceSlideInner,
 } from "../../Signup/SignupBodyFigure/StyledBalanceBar";
-import BodyCompositionInput from "./BodyCompositionInput/BodyCompositionInput"
 
 
 const FixBodyInfo = () => {
@@ -82,6 +82,14 @@ const FixBodyInfo = () => {
 		}));
 	}, [upDownBalance]);
 
+	// bodyFat, muscleMass
+	const categorylist = [
+		["마른 편이에요", [12, 30]],
+		["보통이에요", [15, 30]],
+		["조금 통통한 편이에요", [25, 30]],
+		["뚱뚱해요", [35, 30]],
+	];
+
 	const handleBalanceText = (value) => {
 		const rangevalue = Number(value);
 		if (rangevalue >= 1 && rangevalue <= 4) {
@@ -93,6 +101,17 @@ const FixBodyInfo = () => {
 		}
 	};
 
+	const handleClick = (idx) => {
+		const newArr = Array(categorylist.length).fill(false);
+		newArr[idx] = true;
+		setIsCategorySelect(newArr);
+		setIsValidState((pre) => ({
+			...pre,
+			bodyFat: [categorylist[idx][1][0], true],
+			muscleMass: [categorylist[idx][1][1], true],
+		}));
+	};
+
 	// 입력했는지 체크(한 번 입력한 순간 쭉 true)
 	const [valueHistory, setValueHistory] = useState(false);
 
@@ -101,12 +120,9 @@ const FixBodyInfo = () => {
 
 		if (name === "height") {
 			setHeight(e.target.value);
+			console.log(height)
 		} else if (name === "weight") {
 			setWeight(e.target.value);
-		} else if (name === "muscleMass") {
-			setMuscleMass(e.target.value);
-		} else if (name === "bodyFat") {
-			setBodyFat(e.target.value);
 		}
 		if (!valueHistory) {
 			setValueHistory(true);
@@ -131,7 +147,6 @@ const FixBodyInfo = () => {
 			// API 호출 및 form 데이터 전송
 			const res = await TokenApi.post("bodyData", formData);
 			console.log("수정:", res.status);
-			window.location.replace("fixbodyinfo")
 		} catch (error) {
 			console.log(error);
 			alert("수정 실패. 형식을 준수해주세요.");
@@ -205,23 +220,35 @@ const FixBodyInfo = () => {
 					</div>
 				</div>
 				<S.SignupTextContainer>
-					<span className="bodyfigureText">체형</span>
-					<S.BodyCompositionInputList>
-						<BodyCompositionInput
-							value={muscleMass}
-							name="muscleMass"
-							handleChange={handleChange}
+					<span className="bodyfigureText">상/하체 균형</span>
+					{categorylist?.map((item, index) => {
+						return (
+							<TextCheckbox
+								key={index}
+								handleClick={handleClick}
+								isSelected={isCategorySelect[index]}
+								elementidx={index}
+							>
+								{item[0]}
+							</TextCheckbox>
+						);
+					})}
+					<div className="directButtonContainer">
+						<button
+							className="directbutton"
+							onClick={(e) => {
+								e.preventDefault();
+								navigate(`${currenturl}/direct`);
+							}}
 						>
-							골격근량
-						</BodyCompositionInput>
-						<BodyCompositionInput
-							value={bodyFat}
-							name="bodyFat"
-							handleChange={handleChange}
-						>
-							체지방량
-						</BodyCompositionInput>
-					</S.BodyCompositionInputList>
+							직접 입력하기
+							<img
+								src={rightarrow}
+								className="rightArrow"
+								alt="직접 입력하기 버튼 이미지"
+							/>
+						</button>
+					</div>
 					<S.ButtonContainer>
 						<BeforeButton handleSubmit={handleBackPage} />
 						<MiddleButton handleSubmit={handleSubmit}>

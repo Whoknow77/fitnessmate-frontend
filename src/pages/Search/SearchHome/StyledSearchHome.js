@@ -48,6 +48,7 @@ export const SearchContainer = styled.div`
   }
 
   .serachButtonWrapper {
+		margin-top: 100px;
     display: flex;
     align-items: center;
     justify-content: center;

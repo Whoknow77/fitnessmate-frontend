@@ -1,18 +1,19 @@
 import styled from "styled-components";
+import theme from "./../../../styles/theme";
 
 export const SignupContainer = styled.form`
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   justify-content: space-between;
-  padding-top: 62px;
-  gap: 36px;
+  gap: 70px;
+  width: 474px;
 
   .recommendText {
-    color: ${({ theme }) => theme.Gray80};
-
+    color: ${theme.Gray80};
     font-size: 22px;
-    font-weight: 500;
+    font-weight: 600;
+    letter-spacing: -0.44px;
   }
   .buttonContainer {
     display: flex;
@@ -31,7 +32,41 @@ export const SignupContainer = styled.form`
   }
 
   .buttonCompleteContainer {
-    padding-top: 159px;
+    margin: 0 auto;
+  }
+  .signupCompleteNavBox {
+    padding-top: 33px;
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    width: 100%;
+    .signupCompleteTitle {
+      color: ${theme.Gray80};
+      font-size: 22px;
+      font-weight: 600;
+      letter-spacing: -0.44px;
+    }
+    .signupCompleteNavItem {
+      width: 100%;
+      display: flex;
+      padding: 24px;
+      justify-content: space-between;
+      align-items: center;
+      border-radius: 10px;
+      background: ${theme.Gray10};
+      text-align: left;
+      .signupCompleteNavItemText {
+        color: #333d4b;
+        font-size: 20px;
+        letter-spacing: -0.4px;
+        font-weight: 600;
+      }
+      .signupCompleteNavItemText2 {
+        color: #333d4b;
+        font-size: 16px;
+        letter-spacing: -0.32px;
+      }
+    }
   }
 `;
 
@@ -47,20 +82,35 @@ export const SignupTitle = styled.span`
   flex-direction: ${({ flex }) => (flex ? "column" : "")};
   align-items: center;
   width: 100%;
-
-  color: ${({ theme }) => theme.Gray70};
-  font-size: 28px;
-  font-weight: 700;
+  color: #333d4b;
+  font-size: 30px;
+  font-weight: 600;
+  letter-spacing: -0.6px;
   .warningNoWrite {
     display: inline-block;
-    color: ${({ theme }) => theme.Gray80};
+    color: ${theme.Gray80};
     font-size: 22px;
     padding-top: 12px;
   }
-  .congratu {
-    display: inline-block;
-    color: ${({ theme }) => theme.Gray80};
-    font-size: 24px;
+
+  .statusBar {
+    position: relative;
+    height: 4px;
+    background: ${theme.BrandLight};
+    margin-bottom: 24px;
+
+    .statusBar2 {
+      position: absolute;
+      width: ${({ status }) => `${(100 / 4) * status}%`};
+      height: 4px;
+      background: ${theme.Brand};
+    }
+  }
+  .signupCompleteTitle {
+    color: ${theme.Gray80};
+    font-size: 22px;
+    font-weight: 600;
+    letter-spacing: -0.44px;
   }
 `;
 
@@ -75,7 +125,6 @@ export const BodyInfoContainer = styled.div`
   flex-direction: column;
   align-items: flex-start;
   gap: 24px;
-	padding-bottom: 67px;
   .sexSelect {
     display: flex;
     flex-direction: column;
@@ -135,12 +184,17 @@ export const SexItem = styled.button`
 `;
 
 export const SignupTextContainer = styled.div`
-  padding-top: 8px;
   display: flex;
   flex-direction: column;
   gap: 14px;
   width: 100%;
-	padding-bottom: 200px;
+  .bodyfigureText {
+    padding-bottom: 10px;
+    color: ${theme.Gray80};
+    font-size: 20px;
+    font-weight: 600;
+    letter-spacing: -0.4px;
+  }
   .directButtonContainer {
     display: flex;
     justify-content: flex-end;
@@ -151,7 +205,7 @@ export const SignupTextContainer = styled.div`
       display: flex;
       align-items: center;
       gap: 10px;
-      color: ${({ theme }) => theme.Brand};
+      color: ${theme.Brand};
       font-size: 20px;
       font-weight: 600;
       .rightArrow {
@@ -161,6 +215,7 @@ export const SignupTextContainer = styled.div`
     }
   }
 `;
+
 
 export const BodyCompositionInputList = styled.div`
   display: flex;
@@ -249,5 +304,56 @@ export const SaveButton = styled.button`
 
   &:hover {
     opacity: 0.5;
+  }
+`;
+
+
+export const SignupUpdonwBalanceWrapper = styled.div`
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 48px;
+  .updownBalanceBox {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    .updownBalanceTitle {
+      color: ${theme.Gray80};
+      font-size: 20px;
+      font-weight: 600;
+      letter-spacing: -0.4px;
+    }
+    .updownBalanceBar {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      .updownBalanceBarTitle {
+        color: ${theme.Gray80};
+        font-size: 14px;
+        text-align: center;
+      }
+      .updownBalanceBarContent {
+        justify-content: space-between;
+        height: 58px;
+        display: flex;
+        align-items: center;
+        .balanceRatioBox {
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          align-items: center;
+          gap: 4px;
+          .balanceRatio {
+            color: ${theme.Gray80};
+            font-size: 18px;
+          }
+          .balanceRatioPercent {
+            color: ${theme.Gray80};
+            font-size: 18px;
+            font-weight: 700;
+          }
+        }
+      }
+    }
   }
 `;
