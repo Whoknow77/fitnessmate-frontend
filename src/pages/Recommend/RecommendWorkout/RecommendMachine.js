@@ -141,6 +141,7 @@ const RecommendMachine = () => {
 			makeRequest(`/recommendation/workout/history/${recommendId}`)
 				.then((data) => {
 					setRecommendState(data);
+					console.log(recommendState)
 					navigate("/recommend/machineresult");
 				})
 				.catch((error) => console.error("요청 실패", error));

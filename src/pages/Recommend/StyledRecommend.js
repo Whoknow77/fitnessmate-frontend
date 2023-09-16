@@ -286,12 +286,13 @@ export const RecommendMainTopWrapper = styled.div`
   display: flex;
   padding: ${({ showShadow }) => (showShadow ? "18px" : 0)};
   border: ${({ showShadow }) =>
-    showShadow ? `1px solid ${theme.Gray20}` : "none"};
+		showShadow ? `1px solid ${theme.Gray20}` : "none"};
   box-shadow: ${({ showShadow }) =>
-    showShadow ? `0px 11px 9px 0px rgba(0, 0, 0, 0.05)` : "none"};
+		showShadow ? `0px 11px 9px 0px rgba(0, 0, 0, 0.05)` : "none"};
   background: ${({ showShadow }) => (showShadow ? theme.White : "none")};
   border-radius: ${({ showShadow }) => (showShadow ? "8px" : "0")};
   justify-content: space-between;
+	z-index: 999;
 `;
 export const RecommendMainTopTitleWrapper = styled.div`
   display: flex;
@@ -409,3 +410,211 @@ export const RecommendVideoWrapper = styled.div`
     height: 283px;
   }
 `;
+
+// 보조제
+
+export const MiddleContainer = styled.div`
+	display: flex;
+	gap: 31px;
+	margin: 24px;
+	
+	.supplementImg {
+		border-radius: 12px;
+		border: 1px solid ${theme.Gray30};
+		width: 235px;
+		height: fit-content;
+	}
+`
+
+export const InformationContainer = styled.div`
+	width: 447px;
+	display: flex;
+	flex-direction: column;
+
+	.goToBuy {
+		margin-top: 40px;
+		display: flex;
+		background: ${theme.BrandLight};
+		border-radius: 12px;
+		justify-content: center;
+		align-items: center;
+		height: 49px;
+		font-size: 18px;
+		font-weight: 600;
+		color: ${theme.Brand};
+		letter-spacing: -0.36px;
+
+		&:hover {
+			opacity: 0.5;
+		}
+	}
+`
+
+export const SpplementInformationTop = styled.div`
+	margin-bottom: 46px;
+	display: grid;
+	grid-template-columns: 40px 1fr;
+  grid-column-gap: 12px;
+  grid-row-gap: 12px;
+
+	.smallTitle {
+		grid-column: 1;
+		font-size: 16px;
+		font-weight: 600;
+		color: ${theme.Gray50};
+		letter-spacing: -0.32px;
+		display: flex;
+		align-items: center;
+		padding: 0;
+	}
+
+	p {
+		grid-column: 2;
+		font-size: 16px;
+		font-weight: 500;
+		color: ${theme.Black};
+		letter-spacing: -0.32px;
+	}
+`
+
+export const InformationToggle = styled.div`
+	position: relative;
+
+	.toggleButton {
+		padding: 0px 12px;
+		display: flex;
+		gap: 12px;
+		position: relative
+	}
+
+	.toggleValue {
+		min-width: 71px;
+		font-size: 16px;
+		font-weight: 500;
+		color: ${theme.Black};
+		letter-spacing: -0.32px;
+		line-height: 24px;
+		text-align: center;
+	}
+`
+
+export const ToggleModal = styled.div`
+	position: absolute;
+	top: 30px;
+	display: flex;
+	flex-direction: column;
+	border-radius: 10px;
+  background: ${theme.Gray10};
+	box-shadow: 0px 1px 5px #00000040;
+	z-index: 999;
+
+	.toggleModalContent {
+		padding: 3px 10px;
+		font-size: 16px;
+		font-weight: 500;
+		color: ${theme.Gray70};
+		letter-spacing: -0.32px;
+		line-height: 24px;
+	}
+`
+
+export const SpplementInformationMiddle = styled.div`
+	display: flex;
+	justify-content: end;
+	margin-bottom: 12px;
+
+	.total {
+		display: flex;
+		align-items: center;
+		font-size: 14px;
+		font-weight: 600;
+		color: ${theme.Gray80};
+		letter-spacing: -0.28px;
+	}
+`
+
+export const SpplementInformationBottom = styled.div`
+	margin-bottom: 14px;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+
+	span {
+		font-size: 16px;
+		font-weight: 600;
+		color: ${theme.Gray50};
+		letter-spacing: -0.32px;
+		display: flex;
+		align-items: center;
+		padding: 0;
+	}
+
+	p {
+		font-size: 24px;
+		font-weight: 600;
+		left: 0;
+		letter-spacing: -0.48px;
+	}
+`
+
+export const RecommendMainBottom = styled.div`
+	display: flex;
+	gap: 6px;
+	flex-direction: column;
+
+	.bottomTitle {
+		font-size: 18px;
+		font-weight: 600;
+		letter-spacing: -0.36px;
+		line-height: 27px;
+		color: ${theme.Gray80};
+	}
+
+	.bottomDescription {
+		background: ${theme.Gray10};
+		padding: 24px;
+		font-size: 16px;
+		font-weight: 500;
+		color: ${theme.Gray80};
+		letter-spacing: -0.32px;
+		line-height: 24px;
+	}
+
+	.PerServing {
+		grid-column: 2;
+		display: flex;
+		gap: 24px 32px;
+		flex-wrap: wrap;
+		padding: 15px 0;
+		border-radius: 10px;
+		background: ${theme.Gray10};
+		justify-content: center;
+	}
+`
+
+export const PerServing = styled.div`
+	display: flex;
+	justify-content: center;
+	gap: 8px;
+
+	.TitleSpan {
+		grid-row: 1;
+		font-size: 16px;
+		font-weight: 500;
+		color: ${theme.Gray50};
+		letter-spacing: -0.32px;
+		display: flex;
+		align-items: center;
+	}
+
+	.ContentP {
+		grid-row: 2;
+		font-size: 18px;
+		font-weight: 600;
+		letter-spacing: -0.32px;
+		color: ${theme.Gray80};
+		display: flex;
+		justify-content: center;
+		align-items: center;
+	}
+`

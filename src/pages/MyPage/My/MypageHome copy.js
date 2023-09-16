@@ -28,45 +28,19 @@ export const DUMMY_DATA = [
 
 const Mypagehome = () => {
 
-	// 루틴 목록
-
-	const [data, setData] = useState([...DUMMY_DATA]);
-	const [content, setContent] = useState(data[0].name);
-
-	const [routinesData, setRoutinesData] = useState({ data: [] });
-	const [routinesId, setRoutinesId] = useState('');
-	const [routinesContent, setRoutinesContent] = useState('');
-	const [btnActive, setBtnActive] = useState('');
-
+	const fetchData = async () => {
+		const response = await TokenApi.get("/myfit/routines/workout");
+		console.log(response.data);
+	};
+	// 최초 렌더링 시 운동기구 목록 받아옴
 	useEffect(() => {
-		const fetchDataAndWorkoutData = async () => {
-			try {
-				// 루틴 목록 조회
-				const routinesResponse = await TokenApi.get("/myfit/routines/workout");
-				console.log(routinesResponse.data);
-				if (routinesResponse.data && routinesResponse.data.length > 0) {
-					// 루틴 목록 저장
-					setRoutinesData(routinesResponse);
-					// 가장 첫 번째 루틴 목록을 active 시킴
-					setBtnActive(routinesResponse.data[0].routineIndex);
-					// 첫 번째 루틴의 ID 저장
-					setRoutinesId(routinesResponse.data[0].routineId);
-				}
-				// 루틴에 속한 운동 리스트 조회
-				const routinesWorkout = await TokenApi.get(`/myfit/routines/workout/${routinesId}`);
-				console.log(routinesWorkout.data);
-			} catch (error) {
-				console.error(error);
-			}
-		};
-
-		fetchDataAndWorkoutData();
+		fetchData();
 	}, []);
-
 
 	// Modal
 
 	const [isFixOpen, setIsFixOpen] = useState(false);
+	const [data, setData] = useState([...DUMMY_DATA]);
 
 	const onClickFixButton = () => {
 		setIsFixOpen(true);
@@ -85,13 +59,13 @@ const Mypagehome = () => {
 
 	// 루틴 목록
 
+	const [content, setContent] = useState(data[0].name);
+	const [btnActive, setBtnActive] = useState(data[0].id);
+
 	const handleClickButton = (e) => {
-		const { name, value, key } = e.target;
-		setRoutinesContent(name);
+		const { name, value } = e.target;
 		setContent(name);
 		setBtnActive(value);
-		setRoutinesId(key);
-		console.log(routinesId);
 	};
 
 	const selectComponent = {
@@ -152,15 +126,15 @@ const Mypagehome = () => {
 							<div className="contents-title">내 운동 루틴</div>
 							<S.ButtonContainer>
 								{/* 루틴 목록을 map으로 불러옴 */}
-								{routinesData.data.length > 0 && routinesData.data.map((item) => (
+								{data.map((item, idx) => (
 									<button
-										name={item.routineName}
-										key={item.routineId}
-										value={item.routineIndex}
-										className={'btn' + (item.routineIndex == btnActive ? ' active' : '')}
+										name={item.name}
+										key={item.id}
+										value={idx}
+										className={'btn' + (idx == btnActive ? ' active' : '')}
 										onClick={handleClickButton}
 									>
-										{item.routineName}
+										{item.text}
 									</button>
 								))}
 								<S.FixModalButton onClick={onClickFixButton}>
@@ -171,7 +145,7 @@ const Mypagehome = () => {
 						</S.ContentsTitle>
 						<div className="dummy-height">
 							{/* 각 루틴 목록에 대한 내용은 아직 디자인이 덜 된 관계로 분별만 가능하도록 제작 */}
-							{/* {content && <S.Content>{selectComponent[content]}</S.Content>} */}
+							{content && <S.Content>{selectComponent[content]}</S.Content>}
 						</div>
 					</S.SecondContent>
 				)}

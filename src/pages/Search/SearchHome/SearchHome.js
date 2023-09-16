@@ -137,8 +137,8 @@ const SearchHome = () => {
 			setMachineList([]);
 		}
 	};
-	
-	
+
+
 	// 필터 선택
 	const handleToggleValue = (filtervalue) => {
 		// 모든 키의 값을 false로 설정
@@ -290,7 +290,7 @@ const SearchHome = () => {
 			setSupplementList([]);
 		}
 	};
-	
+
 
 
 
@@ -441,66 +441,66 @@ const SearchHome = () => {
 					{/* 운동 검색창 */}
 					< div className="searchBarWrapper">
 						<SearchBar handleSearch={handleSearch} name="workout" />
-							<S.Filter>
-								<div ref={modalRef}>
-									<div className="searchBarFilter">
-										<span className="searchBarFilterText">운동부위</span>
-										<div className="addFilter">
-											{Object.entries(bodyparts).map(([key, _], index) => {
-												const bodypartName = bodyparts[key][1];
-												const isActive = activeFitFilters.includes(bodypartName);
-												const isButtonVisible = selectedFitFilterKeys.includes(key); // 해당 버튼이 선택된 경우만 flex로 표시
+						<S.Filter>
+							<div ref={modalRef}>
+								<div className="searchBarFilter">
+									<span className="searchBarFilterText">운동부위</span>
+									<div className="addFilter">
+										{Object.entries(bodyparts).map(([key, _], index) => {
+											const bodypartName = bodyparts[key][1];
+											const isActive = activeFitFilters.includes(bodypartName);
+											const isButtonVisible = selectedFitFilterKeys.includes(key); // 해당 버튼이 선택된 경우만 flex로 표시
 
-												return (
-													<button
-														key={key}
-														isSelected={isActive}
-														elementidx={index}
-														className={`searchFilterContent ${isActive ? 'active' : ''}`}
-														style={{ display: isButtonVisible ? 'flex' : 'none' }}
-														onClick={() => handleAddFitFilter(key)} // 클릭 이벤트 추가
-													>
-														{key}
-														<img src={FilterClose} alt="운동 검색 필터" />
-													</button>
-												);
-											})}
-										</div>
-										<img
-											src={plusCircle}
-											alt="운동 검색 필터 토글 버튼"
-											className={`searchBarFilterToggleBtn ${isSearchFitFilterModal ? 'rotate-right' : 'rotate-left'}`}
-											onClick={() => {
-												setIsSearchFitFilterModal(!isSearchFitFilterModal);
-											}}
-										/>
+											return (
+												<button
+													key={key}
+													isSelected={isActive}
+													elementidx={index}
+													className={`searchFilterContent ${isActive ? 'active' : ''}`}
+													style={{ display: isButtonVisible ? 'flex' : 'none' }}
+													onClick={() => handleAddFitFilter(key)} // 클릭 이벤트 추가
+												>
+													{key}
+													<img src={FilterClose} alt="운동 검색 필터" />
+												</button>
+											);
+										})}
 									</div>
-									{isSearchFitFilterModal && (
-										<div className="searchFilterModalWrapper fitness">
-											{Object.entries(bodyparts).map(([key, _], index) => {
-												const bodypartName = bodyparts[key][1];
-												const isActive = activeFitFilters.includes(bodypartName);
-
-												return (
-													<button
-														key={key}
-														isSelected={isActive}
-														elementidx={index}
-														className={`searchFilterModalContent ${isActive ? 'active' : ''}`}
-														onClick={() => handleAddFitFilter(key)}
-													>
-														{key}
-														<img
-															src={plusSimbol}
-															alt="운동 검색 필터 모달 버튼"
-														/>
-													</button>
-												);
-											})}
-										</div>
-									)}
+									<img
+										src={plusCircle}
+										alt="운동 검색 필터 토글 버튼"
+										className={`searchBarFilterToggleBtn ${isSearchFitFilterModal ? 'rotate-right' : 'rotate-left'}`}
+										onClick={() => {
+											setIsSearchFitFilterModal(!isSearchFitFilterModal);
+										}}
+									/>
 								</div>
-							</S.Filter>
+								{isSearchFitFilterModal && (
+									<div className="searchFilterModalWrapper fitness">
+										{Object.entries(bodyparts).map(([key, _], index) => {
+											const bodypartName = bodyparts[key][1];
+											const isActive = activeFitFilters.includes(bodypartName);
+
+											return (
+												<button
+													key={key}
+													isSelected={isActive}
+													elementidx={index}
+													className={`searchFilterModalContent ${isActive ? 'active' : ''}`}
+													onClick={() => handleAddFitFilter(key)}
+												>
+													{key}
+													<img
+														src={plusSimbol}
+														alt="운동 검색 필터 모달 버튼"
+													/>
+												</button>
+											);
+										})}
+									</div>
+								)}
+							</div>
+						</S.Filter>
 					</div >
 
 					{/* 운동 내용 */}
