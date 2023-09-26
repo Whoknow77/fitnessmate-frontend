@@ -578,6 +578,7 @@ export const RecommendMainBottom = styled.div`
 		color: ${theme.Gray80};
 		letter-spacing: -0.32px;
 		line-height: 24px;
+		border-radius: 10px;
 	}
 
 	.PerServing {

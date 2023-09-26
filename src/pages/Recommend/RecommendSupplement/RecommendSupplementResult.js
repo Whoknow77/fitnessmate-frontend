@@ -5,9 +5,8 @@ import { useRecoilState } from "recoil";
 import { supplementRecommendState } from "../../../recoil/atom";
 import TokenApi from "../../../apis/TokenApi";
 import { userSupplementSingleAPI } from "../../../apis/API";
-import RecommendAddModal from "../../../components/Modal/RecommendAddModal";
+import RecommendAddModal from "../../../components/Modal/RecommendSupplementAddModal";
 import toggle from "../../../assets/images/toggle_triangle.svg";
-
 
 
 const RecommendSupplementResult = () => {
@@ -68,7 +67,6 @@ const RecommendSupplementResult = () => {
 	const handleServingButtonClick = (selectedServing) => {
 		// 선택된 회분
 		setToggleServingValue(selectedServing);
-		console.log("이거:", toggleServingValue)
 		setIsServingFilterModal(false); // 모달 닫기
 	};
 
@@ -151,6 +149,41 @@ const RecommendSupplementResult = () => {
 	}
 	const formattedPrice = formatNumberToCurrency(toggleServingValue && toggleServingValue ? toggleServingValue : (recommendState.recommendedSupplementList[currentIdx] && recommendState.recommendedSupplementList[currentIdx] ? recommendState.recommendedSupplementList[currentIdx] : null));
 
+	// 회분 클릭 여부
+	const [isServingValue, setIsServingValue] = useState(false);
+
+	// 내 보조제에 추가
+	const handleAdd = () => {
+		if (isServingValue === true) {
+			const res = toggleServingValue.supplementId
+			console.log(res)
+			TokenApi.post(
+				`/myfit/routines/supplement/${res}`
+			)
+				.then((response) => {
+					console.log(response);
+				})
+				.catch((err) => {
+					console.log(err);
+				});
+			alert("추가되었습니다!")
+		} else {
+			const res = toggleValue.units[0].supplementId
+			console.log(res)
+			TokenApi.post(
+				`/myfit/routines/supplement/${res}`
+			)
+				.then((response) => {
+					console.log(response);
+				})
+				.catch((err) => {
+					console.log(err);
+				});
+			alert("추가되었습니다!")
+		}
+	};
+
+
 	useEffect(() => {
 		fetchData();
 	}, [currentIdx]);
@@ -175,7 +208,10 @@ const RecommendSupplementResult = () => {
 								return (
 									<S.RecommendNavbarItem
 										isSelected={currentIdx === idx}
-										onClick={() => handlecSupplementClick(idx)}
+										onClick={() => {
+											handlecSupplementClick(idx);
+											setIsServingValue(false);
+										}}
 									>
 										{supplement.koreanName}
 									</S.RecommendNavbarItem>
@@ -187,9 +223,7 @@ const RecommendSupplementResult = () => {
 						</S.RecommendMainMachine>
 					</S.RecommendMainTopTitleWrapper>
 					<S.RecommendMainBtn
-						onClick={() => {
-							setRecommendAddModal(true);
-						}}
+						onClick={handleAdd}
 					>
 						내 보조제에 추가
 					</S.RecommendMainBtn>
@@ -258,6 +292,7 @@ const RecommendSupplementResult = () => {
 												className="toggleModalContent"
 												onClick={(e) => {
 													handleServingButtonClick(filtervalue);
+													setIsServingValue(true);
 												}}
 											>
 												{filtervalue.servings}회분
@@ -289,10 +324,10 @@ const RecommendSupplementResult = () => {
 					</div>
 				</S.RecommendMainBottom>
 				<S.RecommendMainBottom>
-					<span className="bottomTitle">보충제 함량</span>
-					<div className="bottomDescription">
-						{nutrientData.some((nutrient) => nutrient.value !== null && nutrient.value !== undefined && nutrient.value !== "") && (
-							<>
+					{nutrientData.some((nutrient) => nutrient.value !== null && nutrient.value !== undefined && nutrient.value !== "") && (
+						<>
+							<span className="bottomTitle">보충제 함량</span>
+							<div className="bottomDescription">
 								<div className="PerServing">
 									{nutrientData
 										.filter((nutrient) => nutrient.value !== null && nutrient.value !== undefined && nutrient.value !== "")
@@ -303,12 +338,11 @@ const RecommendSupplementResult = () => {
 											</S.PerServing>
 										))}
 								</div>
-							</>
-						)}
-					</div>
+							</div>
+						</>
+					)}
 				</S.RecommendMainBottom>
 			</S.RecommendMain>
-
 		</S.RecommendMachineResultContainer>
 	);
 };

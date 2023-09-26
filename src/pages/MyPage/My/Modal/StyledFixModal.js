@@ -152,7 +152,7 @@ export const AddButton = styled.button`
   height: 34px;
 	width: 34px;
 	border-radius: 8px;
-	background-color: ${theme.BrandLighter};
+	background-color: ${theme.BrandLight300};
 	display: flex;
 	justify-content: center;
 	align-items: center;

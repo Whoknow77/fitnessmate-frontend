@@ -439,7 +439,7 @@ const SearchHome = () => {
 				<S.SectionContainer>
 
 					{/* 운동 검색창 */}
-					< div className="searchBarWrapper">
+					<div className="searchBarWrapper">
 						<SearchBar handleSearch={handleSearch} name="workout" />
 						<S.Filter>
 							<div ref={modalRef}>

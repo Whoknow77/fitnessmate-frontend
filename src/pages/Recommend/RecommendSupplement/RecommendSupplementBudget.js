@@ -94,7 +94,7 @@ const RecommendSupplementBudget = () => {
 		}
 	};
 
-	const makeRequest = async (url, maxAttempts) => {
+	const makeRequest = async (url, maxAttempts = 30) => {
 		try {
 			const response = await TokenApi.get(url);
 			// 성공한 경우 데이터 반환

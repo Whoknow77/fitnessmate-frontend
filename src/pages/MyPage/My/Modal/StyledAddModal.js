@@ -110,7 +110,7 @@ export const Contents = styled.div`
 	gap: 8px;
 
 	.ScrollArea {
-		overflow-y: scroll;
+		overflow: auto; // 필요할 때만 스크롤 영역 생김
 	}
 	.ScrollArea::-webkit-scrollbar {
 		width: 35px;
@@ -119,7 +119,7 @@ export const Contents = styled.div`
 		background: ${({ theme }) => theme.White};
 	}
 	.ScrollArea::-webkit-scrollbar-thumb {
-		background: pink; 
+		background: #ebedef; 
 		background-clip: padding-box;
 		border-left: 20px solid transparent;
 	}
