@@ -21,7 +21,7 @@ const router = createBrowserRouter(
 			<Route path="/login/*" element={<Login />} />
 			<Route path="/recommend/*" element={<Recommend />} />
 			<Route path="/search/:pageNum/*" element={<Search />} />
-			<Route path="/mypag/*" element={<Mypage />} />
+			<Route path="/mypage/*" element={<Mypage />} />
 		</Route>
 	)
 );
