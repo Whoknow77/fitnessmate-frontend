@@ -33,6 +33,7 @@ TokenApi.interceptors.response.use(
 	},
 	// 에러가 발생했을 때의 처리(4xx,5xx 에러 => 토큰 만료)
 	async (error) => {
+		const navigate = useNavigate();
 		if (error.response.data.status === "ROUTINE_NOT_FOUND_EXCEPTION") {
 			console.log("routineId와 일치하는 routine이 없습니다");
 		}
@@ -51,37 +52,44 @@ TokenApi.interceptors.response.use(
 		// 토큰 만료
 		if (error.response.data.status === "EXPIRED_ACCESS_TOKEN_EXCEPTION") {
 			console.log("Access Token 만료");
-			alert("토큰이 만료되었습니다. refresh token을 받아볼게요.");
-			// 기존 refreshToken
+			const isKeepLogin = localStorage.getItem("rememberMe");
+			if (isKeepLogin === "true") {
+				alert("토큰이 만료되었습니다. refresh token을 받아볼게요.");
+				// 기존 refreshToken
 
-			try {
-				const originalRequest = error.config;
-				// 새로운 accessToken 요청
-				const response = await getAccessAPI.get("", {
-					headers: {
-						Authorization: "Bearer " + localStorage.getItem("refreshToken"),
-					},
-				});
-				const newAccessToken = response.data.accessToken;
-				// 토큰 재 저장
-				localStorage.setItem("accessToken", newAccessToken);
-				// 새로운 accessToken으로 헤더 변경
-				originalRequest.headers.Authorization = `Bearer ${newAccessToken}`;
-				console.log("get refresh token");
-				// 새로운 accessToken으로 재 요청
-				return await axios(originalRequest);
-			} catch (err) {
-				console.log(err);
-				// refresh token 만료
-				if (err.response.data.status === "EXPIRED_REFRESH_TOKEN_EXCEPTION") {
-					console.log("Refresh Token 만료 재 로그인 해주세요");
-					alert("토큰이 만료되었습니다. 다시 로그인해주세요.");
-					// navigate("/login");
-					// setIsLoginModal(true);
-					// <>
-					// 	{isLoginModal && <LoginModal setIsLoginModal={setIsLoginModal} />}
-					// </>
+				try {
+					const originalRequest = error.config;
+					// 새로운 accessToken 요청
+					const response = await getAccessAPI.get("", {
+						headers: {
+							Authorization: "Bearer " + localStorage.getItem("refreshToken"),
+						},
+					});
+					console.log(response)
+					const newAccessToken = response.data.accessToken;
+					// 토큰 재 저장
+					localStorage.setItem("accessToken", newAccessToken);
+					// 새로운 accessToken으로 헤더 변경
+					originalRequest.headers.Authorization = `Bearer ${newAccessToken}`;
+					console.log("get refresh token");
+					// 새로운 accessToken으로 재 요청
+					return await axios(originalRequest);
+				} catch (err) {
+					console.log(err);
+					// refresh token 만료
+					if (err.response.data.status === "EXPIRED_REFRESH_TOKEN_EXCEPTION") {
+						console.log("Refresh Token 만료 재 로그인 해주세요");
+						alert("토큰이 만료되었습니다. 다시 로그인해주세요.");
+						// navigate("/login");
+						// setIsLoginModal(true);
+						// <>
+						// 	{isLoginModal && <LoginModal setIsLoginModal={setIsLoginModal} />}
+						// </>
+					}
 				}
+			} else {
+				console.log("Access Token 만료 재 로그인 해주세요");
+				alert("토큰이 만료되었습니다. 다시 로그인해주세요.");
 			}
 		}
 	}

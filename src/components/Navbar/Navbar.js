@@ -78,9 +78,11 @@ const Navbar = () => {
 
 	const fetchData = async () => {
 		try {
-			const response = await TokenApi.get("user/private");
-
-			setuserName(response.data.userName);
+			// if 안하고 그냥 바로 받아오면 로그인 안한 상태일 때 accessToken alert 창이 계속 뜸
+			if (localStorage.getItem("accessToken")) {
+				const response = await TokenApi.get("user/private");
+				setuserName(response.data.userName);
+			}
 		} catch (error) { }
 	};
 

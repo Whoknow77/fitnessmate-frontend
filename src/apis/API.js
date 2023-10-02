@@ -309,7 +309,7 @@ export const userSupplementBatchAPI = axios.create({
 // 메일 인증 요청
 export const verifyMailPost = axios.create({
 	method: "post",
-	baseURL: "/api/register/verify/mail",
+	baseURL: "/api/user/auth/verify/email",
 	withCredentials: true,
 });
 

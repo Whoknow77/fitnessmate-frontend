@@ -77,43 +77,43 @@ const ProfileInput = ({ placeholder, children, name }) => {
 		let exp = ValidateTest(name);
 
 		// 매번 서버로부터 중복 체크
-		//if (name === "loginEmail") {
-		//  handleEmail(value).then((isVerified) => {
-		//    setdupCheck(isVerified);
-		//    setIsValidState((pre) => ({
-		//      ...pre,
-		//      [name]: [value, exp && exp.test(value) && isVerified],
-		//    }));
-		//  });
-		//} else {
-		if (name === "password") {
-			// 비밀번호 재확인
-			const passwordSame = value === isValidState.password2[0];
-			setIsValidState((pre) => ({
-				...pre,
-				password2: [
-					isValidState.password2[0],
-					exp && exp.test(value) && passwordSame,
-				],
-				password: [value, exp && exp.test(value) && passwordSame],
-			}));
-		} else if (name === "password2") {
-			const passwordSame = value === isValidState.password[0];
-			setIsValidState((pre) => ({
-				...pre,
-				password2: [value, exp && exp.test(value) && passwordSame],
-				password: [
-					isValidState.password[0],
-					exp && exp.test(value) && passwordSame,
-				],
-			}));
+		if (name === "loginEmail") {
+			handleEmail(value).then((isVerified) => {
+				setdupCheck(isVerified);
+				setIsValidState((pre) => ({
+					...pre,
+					[name]: [value, exp && exp.test(value) && isVerified],
+				}));
+			});
 		} else {
-			setIsValidState((pre) => ({
-				...pre,
-				[name]: [value, exp && exp.test(value)],
-			}));
+			if (name === "password") {
+				// 비밀번호 재확인
+				const passwordSame = value === isValidState.password2[0];
+				setIsValidState((pre) => ({
+					...pre,
+					password2: [
+						isValidState.password2[0],
+						exp && exp.test(value) && passwordSame,
+					],
+					password: [value, exp && exp.test(value) && passwordSame],
+				}));
+			} else if (name === "password2") {
+				const passwordSame = value === isValidState.password[0];
+				setIsValidState((pre) => ({
+					...pre,
+					password2: [value, exp && exp.test(value) && passwordSame],
+					password: [
+						isValidState.password[0],
+						exp && exp.test(value) && passwordSame,
+					],
+				}));
+			} else {
+				setIsValidState((pre) => ({
+					...pre,
+					[name]: [value, exp && exp.test(value)],
+				}));
+			}
 		}
-		//}
 
 		if (!valueHistory) {
 			setValueHistory(true);
