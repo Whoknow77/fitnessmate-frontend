@@ -3,6 +3,8 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { userSupplementSingleAPI } from "../../../apis/API";
 import * as S from "./StyledSearchSupplementDetail";
 import beforebtn from "../../../assets/images/SmallBefore.svg";
+import TokenApi from "../../../apis/TokenApi";
+
 
 
 const SearchSupplementDetail = () => {
@@ -98,6 +100,24 @@ const SearchSupplementDetail = () => {
 		navigate(-1);
 	};
 
+	// 내 보조제에 추가
+	const handleAdd = () => {
+		const submission = []
+		submission.push(supplementId);
+		TokenApi.post(
+			`/myfit/routines/supplement`,
+			{ supplementIds: submission }
+		)
+			.then((response) => {
+				console.log(response.status);
+				alert("추가되었습니다!")
+			})
+			.catch((err) => {
+				console.log(err);
+			});
+		// alert("추가되었습니다!")
+	};
+
 
 	return (
 		<S.SearchWorkoutContainer>
@@ -111,7 +131,11 @@ const SearchSupplementDetail = () => {
 				<S.TopLeft>
 					<S.SpplementName>{supplementName}</S.SpplementName>
 				</S.TopLeft>
-				<button>내 보조제에 추가</button>
+				<button
+					onClick={handleAdd}
+				>
+					내 보조제에 추가
+				</button>
 			</S.TopContainer>
 			<S.MiddleContainer>
 				<img src={imgPath} alt={`${supplementName} 보조제 이미지`} />

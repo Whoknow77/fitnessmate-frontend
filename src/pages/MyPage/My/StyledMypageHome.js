@@ -374,44 +374,33 @@ export const SupplementContent = styled.div`
 		color: ${theme.Black};
 		letter-spacing: -0.6px;
 		line-height: 45px;
-		margin-bottom: 12px;
 	}
 
 	.contentMiddleItem{
-		padding: 15px 24px; 15px 0;
-		margin: 24px;
+		padding: 15px 24px 15px 0;
+		margin: 24px 0;
+		display: flex;
+		gap: 12px;
 	}
 
 	.PerServing {
-		grid-column: 2;
 		display: flex;
-		gap: 24px 32px;
-		flex-wrap: wrap;
-		padding: 15px 0;
-		border-radius: 10px;
-		background: ${theme.Gray10};
-		justify-content: center;
+		gap: 8px;
+		align-items: center;
 	}
 
 	.TitleSpan {
-		grid-row: 1;
 		font-size: 16px;
 		font-weight: 500;
 		color: ${theme.Gray50};
 		letter-spacing: -0.32px;
-		display: flex;
-		align-items: center;
 	}
 
-	.ContentP {
-		grid-row: 2;
+	.ContentSpan {
 		font-size: 18px;
 		font-weight: 600;
 		letter-spacing: -0.32px;
 		color: ${theme.Gray80};
-		display: flex;
-		justify-content: center;
-		align-items: center;
 	}
 
 	.contentBottomItem {

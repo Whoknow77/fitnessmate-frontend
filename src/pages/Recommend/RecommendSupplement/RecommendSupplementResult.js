@@ -5,7 +5,6 @@ import { useRecoilState } from "recoil";
 import { supplementRecommendState } from "../../../recoil/atom";
 import TokenApi from "../../../apis/TokenApi";
 import { userSupplementSingleAPI } from "../../../apis/API";
-import RecommendAddModal from "../../../components/Modal/RecommendSupplementAddModal";
 import toggle from "../../../assets/images/toggle_triangle.svg";
 
 

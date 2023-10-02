@@ -59,7 +59,7 @@ const SignupBodyFigure = () => {
 		return (
 			Object.entries(isValidState)?.filter(([key, value]) => {
 				return value[1];
-			}).length >= 11
+			}).length >= 12
 		);
 	};
 

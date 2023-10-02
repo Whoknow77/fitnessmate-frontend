@@ -3,7 +3,7 @@
 import * as S from "./StyledMypageHome";
 import "./style.css";
 import { useState, useEffect } from "react";
-import AddModal from "./Modal/AddModal";
+import WorkoutAddModal from "./Modal/workoutAddModal";
 import FixModal from "./Modal/FixModal";
 import fix from "../../../assets/images/Fix_Icon.svg";
 import add from "../../../assets/images/Add_Icon.svg";
@@ -66,19 +66,19 @@ const Mypagehome = () => {
 	const [lLysine, setLLysine] = useState("");
 
 	const nutrientData = [
-		{ label: "프로틴 함량", value: protein },
-		{ label: "지방 함량", value: fat },
-		{ label: "탄수화물 함량", value: carbohydrate },
-		{ label: "류신 함량", value: leucine },
-		{ label: "이소류신 함량", value: isoLeucine },
-		{ label: "발린 함량", value: valine },
-		{ label: "메티오닌 함량", value: methionine },
-		{ label: "페닐알라닌 함량", value: phenylalanine },
-		{ label: "트레오닌 함량", value: threonine },
-		{ label: "L-케라틴 함량", value: lCarnitine },
-		{ label: "L-글루타민 함량", value: lGlutamine },
-		{ label: "L-알라닌 함량", value: lAlanine },
-		{ label: "L-라이신 함량", value: lLysine },
+		{ label: "프로틴 함량", value: "proteinPerServing" },
+		{ label: "지방 함량", value: "fatPerServing" },
+		{ label: "탄수화물 함량", value: "carbohydratePerServing" },
+		{ label: "류신 함량", value: "leucine" },
+		{ label: "이소류신 함량", value: "isoLeucine" },
+		{ label: "발린 함량", value: "valine" },
+		{ label: "메티오닌 함량", value: "methionine" },
+		{ label: "페닐알라닌 함량", value: "phenylalanine" },
+		{ label: "트레오닌 함량", value: "threonine" },
+		{ label: "L-케라틴 함량", value: "l_Carnitine" },
+		{ label: "L-글루타민 함량", value: "l_Glutamine" },
+		{ label: "L-알라닌 함량", value: "l_Alanine" },
+		{ label: "L-라이신 함량", value: "l_Lysine" },
 	];
 
 	useEffect(() => {
@@ -96,12 +96,10 @@ const Mypagehome = () => {
 				}
 				// 루틴에 속한 운동 리스트 조회
 				const routinesWorkout = await TokenApi.get(`/myfit/routines/workout/${routinesResponse.data[0].routineId}`);
-				console.log(routinesWorkout.data);
 				setRoutineWorkout(routinesWorkout);
 
 				// 내 보조제 리스트 조회
 				const mySupplement = await TokenApi.get("/myfit/routines/supplement");
-				console.log(mySupplement.data);
 				setMySupplements(mySupplement);
 
 			} catch (error) {
@@ -151,7 +149,6 @@ const Mypagehome = () => {
 		try {
 			// 해당 루틴에 속한 운동 리스트를 가져오기 위해 API 요청
 			const routinesWorkout = await TokenApi.get(`/myfit/routines/workout/${id}`);
-			console.log(routinesWorkout.data);
 			setRoutineWorkout(routinesWorkout);
 		} catch (error) {
 			console.error(error);
@@ -163,23 +160,17 @@ const Mypagehome = () => {
 	const deleteClickButton = async (e) => {
 		const { id } = e.target;
 		const myWorkoutId = parseInt(id);
-		console.log(myWorkoutId);
 		try {
-			const config = {
-				headers: {
-					'Content-Type': 'application/json',
-				},
-			};
 			const deleteWorkout = await TokenApi.get(`/myfit/routines/workout/delete/${myWorkoutId}`);
 			console.log(deleteWorkout.status);
+			alert("삭제되었습니다!")
+			// 페이지 새로고침
+			window.location.reload();
 		} catch (error) {
 			console.error(error);
 		}
 	}
 
-
-	// 목표 운동량이 없을 때 운동 컨텐츠
-	const [noWorkrateItem, setNoWorkrateItem] = useState(false);
 
 	const hasWorkrate = (item) => {
 		return item.rep && item.weight && item.setCount;
@@ -207,7 +198,6 @@ const Mypagehome = () => {
 	const deleteSupplementClickButton = async (e) => {
 		const { id } = e.target;
 		const mySupplementId = parseInt(id);
-		console.log(mySupplementId);
 		try {
 			const deleteSupplement = await TokenApi.get(`/myfit/routines/supplement/delete/${mySupplementId}`);
 			console.log(deleteSupplement.status);
@@ -218,6 +208,7 @@ const Mypagehome = () => {
 			console.error(error);
 		}
 	}
+
 
 
 
@@ -265,7 +256,7 @@ const Mypagehome = () => {
 				{(visible ?
 					<S.SecondContent onChange={onChange}>
 						<div className="supplementContents">
-							{mySupplements.data.supplements.length > 0 && mySupplements.data.supplements.map((item) => (
+							{mySupplements.data.supplements.length > 0 && mySupplements.data.supplements.map((item, index) => (
 								<S.SupplementContent key={item.mySupplementId}>
 									<img src={item.imageURL} alt="보조제 사진" />
 									<div className="contentItem">
@@ -278,16 +269,14 @@ const Mypagehome = () => {
 												{item.supplementName}
 											</span>
 											<div className="contentMiddleItem">
-												함량 들어갈 자리<br /><br /><br />
-												{/* {nutrientData.map((nutrient, index) => {
-													const matchingSupplement = mySupplements.data.supplements.find(item => item.supplementName === nutrient.label);
-													return matchingSupplement && (
-														<div className="PerServing" key={index}>
-															<span className="TitleSpan">{nutrient.label}</span>
-															<p className="ContentP">{matchingSupplement.value}g</p>
+												{nutrientData
+													.filter((nutrient) => item[nutrient.value] !== null && item[nutrient.value] !== undefined && item[nutrient.value] !== "")
+													.map((nutrient) => (
+														<div className="PerServing">
+															<span className="TitleSpan">{item[nutrient.value] && nutrient.label}</span>
+															<span className="ContentSpan">{item[nutrient.value] && <>{item[nutrient.value]}g</>}</span>
 														</div>
-													);
-												})} */}
+													))}
 											</div>
 											<div className="contentBottomItem">
 												<span className="bottomTitle">가격</span>
@@ -363,11 +352,11 @@ const Mypagehome = () => {
 												<div className="workrate">
 													<div className="workrateItem">
 														<span className="workrateTitle">중량</span>
-														<p className="workrateContent">{item.rep}kg</p>
+														<p className="workrateContent">{item.weight}kg</p>
 													</div>
 													<div className="workrateItem">
 														<span className="workrateTitle">횟수</span>
-														<p className="workrateContent">{item.weight}회</p>
+														<p className="workrateContent">{item.rep}회</p>
 													</div>
 													<div className="workrateItem">
 														<span className="workrateTitle">세트 수</span>
@@ -432,7 +421,7 @@ const Mypagehome = () => {
 			{/* 이 목록에 운동 추가하기 버튼 */}
 			{
 				isAddOpen && (
-					<AddModal
+					<WorkoutAddModal
 						open={isAddOpen}
 						routineId={routinesId}
 						onClose={() => {

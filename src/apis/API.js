@@ -128,7 +128,7 @@ export const loginPostAPI = axios.create({
 
 // 로그아웃(refresh 토큰)
 export const logoutPutAPI = axios.create({
-	method: "put",
+	method: "get",
 	baseURL: "/api/auth/logout",
 	withCredentials: true,
 });

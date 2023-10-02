@@ -3,6 +3,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { userWorkoutAPI } from "../../../apis/API";
 import * as S from "./StyledSearchWorkoutDetail";
 import beforebtn from "../../../assets/images/SmallBefore.svg";
+import AddWorkoutModal from "./AddWorkoutModal";
 
 
 const SearchWorkoutDetail = () => {
@@ -10,6 +11,7 @@ const SearchWorkoutDetail = () => {
 	const location = useLocation();
 	const { workoutId } = location.state;
 	const [workoutDetail, setWorkoutDetail] = useState(null);
+	const [addWorkoutModal, setAddWorkoutModal] = useState(false);
 
 
 	const [bodyPart, setbodyPart] = useState([]);
@@ -59,16 +61,20 @@ const SearchWorkoutDetail = () => {
 				<S.TopLeft>
 					<S.WorkoutName>{workoutName}</S.WorkoutName>
 				</S.TopLeft>
-					<button>내 운동에 추가</button>
+				<button
+					onClick={() => {
+						setAddWorkoutModal(true);
+					}}
+				>내 운동에 추가</button>
 			</S.TopContainer>
 			<S.MiddleContainer>
 				<img src={imgPath} alt={`${workoutName} 운동 이미지`} />
 				<S.InformationContainer>
-				<div className="TopInformation">
-					<span>운동 설명</span>
-					<p className="description">{description}</p>
-				</div>
-				<div className="TopInformation">		
+					<div className="TopInformation">
+						<span>운동 설명</span>
+						<p className="description">{description}</p>
+					</div>
+					<div className="TopInformation">
 						<S.BodyPartContainer>
 							<span>운동 부위</span>
 							{bodyPart.map((partName) => (
@@ -81,6 +87,12 @@ const SearchWorkoutDetail = () => {
 				</S.InformationContainer>
 			</S.MiddleContainer>
 			<iframe src={videoLink} title={workoutName} />
+			{addWorkoutModal && (
+				<AddWorkoutModal
+					setRecommendAddModal={setAddWorkoutModal}
+					workoutId={workoutId}
+				/>
+			)}
 		</S.SearchWorkoutContainer>
 	);
 };

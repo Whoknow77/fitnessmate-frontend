@@ -75,19 +75,22 @@ const RecommendAddModal = ({ setRecommendAddModal, machine }) => {
 	// 루틴에 운동 추가하기
 	const handleAdd = () => {
 		const submission = {
-			workoutId: Number(machine.workoutId),
+			workoutIds: [Number(machine.workoutId)],
 			weight: option[0].value,
 			rep: option[1].value,
 			setCount: option[2].value,
 		};
+		console.log(submission)
 		myDivision.forEach((division) => {
 			if (division.isSelected) {
 				TokenApi.post(
-					`myfit/routines/workout/${division.routineId}`,
+					`/myfit/routines/workout/${division.routineId}`,
 					submission
 				)
 					.then((response) => {
 						console.log(response);
+						alert("추가되었습니다!")
+						setRecommendAddModal(false);
 					})
 					.catch((err) => {
 						console.log(err);

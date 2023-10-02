@@ -11,29 +11,34 @@ import { useNavigate, useParams } from "react-router-dom";
 import TokenApi from "../../../../apis/TokenApi";
 
 
-function SupplementAddModal({ onClose, routineId }) {
+function AddModal({ onClose, routineId }) {
 
 	// 보여질 운동 리스트
-	const [supplementList, setSupplementList] = useState([]);
+	const [machineList, setMachineList] = useState([]);
 
 	// 루틴에 추가할 운동
-	const [finalSupplement, setFinalSupplement] = useState([]);
+	const [finalWorkout, setFinalWorkout] = useState([]);
 
 	// 검색결과가 없을 때 페이지
 	const [nosearch, setNoSearch] = useState(false);
 
 	const fetchData = async () => {
+		const request = {
+			searchKeyword: "",
+			bodyPartKoreanName: [],
+		};
+		// 운동 기구 batch 조회(12개)
+
 		try {
 			const config = {
 				headers: {
 					'Content-Type': 'application/json',
 				},
 			};
-			const supplementResponse = await TokenApi.post(`/myfit/routines/supplement/search`, "", config);
-			if (supplementResponse.data.length) {
+			const workoutResponse = await TokenApi.post(`/myfit/routines/workout/search/${routineId}`, "", config);
+			if (workoutResponse.data.length) {
 				setNoSearch(false);
-				console.log(supplementResponse)
-				setSupplementList(supplementResponse.data);
+				setMachineList(workoutResponse.data);
 			} else {
 				setNoSearch(true);
 			}
@@ -43,7 +48,7 @@ function SupplementAddModal({ onClose, routineId }) {
 		}
 	};
 
-	// 보조제 검색
+	// 운동 검색
 	const handleSearch = async (searchValue) => {
 		try {
 			if (searchValue === "") {
@@ -55,13 +60,13 @@ function SupplementAddModal({ onClose, routineId }) {
 						'Content-Type': 'application/json',
 					},
 				};
-				const workoutResponse = await TokenApi.post(`/myfit/routines/supplement/search`, JSON.stringify(searchValue), config);
+				const workoutResponse = await TokenApi.post(`/myfit/routines/workout/search/${routineId}`, JSON.stringify(searchValue), config);
 				console.log(workoutResponse)
-				setSupplementList(workoutResponse.data);
-				console.log(supplementList)
+				setMachineList(workoutResponse.data);
+				console.log(machineList)
 			}
 		} catch (err) {
-			setSupplementList([]);
+			setMachineList([]);
 		}
 	};
 
@@ -69,26 +74,27 @@ function SupplementAddModal({ onClose, routineId }) {
 		fetchData();
 	}, []);
 
-	// 보조제 선택
+	// 운동 선택
 	const handleSelect = (idx) => {
-		setSupplementList(prevSupplementList => {
-			const updatedList = [...prevSupplementList];
+		setMachineList(prevMachineList => {
+			const updatedList = [...prevMachineList];
 			updatedList[idx].isSelected = !updatedList[idx].isSelected;
 			return updatedList;
 		});
-		setFinalSupplement((prevFinalSupplement) => {
-			const selectedSupplement = supplementList[idx].supplementId;
-			return [...prevFinalSupplement, selectedSupplement];
+		setFinalWorkout(prevFinalWorkout => {
+			const selectedWorkout = machineList[idx].workoutId;
+			return [...prevFinalWorkout, selectedWorkout];
 		});
 	};
 
 	// 선택완료
-	const handleSubmit = async () => {
-		console.log(finalSupplement)
+	const handleSubmit = async (machineList) => {
 
-		const supplementResponse = await TokenApi.post(`/myfit/routines/supplement`, { supplementIds: finalSupplement });
-		console.log(supplementResponse.status)
-		setFinalSupplement([]);
+		console.log(finalWorkout)
+
+		const workoutResponse = await TokenApi.post(`/myfit/routines/workout/${routineId}`, { workoutIds: finalWorkout });
+		console.log("결과:", workoutResponse.status);
+		setFinalWorkout([]);
 		alert("추가되었습니다!")
 		onClose?.();
 		// 페이지 새로고침
@@ -117,7 +123,7 @@ function SupplementAddModal({ onClose, routineId }) {
 							</S.ModalTitle>
 						</S.Header>
 						<S.SerchArea className="search">
-							<SearchBar handleSearch={handleSearch} name="supplement" />
+							<SearchBar handleSearch={handleSearch} name="workout" />
 						</S.SerchArea>
 						{nosearch ? (
 							<S.Contents>
@@ -126,15 +132,15 @@ function SupplementAddModal({ onClose, routineId }) {
 						) : (
 							<S.Contents>
 								<S.CheckboxArea className="ScrollArea">
-									{supplementList.map((supplement, idx) => {
+									{machineList.map((machine, idx) => {
 										return (
 											<TextCheckbox
-												key={supplement.supplementName}
+												key={machine.workoutName}
 												handleClick={handleSelect}
-												isSelected={supplement.isSelected}
+												isSelected={machine.isSelected}
 												elementidx={idx}
 											>
-												{supplement.supplementName}
+												{machine.workoutName}
 											</TextCheckbox>
 										);
 									})}
@@ -142,7 +148,7 @@ function SupplementAddModal({ onClose, routineId }) {
 							</S.Contents>
 						)}
 						{/* BigButton이랑 크기가 안 맞아서 새로 제작 */}
-						<S.SaveButton onClick={handleSubmit} type="submit">선택한 보조제 추가하기</S.SaveButton>
+						<S.SaveButton onClick={handleSubmit} type="submit">선택한 운동 추가하기</S.SaveButton>
 					</S.ModalWrap>
 				</S.ModalContainer>
 			</S.Overlay>
@@ -150,4 +156,4 @@ function SupplementAddModal({ onClose, routineId }) {
 	);
 };
 
-export default SupplementAddModal;
+export default AddModal;
