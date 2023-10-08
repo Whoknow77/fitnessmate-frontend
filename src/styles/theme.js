@@ -1,11 +1,11 @@
 // 색상표
 
 const theme = {
-	Black: "#333D4B",
-	Gray80: "#4E5968",
-	Gray70: "#707070",
+	Black: "#191F28",
+	Gray80: "#333D4B",
+	Gray70: "#4E5968",
 	Gray50: "#9A9798",
-	Gray30: "#C2C0C1",
+	Gray30: "#D1D6DB",
 	Gray20: "#F2F4F6",
 	Gray10: "#F9FAFB",
 	White: "#FFFFFF",
