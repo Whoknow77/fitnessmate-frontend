@@ -14,7 +14,10 @@ const EmailModal = ({ setIsEmailModal }) => {
 	const handleTransmit = async () => {
 		try {
 			console.log(isValidState.loginEmail[0])
-			const res = await verifyMailPost.post(`${isValidState.loginEmail[0]}`);
+			const loginEmail = {
+				mailAddress: isValidState.loginEmail[0]
+			}
+			const res = await verifyMailPost.post("", loginEmail);
 			console.log(res)
 		} catch (err) {
 			console.log(err);

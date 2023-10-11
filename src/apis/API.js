@@ -178,12 +178,6 @@ export const userPasswordAPI = axios.create({
 	withCredentials: true,
 });
 
-// 회원 가입 시 email 중복 검사
-export const userIdVerifyAPI = axios.create({
-	method: "post",
-	baseURL: "/api/user/auth/verify/email",
-	withCredentials: true,
-});
 
 /**
  * User API
@@ -306,10 +300,17 @@ export const userSupplementBatchAPI = axios.create({
 
 /* 이메일 인증 관련 API */
 
+// 회원 가입 시 email 중복 검사
+export const userIdVerifyAPI = axios.create({
+	method: "post",
+	baseURL: "/api/user/auth/verify/email",
+	withCredentials: true,
+});
+
 // 메일 인증 요청
 export const verifyMailPost = axios.create({
 	method: "post",
-	baseURL: "/api/user/auth/verify/email",
+	baseURL: "/api/register/verify/mail",
 	withCredentials: true,
 });
 
