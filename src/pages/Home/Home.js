@@ -6,7 +6,7 @@ import arrow from "../../assets/images/arrow.svg";
 import { useState } from "react";
 import LoginModal from "../../components/Modal/LoginModal";
 import homebanner from "../../assets/images/homebanner.png";
-import thirdFirstImg from "../../assets/images/thirdFirstImg.png"
+import thirdFirstImg from "../../assets/images/thirdFirstImg.svg"
 import thirdSecondImg from "../../assets/images/thirdSecondImg.png"
 import thirdThirdImg from "../../assets/images/thirdThirdImg.png"
 import fourthFirstImg from "../../assets/images/fourthFirstImg.png"
@@ -95,7 +95,7 @@ export const Home = () => {
 									골격근량, 체지방량을 입력하면
 								</div>
 							</S.ThirdContentTitle>
-							<img src={thirdFirstImg} />
+							<img className="thirdFirstImg" src={thirdFirstImg} />
 						</div>
 						<div className="thirdSecondContent">
 							<img src={thirdSecondImg} />

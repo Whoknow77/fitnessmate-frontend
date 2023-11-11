@@ -153,6 +153,11 @@ export const HomeContainer = styled.ul`
 				gap: 546px;
 				flex-wrap: wrap;
 			}
+
+			.thirdFirstImg {
+				width: 593px;
+				height: 595px;
+			}
 		}
   }
 

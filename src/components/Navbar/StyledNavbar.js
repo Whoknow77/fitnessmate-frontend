@@ -16,11 +16,9 @@ export const NavbarContainer = styled.div`
   align-items: center;
   background-color: ${theme.White};
   backdrop-filter: ${({ isLoginModal, isCancleModal, isRecommend }) =>
-    isLoginModal || isCancleModal || isRecommend ? "none" : "blur(4px)"};
+		isLoginModal || isCancleModal || isRecommend ? "none" : "blur(4px)"};
   .nav-logo {
-    background-color: #ff7373;
-    width: 110px;
-    height: 20px;
+    width: 93px;
   }
 `;
 

@@ -7,6 +7,7 @@ import NavModal from "./NavModal";
 import TokenApi from "../../apis/TokenApi";
 import LoginModal from "../Modal/LoginModal";
 import CancleModal from "../Modal/CancleModal";
+import logoimg from "../../assets/images/logo.png";
 
 const Navbar = () => {
 	const navigate = useNavigate();
@@ -99,11 +100,13 @@ const Navbar = () => {
 			isCancleModal={isCancleModal}
 			isRecommend={isRecommend}
 		>
-			<button
+			<img
+				src={logoimg}
 				className="nav-logo"
 				onClick={() => {
 					navigate("/");
 				}}
+				alt="fitmate 로고"
 			/>
 			<S.NavLink>
 				<S.NavTextContainer>
