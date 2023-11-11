@@ -27,8 +27,10 @@ function NavModal({ children, userName, setuserName }) {
 			console.log(res)
 			setuserName(null);
 			localStorage.clear();
+			window.location.reload();
 			navigate("/");
 		} catch (err) {
+			window.location.reload();
 			console.log(err);
 		}
 	};
