@@ -33,7 +33,7 @@ const SignupBodyInfo = () => {
 		return (
 			Object.entries(isValidState)?.filter(([key, value]) => {
 				return value[1];
-			}).length >= 9
+			}).length >= 8
 		);
 	};
 

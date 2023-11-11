@@ -8,4 +8,5 @@ export const MainLayoutWrapper = styled.div`
   justify-content: center;
   align-items: center;
   position: relative;
+	z-index: 0;
 `;

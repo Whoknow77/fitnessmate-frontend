@@ -2,34 +2,35 @@
 
 import styled from "styled-components";
 import theme from "./../../styles/theme";
-import homebackground from "../../assets/images/main-background.png"
 
 // 화면 가리기
 
 // 홈
-export const HomeContainer = styled.ul`
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 36px;
+export const HomeContainer = styled.div`
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 36px;
 
   // 1
   .firstContent {
-    max-width: 1920px;
-    // padding: 0 calc((100% - 1440px) / 2);
+		width: 100%;
+		height: 100vh;
 		padding: 0 169px 0 194px;
-    display: flex;
-    width: 100%;
-    justify-content: space-between;
-    align-items: center;
-    height: 861px;
-		background-image: url(${homebackground});
-		background-size: cover;
-		background-position: center;
-		background-repeat: no-repeat;
+		position: relative;
+		display: flex;
+		justify-content: center;
+
+		.firstArea {
+			width: 100%;
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+		}
 
     .firstCotntentItem {
+			z-index: 3;
       display: flex;
       flex-direction: column;
       gap: 12px;
@@ -70,8 +71,86 @@ export const HomeContainer = styled.ul`
     }
 
 		.homebanner { 
+			z-index: 3;
 			width: 766px;
 			height: 765px;
+		}
+
+		.firstContentBack {
+			position:absolute;
+			top:0;
+			left:0;
+			bottom:0;
+			right:0;
+			box-sizing:border-box;
+			padding:0;
+			border:none;
+			margin:auto;
+			display:block;
+			width:0;
+			height:0; 
+			min-width:100%; 
+			max-width:100%; 
+			min-height:100%; 
+			max-height:100%; 
+			object-fit:cover; 
+		}
+
+		@keyframes mouseBounce {
+			0%, 100% {
+				transform: translateY(0); /* 원래 위치 */
+			}
+			50% {
+				transform: translateY(-15px); /* 위로 10px 올라감 */
+			}
+		}
+
+		.mouse {
+			z-index: 3;
+			padding-top: 60px;
+			position: absolute;
+			margin: 0 auto;
+			bottom: 10vh;
+			cursor: pointer;
+		}
+		.mouse span {
+			position: absolute;
+			top: 0;
+			left: 50%;
+			width: 40px;
+			height: 70px;
+			margin-left: -15px;
+			border: 3px solid #FFFFFF80;
+			border-radius: 50px;
+			box-sizing: border-box;
+			animation: mouseBounce 1s infinite; /* 애니메이션 반복 */
+			transition: transform 0.3s; /* 부드러운 애니메이션 전환 */
+		}
+		.mouse span::before {
+			position: absolute;
+			top: 2vh;
+			left: 50%;
+			content: '';
+			width: 8px;
+			height: 8px;
+			margin-left: -4px;
+			background-color: #FFFFFF80;
+			border-radius: 100%;
+			box-sizing: border-box;
+		}
+		.mouse span::after {
+			position: absolute;
+			bottom: -3vh;
+			left: 50%;
+			width: 20px;
+			height: 20px;
+			content: '';
+			margin-left: -10px;
+			border-left: 3px solid #FFFFFF80;
+			border-bottom: 3px solid #FFFFFF80;
+			-webkit-transform: rotate(-45deg);
+			transform: rotate(-45deg);
+			box-sizing: border-box;
 		}
   }
 
@@ -155,8 +234,8 @@ export const HomeContainer = styled.ul`
 			}
 
 			.thirdFirstImg {
-				width: 593px;
-				height: 595px;
+				width: 500px;
+				height: auto;
 			}
 		}
   }

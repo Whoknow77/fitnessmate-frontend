@@ -16,6 +16,30 @@ const Navbar = () => {
 	const [isCancleModal, setIsCancleModal] = useState(false);
 	const [isRecommend, setIsRecommend] = useState(false);
 
+	const isHomePage = window.location.pathname === '/';
+
+	const [isScrolled, setIsScrolled] = useState(false);
+
+	useEffect(() => {
+		const handleScroll = () => {
+			if (window.scrollY > 64) {
+				setIsScrolled(true);
+				console.log(isScrolled);
+				console.log(window.scrollY);
+			} else {
+				setIsScrolled(false);
+				console.log(isScrolled);
+				console.log(window.scrollY);
+			}
+		};
+
+		window.addEventListener("scroll", handleScroll);
+
+		return () => {
+			window.removeEventListener("scroll", handleScroll);
+		};
+	},);
+
 	const handleSearch = () => {
 		if (window.location.href.includes("signup")) {
 			setIsCancleModal(true);
@@ -95,44 +119,51 @@ const Navbar = () => {
 	}, [window.location.href]);
 
 	return (
-		<S.NavbarContainer
-			isLoginModal={isLoginModal}
-			isCancleModal={isCancleModal}
-			isRecommend={isRecommend}
-		>
-			<img
-				src={logoimg}
-				className="nav-logo"
-				onClick={() => {
-					navigate("/");
-				}}
-				alt="fitmate 로고"
-			/>
-			<S.NavLink>
-				<S.NavTextContainer>
-					<i className="fa-solid fa-bars"></i>
-					<S.NavButton onClick={handleSearch}>검색하기</S.NavButton>
-					<S.NavButton onClick={handleRecommend}>추천받기</S.NavButton>
-					<S.NavButton onClick={handleMyPage}>내 운동</S.NavButton>
-				</S.NavTextContainer>
-				{!userName ? (
-					<S.NavLoginButton
-						className="login"
-						onClick={() => {
-							navigate("login");
-						}}
-					>
-						로그인
-					</S.NavLoginButton>
-				) : (
-					<NavModal userName={userName} setuserName={setuserName}>
-						{userName} 님
-					</NavModal>
-				)}
-			</S.NavLink>
-			{isLoginModal && <LoginModal setIsLoginModal={setIsLoginModal} />}
-			{isCancleModal && <CancleModal setIsCancleModal={setIsCancleModal} />}
-		</S.NavbarContainer>
+		<S.NavSection isHomePage={isHomePage}>
+			<div
+				id="navbar"
+				className={isScrolled ? "fixed" : ""}
+				isHomePage={isHomePage}
+				isLoginModal={isLoginModal}
+				isCancleModal={isCancleModal}
+				isRecommend={isRecommend}
+			>
+				<img
+					src={logoimg}
+					className="nav-logo"
+					onClick={() => {
+						navigate("/");
+					}}
+					alt="fitmate 로고"
+				/>
+				<S.NavLink>
+					<S.NavTextContainer>
+						<i className="fa-solid fa-bars"></i>
+						<S.NavButton onClick={handleSearch}>검색하기</S.NavButton>
+						<S.NavButton onClick={handleRecommend}>추천받기</S.NavButton>
+						<S.NavButton onClick={handleMyPage}>내 운동</S.NavButton>
+					</S.NavTextContainer>
+					{!userName ? (
+						<S.NavLoginButton
+							className="login"
+							onClick={() => {
+								navigate("login");
+							}}
+							isScrolled={isScrolled}
+						>
+							로그인
+						</S.NavLoginButton>
+					) : (
+						<NavModal userName={userName} setuserName={setuserName}>
+							{userName} 님
+						</NavModal>
+					)}
+				</S.NavLink>
+				{isLoginModal && <LoginModal setIsLoginModal={setIsLoginModal} />}
+				{isCancleModal && <CancleModal setIsCancleModal={setIsCancleModal} />}
+			</div>
+		</S.NavSection>
+
 	);
 };
 

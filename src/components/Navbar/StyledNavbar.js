@@ -3,23 +3,56 @@
 import styled from "styled-components";
 import theme from "./../../styles/theme";
 
-export const NavbarContainer = styled.div`
-  position: sticky;
-  top: 0;
-  max-width: 1920px;
-  width: 100%;
-  z-index: 999;
-  height: 64px;
-  display: flex;
-  padding: 0 calc((100% - 1440px) / 2);
-  justify-content: space-between;
-  align-items: center;
-  background-color: ${theme.White};
-  backdrop-filter: ${({ isLoginModal, isCancleModal, isRecommend }) =>
+export const NavSection = styled.div`
+	width: 100%;
+	position: ${({ isHomePage }) => isHomePage ? 'fixed' : 'sticky'};
+	top: 0;
+	max-width: 1920px;
+	z-index: 999;
+
+	#navbar {
+		width: 100%;
+		height: 64px;
+		display: flex;
+		padding: 0 calc((100% - 1440px) / 2);
+		justify-content: space-between;
+		align-items: center;
+		background-color: ${({ isHomePage }) => isHomePage ? 'transparent' : '#FFFFFF'};
+		transition: background-color 0.5s ease; // 스크롤할 때 부드럽게 색 변화
+		backdrop-filter: ${({ isLoginModal, isCancleModal, isRecommend }) =>
 		isLoginModal || isCancleModal || isRecommend ? "none" : "blur(4px)"};
-  .nav-logo {
-    width: 93px;
-  }
+		.nav-logo {
+			width: 93px;
+			cursor: pointer;
+		}
+	}
+
+	#navbar.fixed {
+		background-color: #FFFFFF;
+	}
+`
+
+export const NavbarContainer = styled.div`
+	#navbar {
+		position: ${({ isHomePage }) => isHomePage ? 'fixed' : 'sticky'};
+		top: 0;
+		max-width: 1920px;width: 100%;
+		z-index: 999;
+		height: 64px;
+		display: flex;
+		padding: 0 calc((100% - 1440px) / 2);
+		justify-content: space-between;
+		align-items: center;
+		background-color: ${({ isHomePage }) => isHomePage ? 'transparent' : '#FFFFFF'};
+		transition: all ${theme.White} ease-in; // 스크롤링할 때 자연스럽게 색이 입혀지도록 애니메이션추가
+		backdrop-filter: ${({ isLoginModal, isCancleModal, isRecommend }) =>
+		isLoginModal || isCancleModal || isRecommend ? "none" : "blur(4px)"};
+		.nav-logo {
+			width: 93px;
+			cursor: pointer;
+		}
+	}
+  
 `;
 
 export const NavLink = styled.div`
@@ -54,14 +87,15 @@ export const NavButton = styled.button`
     display: none;
   }
 	border-radius: 12px;
+	// 그냥 아예 class를 추가하는 게 나을라나?
   &:hover {
-    background-color: ${theme.Gray10};
+    background-color: #F2F4F670;
   }
 `;
 
 export const NavLoginButton = styled(NavButton)`
-  background: ${theme.BrandLight};
-  color: ${theme.Brand};
+	background-color: ${({ isScrolled }) => isScrolled ? '#E5F4FF' : '#E5F4FF80'};
+	color: ${theme.Brand};
   padding: 10px 24px;
   display: block;
   border-radius: 5px;

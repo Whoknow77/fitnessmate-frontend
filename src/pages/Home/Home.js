@@ -3,16 +3,19 @@ import * as S from "./StyledHome";
 import HomeSecondImg1 from "../../assets/images/HomeSecondImg1.png";
 import { useNavigate } from "react-router-dom";
 import arrow from "../../assets/images/arrow.svg";
-import { useState } from "react";
+import { useState, useRef, useEffect, useCallback } from "react";
 import LoginModal from "../../components/Modal/LoginModal";
+import homebackground from "../../assets/images/main-background.png"
 import homebanner from "../../assets/images/homebanner.png";
-import thirdFirstImg from "../../assets/images/thirdFirstImg.svg"
+import thirdFirstImg from "../../assets/images/thirdFirstImg.png"
 import thirdSecondImg from "../../assets/images/thirdSecondImg.png"
 import thirdThirdImg from "../../assets/images/thirdThirdImg.png"
 import fourthFirstImg from "../../assets/images/fourthFirstImg.png"
 import fourthSecondImg from "../../assets/images/fourthSecondImg.png"
 import fourthThirdImg from "../../assets/images/fourthThirdImg.png"
 import { getAccessAPI } from "../../apis/API";
+import { useScrollFadeIn } from "../../hooks/useScrollFadeIn";
+
 export const Home = () => {
 	const navigate = useNavigate();
 
@@ -39,10 +42,25 @@ export const Home = () => {
 		}
 	};
 
+	// 스크롤 유도 아이콘 누르면 이동
+	const handleScrollToStart = () => {
+		const startElement = document.getElementById("start");
+		startElement.scrollIntoView({ behavior: 'smooth' });
+	};
+
+	// 스크롤 애니메이션 훅 가져오기
+	const animatedItem1 = useScrollFadeIn();
+	const animatedItem2 = useScrollFadeIn();
+	const animatedItem3 = useScrollFadeIn();
+	const animatedItem4 = useScrollFadeIn();
+	const animatedItem5 = useScrollFadeIn();
+
+
 	return (
 		<S.HomeContainer>
-			<S.HomeContent>
-				<section className="firstContent">
+			<section className="firstContent">
+				<img className="firstContentBack" src={homebackground} alt="홈 배경" />
+				<div className="firstArea">
 					<div className="firstCotntentItem">
 						<span className="firstTitle1">
 							AI 기반의
@@ -57,9 +75,12 @@ export const Home = () => {
 						</button>
 					</div>
 					<img className="homebanner" src={homebanner} alt="홈 배너" />
-				</section>
-			</S.HomeContent>
-			<S.HomeContent>
+				</div>
+				<div className="mouse" onClick={handleScrollToStart}>
+					<span></span>
+				</div>
+			</section>
+			<S.HomeContent id="start">
 				<section className="secondContent">
 					이제껏 경험하지 못했던
 					<br />
@@ -68,7 +89,7 @@ export const Home = () => {
 			</S.HomeContent>
 			<S.HomeContent>
 				<section className="thirdContent">
-					<div className="thirdHeader">
+					<div className="thirdHeader" ref={animatedItem1.ref} style={animatedItem1.style}>
 						<div className="thirdTitle">
 							<span className="thirdTitleText">
 								3단계면 끝나는
@@ -86,7 +107,7 @@ export const Home = () => {
 						</div>
 					</div>
 					<div className="thirdBody">
-						<div className="thirdFirstContent">
+						<div className="thirdFirstContent" ref={animatedItem2.ref} style={animatedItem2.style}>
 							<S.ThirdContentTitle>
 								<div className="thirdContentTitleNum">
 									1
@@ -97,7 +118,7 @@ export const Home = () => {
 							</S.ThirdContentTitle>
 							<img className="thirdFirstImg" src={thirdFirstImg} />
 						</div>
-						<div className="thirdSecondContent">
+						<div className="thirdSecondContent" ref={animatedItem3.ref} style={animatedItem3.style}>
 							<img src={thirdSecondImg} />
 							<S.ThirdContentTitle>
 								<div className="thirdContentTitleNum">
@@ -110,7 +131,7 @@ export const Home = () => {
 								</div>
 							</S.ThirdContentTitle>
 						</div>
-						<div className="thirdThirdContent">
+						<div className="thirdThirdContent" ref={animatedItem4.ref} style={animatedItem4.style}>
 							<S.ThirdContentTitle>
 								<div className="thirdContentTitleNum">
 									3
@@ -138,7 +159,7 @@ export const Home = () => {
 							이런 서비스도 있어요.
 						</span>
 					</div>
-					<div className="fourthBody">
+					<div className="fourthBody" ref={animatedItem5.ref} style={animatedItem5.style}>
 						<S.FourthBodyItem>
 							<div className="itemLogo">
 								<img src={fourthFirstImg} />

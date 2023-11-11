@@ -22,7 +22,7 @@ const SignupProfile = () => {
 		return (
 			Object.entries(isValidState)?.filter(([key, value]) => {
 				return value[1];
-			}).length >= 6
+			}).length >= 5
 		);
 	};
 
