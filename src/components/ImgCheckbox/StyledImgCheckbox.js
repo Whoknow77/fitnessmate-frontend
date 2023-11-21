@@ -23,24 +23,24 @@ export const ImgCheckboxWrapper = styled.button`
 
     .check-shape {
       fill: ${({ isSelected, theme }) =>
-        isSelected ? theme.White : theme.Black};
+		isSelected ? theme.White : theme.Black};
     }
 
     .choice-article {
       color: ${({ isSelected, theme }) =>
-        isSelected ? theme.Brand : theme.Black};
+		isSelected ? theme.Brand : theme.Black};
     }
 
     .choice-background {
       color: ${({ isSelected, theme }) =>
-        isSelected ? theme.Brand : theme.Black};
+		isSelected ? theme.Brand : theme.Black};
     }
   }
 
   .choice-article {
     transition: all 0.3s ease-out;
     color: ${({ isSelected, theme }) =>
-      isSelected ? theme.Brand : theme.Gray70};
+		isSelected ? theme.Brand : theme.Gray70};
     font-size: 22px;
     font-weight: 600;
   }
@@ -48,13 +48,13 @@ export const ImgCheckboxWrapper = styled.button`
   .check-background {
     transition: all 0.3s ease-out;
     fill: ${({ isSelected, theme }) =>
-      isSelected ? theme.Brand : theme.Gray10};
+		isSelected ? theme.Brand : theme.Gray10};
   }
 
   .check-shape {
     transition: all 0.3s ease-out;
     fill: ${({ isSelected, theme }) =>
-      isSelected ? theme.White : theme.Gray30};
+		isSelected ? theme.White : theme.Gray30};
   }
 
   .ImgCheckbox-top {

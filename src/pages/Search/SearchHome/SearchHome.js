@@ -4,12 +4,13 @@ import { useEffect, useState, useRef } from "react";
 import OutSideClick from "../../../components/Navbar/OutSideClick";
 import { FitnessType, SupplementType } from "../../../components";
 import { userWorkoutBatchAPI, userSupplementSearchAPI, userSupplementSingleAPI } from "../../../apis/API";
-import plusCircle from "../../../assets/images/plus-circle.svg"
-import plusSimbol from "../../../assets/images/plus-sm.svg"
-import FilterClose from "../../../assets/images/x-close.svg"
+import closeSimbol from "../../../assets/images/close-simbol.svg"
+import FilterMore from "../../../assets/images/expand_more.svg"
 import SearchBar from "../../../components/SearchBar/SearchBar";
 import rightarrow from "../../../assets/images/rightarrow.svg";
 import leftarrow from "../../../assets/images/leftarrow.svg";
+import check from "../../../assets/images/check_circle_fill.svg"
+import noneCheck from "../../../assets/images/check_circle.svg"
 import { useNavigate, useParams } from "react-router-dom";
 import NoSearch from "../../../components/NoSearch/NoSearch";
 
@@ -23,11 +24,11 @@ const SearchHome = () => {
 
 	const labels = {
 		left: {
-			title: "운동 검색",
+			title: "운동",
 			value: "workout",
 		},
 		right: {
-			title: "보조제 검색",
+			title: "보조제",
 			value: "supplement",
 		},
 	};
@@ -42,9 +43,9 @@ const SearchHome = () => {
 	const handleClose = () => {
 		setIsSearchSupFilterModal(false);
 		setIsSearchFitFilterModal(false);
+		setIsClicked(false);
 	};
 	OutSideClick(modalRef, handleClose);
-
 
 
 
@@ -154,7 +155,11 @@ const SearchHome = () => {
 		setSearchFilterValue(updatedObject);
 	};
 
-	// 부위 선택 토글
+	// 부위 토글 선택 여부
+	const [isClicked, setIsClicked] = useState(false);
+
+	// 부위 선택 없을 때 모달 공간
+	const [isSelected, setIsSelected] = useState(false);
 
 	// 보조제 종류 데이터
 	const [bodyparts, setBodyparts] = useState({
@@ -291,8 +296,11 @@ const SearchHome = () => {
 		}
 	};
 
-
-
+	// useEffect를 사용하여 isSelected 상태 업데이트
+	// 0일 때만 문구 보이도록
+	useEffect(() => {
+		setIsSelected(selectedFitFilterKeys.length === 0);
+	}, [selectedFitFilterKeys]);
 
 
 	useEffect(() => {
@@ -349,13 +357,13 @@ const SearchHome = () => {
 													onClick={() => handleAddFilter(key)} // 클릭 이벤트 추가
 												>
 													{key}
-													<img src={FilterClose} alt="보조제 검색 필터" />
+													<img src={FilterMore} alt="보조제 검색 필터" />
 												</button>
 											);
 										})}
 									</div>
 									<img
-										src={plusCircle}
+										src={FilterMore}
 										alt="보조제 검색 필터 토글 버튼"
 										className={`searchBarFilterToggleBtn ${isSearchSupFilterModal ? 'rotate-right' : 'rotate-left'}`}
 										onClick={() => {
@@ -379,7 +387,7 @@ const SearchHome = () => {
 												>
 													{key}
 													<img
-														src={plusSimbol}
+														src={FilterMore}
 														alt="보조제 검색 필터 모달 버튼"
 													/>
 												</button>
@@ -441,62 +449,216 @@ const SearchHome = () => {
 					{/* 운동 검색창 */}
 					<div className="searchBarWrapper">
 						<SearchBar handleSearch={handleSearch} name="workout" />
-						<S.Filter>
+						<S.Filter isClicked={isClicked}>
 							<div ref={modalRef}>
-								<div className="searchBarFilter">
-									<span className="searchBarFilterText">운동부위</span>
-									<div className="addFilter">
-										{Object.entries(bodyparts).map(([key, _], index) => {
-											const bodypartName = bodyparts[key][1];
-											const isActive = activeFitFilters.includes(bodypartName);
-											const isButtonVisible = selectedFitFilterKeys.includes(key); // 해당 버튼이 선택된 경우만 flex로 표시
+								<div
+									className="searchBarFilter"
+									isClicked={isClicked}
+									onClick={() => {
+										setIsSearchFitFilterModal(!isSearchFitFilterModal);
+										setIsClicked(!isClicked);
+									}}
+									onBlur={() => {
+										setIsClicked(false);
+									}}
+								>
+									<span className="searchBarFilterText">
+										운동 부위
+										{
+											isSelected ? (
+												<></>
+											) : (
+												<> :</>
+											)}
+									</span>
+									<div className="addFilter" isClicked={isClicked}>
+										{
+											Object.entries(bodyparts).map(([key, _], index, array) => {
+												const bodypartName = bodyparts[key][1];
+												const isActive = activeFitFilters.includes(bodypartName);
+												const isButtonVisible = selectedFitFilterKeys.includes(key);
 
-											return (
-												<button
-													key={key}
-													isSelected={isActive}
-													elementidx={index}
-													className={`searchFilterContent ${isActive ? 'active' : ''}`}
-													style={{ display: isButtonVisible ? 'flex' : 'none' }}
-													onClick={() => handleAddFitFilter(key)} // 클릭 이벤트 추가
-												>
-													{key}
-													<img src={FilterClose} alt="운동 검색 필터" />
-												</button>
-											);
-										})}
+												// 필터 버튼 엘리먼트를 생성
+												const filterButton = (
+													<p
+														isClicked={isClicked}
+														key={key}
+														isSelected={isActive}
+														elementidx={index}
+														className={`searchFilterContent ${isActive ? 'active' : ''}`}
+														style={{ display: isButtonVisible ? 'flex' : 'none' }}
+													>
+														{key}
+													</p>
+												);
+
+												// 마지막 엘리먼트가 아니고 현재 엘리먼트가 표시되는 경우에만 쉼표 엘리먼트를 생성
+												const comma = isButtonVisible && index < array.length - 1 && array.slice(index + 1).some(([nextKey]) => selectedFitFilterKeys.includes(nextKey)) ? (
+													<span isClicked={isClicked} key={`comma-${index}`} className="searchFilterContent">, </span>
+												) : null;
+
+												// 필터 버튼과 쉼표를 반환
+												return [filterButton, comma];
+											}).flat() // 배열을 평탄화하여 React 컴포넌트 배열로 만듦
+										}
 									</div>
-									<img
-										src={plusCircle}
+									<svg
 										alt="운동 검색 필터 토글 버튼"
 										className={`searchBarFilterToggleBtn ${isSearchFitFilterModal ? 'rotate-right' : 'rotate-left'}`}
-										onClick={() => {
-											setIsSearchFitFilterModal(!isSearchFitFilterModal);
-										}}
-									/>
+										width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+										<mask id="mask0_5583_6922" maskUnits="userSpaceOnUse" x="0" y="0" width="24" height="24">
+											<rect width="24" height="24" fill="#D9D9D9" />
+										</mask>
+										<g mask="url(#mask0_5583_6922)">
+											<path d="M11.9998 14.9499C11.8665 14.9499 11.7415 14.9291 11.6248 14.8874C11.5081 14.8457 11.3998 14.7749 11.2998 14.6749L6.6998 10.0749C6.51647 9.89157 6.4248 9.65824 6.4248 9.3749C6.4248 9.09157 6.51647 8.85824 6.6998 8.6749C6.88314 8.49157 7.11647 8.3999 7.3998 8.3999C7.68314 8.3999 7.91647 8.49157 8.0998 8.6749L11.9998 12.5749L15.8998 8.6749C16.0831 8.49157 16.3165 8.3999 16.5998 8.3999C16.8831 8.3999 17.1165 8.49157 17.2998 8.6749C17.4831 8.85824 17.5748 9.09157 17.5748 9.3749C17.5748 9.65824 17.4831 9.89157 17.2998 10.0749L12.6998 14.6749C12.5998 14.7749 12.4915 14.8457 12.3748 14.8874C12.2581 14.9291 12.1331 14.9499 11.9998 14.9499Z" fill="#6B7684" />
+										</g>
+									</svg>
 								</div>
 								{isSearchFitFilterModal && (
 									<div className="searchFilterModalWrapper fitness">
-										{Object.entries(bodyparts).map(([key, _], index) => {
-											const bodypartName = bodyparts[key][1];
-											const isActive = activeFitFilters.includes(bodypartName);
+										<div className="selectOptionArea">
+											<span className="selectOptionTitle">검색할 부위</span>
+											<div className="selectOption">
+												{isSelected ? (
+													<p>어떤 부위의 운동이 궁금하세요?</p>
+												) : (
+													<>
+														{Object.entries(bodyparts).map(([key, _], index) => {
+															const bodypartName = bodyparts[key][1];
+															const isActive = activeFitFilters.includes(bodypartName);
+															const isButtonVisible = selectedFitFilterKeys.includes(key); // 해당 버튼이 선택된 경우만 flex로 표시
 
-											return (
-												<button
-													key={key}
-													isSelected={isActive}
-													elementidx={index}
-													className={`searchFilterModalContent ${isActive ? 'active' : ''}`}
-													onClick={() => handleAddFitFilter(key)}
-												>
-													{key}
-													<img
-														src={plusSimbol}
-														alt="운동 검색 필터 모달 버튼"
-													/>
-												</button>
-											);
-										})}
+															return (
+																<button
+																	key={key}
+																	isSelected={isActive}
+																	elementidx={index}
+																	className={`searchFilterContent ${isActive ? 'active' : ''}`}
+																	style={{ display: isButtonVisible ? 'flex' : 'none' }}
+																	onClick={() => handleAddFitFilter(key)} // 클릭 이벤트 추가
+																>
+																	{key}
+																	<img src={closeSimbol} alt="부위 삭제" />
+																</button>
+															);
+														})}
+														{/* <div className="deleteAll">안녕</div> */}
+													</>
+												)}
+											</div>
+										</div>
+										<div className="bodypartsOption">
+											<div id="upperbody" className="body">
+												<span className="bodyTitle">상체</span>
+												<div className="bodyOption">
+													<button
+														className={`searchFilterModalContent ${activeFitFilters.includes("가슴") ? 'active' : ''}`}
+														onClick={() => handleAddFitFilter("가슴")}
+													>
+														<div className="checkSimbol">
+															<img className="bodypartCheck" src={check} alt="가슴 부위 선택" />
+															<img className="bodypartNoneCheck" src={noneCheck} alt="가슴 부위" />
+														</div>
+														가슴
+													</button>
+													<button
+														className={`searchFilterModalContent ${activeFitFilters.includes("어깨") ? 'active' : ''}`}
+														onClick={() => handleAddFitFilter("어깨")}
+													>
+														<div className="checkSimbol">
+															<img className="bodypartCheck" src={check} alt="어깨 부위 선택" />
+															<img className="bodypartNoneCheck" src={noneCheck} alt="어깨 부위" />
+														</div>
+														어깨
+													</button>
+													<button
+														className={`searchFilterModalContent ${activeFitFilters.includes("등") ? 'active' : ''}`}
+														onClick={() => handleAddFitFilter("등")}
+													>
+														<div className="checkSimbol">
+															<img className="bodypartCheck" src={check} alt="등 부위 선택" />
+															<img className="bodypartNoneCheck" src={noneCheck} alt="등 부위" />
+														</div>
+														등
+													</button>
+													<button
+														className={`searchFilterModalContent ${activeFitFilters.includes("이두") ? 'active' : ''}`}
+														onClick={() => handleAddFitFilter("이두")}
+													>
+														<div className="checkSimbol">
+															<img className="bodypartCheck" src={check} alt="이두 부위 선택" />
+															<img className="bodypartNoneCheck" src={noneCheck} alt="이두 부위" />
+														</div>
+														이두
+													</button>
+													<button
+														className={`searchFilterModalContent ${activeFitFilters.includes("등") ? 'active' : ''}`}
+														onClick={() => handleAddFitFilter("삼두")}
+													>
+														<div className="checkSimbol">
+															<img className="bodypartCheck" src={check} alt="삼두 부위 선택" />
+															<img className="bodypartNoneCheck" src={noneCheck} alt="삼두 부위" />
+														</div>
+														삼두
+													</button>
+													<button
+														className={`searchFilterModalContent ${activeFitFilters.includes("복부") ? 'active' : ''}`}
+														onClick={() => handleAddFitFilter("복부")}
+													>
+														<div className="checkSimbol">
+															<img className="bodypartCheck" src={check} alt="복부 부위 선택" />
+															<img className="bodypartNoneCheck" src={noneCheck} alt="복부 부위" />
+														</div>
+														복부
+													</button>
+												</div>
+											</div>
+											<div id="lowerbody" className="body">
+												<span className="bodyTitle">하체</span>
+												<div className="bodyOption">
+													<button
+														className={`searchFilterModalContent ${activeFitFilters.includes("엉덩이") ? 'active' : ''}`}
+														onClick={() => handleAddFitFilter("엉덩이")}
+													>
+														<div className="checkSimbol">
+															<img className="bodypartCheck" src={check} alt="엉덩이 부위 선택" />
+															<img className="bodypartNoneCheck" src={noneCheck} alt="엉덩이 부위" />
+														</div>
+														엉덩이
+													</button>
+													<button
+														className={`searchFilterModalContent ${activeFitFilters.includes("종아리") ? 'active' : ''}`}
+														onClick={() => handleAddFitFilter("종아리")}
+													>
+														<div className="checkSimbol">
+															<img className="bodypartCheck" src={check} alt="종아리 부위 선택" />
+															<img className="bodypartNoneCheck" src={noneCheck} alt="종아리 부위" />
+														</div>
+														종아리
+													</button>
+													<button
+														className={`searchFilterModalContent ${activeFitFilters.includes("허벅지앞") ? 'active' : ''}`}
+														onClick={() => handleAddFitFilter("허벅지앞")}
+													>
+														<div className="checkSimbol">
+															<img className="bodypartCheck" src={check} alt="허벅지앞 부위 선택" />
+															<img className="bodypartNoneCheck" src={noneCheck} alt="허벅지앞 부위" />
+														</div>
+														허벅지 앞
+													</button>
+													<button
+														className={`searchFilterModalContent ${activeFitFilters.includes("허벅지뒤") ? 'active' : ''}`}
+														onClick={() => handleAddFitFilter("허벅지뒤")}
+													>
+														<div className="checkSimbol">
+															<img className="bodypartCheck" src={check} alt="허벅지뒤 부위 선택" />
+															<img className="bodypartNoneCheck" src={noneCheck} alt="허벅지뒤 부위" />
+														</div>
+														허벅지 뒤
+													</button>
+												</div>
+											</div>
+										</div>
 									</div>
 								)}
 							</div>
@@ -504,44 +666,46 @@ const SearchHome = () => {
 					</div >
 
 					{/* 운동 내용 */}
-					{nosearch ? (
-						<NoSearch />
-					) : (
-						<>
-							<section className="searchContentWrapper" onChange={onChange}>
-								{machineList.map((machine, idx) => {
-									return (
-										// 부위 map으로 처리해야함
-										<FitnessType
-											key={idx}
-											parts={machine.bodyPartKoreanName}
-											description={machine.description}
-											imgPath={machine.imgPath}
-											onClick={() => handleFitnessTypeClick(machine.id)}
-										>
-											{machine.koreanName}
-										</FitnessType>
-									);
-								})}
-								<section className="serachButtonWrapper">
-									<button className="BtnWrapper">
-										<img src={leftarrow} alt="이전 버튼" className="backBtnImg" />
-										<span className="backBtnText" onClick={handleBackPage}>
-											이전
-										</span>
-									</button>
-									<button className="BtnWrapper">
-										<span className="nextBtnText" onClick={handleNextPage}>
-											다음
-										</span>
-										<img src={rightarrow} alt="다음 버튼" className="nextBtnImg" />
-									</button>
+					{
+						nosearch ? (
+							<NoSearch />
+						) : (
+							<>
+								<section className="searchContentWrapper" onChange={onChange}>
+									{machineList.map((machine, idx) => {
+										return (
+											// 부위 map으로 처리해야함
+											<FitnessType
+												key={idx}
+												parts={machine.bodyPartKoreanName}
+												description={machine.description}
+												imgPath={machine.imgPath}
+												onClick={() => handleFitnessTypeClick(machine.id)}
+											>
+												{machine.koreanName}
+											</FitnessType>
+										);
+									})}
+									<section className="serachButtonWrapper">
+										<button className="BtnWrapper">
+											<img src={leftarrow} alt="이전 버튼" className="backBtnImg" />
+											<span className="backBtnText" onClick={handleBackPage}>
+												이전
+											</span>
+										</button>
+										<button className="BtnWrapper">
+											<span className="nextBtnText" onClick={handleNextPage}>
+												다음
+											</span>
+											<img src={rightarrow} alt="다음 버튼" className="nextBtnImg" />
+										</button>
+									</section>
 								</section>
-							</section>
-						</>
-					)}
+							</>
+						)
+					}
 
-				</S.SectionContainer>
+				</S.SectionContainer >
 
 			)}
 

@@ -32,29 +32,6 @@ export const NavSection = styled.div`
 	}
 `
 
-export const NavbarContainer = styled.div`
-	#navbar {
-		position: ${({ isHomePage }) => isHomePage ? 'fixed' : 'sticky'};
-		top: 0;
-		max-width: 1920px;width: 100%;
-		z-index: 999;
-		height: 64px;
-		display: flex;
-		padding: 0 calc((100% - 1440px) / 2);
-		justify-content: space-between;
-		align-items: center;
-		background-color: ${({ isHomePage }) => isHomePage ? 'transparent' : '#FFFFFF'};
-		transition: all ${theme.White} ease-in; // 스크롤링할 때 자연스럽게 색이 입혀지도록 애니메이션추가
-		backdrop-filter: ${({ isLoginModal, isCancleModal, isRecommend }) =>
-		isLoginModal || isCancleModal || isRecommend ? "none" : "blur(4px)"};
-		.nav-logo {
-			width: 93px;
-			cursor: pointer;
-		}
-	}
-  
-`;
-
 export const NavLink = styled.div`
   display: flex;
   gap: 24px;

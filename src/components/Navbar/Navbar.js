@@ -16,8 +16,10 @@ const Navbar = () => {
 	const [isCancleModal, setIsCancleModal] = useState(false);
 	const [isRecommend, setIsRecommend] = useState(false);
 
+	// home에서만 nav 스크롤 애니메이션 제어
 	const isHomePage = window.location.pathname === '/';
 
+	// 스크롤 애니메이션
 	const [isScrolled, setIsScrolled] = useState(false);
 
 	useEffect(() => {
@@ -40,6 +42,7 @@ const Navbar = () => {
 		};
 	},);
 
+	
 	const handleSearch = () => {
 		if (window.location.href.includes("signup")) {
 			setIsCancleModal(true);

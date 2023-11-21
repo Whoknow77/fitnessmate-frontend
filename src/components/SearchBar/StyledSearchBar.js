@@ -2,31 +2,43 @@ import styled from "styled-components";
 import theme from "../../styles/theme";
 
 export const SearchContainer = styled.div`
-  width: 100%;
+	width: 633px;
   height: 56px;
-  padding: 14px;
+  padding: 18px 20px;
+	margin: 0 auto;
+	background: ${({ theme }) => theme.Gray20};
   border-radius: 10px;
-  border: 1px solid
-    ${({ theme, isClicked }) => (isClicked ? theme.Gray10 : theme.Gray70)};
+  border: 2px solid
+    ${({ theme, isClicked }) => (isClicked ? theme.Brand : '#ecf0f3')};
   display: flex;
-  gap: 14px;
   align-items: center;
-  box-shadow: ${({ isClicked }) =>
-    isClicked ? "2px 2px 9px 0px rgba(0,0,0,0.1)" : "none"};
 
-  .searchIcon {
-    width: 24px;
-    height: 24px;
-  }
+	.iconArea {
+		display: flex;
+		gap: 18px;
+		
+		.searchIcon {
+			width: 24px;
+			height: 24px;
+			cursor: pointer;
+		}
+
+		.closeIcon {
+			width: 24px;
+			height: 24px;
+			cursor: pointer;
+		}
+	}
 `;
 
 export const SearchInputContent = styled.input`
   &::-webkit-input-placeholder {
-    color: ${theme.Gray50};
+    color: ${theme.Gray40};
   }
   border: none;
   width: 100%;
-  color: ${({ theme }) => theme.Gray50};
+  color: ${theme.Black};
   font-size: 18px;
   font-weight: 500;
+	letter-spacing: -0.36px;
 `;

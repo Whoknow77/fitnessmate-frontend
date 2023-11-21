@@ -4,7 +4,7 @@ import theme from "../../../styles/theme";
 export const SearchContainer = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 26px;
+  gap: 10px;
   width: 100%;
   .searchTopWrapper {
     max-width: 812px;
@@ -18,7 +18,6 @@ export const SearchContainer = styled.div`
       flex-direction: column;
       gap: 24px;
       padding: 20px 0;
-      border-bottom: 1px solid ${theme.Gray20};
       .searchTitleTextWrapper {
         display: flex;
         flex-direction: column;
@@ -41,6 +40,11 @@ export const SearchContainer = styled.div`
   }
 
   .searchContentWrapper {
+		display: flex;
+		max-width: 1032px;
+		margin: 0 auto;
+		flex-wrap: wrap;
+    gap: 48px;
     text-align: left;
     @media screen and (max-width: 825px) {
       text-align: center;
@@ -49,6 +53,7 @@ export const SearchContainer = styled.div`
 
   .serachButtonWrapper {
 		margin-top: 100px;
+		margin: 0 auto;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -57,7 +62,7 @@ export const SearchContainer = styled.div`
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: 10px;
+      gap: 48px;
       padding: 10px;
       .backBtnText {
         color: ${theme.BrandNon};
@@ -99,8 +104,8 @@ export const SectionContainer = styled.div`
 	.searchBarWrapper {
 		display: flex;
 		flex-direction: column;
-    gap: 8px;
-		max-width: 812px;
+    gap: 46px;
+		max-width: 1032px;
 		width: 90%;
 		margin: 0 auto;
 	}
@@ -113,36 +118,57 @@ export const Filter = styled.div`
 	position: relative;
 
 	.searchBarFilter {
-			gap: 12px;
       display: flex;
+			gap: 4px;
 			max-width: 100%;
 			min-height: 50px;
-      padding: 10px 12px;
+      padding: 10px;
       justify-content: center;
       align-items: center;
-      border-radius: 10px;
-			background: ${theme.Gray10};
+      border-radius: 8px;
+			border: 1px solid 
+				${({ theme, isClicked }) => (isClicked ? theme.Brand : theme.Gray30)};
+			background: ${theme.Gray20};
+			cursor: pointer;
 
       .searchBarFilterText {
-        color: ${theme.Gray80};
+        color: ${({ theme, isClicked }) => (isClicked ? theme.Brand : theme.Black)};
         text-align: center;
         font-size: 18px;
 				font-weight: 500;
-				min-width: 63px;
+				letter-spacing: -0.36px;
+				user-select: none; // 요소가 드래그 되는 걸 방지
       }
 
-			img {
+			.searchBarFilterToggleBtn {
 				cursor: pointer;
 				z-index: 800;
+				user-select: none; // 요소가 드래그 되는 걸 방지
 			}
 
+			.searchBarFilterToggleBtn g path {
+				fill: ${({ theme, isClicked }) => (isClicked ? '#0B98FF' : '#6B7684')};
+			}
+
+			// 돌아가는 경우
+			// .rotate-right {
+			// 	transform: rotate(180deg);
+			// 	transition: transform 0.1s ease;
+			// }
+
+			// .rotate-left {
+			// 	transform: rotate(-0deg);
+			// 	transition: transform 0.1s ease;
+			// }
+
+			// 뒤집히는 경우
 			.rotate-right {
-				transform: rotate(45deg);
+				transform: scaleY(-1);
 				transition: transform 0.1s ease;
 			}
 
 			.rotate-left {
-				transform: rotate(-0deg);
+				transform: scaleY(1);
 				transition: transform 0.1s ease;
 			}
 
@@ -151,14 +177,10 @@ export const Filter = styled.div`
 				flex-wrap: wrap;
 				gap: 4px;
 
-				button {
-					display: flex;
-					gap: 4px;
-					align-items: center;
-					padding: 4px 8px;
+				.searchFilterContent {
 					border-radius: 4px;
 					background: ${theme.Gray20};
-					color: ${theme.Gray80};
+					color: ${({ theme, isClicked }) => (isClicked ? theme.Brand : theme.Gray80)};
 					font-size: 18px;
 					font-weight: 500;
 				}
@@ -167,23 +189,91 @@ export const Filter = styled.div`
 
 	.searchFilterModalWrapper {
 		position: absolute;
-		bottom: -118px;
+		top: 55px;
+		height: fit-content;
 		display: flex;
-		flex-wrap: wrap;
-		width: 247px;
-    height: 108px;
-		padding: 19px 18px;
+		flex-direction: column;
+		padding: 20px;
 		gap: 12px;
-		border-radius: 10px;
+		border-radius: 12px;
 		border: 1px solid ${theme.Gray20};
 		background: ${theme.White};
-		box-shadow: 0px 1px 5px 0px rgba(0, 0, 0, 0.25);
+		box-shadow: 0px 3px 11.6px #00000033;
 		z-index: 900;
+
+		.selectOptionArea {
+			display: flex;
+			flex-direction: column;
+			gap: 4px;
+
+			.selectOptionTitle {
+				font-weight: 500;
+				color: ${theme.Gray50};
+				font-size: 14px;
+				letter-spacing: -0.28px;
+			}
+
+			.selectOption {
+				display: flex;
+				flex-wrap: wrap;
+				gap: 5px;
+				padding: 12px;
+				background-color: ${theme.Gray10};
+				border-radius: 10px;
+				border: 1px solid ${theme.Gray20};
+
+				p {
+					font-weight: 600;
+					color: ${theme.Gray40};
+					font-size: 16px;
+					letter-spacing: -0.32px;
+					line-height: 24px;
+				}
+
+				button {
+					display: flex;
+					gap: 8px;
+					align-items: center;
+					padding: 4px 8px;
+					border-radius: 4px;
+					background: ${theme.BrandLight};
+					color: ${theme.Brand};
+					font-size: 16px;
+					font-weight: 500;
+				}
+			}
+		}
+		
+		.bodypartsOption {
+			display: flex;
+			gap: 55px;
+
+			#opperbody {
+				padding-left: 4px;
+			}
+
+			.body {
+				display: flex;
+				flex-direction: column;
+				gap: 8px;
+
+				.bodyTitle {
+					font-weight: 500;
+					color: ${theme.Gray50};
+					font-size: 14px;
+				}
+
+				.bodyOption {
+					display: flex;
+					flex-direction: column;
+					gap: 8px;
+				}
+			}
+		}
 	}
 	.searchFilterModalWrapper.fitness {
-		width: 342px;
-    height: 190px;
-		bottom: -200px;
+		width: 316px;
+		bottom: -340px;
 	}
 	}
 
@@ -191,27 +281,32 @@ export const Filter = styled.div`
 		display: flex;
 		align-items: center;
 		gap: 8px;
-		color: ${theme.Gray80};
-		border: 1px solid ${theme.Gray30};
-		background: ${theme.Gray10};
-		border-radius: 4px;
+		color: ${theme.Gray70};
 		font-size: 18px;
 		font-weight: 500;
-		padding: 4px 8px;
-		margin-top: -1px;
+		padding: 0px;
+	}
 
-		&:hover {
-			opacity: 0.8;
+	.searchFilterModalContent .checkSimbol {
+		.bodypartCheck {
+			display: none;
 		}
-		
-	}
-	.searchFilterModalContent.active {
-		background: ${theme.Gray20};
-		color: ${theme.Gray30};
+		.bodypartNoneCheck {
+			display: flex;
+		}
 	}
 
-	.searchFilterModalContent.active img {
-		opacity: 0.3;
+	.searchFilterModalContent.active {
+		color: ${theme.Brand};
+	}
+
+	.searchFilterModalContent.active .checkSimbol {
+		.bodypartCheck {
+			display: flex;
+		}
+		.bodypartNoneCheck {
+			display: none;
+		}
 	}
 
 `

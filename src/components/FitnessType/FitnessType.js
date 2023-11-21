@@ -6,15 +6,15 @@ const FitnessType = ({ children, parts, description, imgPath, onClick }) => {
 	// part : 부위
 	return (
 		<CardContainer onClick={onClick}>
-			<ul className="fitnessPartContainer">
-				{parts.map((part, index) => {
-					return <div className="fitnessPart">{part}</div>;
-				})}
-			</ul>
 			<img src={imgPath} className="fitnessImg" alt="운동종류 이미지"></img>
 			<div className="fitnessInfo">
 				<span className="fitnessTitle">{children}</span>
-				<span className="fitnessExplain">{description}</span>
+				<ul className="fitnessPartContainer">
+					{parts.map((part, index) => {
+						return <div className="fitnessPart">{part}</div>;
+					})}
+				</ul>
+				{/* <span className="fitnessExplain">{description}</span> */}
 			</div>
 		</CardContainer>
 	);
