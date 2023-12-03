@@ -3,28 +3,32 @@ import { CardContainer } from "./StyledSupplementType";
 // 보조제 Card
 const SupplementType = ({ children, flavor, source, imageURL, price, description, onClick }) => {
 
-  function formatNumberToCurrency(number) {
-    return number.toLocaleString('en-US');
-  }
+	function formatNumberToCurrency(number) {
+		return number.toLocaleString('en-US');
+	}
 
-  const formattedPrice = formatNumberToCurrency(price);
+	const formattedPrice = formatNumberToCurrency(price);
 
-  return (
-    <CardContainer onClick={onClick}>
-      <ul className="supplementPartContainer">
-        <div className="supplementFlavor">{flavor}</div>
-				{source && (
-					<div className="supplementSource">{source}</div>
-				)}
-      </ul>
-      <img src={imageURL} className="supplementImg" alt="보조제 이미지"/>
-      <div className="supplementInfo">
-        <span className="supplementTitle">{children}</span>
-        <span className="supplementExplain">{description}</span>
-				<span className="supplementPrice" onChange={formatNumberToCurrency}>{formattedPrice}원</span>
-      </div>
-    </CardContainer>
-  );
+	return (
+		<CardContainer onClick={onClick}>
+			<div className="imageArea">
+				<img src={imageURL} className="supplementImg" alt="보조제 이미지" />
+			</div>
+			<div className="supplementInfo">
+				<span className="supplementTitle">{children}</span>
+				<ul className="supplementPartContainer">
+					{source && (
+						<div className="supplementSource">{source}</div>
+					)}
+					<div className="supplementFlavor">{flavor}</div>
+				</ul>
+				<div className="supplementPrice">
+					<span onChange={formatNumberToCurrency}>{formattedPrice}</span>
+					<p>원</p>
+				</div>
+			</div>
+		</CardContainer>
+	);
 };
 
 export default SupplementType;

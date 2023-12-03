@@ -24,7 +24,7 @@ const Navbar = () => {
 
 	useEffect(() => {
 		const handleScroll = () => {
-			if (window.scrollY > 64) {
+			if (window.scrollY > 70) {
 				setIsScrolled(true);
 				console.log(isScrolled);
 				console.log(window.scrollY);
@@ -42,7 +42,7 @@ const Navbar = () => {
 		};
 	},);
 
-	
+
 	const handleSearch = () => {
 		if (window.location.href.includes("signup")) {
 			setIsCancleModal(true);

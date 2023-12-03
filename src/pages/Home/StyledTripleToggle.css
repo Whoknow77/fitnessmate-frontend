@@ -1,0 +1,222 @@
+input[type="radio"] {
+  display: none;
+}
+
+#label {
+  color: #30343a;
+  z-index: 10;
+  cursor: pointer;
+  font-family: "Pretendard";
+  font-weight: 600;
+  font-size: 20px;
+  letter-spacing: -0.4px;
+  line-height: 30px;
+}
+
+.title {
+  margin: 0;
+  font-weight: 600;
+  font-family: "Pretendard";
+  font-size: 20px;
+  letter-spacing: -0.4px;
+  line-height: 30px;
+}
+
+#label .title {
+  font-size: 20px;
+}
+
+.white-font {
+  color: #e1e4ea !important;
+}
+
+.main {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 344px;
+  height: 64px;
+  border-radius: 100px;
+  background-color: #e1e4ea;
+  padding: 6px;
+}
+
+.switch-label {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 52px;
+  width: 113px;
+  background-color: #30343a;
+  border-radius: 100px;
+  position: absolute;
+  transition: ease-in;
+}
+
+/*---------------- LEFT ------------------- */
+.switch-label.left-to-center {
+  animation-name: leftToCenter;
+  animation-duration: 0.5s;
+}
+
+.switch-label.left-to-right {
+  animation-name: leftToRight;
+  animation-duration: 0.5s;
+}
+
+.switch-label.left-position {
+  left: 5px;
+}
+
+.left-title {
+  position: absolute;
+  left: 15px;
+}
+
+#left + label {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 50px;
+  width: 113px;
+  border-radius: 100px;
+}
+
+#left:checked + label {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 50px;
+  width: 113px;
+  border-radius: 100px;
+}
+
+@keyframes leftToCenter {
+  from {
+    left: 5px;
+  }
+  to {
+    left: 115px;
+  }
+}
+
+@keyframes leftToRight {
+  from {
+    left: 5px;
+  }
+  to {
+    left: 225px;
+  }
+}
+
+/* -------------------- center ------------------ */
+.switch-label.center-to-left {
+  animation-name: centerToLeft;
+  animation-duration: 0.5s;
+}
+
+.switch-label.center-to-right {
+  animation-name: centerToRight;
+  animation-duration: 0.5s;
+}
+
+.switch-label.center-position {
+  left: 115px;
+}
+
+.center-label {
+  position: absolute;
+  left: 115px;
+}
+
+#center + label {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 50px;
+  width: 113px;
+  border-radius: 100px;
+}
+
+#center:checked + label {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 50px;
+  width: 113px;
+  border-radius: 100px;
+}
+
+@keyframes centerToLeft {
+  from {
+    left: 115px;
+  }
+  to {
+    left: 5px;
+  }
+}
+
+@keyframes centerToRight {
+  from {
+    left: 115px;
+  }
+  to {
+    right: 1px;
+  }
+}
+
+/* ------------------- RIGHT ------------------- */
+.switch-label.right-to-left {
+  animation-name: rightToLeft;
+  animation-duration: 0.5s;
+}
+
+.switch-label.right-to-center {
+  animation-name: rightToCenter;
+  animation-duration: 0.5s;
+}
+
+.switch-label.right-position {
+  left: 225px;
+}
+
+.right-title {
+  position: absolute;
+  right: 15px;
+}
+
+#right + label {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 50px;
+  width: 113px;
+  border-radius: 100px;
+}
+
+#right:checked + label {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 50px;
+  width: 113px;
+  border-radius: 100px;
+}
+
+@keyframes rightToLeft {
+  from {
+    left: 225px;
+  }
+  to {
+    left: 5px;
+  }
+}
+
+@keyframes rightToCenter {
+  from {
+    left: 225px;
+  }
+  to {
+    right: 115px;
+  }
+}

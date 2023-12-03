@@ -6,7 +6,7 @@ const FitnessType = ({ children, parts, description, imgPath, onClick }) => {
 	// part : 부위
 	return (
 		<CardContainer onClick={onClick}>
-			<img src={imgPath} className="fitnessImg" alt="운동종류 이미지"></img>
+			<img src={imgPath} className="fitnessImg" alt="운동종류 이미지" />
 			<div className="fitnessInfo">
 				<span className="fitnessTitle">{children}</span>
 				<ul className="fitnessPartContainer">
@@ -14,7 +14,6 @@ const FitnessType = ({ children, parts, description, imgPath, onClick }) => {
 						return <div className="fitnessPart">{part}</div>;
 					})}
 				</ul>
-				{/* <span className="fitnessExplain">{description}</span> */}
 			</div>
 		</CardContainer>
 	);

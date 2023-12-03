@@ -1,7 +1,7 @@
 // 내 운동 페이지
 
 import * as S from "./StyledMypageHome";
-import "./style.css";
+import "./myToggle.css";
 import { useState, useEffect } from "react";
 import WorkoutAddModal from "./Modal/workoutAddModal";
 import FixModal from "./Modal/FixModal";

@@ -2,10 +2,8 @@ import styled from "styled-components";
 export const CardContainer = styled.div`
   display: inline-block;
   width: 312px;
-	height: 403px;
   text-align: center;
   position: relative;
-	border-radius: 12px;
 	cursor: pointer;
 
   @media screen and (max-width: 1400px) {
@@ -24,10 +22,10 @@ export const CardContainer = styled.div`
 		border: 1px solid ${({ theme }) => theme.Gray20};
     border-radius: 12px;
     width: 100%;
+		height: 250px;
   }
 
   .fitnessInfo {
-    height: 145px;
     padding: 24px 8px;
     display: flex;
     flex-direction: column;
@@ -39,7 +37,6 @@ export const CardContainer = styled.div`
       font-size: 24px;
       font-weight: 600;
       letter-spacing: -0.48px;
-			height: 58px;
     }
 
 		.fitnessPartContainer {

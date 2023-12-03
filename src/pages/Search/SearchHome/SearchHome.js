@@ -592,7 +592,7 @@ const SearchHome = () => {
 														이두
 													</button>
 													<button
-														className={`searchFilterModalContent ${activeFitFilters.includes("등") ? 'active' : ''}`}
+														className={`searchFilterModalContent ${activeFitFilters.includes("삼두") ? 'active' : ''}`}
 														onClick={() => handleAddFitFilter("삼두")}
 													>
 														<div className="checkSimbol">

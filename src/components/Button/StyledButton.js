@@ -20,9 +20,37 @@ export const MiddleButtonWrapper = styled.button`
   height: 62px;
   padding: 22px 24px;
   background: ${({ isReady }) =>
-    isReady === undefined || isReady === true ? theme.Brand : theme.BrandLight};
+		isReady === undefined || isReady === true ? theme.Brand : theme.BrandLight};
   cursor: ${({ isReady }) => (isReady ? "pointer" : "default")};
   color: ${theme.White};
+`;
+
+// < 가로 길이가 중간인데 세로 길이가 짧은 버튼 >
+
+export const SemiMiddleButtonWrapper = styled.button`
+  width: 100%;
+  height: 56px;
+  padding: 22px 24px;
+  background: ${({ isReady }) =>
+		isReady === undefined || isReady === true ? theme.Brand : theme.BrandLight};
+  cursor: ${({ isReady }) => (isReady ? "pointer" : "default")};
+  color: ${theme.White};
+	display: flex;
+	gap: 12px;
+
+	.selectedCount {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		width: 24px;
+		height: 24px;
+		border-radius: 20px;
+		background: ${theme.White};
+		color: ${theme.Brand};
+		font-weight: 500;
+		font-size: 14px;
+		letter-spacing: -0.28px;
+	}
 `;
 
 // < 가로 길이가 짧은 버튼 >

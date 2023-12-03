@@ -12,6 +12,7 @@ export const HomeContainer = styled.div`
 	flex-direction: column;
 	align-items: center;
 	gap: 36px;
+	override: hidden;
 
   // 1
   .firstContent {
@@ -95,166 +96,128 @@ export const HomeContainer = styled.div`
 			max-height:100%; 
 			object-fit:cover; 
 		}
-
-		@keyframes mouseBounce {
-			0%, 100% {
-				transform: translateY(0); /* 원래 위치 */
-			}
-			50% {
-				transform: translateY(-15px); /* 위로 10px 올라감 */
-			}
-		}
-
-		.mouse {
-			z-index: 3;
-			padding-top: 60px;
-			position: absolute;
-			margin: 0 auto;
-			bottom: 10vh;
-			cursor: pointer;
-		}
-		.mouse span {
-			position: absolute;
-			top: 0;
-			left: 50%;
-			width: 43px;
-			height: 70px;
-			border: 2px solid #FFFFFF;
-			border-radius: 50px;
-			box-sizing: border-box;
-			animation: mouseBounce 1s infinite; /* 애니메이션 반복 */
-			transition: transform 0.3s; /* 부드러운 애니메이션 전환 */
-		}
-		.mouse span::before {
-			position: absolute;
-			top: 1.3vh;
-			left: 50%;
-			content: '';
-			width: 5px;
-			height: 14px;
-			margin-left: -2.5px;
-			background-color: #FFFFFF;
-			border-radius: 100%;
-			box-sizing: border-box;
-		}
-		.mouse span::after {
-			position: absolute;
-			bottom: -3vh;
-			left: 50%;
-			width: 15px;
-			height: 15px;
-			content: '';
-			margin-left: -7.5px;
-			border-left: 3px solid #FFFFFF;
-			border-bottom: 3px solid #FFFFFF;
-			-webkit-transform: rotate(-45deg);
-			transform: rotate(-45deg);
-			box-sizing: border-box;
-		}
   }
 
   // 2
   .secondContent {
-    height: 545px;
+		position: relative;
+    height: 596px;
     display: flex;
+		flex-direction: column;
+		gap: 4px;
     align-items: center;
+		justify-content: center;
     text-align: center;
-    font-size: 44px;
-    font-weight: 600;
-    line-height: 130%; /* 57.2px */
-    letter-spacing: -0.88px;
-    color: ${theme.Black};
+
+		.secondItems {
+			display: flex;
+			gap: 4px;
+			align-items: center;
+		}
+
+		.secondItems img {
+			width: 136.5px;
+		}
+
+		.secondItems p {
+			font-weight: 600;
+			font-size: 34px;
+			letter-spacing: -0.68px;
+			line-height: 47.6px;
+			color: ${theme.Gray80};
+		}
   }
+
+	.secondContent p {
+		color: ${theme.Gray80};
+		font-weight: 500;
+		font-size: 24px;
+		letter-spacing: -0.96px;
+		line-height: 33.6px;
+	}
+
+	@keyframes mouseBounce {
+		0%, 100% {
+			transform: translateY(0); /* 원래 위치 */
+		}
+		50% {
+			transform: translateY(-15px); /* 위로 10px 올라감 */
+		}
+	}
+
+	.mouse {
+		background: ${theme.White};
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		width: 104px;
+		height: 94px;
+		z-index: 3;
+		padding-top: 18px;
+		position: absolute;
+		margin: 0 auto;
+		bottom: 0;
+		cursor: pointer;
+		border-radius: 18px;
+		animation: mouseBounce 1s infinite; /* 애니메이션 반복 */
+		transition: transform 0.3s; /* 부드러운 애니메이션 전환 */
+		&:hover {
+			background: ${theme.Gray10};
+		}
+	}
+	.mouse span {
+		font-weight: 600;
+		font-size: 20px;
+		letter-spacing: -0.4px;
+		line-height: 28px;
+		white-space: nowrap;
+		color: ${theme.Brand};
+	}
 
   // 3
   .thirdContent {
+		background: ${theme.Gray10};
+		width: 100%;
+		height: 100vh;
     display: flex;
-		padding: 270px 0 311px 0;
+		gap: 69px;
 		flex-direction: column;
-		gap: 159px;
-
-		.thirdHeader {
-			padding-left: 43.5px;
-			width: 100%;
-			// justify-self를 flex에서는 지원하지 않는다.
-
-			.thirdTitle {
-				display: flex;
-				flex-direction: column;
-				gap: 48px;
-
-				.thirdTitleText {
-					color: ${theme.Black};
-					font-size: 58px;
-					font-weight: 600;
-					line-height: 130%; /* 75.4px */
-					letter-spacing: -1.16px;
-				}
-				.myFitnessBtn {
-					padding: 10px;
-					gap: 10px;
-					display: flex;
-					align-items: center;
-					color: ${theme.Brand};
-					.myFitnessBtnText {
-						font-size: 32px;
-						font-weight: 700;
-						letter-spacing: -0.64px;
-					}
-					.myFitnessBtnImg {
-						width: 29px;
-						height: 29px;
-					}
-				}
-			}
-		}
-
-		.thirdBody {
-			display: flex;
-			flex-direction: column;
-			gap: 125px;
-
-			.thirdFirstContent {
-				display: flex;
-				gap: 199px;
-				flex-wrap: wrap;
-			}
-
-			.thirdSecondContent {
-				display: flex;
-				gap: 233px;
-				flex-wrap: wrap-reverse;
-			}
-
-			.thirdThirdContent {
-				display: flex;
-				gap: 546px;
-				flex-wrap: wrap;
-			}
-
-			.thirdFirstImg {
-				width: 500px;
-				height: auto;
-			}
+		justify-content: center;
+		
+		.slideButton {
+			position: relative;
+			align-self: center;
 		}
   }
 
 	//4
 	.fourthContent {
+		width: 100%;
+		height: 656px;
 		display: flex;
-		padding: 221.5px 335px;
 		flex-direction: column;
-		gap: 138px;
+		gap: 81px;
 
 		.fourthTitle {
+			margin-top: 139px;
 			display: flex;
 			flex-direction: column;
-			gap: 12px;
+			gap: 4px;
 
-			.fourthTitleText {
-				font-size: 52px;
-				font-weight: 700;
-				letter-spacing: -1.04px;
+			.firstTitleText {
+				font-weight: 500;
+				font-size: 24px;
+				letter-spacing: -0.48px;
+				line-height: 31.2px;
+				color: ${theme.BrandDark};
+				text-align: center;
+			}
+
+			.secondTitleText {
+				font-weight: 600;
+				font-size: 48px;
+				letter-spacing: -1.44px;
+				line-height: 62.4px;
 				color: ${theme.Black};
 				text-align: center;
 			}
@@ -262,7 +225,8 @@ export const HomeContainer = styled.div`
 
 		.fourthBody {
 			display: flex;
-			gap: 100px;
+			flex-direction: column;
+			gap: 138px;
 		}
 	}
 
@@ -401,3 +365,22 @@ export const FourthBodyItem = styled.div`
 	}
 `;
 
+export const Slide = styled.div`
+	display: flex;
+	width: 3402px;
+	height: 602px;
+	gap: 24px;
+	margin-left: 400px;
+	transition: transform 0.3s ease-in-out;
+  transform: ${(props) => `translateX(-${(props.currentSlide - 1) * 1130}px)`};
+
+	#slideItem {
+		width: 1118px;
+		height: 602px;
+		// background: ${theme.Brand};
+		font-size: 100px;
+	}
+
+	.firstSlide {
+	}
+`
