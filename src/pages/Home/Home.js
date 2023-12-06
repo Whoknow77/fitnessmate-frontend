@@ -82,10 +82,10 @@ export const Home = () => {
 		// 목표 위치로부터 100px 이동
 
 		if (targetPosition < currentSlide) {
-			const newPosition = targetPosition * 1130 - 100;
+			const newPosition = targetPosition * 1130 - 30;
 			setTransformPosition(newPosition);
 		} else {
-			const newPosition = targetPosition * 1130 + 100;
+			const newPosition = targetPosition * 1130 + 30;
 			setTransformPosition(newPosition);
 		}
 
@@ -96,7 +96,7 @@ export const Home = () => {
 
 			// 큰 수에서 작은 수로 이동할 때만 추가로 100px 더 이동하도록 설정
 			if (targetPosition < currentSlide) {
-				setTransformPosition(targetPosition * 1130 + 100);
+				setTransformPosition(targetPosition * 1130 + 30);
 			}
 		}, 300);
 	};
