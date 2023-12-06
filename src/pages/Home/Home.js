@@ -56,23 +56,52 @@ export const Home = () => {
 
 	// slide toggle
 
-	const [currentSlide, setCurrentSlide] = useState(1);
+	const [currentSlide, setCurrentSlide] = useState(0);
+	const [transformPosition, setTransformPosition] = useState(0);
 
 	const onChange = (value) => {
+		let targetPosition;
+
 		switch (value) {
 			case "left":
-				setCurrentSlide(1);
+				targetPosition = 0;
 				break;
 			case "center":
-				setCurrentSlide(2);
+				targetPosition = 1;
 				break;
 			case "right":
-				setCurrentSlide(3);
+				targetPosition = 2;
 				break;
 			default:
 				break;
 		}
+
+		// 목표 위치로 이동
+		setCurrentSlide(targetPosition);
+
+		// 목표 위치로부터 100px 이동
+
+		if (targetPosition < currentSlide) {
+			const newPosition = targetPosition * 1130 - 100;
+			setTransformPosition(newPosition);
+		} else {
+			const newPosition = targetPosition * 1130 + 100;
+			setTransformPosition(newPosition);
+		}
+
+		// 적절한 시간(예: 300ms)을 설정하여 원하는 시간이 지난 후에 이동하도록 조절
+		setTimeout(() => {
+			// 목표 위치로부터 100px 이동한 상태에서 원래 위치로 돌아오기
+			setTransformPosition(targetPosition * 1130);
+
+			// 큰 수에서 작은 수로 이동할 때만 추가로 100px 더 이동하도록 설정
+			if (targetPosition < currentSlide) {
+				setTransformPosition(targetPosition * 1130 + 100);
+			}
+		}, 300);
 	};
+
+
 
 	const labels = {
 		left: {
@@ -155,7 +184,7 @@ export const Home = () => {
 			</S.HomeContent>
 			<S.HomeContent id="start">
 				<section className="thirdContent">
-					<S.Slide currentSlide={currentSlide}>
+					<S.Slide currentSlide={currentSlide} transformPosition={transformPosition}>
 						<img id="slideItem" src={firstSlide} alt="추천을 위한 예리한 질문들" />
 						<img id="slideItem" src={secondSlide} alt="AI가 제공하는 운동 추천 보고서" />
 						<img id="slideItem" src={thirdSlide} alt="루틴도 한 번에 관리하세요" />

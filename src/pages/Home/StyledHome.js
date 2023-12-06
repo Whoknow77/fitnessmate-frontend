@@ -367,12 +367,12 @@ export const FourthBodyItem = styled.div`
 
 export const Slide = styled.div`
 	display: flex;
-	width: 3402px;
-	height: 602px;
-	gap: 24px;
-	margin-left: 400px;
-	transition: transform 0.3s ease-in-out;
-  transform: ${(props) => `translateX(-${(props.currentSlide - 1) * 1130}px)`};
+  width: 3402px;
+  height: 602px;
+  gap: 24px;
+  margin-left: 400px;
+  transition: transform 0.3s ease-in-out;
+  transform: ${(props) => `translateX(-${props.transformPosition}px)`};
 
 	#slideItem {
 		width: 1118px;
