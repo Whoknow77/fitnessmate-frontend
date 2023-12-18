@@ -54,6 +54,14 @@ class TripleToggleSwitch extends React.Component {
 		};
 	}
 
+	componentDidUpdate(prevProps) {
+		// 현재 props와 이전 props의 value 비교
+		if (this.props.value !== prevProps.value) {
+			// value가 변경되었을 때 getSwitchAnimation 호출
+			this.getSwitchAnimation(this.props.value);
+		}
+	}
+
 	getSwitchAnimation = (value) => {
 		const { switchPosition } = this.state;
 		let animation = null;
@@ -84,7 +92,8 @@ class TripleToggleSwitch extends React.Component {
 				></div>
 				<input
 					defaultChecked
-					onChange={(e) => this.getSwitchAnimation(e.target.value)}
+					checked={this.state.switchPosition === "left"}
+					onChange={() => this.getSwitchAnimation("left")}  // 변경된 부분
 					name="map-switch"
 					id="left"
 					type="radio"
@@ -100,7 +109,8 @@ class TripleToggleSwitch extends React.Component {
 				</label>
 
 				<input
-					onChange={(e) => this.getSwitchAnimation(e.target.value)}
+					checked={this.state.switchPosition === "center"}
+					onChange={() => this.getSwitchAnimation("center")}
 					name="map-switch"
 					id="center"
 					type="radio"
@@ -116,7 +126,8 @@ class TripleToggleSwitch extends React.Component {
 				</label>
 
 				<input
-					onChange={(e) => this.getSwitchAnimation(e.target.value)}
+					checked={this.state.switchPosition === "right"}
+					onChange={() => this.getSwitchAnimation("right")}
 					name="map-switch"
 					id="right"
 					type="radio"

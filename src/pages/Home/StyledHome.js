@@ -1,6 +1,6 @@
 // < 홈 스타일 >
 
-import styled from "styled-components";
+import styled, { keyframes, css } from "styled-components";
 import theme from "./../../styles/theme";
 
 // 화면 가리기
@@ -22,6 +22,7 @@ export const HomeContainer = styled.div`
 		position: relative;
 		display: flex;
 		justify-content: center;
+		background: linear-gradient(180deg, rgb(220, 233, 242) 0%, rgb(187, 203, 228) 88.45%);
 
 		.firstArea {
 			width: 100%;
@@ -76,32 +77,12 @@ export const HomeContainer = styled.div`
 			width: 766px;
 			height: 765px;
 		}
-
-		.firstContentBack {
-			position:absolute;
-			top:0;
-			left:0;
-			bottom:0;
-			right:0;
-			box-sizing:border-box;
-			padding:0;
-			border:none;
-			margin:auto;
-			display:block;
-			width:0;
-			height:0; 
-			min-width:100%; 
-			max-width:100%; 
-			min-height:100%; 
-			max-height:100%; 
-			object-fit:cover; 
-		}
   }
 
   // 2
   .secondContent {
 		position: relative;
-    height: 596px;
+    height: 100vh;
     display: flex;
 		flex-direction: column;
 		gap: 4px;
@@ -156,7 +137,7 @@ export const HomeContainer = styled.div`
 		padding-top: 18px;
 		position: absolute;
 		margin: 0 auto;
-		bottom: 0;
+		bottom: 142px;
 		cursor: pointer;
 		border-radius: 18px;
 		animation: mouseBounce 1s infinite; /* 애니메이션 반복 */
@@ -177,6 +158,8 @@ export const HomeContainer = styled.div`
   // 3
   .thirdContent {
 		background: ${theme.Gray10};
+		border-top: 1px solid ${theme.Gray30};
+		border-bottom: 1px solid ${theme.Gray30};
 		width: 100%;
 		height: 100vh;
     display: flex;
@@ -365,6 +348,78 @@ export const FourthBodyItem = styled.div`
 	}
 `;
 
+const firstmoveLeftAndReturn = keyframes`
+  0% {
+    transform: translateX(0);
+  }
+  30% {
+    transform: translateX(-474px);
+  }
+  50% {
+    transform: translateX(-464px); /* 중간 지점에서 멈추도록 추가 */
+  }
+	70% {
+    transform: translateX(-464px);
+  }
+  100% {
+    transform: translateX(-464px);
+  }
+`;
+
+const firstmoveTopAndReturn = keyframes`
+  0% {
+    transform: translateY(0);
+  }
+  20% {
+    transform: translateY(-314px);
+  }
+  40% {
+    transform: translateY(-304px); /* 중간 지점에서 멈추도록 추가 */
+  }
+	70% {
+    transform: translateY(-304px);
+  }
+  100% {
+    transform: translateY(-304px);
+  }
+`;
+
+const secondmoveTopAndReturn = keyframes`
+  0% {
+    transform: translateY(0);
+  }
+  20% {
+    transform: translateY(-354px);
+  }
+  40% {
+    transform: translateY(-344px); /* 중간 지점에서 멈추도록 추가 */
+  }
+	70% {
+    transform: translateY(-344px);
+  }
+  100% {
+    transform: translateY(-344px);
+  }
+`;
+
+const thirdmoveTopAndReturn = keyframes`
+  0% {
+    transform: translateY(0);
+  }
+  30% {
+    transform: translateY(-322px);
+  }
+  50% {
+    transform: translateY(-312px); /* 중간 지점에서 멈추도록 추가 */
+  }
+	70% {
+    transform: translateY(-312px);
+  }
+  100% {
+    transform: translateY(-312px);
+  }
+`;
+
 export const Slide = styled.div`
 	display: flex;
   width: 3402px;
@@ -377,10 +432,138 @@ export const Slide = styled.div`
 	#slideItem {
 		width: 1118px;
 		height: 602px;
-		// background: ${theme.Brand};
 		font-size: 100px;
+		border-radius: 32px;
+		overflow: hidden;
+		position: relative;
+
+		.slideButton {
+		position: absolute;
+		bottom: 62px;
+		display: flex;
+		gap: 4px;
+		align-items: center;
+		height: 62px;
+		padding: 20px;
+		background: ${theme.Brand};
+		border-radius: 10px;
+		cursor: pointer;
+
+		.slideButtonText {
+			font-weight: 600;
+			color: ${theme.White};
+			font-size: 22px;
+			letter-spacing: -0.44px;
+		}
+	}
+	}
+
+	.opacity {
+		opacity: 0.4;
 	}
 
 	.firstSlide {
+		background: ${theme.White};
+		padding-left: 70px;
+
+		.firstSlideTitle {
+			position: absolute;
+			top: 62px;
+			font-weight: 600;
+			color: ${theme.Black};
+			font-size: 47px;
+			letter-spacing: -0.94px;
+			line-height: 61.1px;
+		}
+
+		.firstSlideImg1 {
+			position: absolute;
+			top: 109px;
+			left: 866px;
+			height: 128px;
+		}
+		.firstSlideImg1.active {
+			animation: ${firstmoveLeftAndReturn} 1.9s ease-in-out 0.1s; // 지속시간 ? 지연시간
+		}
+
+		.firstSlideImg2 {
+			position: absolute;
+			top: 558px;
+			left: 435px;
+			height: 379px;
+		}
+		.firstSlideImg2.active {
+			animation: ${firstmoveTopAndReturn} 1.9s ease-in-out 0.1s; // 지속시간 ? 지연시간
+		}
+	}
+
+	.secondSlide {
+		background: #29353d;
+		padding-left: 70px;
+
+		.secondSlideTitle {
+			position: absolute;
+			top: 62px;
+			display: flex;
+			flex-direction: column;
+			gap: 21px;
+		}
+		.secondSlideTitleTop {
+			font-weight: 600;
+			color: ${theme.White};
+			font-size: 47px;
+			letter-spacing: -0.94px;
+			line-height: 61.1px;
+		}
+		.secondSlideTitleBottom {
+			font-weight: 600;
+			color: ${theme.BrandLighter};
+			font-size: 24px;
+			letter-spacing: -0.48px;
+			line-height: 32.6px;
+		}
+
+		.secondSlideImg {
+			position: absolute;
+			top: 416px;
+			left: 465px;
+			width: 588px;
+			box-shadow: 0px 4px 48.5px #FFFFFF33
+		}
+		.secondSlideImg.active {
+			animation: ${secondmoveTopAndReturn} 1.9s ease-in-out 0.1s forwards; // 지속시간 ? 지연시간
+		}
+	}
+	.secondSlide.opacity {
+		background: ${theme.Gray30};
+	}
+
+	.thirdSlide {
+		background: #f9fafc;
+		padding-left: 70px;
+
+		.thirdSlideTitle {
+			position: absolute;
+			top: 62px;
+			display: flex;
+			flex-direction: column;
+			gap: 21px;
+			font-weight: 600;
+			color: #000000;
+			font-size: 47px;
+			letter-spacing: -0.94px;
+			line-height: 61.1px;
+		}
+
+		.thirdSlideImg {
+			position: absolute;
+			top: 371px;
+			left: 451px;
+			width: 927px;
+			box-shadow: 0px 4px 48.5px #FFFFFF33
+		}
+		.thirdSlideImg.active {
+			animation: ${thirdmoveTopAndReturn} 1.9s ease-in-out 0.1s; // 지속시간 ? 지연시간
+		}
 	}
 `

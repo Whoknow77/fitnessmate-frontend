@@ -56,3 +56,9 @@ export const supplementRecommendState = atom({
 	key: "supplementRecommendState",
 	default: {},
 });
+
+// Home 운동 객체
+export const machineListRecoilState = atom({
+	key: "machineListRecoilState",
+	default: {},
+});

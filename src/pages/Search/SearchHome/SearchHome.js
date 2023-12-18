@@ -13,10 +13,14 @@ import check from "../../../assets/images/check_circle_fill.svg"
 import noneCheck from "../../../assets/images/check_circle.svg"
 import { useNavigate, useParams } from "react-router-dom";
 import NoSearch from "../../../components/NoSearch/NoSearch";
+import { useRecoilState } from "recoil";
+import { machineListRecoilState } from "./../../../recoil/atom";
 
 const SearchHome = () => {
 	let { pageNum } = useParams();
 	const navigate = useNavigate();
+
+	const [machineListRecoil, setMachineListRecoil] = useRecoilState(machineListRecoilState);
 
 	// Toggle
 
@@ -63,21 +67,32 @@ const SearchHome = () => {
 			bodyPartKoreanName: [],
 		};
 		// 운동 기구 batch 조회(12개)
-
-		try {
+		console.log("이거 :", machineListRecoil)
+		if (machineListRecoil.length) {
+			const request = {
+				searchKeyword: machineListRecoil,
+			};
 			const workoutResponse = await userWorkoutBatchAPI.post(
 				`${pageNum}`,
 				request
 			);
-			if (workoutResponse.data.length) {
-				setNoSearch(false);
-				setMachineList(workoutResponse.data);
-			} else {
+			setMachineList(workoutResponse.data);
+		} else {
+			try {
+				const workoutResponse = await userWorkoutBatchAPI.post(
+					`${pageNum}`,
+					request
+				);
+				if (workoutResponse.data.length) {
+					setNoSearch(false);
+					setMachineList(workoutResponse.data);
+				} else {
+					setNoSearch(true);
+				}
+			} catch (err) {
+				// 페이지넘버가 이상한 경우 오류페이지
 				setNoSearch(true);
 			}
-		} catch (err) {
-			// 페이지넘버가 이상한 경우 오류페이지
-			setNoSearch(true);
 		}
 	};
 

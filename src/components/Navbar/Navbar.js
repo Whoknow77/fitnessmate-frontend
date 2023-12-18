@@ -26,12 +26,12 @@ const Navbar = () => {
 		const handleScroll = () => {
 			if (window.scrollY > 70) {
 				setIsScrolled(true);
-				console.log(isScrolled);
-				console.log(window.scrollY);
+				// console.log(isScrolled);
+				// console.log(window.scrollY);
 			} else {
 				setIsScrolled(false);
-				console.log(isScrolled);
-				console.log(window.scrollY);
+				// console.log(isScrolled);
+				// console.log(window.scrollY);
 			}
 		};
 
