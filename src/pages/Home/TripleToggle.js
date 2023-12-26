@@ -50,7 +50,12 @@ class TripleToggleSwitch extends React.Component {
 		super(props);
 		this.state = {
 			switchPosition: "left",
-			animation: null
+			animation: null,
+			showSpinner: {  // 1. showSpinner 추가
+				left: false,
+				center: false,
+				right: false
+			}
 		};
 	}
 
@@ -63,8 +68,25 @@ class TripleToggleSwitch extends React.Component {
 	}
 
 	getSwitchAnimation = (value) => {
-		const { switchPosition } = this.state;
+		const { switchPosition, showSpinner } = this.state;
 		let animation = null;
+
+		// 현재 활성화된 라벨에 대한 showSpinner를 false로 설정하여 스피너 감추기
+		Object.keys(showSpinner).forEach(label => {
+			if (label !== value) {
+				showSpinner[label] = false;
+			}
+		});
+
+		// 해당 라벨의 showSpinner를 true로 설정하여 스피너를 표시
+		this.setState({
+			showSpinner: {
+				...showSpinner,
+				[value]: true
+			}
+		});
+
+
 		if (value === "center" && switchPosition === "left") {
 			animation = "left-to-center";
 		} else if (value === "right" && switchPosition === "center") {
@@ -78,12 +100,24 @@ class TripleToggleSwitch extends React.Component {
 		} else if (value === "left" && switchPosition === "right") {
 			animation = "right-to-left";
 		}
+
 		this.props.onChange(value);
 		this.setState({ switchPosition: value, animation });
+
+		// 2. 일정 시간 후에 스피너를 숨기고 showSpinner를 false로 설정
+		setTimeout(() => {
+			this.setState({
+				showSpinner: {
+					...showSpinner,
+					[value]: false
+				}
+			});
+		}, 5000); // 3초
 	};
 
 	render() {
 		const { labels } = this.props;
+		const { showSpinner } = this.state;
 
 		return (
 			<div className="main">
@@ -100,11 +134,11 @@ class TripleToggleSwitch extends React.Component {
 					value="left"
 				/>
 				<label
-					id="label"
-					className={`left-title ${this.state.switchPosition === "left" && "white-font"
-						}`}
+					id="left-label"
+					className={`left-title ${this.state.switchPosition === "left" && "white-font"} ${showSpinner.left && "show-spinner"}`}
 					htmlFor="left"
 				>
+					{showSpinner.left && <div className="spinner"></div>}
 					<h4 className="title">{labels.left.title}</h4>
 				</label>
 
@@ -117,11 +151,11 @@ class TripleToggleSwitch extends React.Component {
 					value="center"
 				/>
 				<label
-					id="label"
-					className={`center-label ${this.state.switchPosition === "center" && "white-font"
-						}`}
+					id="right-label"
+					className={`center-label ${this.state.switchPosition === "center" && "white-font"} ${this.state.switchPosition === "left" && "left"} ${showSpinner.center && "show-spinner"}`}
 					htmlFor="center"
 				>
+					{showSpinner.center && <div className="spinner"></div>}
 					<h4 className="title">{labels.center.title}</h4>
 				</label>
 
@@ -134,11 +168,11 @@ class TripleToggleSwitch extends React.Component {
 					value="right"
 				/>
 				<label
-					id="label"
-					className={`right-title ${this.state.switchPosition === "right" && "white-font"
-						}`}
+					id="right-label"
+					className={`right-title ${this.state.switchPosition === "right" && "white-font"} ${this.state.switchPosition === "left" && "left"} ${showSpinner.right && "show-spinner"}`}
 					htmlFor="right"
 				>
+					{showSpinner.right && <div className="spinner"></div>}
 					<h4 className="title">{labels.right.title}</h4>
 				</label>
 			</div>

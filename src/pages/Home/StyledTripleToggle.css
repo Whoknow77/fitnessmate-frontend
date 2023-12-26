@@ -2,55 +2,75 @@ input[type="radio"] {
   display: none;
 }
 
-#label {
+#left-label {
   color: #30343a;
   z-index: 10;
   cursor: pointer;
-  font-family: "Pretendard";
-  font-weight: 600;
-  font-size: 20px;
-  letter-spacing: -0.4px;
-  line-height: 30px;
+}
+
+#center-label {
+  color: #30343a;
+  z-index: 10;
+  cursor: pointer;
+}
+
+#right-label {
+  color: #30343a;
+  z-index: 10;
+  cursor: pointer;
 }
 
 .title {
   margin: 0;
   font-weight: 600;
   font-family: "Pretendard";
-  font-size: 20px;
-  letter-spacing: -0.4px;
-  line-height: 30px;
+  font-size: 18px;
+  letter-spacing: -0.36px;
+  line-height: 27px;
 }
 
-#label .title {
-  font-size: 20px;
+#left-label .title {
+  font-size: 18px;
+}
+
+#center-label .title {
+  font-size: 18px;
+}
+
+#right-label .title {
+  font-size: 18px;
 }
 
 .white-font {
-  color: #e1e4ea !important;
+  font-family: "Pretendard";
+  font-weight: 500;
+  color: #ffffff !important;
+  font-size: 18px;
+  letter-spacing: -0.36px;
+  line-height: 27px;
+  white-space: nowrap;
+  width: 117px;
 }
 
 .main {
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 344px;
-  height: 64px;
+  width: 308px;
+  height: 55px;
   border-radius: 100px;
   background-color: #e1e4ea;
-  padding: 6px;
+  padding: 4px;
 }
 
 .switch-label {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 52px;
-  width: 113px;
   background-color: #30343a;
   border-radius: 100px;
   position: absolute;
-  transition: ease-in;
+  transition: left 0.1s ease-in-out;
 }
 
 /*---------------- LEFT ------------------- */
@@ -65,47 +85,52 @@ input[type="radio"] {
 }
 
 .switch-label.left-position {
-  left: 5px;
+  left: 3px;
+  height: 47px;
+  width: 117px;
 }
 
 .left-title {
   position: absolute;
-  left: 15px;
+  left: 4px;
+}
+.left-title.white-font.show-spinner {
+  position: absolute;
+  left: 14px;
 }
 
 #left + label {
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 50px;
-  width: 113px;
   border-radius: 100px;
+  width: 89px;
 }
 
 #left:checked + label {
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 50px;
-  width: 113px;
+  gap: 6px;
+  width: 117px;
   border-radius: 100px;
 }
 
 @keyframes leftToCenter {
   from {
-    left: 5px;
+    left: 4px;
   }
   to {
-    left: 115px;
+    left: 93px;
   }
 }
 
 @keyframes leftToRight {
   from {
-    left: 5px;
+    left: 4px;
   }
   to {
-    left: 225px;
+    left: 187px;
   }
 }
 
@@ -121,20 +146,30 @@ input[type="radio"] {
 }
 
 .switch-label.center-position {
-  left: 115px;
+  left: 93px;
+  height: 47px;
+  width: 117px;
 }
 
 .center-label {
   position: absolute;
-  left: 115px;
+  left: 103px;
+}
+
+.center-label.left {
+  position: absolute;
+  left: 135px;
+}
+
+.center-label.white-font.show-spinner {
+  position: absolute;
+  left: 93px;
 }
 
 #center + label {
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 50px;
-  width: 113px;
   border-radius: 100px;
 }
 
@@ -142,14 +177,13 @@ input[type="radio"] {
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 50px;
-  width: 113px;
+  gap: 6px;
   border-radius: 100px;
 }
 
 @keyframes centerToLeft {
   from {
-    left: 115px;
+    left: 117px;
   }
   to {
     left: 5px;
@@ -158,10 +192,10 @@ input[type="radio"] {
 
 @keyframes centerToRight {
   from {
-    left: 115px;
+    left: 117px;
   }
   to {
-    right: 1px;
+    left: 187px;
   }
 }
 
@@ -177,46 +211,72 @@ input[type="radio"] {
 }
 
 .switch-label.right-position {
-  left: 225px;
+  left: 187px;
+  height: 47px;
+  width: 117px;
 }
 
 .right-title {
   position: absolute;
-  right: 15px;
+  left: 205px;
+}
+
+.right-title.white-font.show-spinner {
+  position: absolute;
+  left: 197px;
+  width: 157px;
 }
 
 #right + label {
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 50px;
-  width: 113px;
   border-radius: 100px;
 }
 
-#right:checked + label {
+#right:checked + .right-title {
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 50px;
-  width: 113px;
+  gap: 6px;
   border-radius: 100px;
+  width: 100px;
 }
 
 @keyframes rightToLeft {
   from {
-    left: 225px;
+    left: 187px;
   }
   to {
-    left: 5px;
+    left: 4px;
   }
 }
 
 @keyframes rightToCenter {
   from {
-    left: 225px;
+    left: 187px;
   }
   to {
-    right: 115px;
+    right: 117px;
+  }
+}
+
+/* ------------------- SPINNER ------------------- */
+
+.spinner {
+  border: 3.5px solid #6b7684;
+  border-left: 3.5px solid #0b98ff;
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+  animation: spin 5.1s linear infinite;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
   }
 }

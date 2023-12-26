@@ -68,7 +68,7 @@ export const SearchBottomContainer = styled.div`
 
 	.searchBottomContent {
 		display: flex;
-		gap: 14px;
+		gap: 10px;
 
 		.popularKeyword {
 			display: flex;

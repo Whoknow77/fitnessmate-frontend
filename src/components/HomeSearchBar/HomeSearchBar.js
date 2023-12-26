@@ -112,20 +112,16 @@ const HomeSearchBar = ({ name }) => {
 				<span className="searchBottomTitle">인기 검색 키워드</span>
 				<div className="searchBottomContent">
 					<div className="popularKeyword" onClick={() => handlePopularKeywordClick("데드리프트")}>
-						<p>데드리프트</p>
-						<img src={keywordSearch} alt="데드리프트 검색하기" />
+						<p># 데드리프트</p>
 					</div>
 					<div className="popularKeyword" onClick={() => handlePopularKeywordClick("풀업")}>
-						<p>풀업</p>
-						<img src={keywordSearch} alt="풀업 검색하기" />
+						<p># 풀업</p>
 					</div>
 					<div className="popularKeyword" onClick={() => handlePopularKeywordClick("스쿼트")}>
-						<p>스쿼트</p>
-						<img src={keywordSearch} alt="스쿼트 검색하기" />
+						<p># 스쿼트</p>
 					</div>
 					<div className="popularKeyword" onClick={() => handlePopularKeywordClick("인클라인 덤벨 벤치프레스")}>
-						<p>인클라인 덤벨 벤치프레스</p>
-						<img src={keywordSearch} alt="인클라인 덤벨 벤치프레스 검색하기" />
+						<p># 인클라인 덤벨 벤치프레스</p>
 					</div>
 				</div>
 			</S.SearchBottomContainer>
