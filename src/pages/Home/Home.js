@@ -2,6 +2,7 @@
 import * as S from "./StyledHome";
 import { useNavigate } from "react-router-dom";
 import arrow from "../../assets/images/button-arrow.svg";
+import brandArrow from "../../assets/images/brand-color_arrow.svg";
 import { useState, useRef, useEffect, useCallback, useMemo } from "react";
 import LoginModal from "../../components/Modal/LoginModal";
 import homebackground from "../../assets/images/main-background.png"
@@ -263,9 +264,11 @@ export const Home = () => {
 								<span className={`secondSlideTitleTop ${currentSlide === 1 ? '' : 'opacity'}`}>AI가 제공하는<br />운동 추천 보고서</span>
 								<p className={`secondSlideTitleBottom ${currentSlide === 1 ? '' : 'opacity'}`}>운동량까지 추천해주는 센스.</p>
 							</div>
-							<div className={`slideButton ${currentSlide === 1 ? '' : 'opacity'}`} onClick={handleRecommend}>
-								<p className={`slideButtonText ${currentSlide === 1 ? '' : 'opacity'}`}>추천받기</p>
-								<img className={`slideButtonIcon ${currentSlide === 1 ? '' : 'opacity'}`} src={arrow} alt="추천받기로 이동하기" />
+							<div className={`slideButtonBorder2 ${currentSlide === 1 ? '' : 'opacity'}`} onClick={handleRecommend}>
+								<div className={`slideButton2 ${currentSlide === 1 ? '' : 'opacity'}`}>
+									<p className={`slideButtonText2 ${currentSlide === 1 ? '' : 'opacity'}`}>AI 추천 보고서</p>
+									<img className={`slideButtonIcon ${currentSlide === 1 ? '' : 'opacity'}`} src={brandArrow} alt="추천받기로 이동하기" fill="#0b98ff" />
+								</div>
 							</div>
 							<img className={`secondSlideImg ${currentSlide === 1 ? 'active' : 'opacity'}`} src={recommend3} alt="추천결과" />
 						</div>

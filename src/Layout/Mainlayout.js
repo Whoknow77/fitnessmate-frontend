@@ -2,7 +2,6 @@ import React from "react";
 import { Outlet } from "react-router-dom";
 import { MainLayoutWrapper } from "./StyledMainLayout";
 import Navbar from "../components/Navbar/Navbar";
-import logo from "../assets/images/logo.png"
 
 
 const MainLayout = () => {

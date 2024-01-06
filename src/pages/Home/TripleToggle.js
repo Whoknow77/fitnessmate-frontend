@@ -52,7 +52,7 @@ class TripleToggleSwitch extends React.Component {
 			switchPosition: "left",
 			animation: null,
 			showSpinner: {  // 1. showSpinner 추가
-				left: false,
+				left: true,
 				center: false,
 				right: false
 			}
@@ -138,7 +138,14 @@ class TripleToggleSwitch extends React.Component {
 					className={`left-title ${this.state.switchPosition === "left" && "white-font"} ${showSpinner.left && "show-spinner"}`}
 					htmlFor="left"
 				>
-					{showSpinner.left && <div className="spinner"></div>}
+					{showSpinner.left &&
+						<div className="spinner">
+							<svg width="20" height="20" class="svg">
+								<circle r="8.5" cx="10" cy="10" class="border"></circle>
+								<circle r="8.5" cx="10" cy="10" class="progress"></circle>
+							</svg>
+						</div>
+					}
 					<h4 className="title">{labels.left.title}</h4>
 				</label>
 
@@ -155,7 +162,14 @@ class TripleToggleSwitch extends React.Component {
 					className={`center-label ${this.state.switchPosition === "center" && "white-font"} ${this.state.switchPosition === "left" && "left"} ${showSpinner.center && "show-spinner"}`}
 					htmlFor="center"
 				>
-					{showSpinner.center && <div className="spinner"></div>}
+					{showSpinner.center &&
+						<div className="spinner">
+							<svg width="20" height="20" class="svg">
+								<circle r="8.5" cx="10" cy="10" class="border"></circle>
+								<circle r="8.5" cx="10" cy="10" class="progress"></circle>
+							</svg>
+						</div>
+					}
 					<h4 className="title">{labels.center.title}</h4>
 				</label>
 
@@ -172,7 +186,14 @@ class TripleToggleSwitch extends React.Component {
 					className={`right-title ${this.state.switchPosition === "right" && "white-font"} ${this.state.switchPosition === "left" && "left"} ${showSpinner.right && "show-spinner"}`}
 					htmlFor="right"
 				>
-					{showSpinner.right && <div className="spinner"></div>}
+					{showSpinner.right &&
+						<div className="spinner">
+							<svg width="20" height="20" class="svg">
+								<circle r="8.5" cx="10" cy="10" class="border"></circle>
+								<circle r="8.5" cx="10" cy="10" class="progress"></circle>
+							</svg>
+						</div>
+					}
 					<h4 className="title">{labels.right.title}</h4>
 				</label>
 			</div>

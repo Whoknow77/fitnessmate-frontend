@@ -4,9 +4,9 @@ import theme from "../../../styles/theme";
 export const SearchContainer = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 10px;
   width: 100%;
   .searchTopWrapper {
+		margin-top: 140px;
     max-width: 812px;
     width: 90%;
     margin: 0 auto;
@@ -26,14 +26,14 @@ export const SearchContainer = styled.div`
         .searchTitle1 {
           text-align: center;
           color: ${theme.Gray50};
-          font-size: 24px;
-          font-weight: 700;
+          font-weight: 600;
+					font-size: 20px;
         }
         .searchTitle2 {
           text-align: center;
           color: ${theme.Black};
-          font-size: 38px;
-          font-weight: 700;
+          font-weight: 600;
+					font-size: 30px;
         }
       }
     }
@@ -76,28 +76,116 @@ export const SearchContainer = styled.div`
   }
 `;
 
-export const Toggle = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
+export const SwitchMenu = styled.div`
+	margin: 32px auto 0 auto;
+	width: 1032px;
+	display: flex;
+	gap: 12px;
 
-  .toggleSwitch_wrap {
-    display: flex;
-    gap: 20px;
-    align-items: center;
-  }
-
-  .toggleSwitch {
-    position: relative;
-    display: inline-block;
-    width: 201px;
-    height: 50px;
-  }
+	.menuCategory1 {
+		font-weight: 500;
+		color: ${({ theme }) => theme.Gray40};
+		font-size: 20px;
+		letter-spacing: -0.4px;
+		cursor: pointer;
+		padding: 0 6px 16px 6px;
+		border-bottom: 5px solid ${({ theme }) => theme.White};
+	}
+	.menuCategory2 {
+		font-weight: 500;
+		color: ${({ theme }) => theme.Gray40};
+		font-size: 20px;
+		letter-spacing: -0.4px;
+		cursor: pointer;
+		padding: 0 6px 16px 6px;
+		border-bottom: 5px solid ${({ theme }) => theme.White};
+	}
+	.menuCategory1.active {
+		color: ${({ theme }) => theme.Gray80};
+		border-bottom: 5px solid ${({ theme }) => theme.Gray80};
+	}
+	
+	.menuCategory2.active {
+		color: ${({ theme }) => theme.Gray80};
+		border-bottom: 5px solid ${({ theme }) => theme.Gray80};
+	}
 `;
+
+export const SwitchMenuCategory = styled.div`
+	top: 60px;
+	width: 100%;
+	display: flex;
+	align-items: center;
+	gap: 32px;
+	background: ${({ theme }) => theme.Gray10};
+	height: 64px;
+	position: sticky;
+	z-index: 100;
+
+	.bodypartsCategory {
+		width: 1032px;
+		margin: 0 auto;
+		display: flex;
+		justify-content: space-between;
+
+		.bodypartsContainer {
+			display: flex;
+			gap: 7px;
+
+			.bodypartButton {
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				padding: 8px 12px;
+				cursor: pointer;
+				border-radius: 34px;
+			}
+			.bodypartButtonText {
+				font-weight: 500;
+				color: ${theme.Gray50};
+				font-size: 18px;
+				letter-spacing: -0.36px;
+			}
+			.bodypartButton.active {
+				background: ${theme.Brand};
+			}
+			.bodypartButtonText.active {
+				font-weight: 600;
+				color: ${theme.White};
+			}
+		}
+
+		.searchOpenButton {
+			display: flex;
+			gap: 7px;
+			padding: 10px 14px;
+			background-color: ${theme.Gray20};
+			border-radius: 37px;
+			border: 1px solid ${theme.Gray30};
+
+			.searchOpenIcon {
+				width: 20px;
+				height: 20px;
+			}
+
+			.searchOpenText {
+				font-weight: 500;
+				color: ${theme.Gray50};
+				font-size: 16px;
+				letter-spacing: -0.32px;
+				cursor: pointer;
+			}
+		}
+	}
+`
+
+export const SearchArea = styled.div`
+`
+
 
 export const SectionContainer = styled.div`
 	display: flex;
-	gap: 20px;
+	gap: 62px;
 	flex-direction: column;
 	width: 100%;
 

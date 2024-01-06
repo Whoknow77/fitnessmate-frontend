@@ -532,6 +532,43 @@ export const Slide = styled.div`
 		.secondSlideImg.active {
 			animation: ${secondmoveTopAndReturn} 4.9s ease-in-out 0.1s forwards; // 지속시간 ? 지연시간
 		}
+
+		.slideButtonBorder2 {
+			position: absolute;
+			bottom: 66px;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			height: 66px;
+			padding: 2px;
+			background: linear-gradient(
+				180deg,
+				rgb(10.63, 152.36, 255) 0%,
+				rgb(64.68, 121.03, 255) 23.73%,
+				rgb(151, 71, 255) 61.61%,
+				rgb(61.18, 74.76, 196.99) 84.13%,
+				rgb(10.63, 152.36, 255) 100%
+			);
+			border-radius: 10px;
+			cursor: pointer;
+	
+			.slideButton2 {
+				display: flex;
+				gap: 4px;
+				align-items: center;
+				background: ${theme.BrandLight};
+				height: 62px;
+				padding: 20px;
+				border-radius: 10px;
+			}
+
+			.slideButtonText2 {
+				font-weight: 600;
+				color: ${theme.Brand};
+				font-size: 22px;
+				letter-spacing: -0.44px;
+			}
+		}
 	}
 	.secondSlide.opacity {
 		background: ${theme.Gray30};

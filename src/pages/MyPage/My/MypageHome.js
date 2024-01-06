@@ -235,171 +235,224 @@ const Mypagehome = () => {
 
 
 	return (
-		<S.HomeContainer>
-			<S.HomeContent>
-				<S.FirstContent>
+		<>
+			<S.HomeContainer>
+				<S.HomeContent>
 					<S.FirstContent>
-						<div className="firstTop">나에게 핏한</div>
-						<div className="firstMiddle">
-							<p>내 운동 정보를 모아보세요.</p>
-						</div>
-						<S.Toggle>
-							<div class="toggleSwitch_wrap">
-								<div class="toggleSwitch">
-									<ToggleSwitch labels={labels} onChange={onChange} />
-								</div>
+						<S.FirstContent>
+							<div className="firstTop">나에게 핏한</div>
+							<div className="firstMiddle">
+								<p>내 운동 정보를 모아보세요.</p>
 							</div>
-						</S.Toggle>
+							<S.Toggle>
+								<div class="toggleSwitch_wrap">
+									<div class="toggleSwitch">
+										<ToggleSwitch labels={labels} onChange={onChange} />
+									</div>
+								</div>
+							</S.Toggle>
+						</S.FirstContent>
 					</S.FirstContent>
-				</S.FirstContent>
-			</S.HomeContent>
-			<S.HomeContent>
-				{(visible ?
-					<S.SecondContent onChange={onChange}>
-						<div className="supplementContents">
-							{mySupplements.data.supplements.length > 0 && mySupplements.data.supplements.map((item, index) => (
-								<S.SupplementContent key={item.mySupplementId}>
-									<img src={item.imageURL} alt="보조제 사진" />
-									<div className="contentItem">
-										<div className="contentMainItem">
-											<div className="topItems">
-												<p className="item_flavor-source">{item.flavor}</p>
-												<p className="item_flavor-source">{item.source}</p>
-											</div>
-											<span className="item_workoutName">
-												{item.supplementName}
-											</span>
-											<div className="contentMiddleItem">
-												{nutrientData
-													.filter((nutrient) => item[nutrient.value] !== null && item[nutrient.value] !== undefined && item[nutrient.value] !== "")
-													.map((nutrient) => (
-														<div className="PerServing">
-															<span className="TitleSpan">{item[nutrient.value] && nutrient.label}</span>
-															<span className="ContentSpan">{item[nutrient.value] && <>{item[nutrient.value]}g</>}</span>
-														</div>
-													))}
-											</div>
-											<div className="contentBottomItem">
-												<span className="bottomTitle">가격</span>
-												<div className="price">
-													<p
-														className="bottomPrice"
-													>
-														{formatPriceAndSetToElement(item.price)}
-													</p>
-													&nbsp;원
+				</S.HomeContent>
+				<S.HomeContent>
+					{(visible ?
+						<S.SecondContent onChange={onChange}>
+							<div className="supplementContents">
+								{mySupplements.data.supplements.length > 0 && mySupplements.data.supplements.map((item, index) => (
+									<S.SupplementContent key={item.mySupplementId}>
+										<img src={item.imageURL} alt="보조제 사진" />
+										<div className="contentItem">
+											<div className="contentMainItem">
+												<div className="topItems">
+													<p className="item_flavor-source">{item.flavor}</p>
+													<p className="item_flavor-source">{item.source}</p>
+												</div>
+												<span className="item_workoutName">
+													{item.supplementName}
+												</span>
+												<div className="contentMiddleItem">
+													{nutrientData
+														.filter((nutrient) => item[nutrient.value] !== null && item[nutrient.value] !== undefined && item[nutrient.value] !== "")
+														.map((nutrient) => (
+															<div className="PerServing">
+																<span className="TitleSpan">{item[nutrient.value] && nutrient.label}</span>
+																<span className="ContentSpan">{item[nutrient.value] && <>{item[nutrient.value]}g</>}</span>
+															</div>
+														))}
+												</div>
+												<div className="contentBottomItem">
+													<span className="bottomTitle">가격</span>
+													<div className="price">
+														<p
+															className="bottomPrice"
+														>
+															{formatPriceAndSetToElement(item.price)}
+														</p>
+														&nbsp;원
+													</div>
 												</div>
 											</div>
 										</div>
-									</div>
-									<div
-										className="deleteContent"
-										id={item.mySupplementId}
-										onClick={deleteSupplementClickButton}
-									>
-										삭제
-									</div>
-								</S.SupplementContent>
-							))}
-						</div>
-						<div className="modalbutton">
-							<S.AddModalButton onClick={onClickAddModalButton} className="supplementModal">
-								<img src={add} alt="추가하기 버튼" />
-								<p>이 목록에 보조제 추가하기</p>
-							</S.AddModalButton>
-						</div>
-					</S.SecondContent>
-					:
-					<S.SecondContent onChange={onChange}>
-						<S.ContentsTitle>
-							<div className="contents-title">내 운동 루틴</div>
-							<S.ButtonContainer>
-								{/* 루틴 목록을 map으로 불러옴 */}
-								{routinesData.data.length > 0 && routinesData.data.map((item) => (
-									<button
-										name={item.routineName}
-										id={item.routineId}
-										value={item.routineIndex}
-										className={'btn' + (item.routineIndex == btnActive ? ' active' : '')}
-										onClick={handleClickButton}
-									>
-										{item.routineName}
-									</button>
+										<div
+											className="deleteContent"
+											id={item.mySupplementId}
+											onClick={deleteSupplementClickButton}
+										>
+											삭제
+										</div>
+									</S.SupplementContent>
 								))}
-								<S.FixModalButton onClick={onClickFixButton}>
-									<img src={fix} alt="편집하기 버튼" />
-									<p>편집</p>
-								</S.FixModalButton>
-							</S.ButtonContainer>
-						</S.ContentsTitle>
-						<div className="contents">
-							{routineWorkout.data && routineWorkout.data.map((item) => (
-								<S.WorkoutContent key={item.myWorkoutId}>
-									<img src={item.imgPath} alt="운동 사진" />
-									<div className="contentItem">
-										<div className="contentTopItem">
-											<div className="itemsBodyPart">
-												{item.bodyParts.map((bodyPart, index) => (
-													<p className="item_BodyPart" key={index}>{bodyPart}</p>
-												))}
+							</div>
+							<div className="modalbutton">
+								<S.AddModalButton onClick={onClickAddModalButton} className="supplementModal">
+									<img src={add} alt="추가하기 버튼" />
+									<p>이 목록에 보조제 추가하기</p>
+								</S.AddModalButton>
+							</div>
+						</S.SecondContent>
+						:
+						<S.SecondContent onChange={onChange}>
+							<S.ContentsTitle>
+								<div className="contents-title">내 운동 루틴</div>
+								<S.ButtonContainer>
+									{/* 루틴 목록을 map으로 불러옴 */}
+									{routinesData.data.length > 0 && routinesData.data.map((item) => (
+										<button
+											name={item.routineName}
+											id={item.routineId}
+											value={item.routineIndex}
+											className={'btn' + (item.routineIndex == btnActive ? ' active' : '')}
+											onClick={handleClickButton}
+										>
+											{item.routineName}
+										</button>
+									))}
+									<S.FixModalButton onClick={onClickFixButton}>
+										<img src={fix} alt="편집하기 버튼" />
+										<p>편집</p>
+									</S.FixModalButton>
+								</S.ButtonContainer>
+							</S.ContentsTitle>
+							<div className="contents">
+								{routineWorkout.data && routineWorkout.data.map((item) => (
+									<S.WorkoutContent key={item.myWorkoutId}>
+										<img src={item.imgPath} alt="운동 사진" />
+										<div className="contentItem">
+											<div className="contentTopItem">
+												<div className="itemsBodyPart">
+													{item.bodyParts.map((bodyPart, index) => (
+														<p className="item_BodyPart" key={index}>{bodyPart}</p>
+													))}
+												</div>
+												<span className="item_workoutName">
+													{item.workoutName}
+												</span>
 											</div>
-											<span className="item_workoutName">
-												{item.workoutName}
-											</span>
+											{hasWorkrate(item) ? ( // 목표 운동량이 있는 경우
+												<div className="contentBottomItem">
+													<span className="bottomTitle">목표 운동량</span>
+													<div className="workrate">
+														<div className="workrateItem">
+															<span className="workrateTitle">중량</span>
+															<p className="workrateContent">{item.weight}kg</p>
+														</div>
+														<div className="workrateItem">
+															<span className="workrateTitle">횟수</span>
+															<p className="workrateContent">{item.rep}회</p>
+														</div>
+														<div className="workrateItem">
+															<span className="workrateTitle">세트 수</span>
+															<p className="workrateContent">{item.setCount}세트</p>
+														</div>
+													</div>
+												</div>
+											) : ( // 목표 운동량이 없는 경우
+												<div className="noWorkrate">
+													<p className="noWorkrateContent">추천 받지 않아 목표 운동량이 없습니다.</p>
+													<div
+														className="writeWorkrate"
+														onClick={() => {
+															handleRecommendWorkrateButtonClick(item)
+														}}
+													>
+														<p className="recommendWorkrate">추천받기</p>
+														<img className="recommendImg" src={noWorkrate} alt="목표 운동량 추천받기" />
+													</div>
+												</div>
+											)}
 										</div>
-										{hasWorkrate(item) ? ( // 목표 운동량이 있는 경우
-											<div className="contentBottomItem">
-												<span className="bottomTitle">목표 운동량</span>
-												<div className="workrate">
-													<div className="workrateItem">
-														<span className="workrateTitle">중량</span>
-														<p className="workrateContent">{item.weight}kg</p>
-													</div>
-													<div className="workrateItem">
-														<span className="workrateTitle">횟수</span>
-														<p className="workrateContent">{item.rep}회</p>
-													</div>
-													<div className="workrateItem">
-														<span className="workrateTitle">세트 수</span>
-														<p className="workrateContent">{item.setCount}세트</p>
-													</div>
-												</div>
-											</div>
-										) : ( // 목표 운동량이 없는 경우
-											<div className="noWorkrate">
-												<p className="noWorkrateContent">추천 받지 않아 목표 운동량이 없습니다.</p>
-												<div
-													className="writeWorkrate"
-													onClick={() => {
-														handleRecommendWorkrateButtonClick(item)
-													}}
-												>
-													<p className="recommendWorkrate">추천받기</p>
-													<img className="recommendImg" src={noWorkrate} alt="목표 운동량 추천받기" />
-												</div>
-											</div>
-										)}
-									</div>
-									<div
-										className="deleteContent"
-										id={item.myWorkoutId}
-										onClick={deleteClickButton}
-									>
-										삭제
-									</div>
-								</S.WorkoutContent>
-							))}
-						</div>
-						<div className="modalbutton">
-							<S.AddModalButton onClick={onClickAddButton} >
-								<img src={add} alt="추가하기 버튼" />
-								<p>이 목록에 운동 추가하기</p>
-							</S.AddModalButton>
-						</div>
-					</S.SecondContent>
-				)}
-			</S.HomeContent>
+										<div
+											className="deleteContent"
+											id={item.myWorkoutId}
+											onClick={deleteClickButton}
+										>
+											삭제
+										</div>
+									</S.WorkoutContent>
+								))}
+							</div>
+							<div className="modalbutton">
+								<S.AddModalButton onClick={onClickAddButton} >
+									<img src={add} alt="추가하기 버튼" />
+									<p>이 목록에 운동 추가하기</p>
+								</S.AddModalButton>
+							</div>
+						</S.SecondContent>
+					)}
+				</S.HomeContent>
+				{/* 편집 버튼 */}
+				{
+					isFixOpen && (
+						<FixModal
+							open={isFixOpen}
+							data={data} // data를 FixModal로 전달
+							onUpdateData={handleUpdateData}
+							onDeleteItem={(deletedItemId) => {
+								// 삭제된 항목의 ID를 사용하여 데이터 업데이트
+								const updatedData = data.filter((item) => item.id !== deletedItemId);
+								setData(updatedData);
+							}}
+							onClose={() => {
+								setIsFixOpen(false);
+							}}
+						/>
+					)
+				}
 
+				{/* 이 목록에 운동 추가하기 버튼 */}
+				{
+					isAddOpen && (
+						<WorkoutAddModal
+							open={isAddOpen}
+							routineId={routinesId}
+							onClose={() => {
+								setIsAddOpen(false);
+							}}
+						/>
+					)
+				}
+
+				{/* 목표 운동량 추천받기 모달 */}
+				{recommendWorkrateModal && (
+					<RecommendWorkrateModal
+						setRecommendWorkrateModal={setRecommendWorkrateModal}
+						myWorkout={selectedMyWorkout}
+					/>
+				)}
+
+				{/* 이 목록에 보조제 추가하기 버튼 */}
+				{
+					isAddModalOpen && (
+						<SupplementAddModal
+							open={isAddOpen}
+							routineId={routinesId}
+							onClose={() => {
+								setIsAddModalOpen(false);
+							}}
+						/>
+					)
+				}
+			</S.HomeContainer >
 			<S.Footer>
 				<div class="frame">
 					<div class="div">
@@ -446,60 +499,7 @@ const Mypagehome = () => {
 					</div>
 				</div>
 			</S.Footer>
-
-			{/* 편집 버튼 */}
-			{
-				isFixOpen && (
-					<FixModal
-						open={isFixOpen}
-						data={data} // data를 FixModal로 전달
-						onUpdateData={handleUpdateData}
-						onDeleteItem={(deletedItemId) => {
-							// 삭제된 항목의 ID를 사용하여 데이터 업데이트
-							const updatedData = data.filter((item) => item.id !== deletedItemId);
-							setData(updatedData);
-						}}
-						onClose={() => {
-							setIsFixOpen(false);
-						}}
-					/>
-				)
-			}
-
-			{/* 이 목록에 운동 추가하기 버튼 */}
-			{
-				isAddOpen && (
-					<WorkoutAddModal
-						open={isAddOpen}
-						routineId={routinesId}
-						onClose={() => {
-							setIsAddOpen(false);
-						}}
-					/>
-				)
-			}
-
-			{/* 목표 운동량 추천받기 모달 */}
-			{recommendWorkrateModal && (
-				<RecommendWorkrateModal
-					setRecommendWorkrateModal={setRecommendWorkrateModal}
-					myWorkout={selectedMyWorkout}
-				/>
-			)}
-
-			{/* 이 목록에 보조제 추가하기 버튼 */}
-			{
-				isAddModalOpen && (
-					<SupplementAddModal
-						open={isAddOpen}
-						routineId={routinesId}
-						onClose={() => {
-							setIsAddModalOpen(false);
-						}}
-					/>
-				)
-			}
-		</S.HomeContainer >
+		</>
 	);
 };
 

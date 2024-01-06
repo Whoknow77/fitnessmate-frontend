@@ -264,19 +264,39 @@ input[type="radio"] {
 /* ------------------- SPINNER ------------------- */
 
 .spinner {
-  border: 3.5px solid #6b7684;
-  border-left: 3.5px solid #0b98ff;
-  border-radius: 50%;
   width: 20px;
   height: 20px;
-  animation: spin 5.1s linear infinite;
+}
+.svg {
+  display: block;
+}
+.border {
+  fill: none;
+  stroke: #6b7684;
+  stroke-width: 3;
+}
+.progress {
+  fill: none;
+  stroke: #0b98ff;
+  stroke-width: 3;
+  stroke-dasharray: 62.8;
+  stroke-dashoffset: 62.8;
+  animation: progress 6.5s ease-in-out infinite;
+
+  transform-origin: center;
+  transform: rotate(-90deg);
+}
+@keyframes progress {
+  100% {
+    stroke-dashoffset: 0;
+  }
 }
 
-@keyframes spin {
-  0% {
-    transform: rotate(0deg);
+@keyframes spinning {
+  from {
+    transform: rotate(0);
   }
-  100% {
+  to {
     transform: rotate(360deg);
   }
 }
