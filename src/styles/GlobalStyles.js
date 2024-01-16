@@ -20,8 +20,8 @@ ${reset}
         border: 0;
         font-size: 10px;
         vertical-align: baseline;
-         font-family: 'Pretendard';
-         line-height:normal;
+        font-family: 'Pretendard';
+        line-height:normal;
 
 
     }
@@ -49,11 +49,7 @@ ${reset}
         background:none;
         &:focus{
             outline:none;
-     
         }
-    }
-    img{
-        max-width:100%;
     }
 `;
 

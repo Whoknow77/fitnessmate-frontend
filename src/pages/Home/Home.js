@@ -236,7 +236,7 @@ export const Home = () => {
 				<section className="secondContent">
 					<p>이제껏 경험하지 못했던 운동 코칭 경험</p>
 					<div className="secondItems">
-						<img src={logo} alt="핏메이트 로고" />
+						<img className="logoImage" src={logo} alt="핏메이트 로고" />
 						<p>에서 경험해 보세요</p>
 					</div>
 					<div className="mouse" onClick={handleScrollToStart}>
@@ -346,7 +346,7 @@ export const Home = () => {
 						</div>
 					</div>
 					<div class="group">
-						<img src={logo} alt="핏메이트 로고" />
+						<img className="footerLogo" src={logo} alt="핏메이트 로고" />
 					</div>
 				</div>
 			</S.Footer>

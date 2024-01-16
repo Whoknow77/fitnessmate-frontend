@@ -40,7 +40,7 @@ export const SearchInput = ({ isClicked, setIsClicked, handleSearch, name }) => 
 					onChange={handleChange}
 					onKeyDown={handleEnter}
 					placeholder={
-						isClicked === true ? "" : "보조제 이름을 검색해보세요"
+						isClicked === true ? "" : "어떤 보조제가 도움될까요?"
 					}
 					onFocus={() => {
 						setIsClicked(true);

@@ -495,7 +495,7 @@ const Mypagehome = () => {
 						</div>
 					</div>
 					<div class="group">
-						<img src={logo} alt="핏메이트 로고" />
+						<img className="footerLogo" src={logo} alt="핏메이트 로고" />
 					</div>
 				</div>
 			</S.Footer>

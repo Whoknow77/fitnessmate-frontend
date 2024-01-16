@@ -648,6 +648,9 @@ export const Footer = styled.div`
 		position: absolute;
 		width: 60px;
 		height: 13px;
+			.footerLogo {
+				width: 60px;
+			}
 		}
 		.frame .overlap {
 		position: relative;

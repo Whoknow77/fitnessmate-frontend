@@ -12,25 +12,30 @@ export const SearchContainer = styled.div`
 export const SearchBarContainer = styled.div`
 	width: 627px;
   height: 58px;
-  padding: 8px 12px 8px 18px;
+  padding: 10px 12px 10px 18px;
 	background: ${theme.Gray10};
   border-radius: 16px;
 	border: ${({ isClicked, theme }) =>
 		isClicked ? `2px solid ${theme.Brand}` : '1px solid #eaeef1'};
   display: flex;
   align-items: center;
+	justify-content: space-between;
 
 	.iconArea {
 		display: flex;
-		gap: 18px;
+		gap: 8px;
+		align-items: center;
 		
 		.searchIcon {
 			cursor: pointer;
+			width: 32px;
+			height: 32px;
 		}
 
 		.closeIcon {
-			width: 24px;
-			height: 24px;
+			width: 18px;
+			height: 18px;
+			margin: 13px;
 			cursor: pointer;
 		}
 	}
@@ -75,7 +80,7 @@ export const SearchBottomContainer = styled.div`
 			align-items: center;
 			gap: 6px;
 			padding: 8px 12px;
-			background: ${theme.Gray20};
+			background: ${theme.Gray10};
 			border-radius: 8px;
 			cursor: pointer;
 		}

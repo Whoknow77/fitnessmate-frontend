@@ -5,6 +5,18 @@ export const SearchContainer = styled.div`
   display: flex;
   flex-direction: column;
   width: 100%;
+
+	.searchAreaOverlay {
+		position: fixed;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		background: ${theme.White};
+		opacity: 0.6;
+		z-index: 101;
+	}
+
   .searchTopWrapper {
 		margin-top: 140px;
     max-width: 812px;
@@ -39,41 +51,79 @@ export const SearchContainer = styled.div`
     }
   }
 
+	.noSearch {
+		z-index: 9;
+	}
+	.noSearch.opacity {
+		z-index: 103;
+	}
+
   .searchContentWrapper {
 		display: flex;
-		max-width: 1032px;
-		margin: 0 auto;
-		flex-wrap: wrap;
-    gap: 48px;
-    text-align: left;
-    @media screen and (max-width: 825px) {
-      text-align: center;
-    }
-  }
+		flex-direction: column;
+		width: 1032px;
+		margin: 62px auto 4px auto;
+		gap: 82px;
+		
+		.searchContent {
+			width: 1032px;
+			display: flex;
+			flex-wrap: wrap;
+			gap: 48px;
+		}
 
-  .serachButtonWrapper {
-		margin-top: 100px;
-		margin: 0 auto;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 58px;
-    .BtnWrapper {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 48px;
-      padding: 10px;
-      .backBtnText {
-        color: ${theme.BrandNon};
-        font-size: 24px;
-      }
-      .nextBtnText {
-        color: ${theme.Brand};
-        font-size: 24px;
-      }
-    }
+		.serachButtonWrapper {
+			margin-top: 100px;
+			margin: 0 auto;
+			display: flex;
+			align-items: center;
+			gap: 18px;
+	
+				.backBtnImg {
+					cursor: pointer;
+				}
+				.backBtnImg.nonActivePage {
+					opacity: 0.3;
+					cursor: auto;
+				}
+				.nextBtnImg {
+					cursor: pointer;
+				}
+				.nextBtnImg.nonActivePage {
+					opacity: 0.3;
+					cursor: auto;
+				}
+	
+				.paginationWrapper {
+					display: flex;
+					align-items: center;
+					gap: 12px;
+	
+					.pageItem {
+						width: 30px;
+						height: 30px;
+						display: flex;
+						align-items: center;
+						justify-content: center;
+						border-radius: 16px;
+						font-weight: 500;
+						color: ${theme.Gray70};
+						font-size: 15px;
+						letter-spacing: -0.3px;
+						cursor: pointer;
+					}
+					.pageItem.activePage {
+						color: ${theme.White};
+						background-color: ${theme.Gray80};
+					}
+				}
+		}
+
   }
+	.searchContentWrapper.opacity {
+		z-index: 103;
+	}
+
 `;
 
 export const SwitchMenu = styled.div`
@@ -111,81 +161,8 @@ export const SwitchMenu = styled.div`
 	}
 `;
 
-export const SwitchMenuCategory = styled.div`
-	top: 60px;
-	width: 100%;
-	display: flex;
-	align-items: center;
-	gap: 32px;
-	background: ${({ theme }) => theme.Gray10};
-	height: 64px;
-	position: sticky;
-	z-index: 100;
-
-	.bodypartsCategory {
-		width: 1032px;
-		margin: 0 auto;
-		display: flex;
-		justify-content: space-between;
-
-		.bodypartsContainer {
-			display: flex;
-			gap: 7px;
-
-			.bodypartButton {
-				display: flex;
-				align-items: center;
-				justify-content: center;
-				padding: 8px 12px;
-				cursor: pointer;
-				border-radius: 34px;
-			}
-			.bodypartButtonText {
-				font-weight: 500;
-				color: ${theme.Gray50};
-				font-size: 18px;
-				letter-spacing: -0.36px;
-			}
-			.bodypartButton.active {
-				background: ${theme.Brand};
-			}
-			.bodypartButtonText.active {
-				font-weight: 600;
-				color: ${theme.White};
-			}
-		}
-
-		.searchOpenButton {
-			display: flex;
-			gap: 7px;
-			padding: 10px 14px;
-			background-color: ${theme.Gray20};
-			border-radius: 37px;
-			border: 1px solid ${theme.Gray30};
-
-			.searchOpenIcon {
-				width: 20px;
-				height: 20px;
-			}
-
-			.searchOpenText {
-				font-weight: 500;
-				color: ${theme.Gray50};
-				font-size: 16px;
-				letter-spacing: -0.32px;
-				cursor: pointer;
-			}
-		}
-	}
-`
-
-export const SearchArea = styled.div`
-`
-
-
 export const SectionContainer = styled.div`
 	display: flex;
-	gap: 62px;
 	flex-direction: column;
 	width: 100%;
 
@@ -197,6 +174,135 @@ export const SectionContainer = styled.div`
 		width: 90%;
 		margin: 0 auto;
 	}
+
+	.switchMenuCategory {
+		top: 64px;
+		width: 100%;
+		display: flex;
+		align-items: center;
+		gap: 32px;
+		background: ${({ theme }) => theme.Gray10};
+		height: 64px;
+		position: sticky;
+		z-index: 999;
+
+		.bodypartsCategory {
+			width: 1032px;
+			margin: 0 auto;
+			display: flex;
+			justify-content: space-between;
+	
+			.bodypartsContainer {
+				display: flex;
+				gap: 7px;
+	
+				.bodypartButton {
+					display: flex;
+					align-items: center;
+					justify-content: center;
+					padding: 8px 12px;
+					cursor: pointer;
+					border-radius: 34px;
+				}
+				.bodypartButtonText {
+					font-weight: 500;
+					color: ${theme.Gray50};
+					font-size: 18px;
+					letter-spacing: -0.36px;
+				}
+				.bodypartButton.active {
+					background: ${theme.Brand};
+				}
+				.bodypartButtonText.active {
+					font-weight: 600;
+					color: ${theme.White};
+				}
+			}
+	
+			.searchOpenButton {
+				display: flex;
+				gap: 7px;
+				padding: 10px 14px;
+				background-color: ${theme.Gray20};
+				border-radius: 37px;
+				border: 1px solid ${theme.Gray30};
+				cursor: pointer;
+	
+				.searchOpenIcon {
+					width: 20px;
+					height: 20px;
+				}
+	
+				.searchOpenText {
+					font-weight: 500;
+					color: ${theme.Gray50};
+					font-size: 16px;
+					letter-spacing: -0.32px;
+				}
+			}
+		}
+	}
+	.switchMenuCategory.open {
+		position: relative;
+		top: 0;
+		z-index: 999;
+	}
+`
+
+export const SearchArea = styled.div`
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	z-index: 103;
+
+	.searchArea {
+		width: 909.04px;
+		height: 0;
+		overflow: hidden;
+  	opacity: 0; // 처음에는 투명하게 설정
+		transition: height 0.5s ease, opacity 0.5s 0.4s ease; // 펼쳐지는 지속시간 ease, 투명도변하는 지속시간 지연시간
+		position: relative;
+
+		.searchBar {
+			position: absolute;
+			top: 188px;
+			left: 50%;
+			transform: translate(-50%, 0);
+		}
+
+		.searchCloseIcon {
+			width: 20px;
+			height: 21px;
+			position: absolute;
+			top: 92.26px;
+			right: 0px;
+			cursor: pointer;
+		}
+	}
+
+	.searchArea.open {
+		width: 909.04px;
+		height: 420px;// 펼쳐진 상태의 높이를 설정
+		opacity: 1; // 서서히 나타나도록 투명도를 조절
+		position: relative;
+
+		.searchBar {
+			position: absolute;
+			top: 188px;
+			left: 50%;
+			transform: translate(-50%, 0);
+		}
+
+		.searchCloseIcon {
+			width: 20px;
+			height: 21px;
+			position: absolute;
+			top: 92.26px;
+			right: 0px;
+			cursor: pointer;
+		}
+	}
+
 `
 
 export const Filter = styled.div`
@@ -539,6 +645,9 @@ export const Footer = styled.div`
 		position: absolute;
 		width: 60px;
 		height: 13px;
+			.footerLogo {
+				width: 60px;
+			}
 		}
 		.frame .overlap {
 		position: relative;
