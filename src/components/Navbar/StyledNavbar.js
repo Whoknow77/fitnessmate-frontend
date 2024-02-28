@@ -8,7 +8,7 @@ export const NavSection = styled.div`
 	position: ${({ isHomePage }) => isHomePage ? 'fixed' : 'sticky'};
 	top: 0;
 	max-width: 1920px;
-	z-index: 999;
+	z-index: 1000;
 
 	#navbar {
 		width: 100%;

@@ -67,7 +67,7 @@ export const Button = styled.button`
   padding: 8px 12px;
   color: ${theme.Black};
   letter-spacing: -0.02em;
-	background-color: ${theme.White};;
+	background-color: ${theme.White};
   &:hover {
     background-color: ${theme.Gray20};
   }

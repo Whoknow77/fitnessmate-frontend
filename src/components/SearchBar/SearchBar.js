@@ -1,11 +1,13 @@
-import { useState, useRef } from "react";
+import { useEffect, useState, useRef } from "react";
 import * as S from "./StyledSearchBar"
 import Search_Icon from "../../assets/images/searchHome_icon.svg";
 import { useNavigate } from "react-router-dom";
 import Close from "../../assets/images/close_small.svg";
 
 // 운동명 / 운동 종목 검색
-const SearchBar = ({ handleSearch, name, }) => {
+const SearchBar = ({ handleSearch, name, isClearSearchValue }) => {
+
+
 	const navigate = useNavigate();
 
 	// isClicked를 통해 검색창 클릭 여부에 따라 스타일 다르게 함
@@ -38,6 +40,14 @@ const SearchBar = ({ handleSearch, name, }) => {
 		setSearchValue("");
 		inputRef.current.focus(); // ref를 통해 입력 창에 포커스 주기
 	};
+
+	// SearchHome으로부터 전달받은 상태를 토대로 SearchValue 지우기
+	useEffect(() => {
+		console.log("isClearSearchValue : ", isClearSearchValue)
+		if (isClearSearchValue === true) {
+			setSearchValue("");
+		}
+	}, [isClearSearchValue]);
 
 	return (
 		<S.SearchContainer>
@@ -114,11 +124,11 @@ const SearchBar = ({ handleSearch, name, }) => {
 				)}
 				{name === "supplement" && (
 					<div className="searchBottomContent">
-						<div className="popularKeyword" onClick={() => handlePopularKeywordClick("마이 프로틴")}>
-							<p># 마이 프로틴</p>
+						<div className="popularKeyword" onClick={() => handlePopularKeywordClick("히알루론산")}>
+							<p># 히알루론산</p>
 						</div>
-						<div className="popularKeyword" onClick={() => handlePopularKeywordClick("BCAA")}>
-							<p># BCAA</p>
+						<div className="popularKeyword" onClick={() => handlePopularKeywordClick("시리어스")}>
+							<p># 시리어스</p>
 						</div>
 					</div>
 				)}

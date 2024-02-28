@@ -71,49 +71,45 @@ class TripleToggleSwitch extends React.Component {
 		const { switchPosition, showSpinner } = this.state;
 		let animation = null;
 
-		// 현재 활성화된 라벨에 대한 showSpinner를 false로 설정하여 스피너 감추기
-		Object.keys(showSpinner).forEach(label => {
-			if (label !== value) {
-				showSpinner[label] = false;
+		// 스피너를 갱신하는 로직 유지
+		const updatedShowSpinner = Object.keys(showSpinner).reduce((acc, label) => {
+			acc[label] = label === value;
+			return acc;
+		}, {});
+
+		this.setState({ showSpinner: updatedShowSpinner });
+
+		// value가 변경되었을 때 애니메이션 및 상태 갱신
+		if (value !== switchPosition) {
+			if (value === "center" && switchPosition === "left") {
+				animation = "left-to-center";
+			} else if (value === "right" && switchPosition === "center") {
+				animation = "center-to-right";
+			} else if (value === "center" && switchPosition === "right") {
+				animation = "right-to-center";
+			} else if (value === "left" && switchPosition === "center") {
+				animation = "center-to-left";
+			} else if (value === "right" && switchPosition === "left") {
+				animation = "left-to-right";
+			} else if (value === "left" && switchPosition === "right") {
+				animation = "right-to-left";
 			}
-		});
 
-		// 해당 라벨의 showSpinner를 true로 설정하여 스피너를 표시
-		this.setState({
-			showSpinner: {
-				...showSpinner,
-				[value]: true
-			}
-		});
+			this.props.onChange(value);
+			this.setState({ switchPosition: value, animation });
 
-
-		if (value === "center" && switchPosition === "left") {
-			animation = "left-to-center";
-		} else if (value === "right" && switchPosition === "center") {
-			animation = "center-to-right";
-		} else if (value === "center" && switchPosition === "right") {
-			animation = "right-to-center";
-		} else if (value === "left" && switchPosition === "center") {
-			animation = "center-to-left";
-		} else if (value === "right" && switchPosition === "left") {
-			animation = "left-to-right";
-		} else if (value === "left" && switchPosition === "right") {
-			animation = "right-to-left";
+			// 일정 시간 후에 스피너를 숨기고 showSpinner를 false로 설정
+			setTimeout(() => {
+				this.setState(prevState => ({
+					showSpinner: {
+						...prevState.showSpinner,
+						[value]: false
+					}
+				}));
+			}, 5000); // 5초
 		}
-
-		this.props.onChange(value);
-		this.setState({ switchPosition: value, animation });
-
-		// 2. 일정 시간 후에 스피너를 숨기고 showSpinner를 false로 설정
-		setTimeout(() => {
-			this.setState({
-				showSpinner: {
-					...showSpinner,
-					[value]: false
-				}
-			});
-		}, 5000); // 3초
 	};
+
 
 	render() {
 		const { labels } = this.props;

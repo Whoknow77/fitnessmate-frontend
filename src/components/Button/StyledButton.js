@@ -20,7 +20,7 @@ export const MiddleButtonWrapper = styled.button`
   height: 62px;
   padding: 22px 24px;
   background: ${({ isReady }) =>
-		isReady === undefined || isReady === true ? theme.Brand : theme.BrandLight};
+    isReady === undefined || isReady === true ? theme.Brand : theme.BrandLight};
   cursor: ${({ isReady }) => (isReady ? "pointer" : "default")};
   color: ${theme.White};
 `;
@@ -32,25 +32,25 @@ export const SemiMiddleButtonWrapper = styled.button`
   height: 56px;
   padding: 22px 24px;
   background: ${({ isReady }) =>
-		isReady === undefined || isReady === true ? theme.Brand : theme.BrandLight};
+    isReady === undefined || isReady === true ? theme.Brand : theme.BrandLight};
   cursor: ${({ isReady }) => (isReady ? "pointer" : "default")};
   color: ${theme.White};
-	display: flex;
-	gap: 12px;
+  display: flex;
+  gap: 12px;
 
-	.selectedCount {
-		display: flex;
-		align-items: center;
-		justify-content: center;
-		width: 24px;
-		height: 24px;
-		border-radius: 20px;
-		background: ${theme.White};
-		color: ${theme.Brand};
-		font-weight: 500;
-		font-size: 14px;
-		letter-spacing: -0.28px;
-	}
+  .selectedCount {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 24px;
+    height: 24px;
+    border-radius: 20px;
+    background: ${theme.White};
+    color: ${theme.Brand};
+    font-weight: 500;
+    font-size: 14px;
+    letter-spacing: -0.28px;
+  }
 `;
 
 // < 가로 길이가 짧은 버튼 >
@@ -94,7 +94,8 @@ export const ListButtonWrapper = styled.button`
   color: ${theme.Black};
 `;
 
-export const BeforeArrowButtonWrapper = styled.button`
+export const BeforeArrowButtonWrapper = styled.div`
+  corsur: ${({ isLoading }) => (isLoading ? "auto" : "pointer")};
   display: flex;
   width: 150px;
   height: 62px;
@@ -103,15 +104,20 @@ export const BeforeArrowButtonWrapper = styled.button`
   align-items: center;
   gap: 10px;
   border-radius: 10px;
-  background: ${theme.White};
   .beforeArrowBtnImg {
     width: 24px;
     height: 24px;
+    opacity: ${({ isLoading }) => (isLoading ? 0.5 : 1)};
   }
   .beforeArrowBtnText {
     color: ${theme.Brand};
     font-size: 22px;
     letter-spacing: -0.44px;
+    opacity: ${({ isLoading }) => (isLoading ? 0.5 : 1)};
+  }
+
+  &:hover {
+    background: ${({ isLoading }) => (isLoading ? "none" : "Gray20")};
   }
 `;
 

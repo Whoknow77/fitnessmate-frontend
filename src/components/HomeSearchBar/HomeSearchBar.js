@@ -29,7 +29,7 @@ const HomeSearchBar = ({ name }) => {
 
 	const handleSearch = (searchValue) => {
 		setMachineListRecoil(searchValue);
-		navigate("search/1");
+		navigate("/searchworkout/1");
 	};
 
 

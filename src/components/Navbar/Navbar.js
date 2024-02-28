@@ -42,13 +42,10 @@ const Navbar = () => {
 		};
 	},);
 
-
 	const handleSearch = () => {
-		if (window.location.href.includes("signup")) {
-			setIsCancleModal(true);
-		} else {
-			navigate("search/1");
-		}
+		navigate("searchworkout/1");
+		// 페이지 새로고침
+		window.location.reload();
 	};
 	const handleMyPage = () => {
 		if (window.location.href.includes("signup")) {
@@ -61,18 +58,10 @@ const Navbar = () => {
 			}
 		}
 	};
+
 	// 브라우저의 새로고침 감지
 	useEffect(() => {
-		// signup 페이지 && 새로고침 시에만
-		if (
-			localStorage.getItem("refreshed") &&
-			window.performance.navigation.type === 1 &&
-			window.location.href.includes("signup")
-		) {
-			navigate("/signup");
-			localStorage.removeItem("refreshed"); // 플래그 제거
-		}
-
+		// 브라우저의 새로고침 감지
 		const handleBeforeUnload = (e) => {
 			e.preventDefault();
 			if (window.location.href.includes("signup")) {
@@ -80,12 +69,17 @@ const Navbar = () => {
 			}
 		};
 
-		window.addEventListener("beforeunload", handleBeforeUnload);
+		if (window.location.href.includes("signup")) {
+			window.addEventListener("beforeunload", handleBeforeUnload);
+		}
 
 		return () => {
-			window.removeEventListener("beforeunload", handleBeforeUnload);
+			if (window.location.href.includes("signup")) {
+				window.removeEventListener("beforeunload", handleBeforeUnload);
+			}
 		};
 	}, [navigate]);
+
 
 	const handleRecommend = () => {
 		if (window.location.href.includes("signup")) {

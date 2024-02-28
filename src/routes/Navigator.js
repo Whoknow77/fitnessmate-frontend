@@ -10,7 +10,8 @@ import Signup from "../pages/Signup/Signup";
 import Recommend from "./../pages/Recommend/Recommend";
 import Mypage from "../pages/MyPage/Mypage";
 import MainLayout from "./../Layout/Mainlayout";
-import Search from "../pages/Search/Search"
+import SearchWourkoutHome from "../pages/Search/SearchWorkout/SearchWorkout"
+import SearchSupplementHome from "../pages/Search/SearchSupplement/SearchSupplement"
 
 const router = createBrowserRouter(
 	createRoutesFromElements(
@@ -20,7 +21,8 @@ const router = createBrowserRouter(
 			<Route path="/signup/*" element={<Signup />} />
 			<Route path="/login/*" element={<Login />} />
 			<Route path="/recommend/*" element={<Recommend />} />
-			<Route path="/search/:pageNum/*" element={<Search />} />
+			<Route path="/searchworkout/:pageNum/*" element={<SearchWourkoutHome />} />
+			<Route path="/searchsupplement/:pageNum/*" element={<SearchSupplementHome />} />
 			<Route path="/mypage/*" element={<Mypage />} />
 		</Route>
 	)
