@@ -77,15 +77,151 @@ export const MypageTopContainer = styled.div`
       }
     }
   }
+`;
 
-  .addRoutineButton {
-    width: 44px;
-    height: 44px;
-    background: ${theme.Gray20};
-    border-radius: 50%;
+export const RoutinesContainer = styled.div`
+  .lengthRoutineContainer {
     display: flex;
-    justify-content: center;
+    gap: 6px;
     align-items: center;
+
+    .addRoutineButton {
+      width: 44px;
+      height: 44px;
+      background: ${theme.Gray20};
+      border-radius: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .routineArea {
+      display: flex;
+      gap: 12px;
+      height: 44px;
+      padding: 0 12px 0 18px;
+      align-items: center;
+      border-radius: 30px;
+      background: #e4eaf0;
+      position: relative;
+
+      .routineName {
+        color: #4e5968;
+        font-size: 16px;
+        font-weight: 500;
+        line-height: 150%;
+        letter-spacing: -0.192px;
+      }
+      .fixThisRoutine {
+        cursor: pointer;
+      }
+    }
+    .active {
+      background: #191f28;
+      .routineName {
+        color: #ffffff;
+      }
+      .svgFill {
+        fill: #ffffff;
+      }
+    }
+  }
+
+  .noneRoutineContainer {
+    display: flex;
+    width: 100%;
+    padding: 20px 18px;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: 16px;
+    background: #fff;
+
+    .noneRoutineTextArea {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+
+      .noneRoutineTopText {
+        color: ${theme.Gray80};
+        font-size: 18px;
+        font-weight: 500;
+        line-height: 150%;
+        letter-spacing: -0.18px;
+      }
+      .noneRoutineBottomText {
+        color: ${theme.Brand};
+        font-size: 15px;
+        font-weight: 600;
+        line-height: 150%;
+        letter-spacing: -0.15px;
+      }
+    }
+
+    .addFirstRoutineButton {
+      display: flex;
+      padding: 14px 20px 14px 14px;
+      align-items: center;
+      gap: 4px;
+      border-radius: 28px;
+      background: ${theme.Brand};
+
+      .addFirstRoutineButtonImg {
+        width: 24px;
+        height: 24px;
+      }
+      .addFirstRoutineButtonText {
+        color: #fff;
+        font-size: 16px;
+        font-weight: 500;
+        line-height: 150%;
+        letter-spacing: -0.32px;
+      }
+    }
+  }
+`;
+
+export const RoutineFixModal = styled.div`
+  position: absolute;
+  left: 3px;
+  top: 38px;
+  z-index: 300;
+  display: flex;
+  padding: 8px;
+  flex-direction: column;
+  width: 152px;
+  height: 140px;
+  border-radius: 14px;
+  background: #fff;
+  box-shadow: 0px 1px 8.7px 0px rgba(0, 0, 0, 0.48);
+
+  .routineFixModalButton {
+    display: flex;
+    padding: 8px 12px 8px 6px;
+    align-items: center;
+    gap: 8px;
+    border-radius: 10px;
+
+    .routineFixModalIcon {
+      width: 20px;
+      height: 20px;
+    }
+    .routineFixModalText {
+      color: #333d4b;
+      font-size: 14px;
+      font-weight: 500;
+      line-height: 150%;
+      letter-spacing: -0.28px;
+    }
+
+    &:hover {
+      background: rgba(51, 61, 75, 0.1);
+    }
+  }
+
+  .routineFixModalLine {
+    opacity: 0.2;
+    background: #a2b2c2;
+    height: 1px;
+    margin: 6px 0 6px 0;
   }
 `;
 

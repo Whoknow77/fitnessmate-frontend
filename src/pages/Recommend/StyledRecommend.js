@@ -739,8 +739,8 @@ export const RecommendMainMiddleWrapper = styled.div`
   max-height: ${({ isOpenArray }) => (isOpenArray ? "1000px" : 0)};
   opacity: ${({ isOpenArray }) => (isOpenArray ? 1 : 0)};
   transition:
-    max-height 0.7s ease,
-    opacity 0.7s ease;
+    max-height 0.2s ease-out,
+    opacity 0.5s ease-out;
   overflow: hidden;
   display: flex;
   flex-direction: column;

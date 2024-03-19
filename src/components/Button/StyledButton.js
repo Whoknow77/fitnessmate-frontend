@@ -95,7 +95,7 @@ export const ListButtonWrapper = styled.button`
 `;
 
 export const BeforeArrowButtonWrapper = styled.div`
-  corsur: ${({ isLoading }) => (isLoading ? "auto" : "pointer")};
+  cursor: ${({ isLoading }) => (isLoading ? "auto" : "pointer")};
   display: flex;
   width: 150px;
   height: 62px;
@@ -104,6 +104,8 @@ export const BeforeArrowButtonWrapper = styled.div`
   align-items: center;
   gap: 10px;
   border-radius: 10px;
+  background: ${theme.White};
+
   .beforeArrowBtnImg {
     width: 24px;
     height: 24px;
@@ -117,7 +119,8 @@ export const BeforeArrowButtonWrapper = styled.div`
   }
 
   &:hover {
-    background: ${({ isLoading }) => (isLoading ? "none" : "Gray20")};
+    background: ${({ isLoading, theme }) =>
+      isLoading ? "none" : theme.Gray10};
   }
 `;
 

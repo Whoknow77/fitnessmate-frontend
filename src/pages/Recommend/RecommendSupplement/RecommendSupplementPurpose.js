@@ -18,6 +18,9 @@ import { purposeState } from "../../../recoil/atom";
 import { SignupTitle } from "../../Signup/StyledSignup";
 
 const RecommendSupplementPurpose = () => {
+  // 분석중 로딩 상태
+  const [isLoading, setIsLoading] = useState(false);
+
   const navigate = useNavigate();
 
   // 목적 객체
@@ -131,7 +134,7 @@ const RecommendSupplementPurpose = () => {
         ))}
       </TextCheckboxContainer>
       <RecommendButtonContainer isover={isover}>
-        <BeforeArrowButton handleClick={handleBackPage} />
+        <BeforeArrowButton handleClick={handleBackPage} isLoading={isLoading} />
         <AfterArrowButton handleClick={handleNextPage} isReady={isReady}>
           다음
         </AfterArrowButton>
