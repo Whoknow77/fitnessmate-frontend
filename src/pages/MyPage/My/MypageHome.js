@@ -51,9 +51,15 @@ const Mypagehome = () => {
   const [isRoutine, setIsRoutine] = useState(false);
   // 선택된 루틴
   const [btnActive, setBtnActive] = useState("");
+  // 선택된 루틴에 속한 운동
+  const [routineWorkout, setRoutineWorkout] = useState([]);
 
   // 기본 상태 세팅
+
   const fetchData = async () => {
+    // 내 운동 페이지 들어갈 때마다 로그아웃 되었던 이유
+    // 지성님께서 로컬 스토리지 값이 내 운동 페이지 들어갈 때마다 사라진다고 하셨음.
+    // localStorage.clear();
     try {
       // 이름
       const response = await TokenApi.get("user/private");
@@ -63,48 +69,39 @@ const Mypagehome = () => {
       setBodyFat(response_body.data.bodyFat);
       setMuscleMass(response_body.data.muscleMass);
       // 루틴 목록
-      const routinesResponse = await TokenApi.get("/myfit/routines/workout");
+      const routinesResponse = await TokenApi.get("myfit/routines/workout");
       setRoutinesData(routinesResponse);
-      console.log(routinesResponse);
       if (routinesData.data.length !== 0) {
         setIsRoutine(true);
-        console.log(routinesResponse.data);
         // 가장 첫 번째 루틴 목록을 active 시킴
         setBtnActive(routinesResponse.data[0].routineIndex);
+        // 루틴에 속한 운동 리스트 조회
+        const routinesWorkoutResult = await TokenApi.get(
+          `myfit/routines/workout/${routinesResponse.data[0].routineId}`
+        );
+        setRoutineWorkout(routinesWorkoutResult);
       } else {
         setIsRoutine(false);
       }
     } catch (error) {
-      localStorage.clear();
+      console.log(error);
     }
   };
 
   useEffect(() => {
     fetchData();
-  }, [routinesData.data]);
+  }, [routinesData.length]);
 
-  // 루틴 조작 및 재조회
+  // 루틴 조작
 
   const fixRoutines = async (routinesArray) => {
-    console.log(isRoutine);
     try {
-      // 루틴 조작
-      const newRoutines = await TokenApi.post("/myfit/routines/workout", {
+      const newRoutines = await TokenApi.post("myfit/routines/workout", {
         routines: routinesArray,
       });
-      console.log(newRoutines);
+      console.log("이거", newRoutines);
 
-      // 루틴 목록 재조회
-      const routinesResponse = await TokenApi.get("/myfit/routines/workout");
-      setRoutinesData(routinesResponse);
-      if (routinesData.data.length !== 0) {
-        setIsRoutine(true);
-        console.log(routinesData);
-        console.log(isRoutine);
-      } else {
-        setIsRoutine(false);
-        console.log(isRoutine);
-      }
+      setRoutinesData(routinesArray);
     } catch (error) {
       console.error(error);
     }
@@ -117,12 +114,22 @@ const Mypagehome = () => {
       {
         routineId: -1,
         routineIndex: 0,
-        routineName: "첫 번째 루틴",
+        routineName: "루틴 1",
       },
       {
         routineId: -1,
         routineIndex: 1,
-        routineName: "두 번째 루틴",
+        routineName: "루틴 2",
+      },
+      {
+        routineId: -1,
+        routineIndex: 2,
+        routineName: "루틴 3",
+      },
+      {
+        routineId: -1,
+        routineIndex: 3,
+        routineName: "루틴 4",
       },
     ];
 
@@ -153,17 +160,29 @@ const Mypagehome = () => {
     setIsRoutineFixOpen("");
   };
 
+  // 임의 제작
   const howabout = () => {
-    console.log(routinesData.data);
-    console.log(isRoutine);
+    console.log(routineWorkout.data);
+    console.log(list);
   };
 
   // Routine Modal
 
   const [isRoutineFixOpen, setIsRoutineFixOpen] = useState("");
 
-  const onClickFixRoutine = (routineId) => {
+  const onClickFixRoutine = async (routineId) => {
     setIsRoutineFixOpen(routineId);
+
+    try {
+      // 해당 루틴에 속한 운동 리스트를 가져오기 위해 API 요청
+      const routinesWorkout = await TokenApi.get(
+        `/myfit/routines/workout/${routineId}`
+      );
+      setRoutineWorkout(routinesWorkout);
+      console.log(routineWorkout);
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   const modalRef = useRef(null);
@@ -199,13 +218,13 @@ const Mypagehome = () => {
 
   // 드랍 (커서 뗐을 때)
   const drop = (e) => {
-    const newList = [...list];
+    const newList = [...routineWorkout.data];
     const dragItemValue = newList[dragItem.current];
     newList.splice(dragItem.current, 1);
     newList.splice(dragOverItem.current, 0, dragItemValue);
     dragItem.current = null;
     dragOverItem.current = null;
-    setList(newList);
+    setRoutineWorkout(newList);
   };
 
   return (
@@ -353,8 +372,8 @@ const Mypagehome = () => {
             </div>
           </S.MypageTopContainer>
           <S.MypageMiddleContainer>
-            {list &&
-              list.map((item, idx) => (
+            {routineWorkout.data &&
+              routineWorkout.data.map((item, idx) => (
                 <div
                   className="workoutCard"
                   key={idx}
@@ -368,7 +387,7 @@ const Mypagehome = () => {
                     <div className="line"></div>
                   </div>
                   <div className="workoutCardContent" draggable>
-                    <p className="workoutName">{item}</p>
+                    <p className="workoutName">{item.workoutName}</p>
                   </div>
                   <img
                     className="cardHandler"
@@ -382,60 +401,6 @@ const Mypagehome = () => {
           </S.MypageMiddleContainer>
         </div>
       </S.MypageContainer>
-      <S.Footer>
-        <div class="frame">
-          <div class="div">
-            <div class="text-wrapper">서비스</div>
-            <div class="div-2">
-              <div class="text-wrapper-2">검색하기</div>
-              <div class="text-wrapper-3">추천받기</div>
-              <div class="text-wrapper-3">내 운동</div>
-            </div>
-          </div>
-          <div class="div-3">
-            <div class="text-wrapper">문의</div>
-            <div class="div-2">
-              <div class="div-4">
-                <div class="div-wrapper">
-                  <div class="text-wrapper-4">전화</div>
-                </div>
-                <div class="div-wrapper">
-                  <div class="text-wrapper-2">010-8544-1013</div>
-                </div>
-              </div>
-              <div class="div-4">
-                <div class="div-wrapper">
-                  <div class="text-wrapper-5">이메일</div>
-                </div>
-                <div class="div-wrapper">
-                  <div class="text-wrapper-2">jeuk1013@naver.com</div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="div-5">
-            <div class="div-6">
-              <div class="text-wrapper-6">개발</div>
-              <div class="div-2">
-                <div class="text-wrapper-2">이찬하</div>
-                <div class="text-wrapper-3">정지성</div>
-                <div class="text-wrapper-3">강민정</div>
-                <div class="text-wrapper-3">최훈오</div>
-              </div>
-            </div>
-            <div class="div-6">
-              <div class="text-wrapper-6">디자인</div>
-              <div class="div-2">
-                <div class="text-wrapper-2">김정욱</div>
-                <div class="text-wrapper-3">최시현</div>
-              </div>
-            </div>
-          </div>
-          <div class="group">
-            <img className="footerLogo" src={logo} alt="핏메이트 로고" />
-          </div>
-        </div>
-      </S.Footer>
     </>
   );
 };

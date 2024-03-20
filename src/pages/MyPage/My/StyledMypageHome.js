@@ -181,7 +181,7 @@ export const RoutinesContainer = styled.div`
 
 export const RoutineFixModal = styled.div`
   position: absolute;
-  left: 3px;
+  right: 6px;
   top: 38px;
   z-index: 300;
   display: flex;

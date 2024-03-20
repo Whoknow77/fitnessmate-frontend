@@ -8,6 +8,7 @@ export const ModalBox = styled.div`
   width: 100vw;
   height: 100vh;
   z-index: 1000;
+  overflow: hidden;
   background-color: rgba(0, 0, 0, 0.2);
 `;
 
@@ -21,7 +22,7 @@ export const ModalWrapper = styled.div`
   border: 1px solid ${theme.Gray30};
   border-radius: 16px;
   background: ${theme.White};
-  position: fixed;
+  position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);

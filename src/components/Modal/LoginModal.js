@@ -3,9 +3,13 @@ import { useNavigate } from "react-router-dom";
 
 const LoginModal = ({ setIsLoginModal }) => {
   const navigate = useNavigate();
+  // 스크롤 없애서모달 뒤에 스크롤 막기
+  document.body.style.overflowY = "hidden";
 
   const handleCancle = () => {
     setIsLoginModal(false);
+    // 스크롤 다시 생기도록
+    document.body.style.overflowY = "auto";
   };
 
   const handleLeave = () => {
