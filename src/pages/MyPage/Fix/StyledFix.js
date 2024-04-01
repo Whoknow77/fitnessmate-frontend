@@ -10,7 +10,7 @@ export const SignupContainer = styled.form`
   width: 474px;
 
   .recommendText {
-    color: ${theme.Gray80};
+    color: ${theme.Neutral900};
     font-size: 22px;
     font-weight: 600;
     letter-spacing: -0.44px;
@@ -41,7 +41,7 @@ export const SignupContainer = styled.form`
     gap: 18px;
     width: 100%;
     .signupCompleteTitle {
-      color: ${theme.Gray80};
+      color: ${theme.Neutral900};
       font-size: 22px;
       font-weight: 600;
       letter-spacing: -0.44px;
@@ -53,16 +53,16 @@ export const SignupContainer = styled.form`
       justify-content: space-between;
       align-items: center;
       border-radius: 10px;
-      background: ${theme.Gray10};
+      background: ${theme.Neutral200};
       text-align: left;
       .signupCompleteNavItemText {
-        color: #333d4b;
+        color: ${theme.Neutral900};
         font-size: 20px;
         letter-spacing: -0.4px;
         font-weight: 600;
       }
       .signupCompleteNavItemText2 {
-        color: #333d4b;
+        color: ${theme.Neutral900};
         font-size: 16px;
         letter-spacing: -0.32px;
       }
@@ -82,13 +82,13 @@ export const SignupTitle = styled.span`
   flex-direction: ${({ flex }) => (flex ? "column" : "")};
   align-items: center;
   width: 100%;
-  color: #333d4b;
+  color: ${theme.Neutral900};
   font-size: 30px;
   font-weight: 600;
   letter-spacing: -0.6px;
   .warningNoWrite {
     display: inline-block;
-    color: ${theme.Gray80};
+    color: ${theme.Neutral900};
     font-size: 22px;
     padding-top: 12px;
   }
@@ -103,11 +103,11 @@ export const SignupTitle = styled.span`
       position: absolute;
       width: ${({ status }) => `${(100 / 4) * status}%`};
       height: 4px;
-      background: ${theme.Brand};
+      background: ${theme.Brand600};
     }
   }
   .signupCompleteTitle {
-    color: ${theme.Gray80};
+    color: ${theme.Neutral900};
     font-size: 22px;
     font-weight: 600;
     letter-spacing: -0.44px;
@@ -115,7 +115,7 @@ export const SignupTitle = styled.span`
 `;
 
 export const TitleEmphasis = styled.span`
-  color: ${({ theme }) => theme.Black};
+  color: ${({ theme }) => theme.Neutral990};
   font-size: 28px;
   font-weight: 700;
 `;
@@ -149,7 +149,7 @@ export const ProfileInputcontainer = styled.div`
 `;
 export const SexName = styled.span`
   transition: all 0.3s ease-out;
-  color: ${({ sex, theme }) => (sex ? theme.BrandDark : theme.Gray50)};
+  color: ${({ sex, theme }) => (sex ? theme.BrandDark : theme.Neutral600)};
   font-size: 16px;
   font-weight: 600;
   letter-spacing: -0.32px;
@@ -158,9 +158,9 @@ export const SexName = styled.span`
 export const SexItem = styled.button`
   transition: all 0.3s ease-out;
   border-radius: 16px;
-  background: ${({ sex, theme }) => (sex ? theme.Gray10 : theme.White)};
+  background: ${({ sex, theme }) => (sex ? theme.Neutral200 : theme.Neutral0)};
   border: ${({ sex, theme }) =>
-		sex ? `2px solid ${theme.Brand}` : `2px solid transparent`};
+    sex ? `2px solid ${theme.Brand600}` : `2px solid transparent`};
   display: flex;
   width: 126px;
   height: 126px;
@@ -174,12 +174,13 @@ export const SexItem = styled.button`
     height: 60px;
   }
   &:hover {
-    background: ${({ theme }) => theme.Gray10};
+    background: ${({ theme }) => theme.Neutral200};
     border: 2px solid
-      ${({ sex, theme }) => (sex ? `2px solid ${theme.Brand}` : theme.Gray30)};
+      ${({ sex, theme }) =>
+        sex ? `2px solid ${theme.Brand600}` : theme.Gray30};
   }
   &:hover ${SexName} {
-    color: ${({ sex, theme }) => (sex ? theme.BrandDark : theme.Black)};
+    color: ${({ sex, theme }) => (sex ? theme.BrandDark : theme.Neutral990)};
   }
 `;
 
@@ -190,7 +191,7 @@ export const SignupTextContainer = styled.div`
   width: 100%;
   .bodyfigureText {
     padding-bottom: 10px;
-    color: ${theme.Gray80};
+    color: ${theme.Neutral900};
     font-size: 20px;
     font-weight: 600;
     letter-spacing: -0.4px;
@@ -205,7 +206,7 @@ export const SignupTextContainer = styled.div`
       display: flex;
       align-items: center;
       gap: 10px;
-      color: ${theme.Brand};
+      color: ${theme.Brand600};
       font-size: 20px;
       font-weight: 600;
       .rightArrow {
@@ -215,7 +216,6 @@ export const SignupTextContainer = styled.div`
     }
   }
 `;
-
 
 export const BodyCompositionInputList = styled.div`
   display: flex;
@@ -229,47 +229,46 @@ export const ButtonContainer = styled.div`
 `;
 
 export const FixPassword = styled.button`
-	font-size: 20px;
-	color: ${({ theme }) => theme.Brand};
-	text-decoration: underline;
-	font-weight: 700;
-`
+  font-size: 20px;
+  color: ${({ theme }) => theme.Brand600};
+  text-decoration: underline;
+  font-weight: 700;
+`;
 
 export const NonFix = styled.div`
-	display: flex;
-	gap: 8px;
-	flex-direction: column;
+  display: flex;
+  gap: 8px;
+  flex-direction: column;
 
-	.nonfix-title {
-		font-size: 18px;
-		font-weight: 500;
-		color: ${({ theme }) => theme.Black};
-	}
+  .nonfix-title {
+    font-size: 18px;
+    font-weight: 500;
+    color: ${({ theme }) => theme.Neutral990};
+  }
 
-	.nonfix-content {
-		background-color: ${({ theme }) => theme.Gray10};
-		border: 1.5px solid ${({ theme }) => theme.Gray20};
-		display: flex;
-		align-items: center;
-		height: 56px;
-		width: 474px;
-		border-radius: 10px;
-		padding-left: 14px;
-		color: ${({ theme }) => theme.Gray50};
-		font-size: 18px;
-		font-weight: 500;
-		margin-bottom: 55px;
-	}
-	
-`
+  .nonfix-content {
+    background-color: ${({ theme }) => theme.Neutral200};
+    border: 1.5px solid ${({ theme }) => theme.Neutral300};
+    display: flex;
+    align-items: center;
+    height: 56px;
+    width: 474px;
+    border-radius: 10px;
+    padding-left: 14px;
+    color: ${({ theme }) => theme.Neutral600};
+    font-size: 18px;
+    font-weight: 500;
+    margin-bottom: 55px;
+  }
+`;
 
 export const CancelButton = styled.button`
   width: 180px;
   height: 62px;
   padding: 22px 10px;
-  background: ${({ theme }) => theme.White};
-  color: ${({ theme }) => theme.Brand};
-	display: flex;
+  background: ${({ theme }) => theme.Neutral0};
+  color: ${({ theme }) => theme.Brand600};
+  display: flex;
   justify-content: center;
   align-items: center;
   gap: 3px;
@@ -289,10 +288,10 @@ export const SaveButton = styled.button`
   height: 62px;
   padding: 22px 24px;
 
-  background: ${({ theme }) => theme.Brand};
-  color: ${({ theme }) => theme.White};
+  background: ${({ theme }) => theme.Brand600};
+  color: ${({ theme }) => theme.Neutral0};
 
-	display: flex;
+  display: flex;
   justify-content: center;
   align-items: center;
   gap: 3px;
@@ -307,7 +306,6 @@ export const SaveButton = styled.button`
   }
 `;
 
-
 export const SignupUpdonwBalanceWrapper = styled.div`
   width: 100%;
   display: flex;
@@ -318,7 +316,7 @@ export const SignupUpdonwBalanceWrapper = styled.div`
     flex-direction: column;
     gap: 24px;
     .updownBalanceTitle {
-      color: ${theme.Gray80};
+      color: ${theme.Neutral900};
       font-size: 20px;
       font-weight: 600;
       letter-spacing: -0.4px;
@@ -328,7 +326,7 @@ export const SignupUpdonwBalanceWrapper = styled.div`
       flex-direction: column;
       gap: 4px;
       .updownBalanceBarTitle {
-        color: ${theme.Gray80};
+        color: ${theme.Neutral900};
         font-size: 14px;
         text-align: center;
       }
@@ -344,11 +342,11 @@ export const SignupUpdonwBalanceWrapper = styled.div`
           align-items: center;
           gap: 4px;
           .balanceRatio {
-            color: ${theme.Gray80};
+            color: ${theme.Neutral900};
             font-size: 18px;
           }
           .balanceRatioPercent {
-            color: ${theme.Gray80};
+            color: ${theme.Neutral900};
             font-size: 18px;
             font-weight: 700;
           }

@@ -10,27 +10,27 @@ export const NavButton = styled.button`
   padding: 10px 24px;
   border-radius: 12px;
   font-weight: 700;
-  color: ${theme.Brand};
+  color: ${theme.Brand600};
   cursor: pointer;
   &:hover {
-    background-color: ${theme.Gray10};
+    background-color: ${theme.Neutral200};
   }
 `;
 
 export const AppWrap = styled.div`
   text-align: center;
-	position: relative;
+  position: relative;
 `;
 
 // modal
 
 export const ModalWrap = styled.div`
   width: 200px;
-	height: 220px;
+  height: 220px;
   border-radius: 16px;
   box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
   border: 1px solid ${theme.Gray30};
-  background-color: ${theme.Gray10};
+  background-color: ${theme.Neutral200};
   position: absolute;
   top: 57px;
   left: -11px;
@@ -50,14 +50,14 @@ export const Contents = styled.div`
     text-align: center;
     text-align: center;
     font-weight: 500;
-		font-size: 16px;
-		letter-spacing: -0.02em;
+    font-size: 16px;
+    letter-spacing: -0.02em;
   }
-	.modalButton {
-		display: flex;
-		flex-direction: column;
-		gap: 1px;
-	}
+  .modalButton {
+    display: flex;
+    flex-direction: column;
+    gap: 1px;
+  }
 `;
 
 export const Button = styled.button`
@@ -65,10 +65,10 @@ export const Button = styled.button`
   height: 40px;
   font-size: 16px;
   padding: 8px 12px;
-  color: ${theme.Black};
+  color: ${theme.Neutral990};
   letter-spacing: -0.02em;
-	background-color: ${theme.White};
+  background-color: ${theme.Neutral0};
   &:hover {
-    background-color: ${theme.Gray20};
+    background-color: ${theme.Neutral300};
   }
 `;

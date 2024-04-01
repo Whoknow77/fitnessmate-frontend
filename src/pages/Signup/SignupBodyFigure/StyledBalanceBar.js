@@ -6,7 +6,7 @@ export const FilterPriceSlide = styled.div`
   height: 4px;
   width: 295px;
   border-radius: 3px;
-  background: ${theme.Gray80};
+  background: ${theme.Neutral900};
 `;
 
 export const FilterPriceSlideInner = styled.div`
@@ -15,7 +15,7 @@ export const FilterPriceSlideInner = styled.div`
   right: ${({ rangePercent }) => 99 - rangePercent}%;
   height: 4px;
   border-radius: 10px;
-  background-color: ${theme.Brand};
+  background-color: ${theme.Brand600};
 `;
 
 export const FilterPriceRangeWrap = styled.div`
@@ -33,7 +33,7 @@ export const FilterPriceRange = styled.input`
     height: 35px;
     width: 35px;
     border-radius: 50%;
-    background: ${theme.Gray20};
+    background: ${theme.Neutral300};
     -webkit-appearance: none;
     position: relative;
     top: -10px;

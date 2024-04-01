@@ -19,7 +19,7 @@ export const LoginContainer = styled.div`
 `;
 
 export const Title = styled.h1`
-  color: ${theme.Black};
+  color: ${theme.Neutral990};
   font-size: 28px;
   font-weight: 700;
 `;
@@ -37,14 +37,14 @@ export const LoginInput = styled.input`
   width: 100%;
   height: 60px;
   border: 3px solid;
-  border-color: ${({ theme }) => theme.Gray10};
+  border-color: ${({ theme }) => theme.Neutral200};
   border-radius: 10px;
   padding: 14px;
   font-size: 18px;
   font-weight: 500;
   font-family: "Pretendard";
   &:placeholder {
-    color: ${({ theme }) => theme.Gray50};
+    color: ${({ theme }) => theme.Neutral600};
   }
 `;
 
@@ -64,12 +64,12 @@ export const AutomaticLogin = styled.div`
     height: 18px;
     border: 2px solid;
     outline: 0;
-    border-color: ${({ theme }) => theme.Gray50};
+    border-color: ${({ theme }) => theme.Neutral600};
   }
 
   input[type="checkbox"]:checked {
     appearance: checkbox;
-    background: ${({ theme }) => theme.Brand};
+    background: ${({ theme }) => theme.Brand600};
   }
   color: ${({ theme }) => theme.Gray30};
   font-size: 18px;

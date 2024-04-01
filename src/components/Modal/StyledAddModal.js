@@ -1,9 +1,10 @@
 import styled from "styled-components";
+import theme from "../../styles/theme";
 
 export const ModalWrapper = styled.div`
   width: 400px;
   padding: 30px;
-  background: #ffffff;
+  background: ${theme.Neutral0};
   box-shadow: 0px 0px 18px rgba(0, 0, 0, 0.5);
   border-radius: 15px;
   position: fixed;
@@ -40,7 +41,7 @@ export const FormList = styled.form`
 export const SubmitButton = styled.button`
   margin-top: 10px;
   background: #e78111;
-  color: #fff;
+  color: ${theme.Neutral0};
   text-align: center;
   padding: 10px;
   border-radius: 10px;

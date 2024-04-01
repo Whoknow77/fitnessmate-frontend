@@ -3,7 +3,6 @@
 import styled from "styled-components";
 import theme from "./../../../../styles/theme";
 
-
 export const AppWrap = styled.div`
   text-align: center;
   margin: 10px auto;
@@ -30,136 +29,134 @@ export const ModalContainer = styled.div`
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	flex-direction: column;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
 `;
 
 export const ModalWrap = styled.div`
   width: 470px;
   height: 620px;
-	margin-bottom: 53px;
+  margin-bottom: 53px;
   border-radius: 15px;
-  background-color: #fff;
-	display: flex;
-	align-items: center;
-	flex-direction: column;
-	padding: 24px;
-	justify-content: space-between;
+  background-color: ${theme.Neutral0};
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  padding: 24px;
+  justify-content: space-between;
 `;
 
 export const Header = styled.div`
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	flex-direction: column;
-	width: 100%;
-	margin-bottom: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  width: 100%;
+  margin-bottom: 32px;
 
-span {
-	color: ${theme.BrandMid};
-	font-size: 16px;
-	font-weight: 500;
-	width: 100%;
-	display: flex;
-	justify-content: start;
-	margin-bottom: 8px;
-}
-`
-
-export const ModalTitle = styled.div`
-
-	display: grid;
-  grid-template-columns: 24px 1fr 24px;
-  grid-template-rows: 24px;
-	width: 100%;
-	margin-bottom: 32px;
-
-h1 {
-	grid-column: 2;
-	display: flex;
-	justify-content: center;
-	font-size: 24px;
-	font-weight: 500;
-	color: ${theme.Black};
-	font-family: Pretendard;
-	margin-bottom: 32px;
-}
-`;
-
-export const CloseButton = styled.div`
-	grid-column: 3;
-  border-radius: 23.5px;
-	display: flex;
-	justify-content: center;
-	align-items: center;
-  cursor: pointer;
-  img {
-    color: ${theme.Black};
-    font-size: 30px;
-		width: 17px;
-		height: 17px;
-
-		&:hover {
-			opacity: 0.5;
-		}
+  span {
+    color: ${theme.BrandMid};
+    font-size: 16px;
+    font-weight: 500;
+    width: 100%;
+    display: flex;
+    justify-content: start;
+    margin-bottom: 8px;
   }
 `;
 
+export const ModalTitle = styled.div`
+  display: grid;
+  grid-template-columns: 24px 1fr 24px;
+  grid-template-rows: 24px;
+  width: 100%;
+  margin-bottom: 32px;
+
+  h1 {
+    grid-column: 2;
+    display: flex;
+    justify-content: center;
+    font-size: 24px;
+    font-weight: 500;
+    color: ${theme.Neutral990};
+    font-family: Pretendard;
+    margin-bottom: 32px;
+  }
+`;
+
+export const CloseButton = styled.div`
+  grid-column: 3;
+  border-radius: 23.5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  img {
+    color: ${theme.Neutral990};
+    font-size: 30px;
+    width: 17px;
+    height: 17px;
+
+    &:hover {
+      opacity: 0.5;
+    }
+  }
+`;
 
 export const Contents = styled.div`
-	display: flex;
+  display: flex;
   justify-content: center;
-	flex-direction: column;
-	width: 422px;
-	margin-bottom: 10px;
-	gap: 14px;
+  flex-direction: column;
+  width: 422px;
+  margin-bottom: 10px;
+  gap: 14px;
 
-	.contents-input {
-		display: flex;
-		align-items: center;
-		background-color: ${theme.Gray10};
-		border: 1px solid ${theme.Gray20};
-		border-radius: 10px;
-		gap: 14px;
-		height: 56px;
-		padding: 14px;
-	}
+  .contents-input {
+    display: flex;
+    align-items: center;
+    background-color: ${theme.Neutral200};
+    border: 1px solid ${theme.Neutral300};
+    border-radius: 10px;
+    gap: 14px;
+    height: 56px;
+    padding: 14px;
+  }
 
-	p {
-		font-size: 18px;
-		font-weight: 500;
-		width: 368px;
-		display: flex;
-		justify-content: start;
-		cursor: pointer;
-	}
+  p {
+    font-size: 18px;
+    font-weight: 500;
+    width: 368px;
+    display: flex;
+    justify-content: start;
+    cursor: pointer;
+  }
 
-	img {
-		cursor: pointer;
-	}
+  img {
+    cursor: pointer;
+  }
 
-	input {
-		font-size: 18px;
-		font-weight: 500;
-		width: 368px;
-		display: flex;
-	}
+  input {
+    font-size: 18px;
+    font-weight: 500;
+    width: 368px;
+    display: flex;
+  }
 `;
 
 export const AddButton = styled.button`
   height: 34px;
-	width: 34px;
-	border-radius: 8px;
-	background-color: ${theme.BrandLight300};
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	img {
-		height: 14px;
-		width: 14px;
-	}
+  width: 34px;
+  border-radius: 8px;
+  background-color: ${theme.BrandLight300};
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  img {
+    height: 14px;
+    width: 14px;
+  }
 `;
 
 export const Button = styled.button`
@@ -168,7 +165,7 @@ export const Button = styled.button`
   border: none;
   background-color: #ababab;
   border-radius: 10px;
-  color: white;
+  color: ${theme.Neutral0};
   font-style: italic;
   font-weight: 200;
   cursor: pointer;
@@ -182,10 +179,10 @@ export const SaveButton = styled.button`
   height: 68px;
   padding: 22px 24px;
 
-  background: ${({ theme }) => theme.Brand};
-  color: ${({ theme }) => theme.White};
+  background: ${({ theme }) => theme.Brand600};
+  color: ${({ theme }) => theme.Neutral0};
 
-	display: flex;
+  display: flex;
   justify-content: center;
   align-items: center;
   gap: 3px;

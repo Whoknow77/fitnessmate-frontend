@@ -8,7 +8,7 @@ export const RecommendAddModalWrapper = styled.div`
   padding: 20px;
   justify-content: space-between;
   border-radius: 16px;
-  background: ${theme.White};
+  background: ${theme.Neutral0};
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
@@ -16,64 +16,64 @@ export const RecommendAddModalWrapper = styled.div`
   flex-direction: column;
   .recommendAddModalTitleWrapper {
     display: flex;
-		flex-direction: column;
-		gap: 8px;
-		.quitBtnArea {
-			display: flex;
-			justify-content: flex-end;
-			width: 100%;
-			.recommendAddModalQuitBtn {
-				cursor: pointer;
-			}
-		}
-    .recommendAddModalTitle {
-      color: ${theme.Black};
+    flex-direction: column;
+    gap: 8px;
+    .quitBtnArea {
+      display: flex;
+      justify-content: flex-end;
+      width: 100%;
+      .recommendAddModalQuitBtn {
+        cursor: pointer;
+      }
     }
-		.recommendAddModalTitle .firstTitle {
-			font-weight: 500;
-			font-size: 22px;
-			letter-spacing: -0.44px;
-			line-height: 30.8px;
-		}
-		.recommendAddModalTitle .secondTitle {
-			font-weight: 600;
-			font-size: 22px;
-			letter-spacing: -0.44px;
-			line-height: 30.8px;
-		}
+    .recommendAddModalTitle {
+      color: ${theme.Neutral990};
+    }
+    .recommendAddModalTitle .firstTitle {
+      font-weight: 500;
+      font-size: 22px;
+      letter-spacing: -0.44px;
+      line-height: 30.8px;
+    }
+    .recommendAddModalTitle .secondTitle {
+      font-weight: 600;
+      font-size: 22px;
+      letter-spacing: -0.44px;
+      line-height: 30.8px;
+    }
   }
-	.middleModalArea {
-		display: flex;
-		flex-direction: column;
-		gap: 14px;
-		.middleModalTitle {
-			font-weight: 500;
-			color: ${theme.Gray70};
-			font-size: 16px;
-			letter-spacing: -0.32px;
-			line-height: 22.4px;
-		}
-		.recommendAddModalDivsionList {
-			display: flex;
-			flex-direction: column;
-			align-items: center;
-			gap: 8px;
-			.recommendAddModalBtnWrapper {
-				display: flex;
-				padding: 10px;
-				justify-content: flex-end;
-				width: 100%;
-				align-items: center;
-				gap: 10px;
-				.recommendAddModalModifyBtn {
-					color: ${theme.Brand};
-					font-size: 18px;
-					font-weight: 700;
-					letter-spacing: -0.36px;
-				}
-			}
-		}
-	}
+  .middleModalArea {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    .middleModalTitle {
+      font-weight: 500;
+      color: ${theme.Neutral800};
+      font-size: 16px;
+      letter-spacing: -0.32px;
+      line-height: 22.4px;
+    }
+    .recommendAddModalDivsionList {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      .recommendAddModalBtnWrapper {
+        display: flex;
+        padding: 10px;
+        justify-content: flex-end;
+        width: 100%;
+        align-items: center;
+        gap: 10px;
+        .recommendAddModalModifyBtn {
+          color: ${theme.Brand600};
+          font-size: 18px;
+          font-weight: 700;
+          letter-spacing: -0.36px;
+        }
+      }
+    }
+  }
 `;
 
 export const ModifyOptionWrapper = styled.div`
@@ -84,7 +84,7 @@ export const ModifyOptionWrapper = styled.div`
 `;
 
 export const ModifyOptionButton = styled.button`
-  color: ${({ isSelected }) => (isSelected ? theme.White : theme.Brand)};
+  color: ${({ isSelected }) => (isSelected ? theme.Neutral0 : theme.Brand600)};
   font-size: 18px;
   line-height: 150%; /* 27px */
   letter-spacing: -0.36px;
@@ -93,7 +93,8 @@ export const ModifyOptionButton = styled.button`
   justify-content: center;
   align-items: center;
   border-radius: 6px;
-  background: ${({ isSelected }) => (isSelected ? theme.Brand : theme.White)};
+  background: ${({ isSelected }) =>
+    isSelected ? theme.Brand600 : theme.Neutral0};
   box-shadow: 0px 4px 8px 0px rgba(0, 0, 0, 0.05);
   &:hover {
     opacity: 0.8;

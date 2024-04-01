@@ -163,7 +163,11 @@ const RecommendMachine = () => {
           <div className="statusBar2"></div>
         </div>
         <div className="recommendTitleArea">
-          <RecommendTitle ftsize="32px" ftcolor={theme.Black} ftweight="600">
+          <RecommendTitle
+            ftsize="32px"
+            ftcolor={theme.Neutral990}
+            ftweight="600"
+          >
             사용 가능한 운동 기구를 선택해주세요
           </RecommendTitle>
           <RecommendTitleHide>

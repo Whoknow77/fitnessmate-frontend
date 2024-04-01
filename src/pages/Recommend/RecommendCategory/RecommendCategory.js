@@ -54,7 +54,7 @@ const RecommendCategory = () => {
         <div className="statusBar">
           <div className="statusBar2"></div>
         </div>
-        <RecommendTitle ftsize="36px" ftcolor={theme.Black} ftweight="600">
+        <RecommendTitle ftsize="36px" ftcolor={theme.Neutral990} ftweight="600">
           무엇을 추천 해드릴까요?
         </RecommendTitle>
       </SignupTitle>

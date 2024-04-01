@@ -12,7 +12,7 @@ export const SearchContainer = styled.div`
     left: 0;
     width: 100%;
     height: 100%;
-    background: ${theme.White};
+    background: ${theme.Neutral0};
     opacity: 0.6;
     z-index: 101;
   }
@@ -37,13 +37,13 @@ export const SearchContainer = styled.div`
 
         .searchTitle1 {
           text-align: center;
-          color: ${theme.Gray50};
+          color: ${theme.Neutral600};
           font-weight: 600;
           font-size: 20px;
         }
         .searchTitle2 {
           text-align: center;
-          color: ${theme.Black};
+          color: ${theme.Neutral990};
           font-weight: 600;
           font-size: 30px;
         }
@@ -75,7 +75,7 @@ export const SearchContainer = styled.div`
         letter-spacing: -0.56px;
       }
       .currentSearchContent {
-        color: ${theme.Gray70};
+        color: ${theme.Neutral800};
         font-size: 28px;
         font-weight: 500;
         letter-spacing: -0.56px;
@@ -128,14 +128,14 @@ export const SearchContainer = styled.div`
           justify-content: center;
           border-radius: 16px;
           font-weight: 500;
-          color: ${theme.Gray70};
+          color: ${theme.Neutral800};
           font-size: 15px;
           letter-spacing: -0.3px;
           cursor: pointer;
         }
         .pageItem.activePage {
-          color: ${theme.White};
-          background-color: ${theme.Gray80};
+          color: ${theme.Neutral0};
+          background-color: ${theme.Neutral900};
         }
       }
     }
@@ -161,11 +161,11 @@ export const SwitchMenu = styled.div`
     letter-spacing: -0.4px;
     cursor: pointer;
     padding: 0 6px 16px 6px;
-    border-bottom: 5px solid ${({ theme }) => theme.White};
+    border-bottom: 5px solid ${({ theme }) => theme.Neutral0};
   }
   .menuCategory.active {
-    color: ${({ theme }) => theme.Gray80};
-    border-bottom: 5px solid ${({ theme }) => theme.Gray80};
+    color: ${({ theme }) => theme.Neutral900};
+    border-bottom: 5px solid ${({ theme }) => theme.Neutral900};
   }
 `;
 
@@ -189,7 +189,7 @@ export const SectionContainer = styled.div`
     display: flex;
     align-items: center;
     gap: 32px;
-    background: ${({ theme }) => theme.Gray10};
+    background: ${({ theme }) => theme.Neutral200};
     height: 64px;
     position: sticky;
     z-index: 999;
@@ -214,16 +214,16 @@ export const SectionContainer = styled.div`
         }
         .bodypartButtonText {
           font-weight: 500;
-          color: ${theme.Gray50};
+          color: ${theme.Neutral600};
           font-size: 18px;
           letter-spacing: -0.36px;
         }
         .bodypartButton.active {
-          background: ${theme.Brand};
+          background: ${theme.Brand600};
         }
         .bodypartButtonText.active {
           font-weight: 600;
-          color: ${theme.White};
+          color: ${theme.Neutral0};
         }
       }
 
@@ -231,7 +231,7 @@ export const SectionContainer = styled.div`
         display: flex;
         gap: 7px;
         padding: 10px 14px;
-        background-color: ${theme.Gray20};
+        background-color: ${theme.Neutral300};
         border-radius: 37px;
         border: 1px solid ${theme.Gray30};
         cursor: pointer;
@@ -243,7 +243,7 @@ export const SectionContainer = styled.div`
 
         .searchOpenText {
           font-weight: 500;
-          color: ${theme.Gray50};
+          color: ${theme.Neutral600};
           font-size: 16px;
           letter-spacing: -0.32px;
         }
@@ -330,12 +330,12 @@ export const Filter = styled.div`
       align-items: center;
       border-radius: 8px;
 			border: 1px solid 
-				${({ theme, isClicked }) => (isClicked ? theme.Brand : theme.Gray30)};
-			background: ${theme.Gray20};
+				${({ theme, isClicked }) => (isClicked ? theme.Brand600 : theme.Gray30)};
+			background: ${theme.Neutral300};
 			cursor: pointer;
 
       .searchBarFilterText {
-        color: ${({ theme, isClicked }) => (isClicked ? theme.Brand : theme.Black)};
+        color: ${({ theme, isClicked }) => (isClicked ? theme.Brand600 : theme.Neutral990)};
         text-align: center;
         font-size: 18px;
 				font-weight: 500;
@@ -350,7 +350,7 @@ export const Filter = styled.div`
 			}
 
 			.searchBarFilterToggleBtn g path {
-				fill: ${({ theme, isClicked }) => (isClicked ? "#0B98FF" : "#6B7684")};
+				fill: ${({ theme, isClicked }) => (isClicked ? theme.Brand600 : theme.Neutral600)};
 			}
 
 			// 돌아가는 경우
@@ -382,8 +382,8 @@ export const Filter = styled.div`
 
 				.searchFilterContent {
 					border-radius: 4px;
-					background: ${theme.Gray20};
-					color: ${({ theme, isClicked }) => (isClicked ? theme.Brand : theme.Gray80)};
+					background: ${theme.Neutral300};
+					color: ${({ theme, isClicked }) => (isClicked ? theme.Brand600 : theme.Neutral900)};
 					font-size: 18px;
 					font-weight: 500;
 				}
@@ -399,8 +399,8 @@ export const Filter = styled.div`
 		padding: 20px;
 		gap: 12px;
 		border-radius: 12px;
-		border: 1px solid ${theme.Gray20};
-		background: ${theme.White};
+		border: 1px solid ${theme.Neutral300};
+		background: ${theme.Neutral0};
 		box-shadow: 0px 3px 11.6px #00000033;
 		z-index: 900;
 
@@ -411,7 +411,7 @@ export const Filter = styled.div`
 
 			.selectOptionTitle {
 				font-weight: 500;
-				color: ${theme.Gray50};
+				color: ${theme.Neutral600};
 				font-size: 14px;
 				letter-spacing: -0.28px;
 			}
@@ -421,9 +421,9 @@ export const Filter = styled.div`
 				flex-wrap: wrap;
 				gap: 5px;
 				padding: 12px;
-				background-color: ${theme.Gray10};
+				background-color: ${theme.Neutral200};
 				border-radius: 10px;
-				border: 1px solid ${theme.Gray20};
+				border: 1px solid ${theme.Neutral300};
 
 				p {
 					font-weight: 600;
@@ -440,7 +440,7 @@ export const Filter = styled.div`
 					padding: 4px 8px;
 					border-radius: 4px;
 					background: ${theme.BrandLight};
-					color: ${theme.Brand};
+					color: ${theme.Brand600};
 					font-size: 16px;
 					font-weight: 500;
 				}
@@ -462,7 +462,7 @@ export const Filter = styled.div`
 
 				.bodyTitle {
 					font-weight: 500;
-					color: ${theme.Gray50};
+					color: ${theme.Neutral600};
 					font-size: 14px;
 				}
 
@@ -484,7 +484,7 @@ export const Filter = styled.div`
 		display: flex;
 		align-items: center;
 		gap: 8px;
-		color: ${theme.Gray70};
+		color: ${theme.Neutral800};
 		font-size: 18px;
 		font-weight: 500;
 		padding: 0px;
@@ -500,7 +500,7 @@ export const Filter = styled.div`
 	}
 
 	.searchFilterModalContent.active {
-		color: ${theme.Brand};
+		color: ${theme.Brand600};
 	}
 
 	.searchFilterModalContent.active .checkSimbol {
@@ -519,13 +519,13 @@ export const Footer = styled.div`
   width: 100%;
   height: 589px;
   bottom: 0;
-  background: ${theme.Gray20};
+  background: ${theme.Neutral200};
 
   .frame {
     position: relative;
     width: 1920px;
     height: 589px;
-    background-color: var(--text-color-gray10);
+    background-color: ${theme.Neutral200};
   }
   .frame .div {
     display: inline-flex;
@@ -541,7 +541,7 @@ export const Footer = styled.div`
     width: fit-content;
     margin-top: -1px;
     font-weight: 600;
-    color: ${theme.Black};
+    color: ${theme.Neutral990};
     font-size: 15px;
     letter-spacing: -0.3px;
     line-height: 19.5px;
@@ -560,7 +560,7 @@ export const Footer = styled.div`
     width: fit-content;
     margin-top: -1px;
     font-weight: 400;
-    color: v ${theme.Gray70};
+    color: v ${theme.Neutral800};
     font-size: 14px;
     letter-spacing: -0.28px;
     line-height: 18.2px;
@@ -569,7 +569,7 @@ export const Footer = styled.div`
   .frame .text-wrapper-3 {
     width: fit-content;
     font-weight: 400;
-    color: ${theme.Gray70};
+    color: ${theme.Neutral800};
     white-space: nowrap;
     position: relative;
     font-size: 14px;
@@ -641,7 +641,7 @@ export const Footer = styled.div`
     width: fit-content;
     margin-top: -1px;
     font-weight: 600;
-    color: ${theme.Black};
+    color: ${theme.Neutral990};
     white-space: nowrap;
     position: relative;
     font-size: 14px;
@@ -683,7 +683,7 @@ export const Footer = styled.div`
     height: 13px;
     top: 0;
     left: 1px;
-    background-color: ${theme.Gray80};
+    background-color: ${theme.Neutral900};
     border-radius: 0px 0.52px 0px 0px;
   }
   .frame .rectangle-2 {
@@ -692,7 +692,7 @@ export const Footer = styled.div`
     height: 2px;
     top: 3px;
     left: 0;
-    background-color: ${theme.Gray80};
+    background-color: ${theme.Neutral900};
   }
   .frame .overlap-2 {
     position: absolute;

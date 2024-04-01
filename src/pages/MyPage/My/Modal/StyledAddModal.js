@@ -3,7 +3,6 @@
 import styled from "styled-components";
 import theme from "./../../../../styles/theme";
 
-
 export const AppWrap = styled.div`
   text-align: center;
   margin: 10px auto;
@@ -30,106 +29,105 @@ export const ModalContainer = styled.div`
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	flex-direction: column;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
 `;
 
 export const ModalWrap = styled.div`
   width: 470px;
   height: 620px;
-	margin-bottom: 53px;
+  margin-bottom: 53px;
   border-radius: 15px;
-  background-color: #fff;
-	display: flex;
-	align-items: center;
-	flex-direction: column;
-	padding: 24px;
-	justify-content: space-between;
+  background-color: ${theme.Neutral0};
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  padding: 24px;
+  justify-content: space-between;
 `;
 
 export const Header = styled.div`
-display: flex;
-align-items: center;
-justify-content: center;
-width: 100%;
-`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+`;
 
 export const ModalTitle = styled.div`
-
-	display: grid;
+  display: grid;
   grid-template-columns: 24px 1fr 24px;
   grid-template-rows: 24px;
-	width: 100%;
-	margin-bottom: 32px;
+  width: 100%;
+  margin-bottom: 32px;
 
-h1 {
-	grid-column: 2;
-	display: flex;
-	justify-content: center;
-	font-size: 24px;
-	font-weight: 500;
-	color: ${theme.Black};
-	font-family: Pretendard;
-	margin-bottom: 32px;
-}
+  h1 {
+    grid-column: 2;
+    display: flex;
+    justify-content: center;
+    font-size: 24px;
+    font-weight: 500;
+    color: ${theme.Neutral990};
+    font-family: Pretendard;
+    margin-bottom: 32px;
+  }
 `;
 
 export const CloseButton = styled.div`
-	grid-column: 3;
+  grid-column: 3;
   border-radius: 23.5px;
-	display: flex;
-	justify-content: center;
-	align-items: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   cursor: pointer;
   img {
-    color: ${theme.Black};
+    color: ${theme.Neutral990};
     font-size: 30px;
-		width: 17px;
-		height: 17px;
+    width: 17px;
+    height: 17px;
 
-		&:hover {
-			opacity: 0.5;
-		}
+    &:hover {
+      opacity: 0.5;
+    }
   }
 `;
 
 export const SerchArea = styled.div`
-	display: flex;
+  display: flex;
   justify-content: center;
-	width: 422px;
-`
+  width: 422px;
+`;
 
 export const Contents = styled.div`
-	display: flex;
+  display: flex;
   justify-content: center;
-	width: 422px;
-	height: 332px;
-	margin-bottom: 10px;
-	gap: 8px;
+  width: 422px;
+  height: 332px;
+  margin-bottom: 10px;
+  gap: 8px;
 
-	.ScrollArea {
-		overflow: auto; // 필요할 때만 스크롤 영역 생김
-	}
-	.ScrollArea::-webkit-scrollbar {
-		width: 35px;
-	}
-	.ScrollArea::-webkit-scrollbar-track {
-		background: ${({ theme }) => theme.White};
-	}
-	.ScrollArea::-webkit-scrollbar-thumb {
-		background: #ebedef; 
-		background-clip: padding-box;
-		border-left: 20px solid transparent;
-	}
+  .ScrollArea {
+    overflow: auto; // 필요할 때만 스크롤 영역 생김
+  }
+  .ScrollArea::-webkit-scrollbar {
+    width: 35px;
+  }
+  .ScrollArea::-webkit-scrollbar-track {
+    background: ${({ theme }) => theme.Neutral0};
+  }
+  .ScrollArea::-webkit-scrollbar-thumb {
+    background: #ebedef;
+    background-clip: padding-box;
+    border-left: 20px solid transparent;
+  }
 `;
 
 export const CheckboxArea = styled.div`
-	display: flex;
-	gap: 8px;
-	width: 100%;
-	flex-direction: column;
+  display: flex;
+  gap: 8px;
+  width: 100%;
+  flex-direction: column;
 `;
 
 export const Button = styled.button`
@@ -138,7 +136,7 @@ export const Button = styled.button`
   border: none;
   background-color: #ababab;
   border-radius: 10px;
-  color: white;
+  color: ${theme.Neutral0};
   font-style: italic;
   font-weight: 200;
   cursor: pointer;
@@ -152,10 +150,10 @@ export const SaveButton = styled.button`
   height: 68px;
   padding: 22px 24px;
 
-  background: ${({ theme }) => theme.Brand};
-  color: ${({ theme }) => theme.White};
+  background: ${({ theme }) => theme.Brand600};
+  color: ${({ theme }) => theme.Neutral0};
 
-	display: flex;
+  display: flex;
   justify-content: center;
   align-items: center;
   gap: 3px;

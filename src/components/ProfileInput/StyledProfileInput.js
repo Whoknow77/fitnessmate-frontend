@@ -15,7 +15,7 @@ export const ProfileInputContainer = styled.div`
     font-size: 16px;
   }
   .profileInputChecking {
-    color: ${theme.Brand};
+    color: ${theme.Brand600};
     font-size: 16px;
     font-weight: 500;
   }
@@ -23,7 +23,7 @@ export const ProfileInputContainer = styled.div`
     opacity: ${({ isValidState }) => (isValidState ? "1" : "0.3")};
     cursor: ${({ isValidState }) => (isValidState ? "pointer" : "default")};
     position: absolute;
-    color: ${theme.Brand};
+    color: ${theme.Brand600};
     font-size: 17px;
     font-weight: 700;
     letter-spacing: -0.34px;
@@ -35,7 +35,7 @@ export const ProfileInputContainer = styled.div`
 `;
 
 export const InputName = styled.span`
-  color: ${theme.Black};
+  color: ${theme.Neutral990};
   font-size: 20px;
   .essentialSymbol {
     color: ${theme.Error};
@@ -45,26 +45,26 @@ export const InputName = styled.span`
 
 export const ProfileInputContentWrapper = styled.input`
   &::-webkit-input-placeholder {
-    color: ${theme.Gray50};
+    color: ${theme.Neutral600};
   }
-  border: 1.5px solid ${theme.Gray20};
+  border: 1.5px solid ${theme.Neutral300};
   border-radius: 10px;
   padding: 14px;
-  background: ${theme.Gray10};
+  background: ${theme.Neutral200};
   width: 100%;
-  color: ${theme.Gray50};
+  color: ${theme.Neutral600};
   font-size: 18px;
   border: ${({ isFocused, name, valueHistory, isValidState }) =>
     !isFocused && valueHistory
       ? isValidState[name][1]
-        ? `1.5px solid ${theme.Gray20}`
+        ? `1.5px solid ${theme.Neutral300}`
           ? name === "loginEmail"
             ? isValidState.emailModal[1]
-              ? `1.5px solid ${theme.Brand}`
+              ? `1.5px solid ${theme.Brand600}`
               : `1.5px solid ${theme.Error}`
-            : `1.5px solid ${theme.Gray20}`
-          : `1.5px solid ${theme.Gray20}`
+            : `1.5px solid ${theme.Neutral300}`
+          : `1.5px solid ${theme.Neutral300}`
         : `1.5px solid ${theme.Error}`
-      : `1.5px solid ${theme.Gray20}`};
+      : `1.5px solid ${theme.Neutral300}`};
 `;
-// `1.5px solid ${theme.Brand}`
+// `1.5px solid ${theme.Brand600}`

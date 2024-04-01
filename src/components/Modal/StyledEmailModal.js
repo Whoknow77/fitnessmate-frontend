@@ -20,7 +20,7 @@ export const ModalWrapper = styled.div`
   gap: 24px;
   border: 1px solid ${theme.Gray30};
   border-radius: 16px;
-  background: ${theme.White};
+  background: ${theme.Neutral0};
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
@@ -41,7 +41,7 @@ export const ModalWrapper = styled.div`
       }
     }
     .emailModalTitle {
-      color: ${theme.Black};
+      color: ${theme.Neutral990};
       font-size: 24px;
       font-weight: 600;
       line-height: 130%; /* 31.2px */
@@ -57,7 +57,7 @@ export const ModalWrapper = styled.div`
         letter-spacing: -0.32px;
       }
       .retransmitBtn {
-        color: var(--Brand, #0b98ff);
+        color: ${theme.Brand600};
         font-size: 16px;
         font-weight: 600;
         letter-spacing: -0.32px;

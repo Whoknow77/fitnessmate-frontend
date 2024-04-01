@@ -116,7 +116,7 @@ const RecommendWorkoutPart = () => {
         <div className="statusBar">
           <div className="statusBar2"></div>
         </div>
-        <RecommendTitle ftsize="32px" ftcolor="#191F28" ftweight="600">
+        <RecommendTitle ftsize="32px" ftcolor={theme.Neutral990} ftweight="600">
           어느 부위의 운동을 추천 받고 싶으세요?
         </RecommendTitle>
       </SignupTitle>

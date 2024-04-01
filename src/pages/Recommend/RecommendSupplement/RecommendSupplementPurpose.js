@@ -113,7 +113,11 @@ const RecommendSupplementPurpose = () => {
           <div className="statusBar2"></div>
         </div>
         <div className="recommendTitleArea">
-          <RecommendTitle ftsize="32px" ftcolor={theme.Black} ftweight="600">
+          <RecommendTitle
+            ftsize="32px"
+            ftcolor={theme.Neutral990}
+            ftweight="600"
+          >
             보조제 섭취 목적이 무엇인가요?
           </RecommendTitle>
           <RecommendTitleHide>

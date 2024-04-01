@@ -2,6 +2,7 @@
 
 import * as S from "./StyledMypageHome";
 import "./myToggle.css";
+import theme from "./../../../styles/theme";
 import React, { useState, useEffect, useRef } from "react";
 import WorkoutAddModal from "./Modal/workoutAddModal";
 import FixModal from "./Modal/FixModal";
@@ -25,6 +26,8 @@ import { userWorkoutAPI } from "../../../apis/API";
 import RecommendWorkrateModal from "../../../components/Modal/RecommendWorkrateModal";
 import SupplementAddModal from "./Modal/supplementAddModal";
 import { flatMap } from "async";
+// Drag & Drop
+import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 
 // 루틴 목록용 더미데이터
 
@@ -193,8 +196,7 @@ const Mypagehome = () => {
 
   // Drag & Drop
 
-  const dragItem = useRef(); // 드래그할 아이템의 인덱스
-  const dragOverItem = useRef(); // 드랍할 위치의 아이템의 인덱스
+  // dnd 더미데이터
   const [list, setList] = useState([
     "시티드 머신 로우",
     "행잉 레그레이즈",
@@ -203,28 +205,20 @@ const Mypagehome = () => {
     "힙어브덕션",
     "덤벨 플라이",
   ]);
+  // React state to track order of items
+  const [itemList, setItemList] = useState(list);
 
-  // 드래그 시작될 때 실행
-  const dragStart = (e, position) => {
-    dragItem.current = position;
-    console.log(e.target.innerHTML);
-  };
-
-  // 드래그중인 대상이 위로 포개졌을 때
-  const dragEnter = (e, position) => {
-    dragOverItem.current = position;
-    console.log(e.target.innerHTML);
-  };
-
-  // 드랍 (커서 뗐을 때)
-  const drop = (e) => {
-    const newList = [...routineWorkout.data];
-    const dragItemValue = newList[dragItem.current];
-    newList.splice(dragItem.current, 1);
-    newList.splice(dragOverItem.current, 0, dragItemValue);
-    dragItem.current = null;
-    dragOverItem.current = null;
-    setRoutineWorkout(newList);
+  // Function to update list on drop
+  const handleDrop = (droppedItem) => {
+    // Ignore drop outside droppable container
+    if (!droppedItem.destination) return;
+    var updatedList = [...itemList];
+    // Remove dragged item
+    const [reorderedItem] = updatedList.splice(droppedItem.source.index, 1);
+    // Add dropped item
+    updatedList.splice(droppedItem.destination.index, 0, reorderedItem);
+    // Update State
+    setItemList(updatedList);
   };
 
   return (
@@ -294,7 +288,7 @@ const Mypagehome = () => {
                             <path
                               className="svgFill"
                               d="M11.9978 18.469C11.6388 18.469 11.3333 18.3412 11.0813 18.0856C10.8292 17.8299 10.7031 17.5227 10.7031 17.1637C10.7031 16.8048 10.8309 16.4993 11.0866 16.2472C11.3422 15.9951 11.6495 15.8691 12.0084 15.8691C12.3673 15.8691 12.6729 15.9969 12.925 16.2525C13.177 16.5081 13.3031 16.8154 13.3031 17.1743C13.3031 17.5333 13.1753 17.8388 12.9196 18.0909C12.664 18.343 12.3567 18.469 11.9978 18.469ZM11.9978 13.2998C11.6388 13.2998 11.3333 13.172 11.0813 12.9164C10.8292 12.6607 10.7031 12.3535 10.7031 11.9945C10.7031 11.6356 10.8309 11.33 11.0866 11.078C11.3422 10.8259 11.6495 10.6998 12.0084 10.6998C12.3673 10.6998 12.6729 10.8276 12.925 11.0833C13.177 11.3389 13.3031 11.6462 13.3031 12.0051C13.3031 12.3641 13.1753 12.6696 12.9196 12.9217C12.664 13.1737 12.3567 13.2998 11.9978 13.2998ZM11.9978 8.13057C11.6388 8.13057 11.3333 8.00276 11.0813 7.74714C10.8292 7.49152 10.7031 7.18424 10.7031 6.82529C10.7031 6.46634 10.8309 6.16082 11.0866 5.90874C11.3422 5.65667 11.6495 5.53064 12.0084 5.53064C12.3673 5.53064 12.6729 5.65845 12.925 5.91407C13.177 6.16968 13.3031 6.47696 13.3031 6.83591C13.3031 7.19486 13.1753 7.50037 12.9196 7.75244C12.664 8.00452 12.3567 8.13057 11.9978 8.13057Z"
-                              fill="#333D4B"
+                              fill={theme.Neutral900}
                             />
                           </g>
                         </svg>
@@ -372,32 +366,58 @@ const Mypagehome = () => {
             </div>
           </S.MypageTopContainer>
           <S.MypageMiddleContainer>
-            {routineWorkout.data &&
-              routineWorkout.data.map((item, idx) => (
-                <div
-                  className="workoutCard"
-                  key={idx}
-                  onDragStart={(e) => dragStart(e, idx)}
-                  onDragEnter={(e) => dragEnter(e, idx)}
-                  onDragEnd={drop}
-                  onDragOver={(e) => e.preventDefault()}
-                >
-                  <div className="workoutNum">
-                    <div className="numCircle">{idx + 1}</div>
-                    <div className="line"></div>
+            <DragDropContext onDragEnd={handleDrop}>
+              <Droppable droppableId="list-container">
+                {(provided) => (
+                  <div
+                    className="list-container"
+                    {...provided.droppableProps}
+                    ref={provided.innerRef}
+                  >
+                    <div className="item-container">
+                      <div className="numArea">
+                        {itemList.map((item, index) => (
+                          <div className="workoutNum">
+                            <div className="numCircle">{index + 1}</div>
+                            <div className="line"></div>
+                          </div>
+                        ))}
+                      </div>
+                      <div className="numArea">
+                        {itemList.map((item, index) => (
+                          <Draggable
+                            key={item}
+                            draggableId={item}
+                            index={index}
+                          >
+                            {(provided) => (
+                              <div
+                                className="workoutCard"
+                                ref={provided.innerRef}
+                                {...provided.dragHandleProps}
+                                {...provided.draggableProps}
+                              >
+                                <div className="workoutCardContent" draggable>
+                                  <p className="workoutName">{item}</p>
+                                </div>
+                                <img
+                                  className="cardHandler"
+                                  src={cardHandler}
+                                  alt="운동 움직일 핸들링 버튼"
+                                  key={index}
+                                  draggable
+                                />
+                              </div>
+                            )}
+                          </Draggable>
+                        ))}
+                        {provided.placeholder}
+                      </div>
+                    </div>
                   </div>
-                  <div className="workoutCardContent" draggable>
-                    <p className="workoutName">{item.workoutName}</p>
-                  </div>
-                  <img
-                    className="cardHandler"
-                    src={cardHandler}
-                    alt="운동 움직일 핸들링 버튼"
-                    key={idx}
-                    draggable
-                  />
-                </div>
-              ))}
+                )}
+              </Droppable>
+            </DragDropContext>
           </S.MypageMiddleContainer>
         </div>
       </S.MypageContainer>

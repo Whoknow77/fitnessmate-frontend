@@ -10,13 +10,14 @@ export const TextCheckboxWrapper = styled.button`
   display: flex;
   padding: 10px 24px;
   transition: all 0.1s ease-out;
-  background: ${({ theme }) => theme.Gray10};
+  background: ${({ theme }) => theme.Neutral200};
   border-radius: 10px;
   justify-content: space-between;
   align-items: center;
 
   border: 2px solid
-    ${({ theme, isSelected }) => (isSelected ? theme.Brand : theme.Gray20)};
+    ${({ theme, isSelected }) =>
+      isSelected ? theme.Brand600 : theme.Neutral300};
 
   .choice-article {
     // 텍스트가 새로운 줄로 넘어가지 않게됨
@@ -27,39 +28,39 @@ export const TextCheckboxWrapper = styled.button`
     text-overflow: ellipsis;
     transition: all 0.3s ease-out;
     color: ${({ isSelected, theme }) =>
-		isSelected ? theme.Brand : theme.Gray70};
+      isSelected ? theme.Brand600 : theme.Neutral800};
     font-size: 22px;
   }
   .choice-articleinput {
     transition: all 0.3s ease-out;
     color: ${({ isSelected, theme }) =>
-		isSelected ? theme.Brand : theme.Gray70};
+      isSelected ? theme.Brand600 : theme.Neutral800};
     font-size: 22px;
   }
 
   .check-background {
     transition: all 0.3s ease-out;
     fill: ${({ isSelected, theme }) =>
-		isSelected ? theme.Brand : theme.Gray10};
+      isSelected ? theme.Brand600 : theme.Neutral200};
   }
 
   .check-shape {
     transition: all 0.3s ease-out;
     fill: ${({ isSelected, theme }) =>
-		isSelected ? theme.White : theme.Gray30};
+      isSelected ? theme.Neutral0 : theme.Gray30};
   }
   &:hover {
     border: 2px solid
-      ${({ isSelected, theme }) => (isSelected ? theme.Brand : theme.Gray30)};
+      ${({ isSelected, theme }) => (isSelected ? theme.Brand600 : theme.Gray30)};
 
     .check-shape {
       fill: ${({ isSelected, theme }) =>
-		isSelected ? theme.White : theme.Black};
+        isSelected ? theme.Neutral0 : theme.Neutral990};
     }
 
     .choice-article {
       color: ${({ isSelected, theme }) =>
-		isSelected ? theme.Brand : theme.Black};
+        isSelected ? theme.Brand600 : theme.Neutral990};
     }
   }
 `;
@@ -86,17 +87,18 @@ export const SmallTextCheckboxWrapper = styled(TextCheckboxWrapper)`
 
 export const SmallFontTextCheckboxWrapper = styled.button`
   width: 100%;
-	height: 48px;
+  height: 48px;
   display: flex;
   padding: 8px 14px;
   transition: all 0.1s ease-out;
-  background: ${({ theme }) => theme.Gray10};
+  background: ${({ theme }) => theme.Neutral200};
   border-radius: 10px;
   justify-content: space-between;
   align-items: center;
 
   border: 2px solid
-    ${({ theme, isSelected }) => (isSelected ? theme.Brand : theme.Gray20)};
+    ${({ theme, isSelected }) =>
+      isSelected ? theme.Brand600 : theme.Neutral300};
 
   .choice-article {
     // 텍스트가 새로운 줄로 넘어가지 않게됨
@@ -107,34 +109,34 @@ export const SmallFontTextCheckboxWrapper = styled.button`
     text-overflow: ellipsis;
     transition: all 0.3s ease-out;
     color: ${({ isSelected, theme }) =>
-		isSelected ? theme.Brand : theme.Gray70};
+      isSelected ? theme.Brand600 : theme.Neutral800};
     font-size: 16px;
-		font-weight: 500;
+    font-weight: 500;
   }
 
   .check-background {
     transition: all 0.3s ease-out;
     fill: ${({ isSelected, theme }) =>
-		isSelected ? theme.Brand : theme.Gray10};
+      isSelected ? theme.Brand600 : theme.Neutral200};
   }
 
   .check-shape {
     transition: all 0.3s ease-out;
     fill: ${({ isSelected, theme }) =>
-		isSelected ? theme.White : theme.Gray30};
+      isSelected ? theme.Neutral0 : theme.Gray30};
   }
   &:hover {
     border: 2px solid
-      ${({ isSelected, theme }) => (isSelected ? theme.Brand : theme.Gray30)};
+      ${({ isSelected, theme }) => (isSelected ? theme.Brand600 : theme.Gray30)};
 
     .check-shape {
       fill: ${({ isSelected, theme }) =>
-		isSelected ? theme.White : theme.Black};
+        isSelected ? theme.Neutral0 : theme.Neutral990};
     }
 
     .choice-article {
       color: ${({ isSelected, theme }) =>
-		isSelected ? theme.Brand : theme.Black};
+        isSelected ? theme.Brand600 : theme.Neutral990};
     }
   }
 `;

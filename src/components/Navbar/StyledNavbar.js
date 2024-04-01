@@ -4,33 +4,34 @@ import styled from "styled-components";
 import theme from "./../../styles/theme";
 
 export const NavSection = styled.div`
-	width: 100%;
-	position: ${({ isHomePage }) => isHomePage ? 'fixed' : 'sticky'};
-	top: 0;
-	max-width: 1920px;
-	z-index: 1000;
+  width: 100%;
+  position: ${({ isHomePage }) => (isHomePage ? "fixed" : "sticky")};
+  top: 0;
+  max-width: 1920px;
+  z-index: 1000;
 
-	#navbar {
-		width: 100%;
-		height: 64px;
-		display: flex;
-		padding: 0 calc((100% - 1440px) / 2);
-		justify-content: space-between;
-		align-items: center;
-		background-color: ${({ isHomePage }) => isHomePage ? 'transparent' : '#FFFFFF'};
-		transition: background-color 0.5s ease; // 스크롤할 때 부드럽게 색 변화
-		backdrop-filter: ${({ isLoginModal, isCancleModal, isRecommend }) =>
-		isLoginModal || isCancleModal || isRecommend ? "none" : "blur(4px)"};
-		.nav-logo {
-			width: 93px;
-			cursor: pointer;
-		}
-	}
+  #navbar {
+    width: 100%;
+    height: 64px;
+    display: flex;
+    padding: 0 calc((100% - 1440px) / 2);
+    justify-content: space-between;
+    align-items: center;
+    background-color: ${({ isHomePage }) =>
+      isHomePage ? "transparent" : theme.Neutral0};
+    transition: background-color 0.5s ease; // 스크롤할 때 부드럽게 색 변화
+    backdrop-filter: ${({ isLoginModal, isCancleModal, isRecommend }) =>
+      isLoginModal || isCancleModal || isRecommend ? "none" : "blur(4px)"};
+    .nav-logo {
+      width: 93px;
+      cursor: pointer;
+    }
+  }
 
-	#navbar.fixed {
-		background-color: #FFFFFF;
-	}
-`
+  #navbar.fixed {
+    background-color: ${theme.Neutral0};
+  }
+`;
 
 export const NavLink = styled.div`
   display: flex;
@@ -52,7 +53,7 @@ export const NavTextContainer = styled.div`
 `;
 
 export const NavButton = styled.button`
-  color: ${theme.Black};
+  color: ${theme.Neutral990};
   display: flex;
   padding: 10px 14px;
   justify-content: center;
@@ -63,19 +64,20 @@ export const NavButton = styled.button`
   @media (max-width: 1000px) {
     display: none;
   }
-	border-radius: 12px;
-	// 그냥 아예 class를 추가하는 게 나을라나?
+  border-radius: 12px;
+  // 그냥 아예 class를 추가하는 게 나을라나?
   &:hover {
-    background-color: #F2F4F670;
+    background-color: ${theme.Neutral200};
   }
 `;
 
 export const NavLoginButton = styled(NavButton)`
-	background-color: ${({ isScrolled }) => isScrolled ? '#E5F4FF' : '#E5F4FF80'};
-	color: ${theme.Brand};
+  background-color: ${({ isScrolled }) =>
+    isScrolled ? theme.BrandLight : "#E5F4FF80"};
+  color: ${theme.Brand600};
   padding: 10px 24px;
   display: block;
-  border-radius: 5px;
+  border-radius: 8px;
 `;
 export const navbar = styled.div`
   .likes__wrapper {
@@ -95,7 +97,7 @@ export const navbar = styled.div`
     overflow-y: scroll;
     max-height: 150px;
     left: 0%;
-    background: white;
+    background: ${theme.Neutral0};
     padding: 10px;
     border: 1px solid grey;
     box-shadow: 0 0 2px 2px grey;

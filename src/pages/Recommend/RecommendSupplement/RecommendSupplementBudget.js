@@ -163,7 +163,11 @@ const RecommendSupplementBudget = () => {
           <div className="statusBar2"></div>
         </div>
         <div className="recommendTitleArea">
-          <RecommendTitle ftsize="32px" ftcolor={theme.Black} ftweight="600">
+          <RecommendTitle
+            ftsize="32px"
+            ftcolor={theme.Neutral990}
+            ftweight="600"
+          >
             보조제에 사용할 예산을 설정해 주세요
           </RecommendTitle>
           <RecommendTitleHide>

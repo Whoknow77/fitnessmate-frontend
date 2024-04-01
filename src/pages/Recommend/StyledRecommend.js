@@ -8,7 +8,7 @@ export const RecommendResultBackground = styled.div`
   top: 0;
   display: flex;
   justify-content: center;
-  background: ${theme.Gray10};
+  background: ${theme.Neutral200};
   z-index: -999;
 `;
 
@@ -57,9 +57,9 @@ export const RecommendHomeContainer = styled.div`
     align-items: center;
     gap: 10px;
     border-radius: 10px;
-    background: ${theme.Brand};
+    background: ${theme.Brand600};
     .recommendBtnText {
-      color: ${theme.White};
+      color: ${theme.Neutral0};
       font-size: 24px;
       letter-spacing: -0.48px;
     }
@@ -82,7 +82,7 @@ export const RecommendTitle = styled.span`
 `;
 
 export const RecommendTitleHide = styled(RecommendTitle)`
-  color: ${theme.Gray50};
+  color: ${theme.Neutral600};
   font-size: 24px;
   font-weight: 500;
   letter-spacing: -0.48px;
@@ -125,13 +125,13 @@ export const RecommendTextContainer = styled.div`
     padding: 10px;
     border-radius: 8px;
     background: ${theme.BrandLight};
-    color: ${theme.Brand};
+    color: ${theme.Brand600};
     font-size: 18px;
     margin-left: auto;
     margin-right: 0;
   }
   .allClearButton {
-    color: ${theme.Brand};
+    color: ${theme.Brand600};
     font-size: 18px;
     font-weight: 600;
     padding: 10px;
@@ -170,7 +170,8 @@ export const RecommendNavbarItem = styled.button`
   font-size: 20px;
   line-height: 150%; /* 30px */
   letter-spacing: -0.4px;
-  color: ${({ isSelected }) => (isSelected ? theme.Brand : theme.Gray50)};
+  color: ${({ isSelected }) =>
+    isSelected ? theme.Brand600 : theme.Neutral600};
   &:hover {
     opacity: 0.8;
   }
@@ -186,7 +187,8 @@ export const RecommendMachineList = styled.div`
   left: 427px;
 `;
 export const RecommendMachine = styled.button`
-  color: ${({ isSelected }) => (isSelected ? theme.Brand : theme.Gray50)};
+  color: ${({ isSelected }) =>
+    isSelected ? theme.Brand600 : theme.Neutral600};
   font-size: 20px;
   line-height: 150%; /* 30px */
   letter-spacing: -0.4px;
@@ -205,7 +207,7 @@ export const BudgetContainer = styled.div`
   position: relative;
   gap: 24px;
   .warningText {
-    color: #eb444c;
+    color: ${theme.Error};
     text-align: center;
     font-size: 18px;
     font-weight: 700;
@@ -222,7 +224,7 @@ export const BudgetBox = styled.div`
   flex-direction: column;
 
   .bugetText {
-    color: ${theme.Black};
+    color: ${theme.Neutral990};
     text-align: center;
     font-size: 18px;
     font-weight: 700;
@@ -235,6 +237,7 @@ export const BudgetBox = styled.div`
     gap: 36px;
 
     .budgetWrapper {
+      overflow: hidden;
       min-width: 316px;
       height: 100px;
       display: flex;
@@ -242,12 +245,13 @@ export const BudgetBox = styled.div`
       align-items: center;
       position: relative;
       border: 2px solid ${theme.Gray30};
-      ${({ warnBudget }) => (warnBudget ? theme.Error : theme.Gray10)};
+      ${({ warnBudget }) => (warnBudget ? theme.Error : theme.Neutral200)};
       border-radius: 16px;
-      background: ${theme.Gray10};
+      background: ${theme.Neutral200};
     }
     .budget {
-      color: ${({ warnBudget }) => (warnBudget ? theme.Error : theme.Black)};
+      color: ${({ warnBudget }) =>
+        warnBudget ? theme.Error : theme.Neutral990};
       font-size: 49px;
       font-weight: 700;
       letter-spacing: -0.98px;
@@ -288,7 +292,7 @@ export const RecommendMain = styled.div`
     width: 193px;
     left: -250px;
     .recommendNavbarTitle {
-      color: ${theme.Gray80};
+      color: ${theme.Neutral900};
       font-size: 18px;
       line-height: 150%; /* 27px */
       letter-spacing: -0.36px;
@@ -326,7 +330,7 @@ export const InformationContainer = styled.div`
     height: 49px;
     font-size: 18px;
     font-weight: 600;
-    color: ${theme.Brand};
+    color: ${theme.Brand600};
     letter-spacing: -0.36px;
 
     &:hover {
@@ -346,7 +350,7 @@ export const SpplementInformationTop = styled.div`
     grid-column: 1;
     font-size: 16px;
     font-weight: 600;
-    color: ${theme.Gray50};
+    color: ${theme.Neutral600};
     letter-spacing: -0.32px;
     display: flex;
     align-items: center;
@@ -357,7 +361,7 @@ export const SpplementInformationTop = styled.div`
     grid-column: 2;
     font-size: 16px;
     font-weight: 500;
-    color: ${theme.Black};
+    color: ${theme.Neutral990};
     letter-spacing: -0.32px;
   }
 `;
@@ -376,7 +380,7 @@ export const InformationToggle = styled.div`
     min-width: 71px;
     font-size: 16px;
     font-weight: 500;
-    color: ${theme.Black};
+    color: ${theme.Neutral990};
     letter-spacing: -0.32px;
     line-height: 24px;
     text-align: center;
@@ -389,7 +393,7 @@ export const ToggleModal = styled.div`
   display: flex;
   flex-direction: column;
   border-radius: 10px;
-  background: ${theme.Gray10};
+  background: ${theme.Neutral200};
   box-shadow: 0px 1px 5px #00000040;
   z-index: 999;
 
@@ -397,7 +401,7 @@ export const ToggleModal = styled.div`
     padding: 3px 10px;
     font-size: 16px;
     font-weight: 500;
-    color: ${theme.Gray70};
+    color: ${theme.Neutral800};
     letter-spacing: -0.32px;
     line-height: 24px;
   }
@@ -413,7 +417,7 @@ export const SpplementInformationMiddle = styled.div`
     align-items: center;
     font-size: 14px;
     font-weight: 600;
-    color: ${theme.Gray80};
+    color: ${theme.Neutral900};
     letter-spacing: -0.28px;
   }
 `;
@@ -427,7 +431,7 @@ export const SpplementInformationBottom = styled.div`
   span {
     font-size: 16px;
     font-weight: 600;
-    color: ${theme.Gray50};
+    color: ${theme.Neutral600};
     letter-spacing: -0.32px;
     display: flex;
     align-items: center;
@@ -452,15 +456,15 @@ export const RecommendMainBottom = styled.div`
     font-weight: 600;
     letter-spacing: -0.36px;
     line-height: 27px;
-    color: ${theme.Gray80};
+    color: ${theme.Neutral900};
   }
 
   .bottomDescription {
-    background: ${theme.Gray10};
+    background: ${theme.Neutral200};
     padding: 24px;
     font-size: 16px;
     font-weight: 500;
-    color: ${theme.Gray80};
+    color: ${theme.Neutral900};
     letter-spacing: -0.32px;
     line-height: 24px;
     border-radius: 10px;
@@ -473,7 +477,7 @@ export const RecommendMainBottom = styled.div`
     flex-wrap: wrap;
     padding: 15px 0;
     border-radius: 10px;
-    background: ${theme.Gray10};
+    background: ${theme.Neutral200};
     justify-content: center;
   }
 `;
@@ -487,7 +491,7 @@ export const PerServing = styled.div`
     grid-row: 1;
     font-size: 16px;
     font-weight: 500;
-    color: ${theme.Gray50};
+    color: ${theme.Neutral600};
     letter-spacing: -0.32px;
     display: flex;
     align-items: center;
@@ -498,7 +502,7 @@ export const PerServing = styled.div`
     font-size: 18px;
     font-weight: 600;
     letter-spacing: -0.32px;
-    color: ${theme.Gray80};
+    color: ${theme.Neutral900};
     display: flex;
     justify-content: center;
     align-items: center;
@@ -542,7 +546,7 @@ export const RecommendTitleContainer = styled.div`
 	
 			.recommendTitle {
 				display: flex;
-				color: ${theme.Black};
+				color: ${theme.Neutral990};
 				font-size: 25px;
 				font-weight: 500;
 				line-height: 140%;
@@ -561,7 +565,7 @@ export const RecommendTitleContainer = styled.div`
 			height: 24px;
 			
 			.goToHomeText {
-				color: ${theme.Gray50};
+				color: ${theme.Neutral600};
 				font-size: 16px;
 				font-weight: 500;
 				line-height: 140%;
@@ -582,7 +586,7 @@ export const RecommendTitleContainer = styled.div`
 		gap: 12px;
 
 		.recommendKeywordTitle {
-			color: ${theme.Gray50};
+			color: ${theme.Neutral600};
 			font-size: 15px;
 			font-weight: 500;l
 			ine-height: 140%;
@@ -600,7 +604,7 @@ export const RecommendTitleContainer = styled.div`
 			border: 1px solid ${theme.Gray40};
 			background: ${theme.Gray30};
 			padding: 4px 6px;
-			color: ${theme.Gray80};
+			color: ${theme.Neutral900};
 			font-size: 12px;
 			font-weight: 600;
 			line-height: 140%;
@@ -622,7 +626,7 @@ export const RecommendCardContainer = styled.div`
     flex-direction: column;
     width: 716px;
     border-radius: 18px;
-    background: #fff;
+    background: ${theme.Neutral0};
     box-shadow: 0px 4px 8.1px 0px rgba(0, 0, 0, 0.03);
 
     .recommendCardContent {
@@ -654,7 +658,7 @@ export const RecommendMainTopTitleWrapper = styled.div`
 `;
 
 export const RecommendMainWorkout = styled.span`
-  color: ${theme.Gray80};
+  color: ${theme.Neutral900};
   font-size: 22px;
   font-weight: 600;
   line-height: 140%;
@@ -663,7 +667,7 @@ export const RecommendMainWorkout = styled.span`
 
 // 이거 이름 바꾸고 싶음
 export const RecommendMainMachine = styled.span`
-  color: ${theme.Gray80};
+  color: ${theme.Neutral900};
   font-size: 22px;
   font-weight: 600;
   line-height: 140%;
@@ -688,7 +692,7 @@ export const RecommendMainTopRightWrapper = styled.button`
   align-items: center;
 
   .alreadyRoutine {
-    color: ${theme.Gray80};
+    color: ${theme.Neutral900};
     font-size: 14px;
     font-weight: 500;
     line-height: 140%;
@@ -701,7 +705,7 @@ export const RecommendMainTopRightWrapper = styled.button`
     align-items: center;
     gap: 2px;
     border-radius: 38px;
-    background: ${theme.Brand};
+    background: ${theme.Brand600};
 
     .recommendMainBtnImg {
       width: 20px;
@@ -709,7 +713,7 @@ export const RecommendMainTopRightWrapper = styled.button`
     }
 
     .recommendMainBtnText {
-      color: #fff;
+      color: ${theme.Neutral0};
       font-size: 13px;
       font-weight: 500;
       line-height: 140%;
@@ -725,8 +729,8 @@ export const RecommendMainBtn = styled.button`
   padding: 14px;
   align-items: center;
   border-radius: 36px;
-  background: ${theme.Brand};
-  color: ${theme.White};
+  background: ${theme.Brand600};
+  color: ${theme.Neutral0};
   font-size: 16px;
   font-weight: 600;
   letter-spacing: -0.32px;
@@ -777,7 +781,7 @@ export const RecommendVideoWrapper = styled.div`
     justify-content: center;
     align-items: center;
     border-radius: 30px;
-    background: #191f28;
+    background: ${theme.Neutral990};
     box-shadow: 0px 4px 6.8px 0px rgba(0, 0, 0, 0.4);
 
     .videoArrow {
@@ -789,7 +793,7 @@ export const RecommendVideoWrapper = styled.div`
 
 export const RecommendDescriptionWrapper = styled.div`
   padding: 0 12px;
-  color: ${theme.Gray70};
+  color: ${theme.Neutral800};
   font-size: 16px;
   font-weight: 500;
   line-height: 165%;
@@ -807,7 +811,7 @@ export const RecommendAmountWrapper = styled.div`
   .recommendAmountContainer {
     width: 100%;
     height: 52px;
-    border: 2px solid #0b98ff;
+    border: 2px solid ${theme.Brand600};
     // 위에껀 추후 border px 고려해서 수정
     display: flex;
     padding: 14px 16px;
@@ -826,7 +830,7 @@ export const RecommendAmountWrapper = styled.div`
         height: 24px;
       }
       .amountTitle {
-        color: ${theme.Brand};
+        color: ${theme.Brand600};
         font-size: 15px;
         font-weight: 500;
         letter-spacing: -0.3px;
@@ -839,7 +843,7 @@ export const RecommendAmountWrapper = styled.div`
       gap: 14px;
 
       .amountText {
-        color: ${theme.Brand};
+        color: ${theme.Brand600};
         font-size: 18px;
         font-weight: 600;
         letter-spacing: -0.36px;
@@ -856,11 +860,11 @@ export const RecommendMoreButton = styled.button`
   justify-content: center;
   align-items: center;
   border-radius: 0px 0px 18px 18px;
-  border-top: 1px solid ${theme.Gray20};
+  border-top: 1px solid ${theme.Neutral300};
   // 글씨 바뀌는 딜레이
 
   .informationText {
-    color: ${theme.Gray70};
+    color: ${theme.Neutral800};
     font-size: 14px;
     font-weight: 500;
     line-height: 140%;

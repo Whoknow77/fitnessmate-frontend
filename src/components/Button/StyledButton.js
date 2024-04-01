@@ -9,8 +9,8 @@ export const BigButtonWrapper = styled.button`
   width: 474px;
   height: 62px;
   padding: 22px 24px;
-  background: ${(props) => props.backcolor || props.theme.Brand};
-  color: ${(props) => props.fontcolor || props.theme.White};
+  background: ${(props) => props.backcolor || props.theme.Brand600};
+  color: ${(props) => props.fontcolor || props.theme.Neutral0};
 `;
 
 // < 가로 길이가 중간인 버튼 >
@@ -20,9 +20,11 @@ export const MiddleButtonWrapper = styled.button`
   height: 62px;
   padding: 22px 24px;
   background: ${({ isReady }) =>
-    isReady === undefined || isReady === true ? theme.Brand : theme.BrandLight};
+    isReady === undefined || isReady === true
+      ? theme.Brand600
+      : theme.BrandLight};
   cursor: ${({ isReady }) => (isReady ? "pointer" : "default")};
-  color: ${theme.White};
+  color: ${theme.Neutral0};
 `;
 
 // < 가로 길이가 중간인데 세로 길이가 짧은 버튼 >
@@ -32,9 +34,11 @@ export const SemiMiddleButtonWrapper = styled.button`
   height: 56px;
   padding: 22px 24px;
   background: ${({ isReady }) =>
-    isReady === undefined || isReady === true ? theme.Brand : theme.BrandLight};
+    isReady === undefined || isReady === true
+      ? theme.Brand600
+      : theme.BrandLight};
   cursor: ${({ isReady }) => (isReady ? "pointer" : "default")};
-  color: ${theme.White};
+  color: ${theme.Neutral0};
   display: flex;
   gap: 12px;
 
@@ -45,8 +49,8 @@ export const SemiMiddleButtonWrapper = styled.button`
     width: 24px;
     height: 24px;
     border-radius: 20px;
-    background: ${theme.White};
-    color: ${theme.Brand};
+    background: ${theme.Neutral0};
+    color: ${theme.Brand600};
     font-weight: 500;
     font-size: 14px;
     letter-spacing: -0.28px;
@@ -62,9 +66,9 @@ export const SmallButtonWrapper = styled.button`
   justify-content: center;
   align-items: center;
   border-radius: 10px;
-  background: ${({ isReady }) => (isReady ? theme.Brand : theme.BrandNon)};
+  background: ${({ isReady }) => (isReady ? theme.Brand600 : theme.BrandNon)};
   cursor: ${({ isReady }) => (isReady ? "pointer" : "default")};
-  color: ${theme.White};
+  color: ${theme.Neutral0};
   font-size: 22px;
   letter-spacing: -0.44px;
 `;
@@ -75,8 +79,8 @@ export const BeforeButtonWrapper = styled.button`
   width: 134px;
   height: 62px;
   padding: 22px 10px;
-  background: ${theme.White};
-  color: ${theme.Brand};
+  background: ${theme.Neutral0};
+  color: ${theme.Brand600};
 `;
 
 // < 목록 버튼 >
@@ -90,8 +94,8 @@ export const ListButtonWrapper = styled.button`
   border-radius: 16px;
   font-size: 17px;
 
-  background: ${theme.Gray10};
-  color: ${theme.Black};
+  background: ${theme.Neutral200};
+  color: ${theme.Neutral990};
 `;
 
 export const BeforeArrowButtonWrapper = styled.div`
@@ -104,7 +108,7 @@ export const BeforeArrowButtonWrapper = styled.div`
   align-items: center;
   gap: 10px;
   border-radius: 10px;
-  background: ${theme.White};
+  background: ${theme.Neutral0};
 
   .beforeArrowBtnImg {
     width: 24px;
@@ -112,7 +116,7 @@ export const BeforeArrowButtonWrapper = styled.div`
     opacity: ${({ isLoading }) => (isLoading ? 0.5 : 1)};
   }
   .beforeArrowBtnText {
-    color: ${theme.Brand};
+    color: ${theme.Brand600};
     font-size: 22px;
     letter-spacing: -0.44px;
     opacity: ${({ isLoading }) => (isLoading ? 0.5 : 1)};
@@ -120,7 +124,7 @@ export const BeforeArrowButtonWrapper = styled.div`
 
   &:hover {
     background: ${({ isLoading, theme }) =>
-      isLoading ? "none" : theme.Gray10};
+      isLoading ? "none" : theme.Neutral200};
   }
 `;
 
@@ -133,11 +137,11 @@ export const AfterArrowButtonWrapper = styled.button`
   align-items: center;
   gap: 10px;
   border-radius: 10px;
-  background: ${({ isReady }) => (isReady ? theme.Brand : theme.BrandNon)};
+  background: ${({ isReady }) => (isReady ? theme.Brand600 : theme.BrandNon)};
   cursor: ${({ isReady }) => (isReady ? "pointer" : "default")};
 
   .afterArrowBtnText {
-    color: ${theme.White};
+    color: ${theme.Neutral0};
     font-size: 22px;
     letter-spacing: -0.44px;
   }
