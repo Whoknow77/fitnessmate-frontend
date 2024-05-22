@@ -8,6 +8,7 @@ export const SignupContainer = styled.form`
   justify-content: space-between;
   gap: 70px;
   width: 474px;
+  margin-bottom: 200px;
 
   .recommendText {
     color: ${theme.Neutral900};
@@ -186,33 +187,94 @@ export const SexItem = styled.button`
 
 export const SignupTextContainer = styled.div`
   display: flex;
-  flex-direction: column;
-  gap: 14px;
+  flex-wrap: wrap;
   width: 100%;
+
   .bodyfigureText {
-    padding-bottom: 10px;
+    padding-bottom: 24px;
     color: ${theme.Neutral900};
     font-size: 20px;
     font-weight: 600;
     letter-spacing: -0.4px;
   }
-  .directButtonContainer {
+
+  .categoryButton {
     display: flex;
-    justify-content: flex-end;
-    .directbutton {
-      /* 자식 크기에 width 맞추기 */
-      padding: 10px;
-      justify-content: center;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      color: ${theme.Brand600};
-      font-size: 20px;
+    width: 474px;
+    height: 60px;
+    padding: 6px 18px 6px 6px;
+    border-radius: 12px;
+    border: 1px solid ${theme.Brand600};
+    background: #ecf7ff;
+    align-items: center;
+    color: ${theme.Neutral950};
+    text-align: center;
+    font-family: Pretendard;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    letter-spacing: -0.32px;
+    margin-bottom: 64px;
+
+    img {
+      padding: 8px;
+    }
+  }
+
+  .informationBodyComposition {
+    margin-left: 14px;
+    margin-bottom: 36px;
+    display: flex;
+    width: 460px;
+    padding: 21px 24px;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 2px;
+    border-radius: 12px;
+    background: ${theme.Neutral200};
+
+    .titleInformation {
+      color: ${theme.Neutral950};
+      font-family: Pretendard;
+      font-size: 16px;
+      font-style: normal;
       font-weight: 600;
-      .rightArrow {
-        width: 24px;
-        height: 24px;
-      }
+      line-height: 150%; /* 24px */
+      letter-spacing: -0.32px;
+    }
+    .contentInformation {
+      color: ${theme.Neutral800};
+      font-family: Pretendard;
+      font-size: 15px;
+      font-style: normal;
+      font-weight: 500;
+      line-height: 150%; /* 22.5px */
+      letter-spacing: -0.3px;
+    }
+  }
+
+  .categoryNoneButton {
+    height: 60px;
+    display: flex;
+    width: 474px;
+    padding: 6px 18px 6px 6px;
+    border-radius: 12px;
+    border: 1px solid ${theme.Neutral500};
+    background: #fff;
+    align-items: center;
+    color: ${theme.Neutral950};
+    text-align: center;
+    font-family: Pretendard;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    letter-spacing: -0.32px;
+    margin-bottom: 8px;
+
+    img {
+      padding: 8px;
     }
   }
 `;
@@ -221,7 +283,16 @@ export const BodyCompositionInputList = styled.div`
   display: flex;
   flex-direction: column;
   gap: 24px;
+  padding-left: 14px;
+  margin-bottom: 64px;
 `;
+export const BodyCompositionList = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  width: 100%;
+`;
+
 export const ButtonContainer = styled.div`
   display: flex;
   align-items: center;

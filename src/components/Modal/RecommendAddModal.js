@@ -3,200 +3,218 @@ import * as S from "./StyledRecommendAddModal";
 import xbutton2 from "../../assets/images/xbutton2.svg";
 import { useEffect, useState } from "react";
 import MiddleButton from "./../Button/MiddleButton";
-import TextCheckbox from "../TextCheckbox/TextCheckbox";
-import rightarrow from "../../assets/images/rightarrow.svg";
+import SmallFontTextCheckbox from "../TextCheckbox/SmallFontTextCheckbox";
 import TokenApi from "./../../apis/TokenApi";
-const RecommendAddModal = ({ setRecommendAddModal, machine }) => {
-	// my페이지에서는 저장된 값을 가져옴
-	const [myDivision, setMyDivsion] = useState([]);
-	const [isReady, setIsReady] = useState(false);
-	const [modifyMachineOption, setModifyMachineOption] = useState(false);
+import SemiMiddleButton from "./../Button/SemiMiddleButton";
+import { getLastError } from "../../apis/TokenApi";
 
-	// 중량 횟수 세트수
-	const [option, setOption] = useState([
-		{
-			optionname: "중량",
-			value: machine.weight,
-			isSelected: true,
-			unit: "kg",
-		},
-		{
-			optionname: "횟수",
-			value: machine.repeat,
-			isSelected: false,
-			unit: "회",
-		},
-		{
-			optionname: "세트 수",
-			value: machine.set,
-			isSelected: false,
-			unit: "세트",
-		},
-	]);
+const RecommendAddModal = ({
+  setRecommendAddModal,
+  machine,
+  routineContainment,
+}) => {
+  const [myDivision, setMyDivsion] = useState([]);
+  const [isReady, setIsReady] = useState(false);
+  const [modifyMachineOption, setModifyMachineOption] = useState(true);
 
-	// option 인덱스
-	const [currentIdx, setCurrentIdx] = useState(0);
+  // 중량 횟수 세트수
+  const [option, setOption] = useState([
+    {
+      optionname: "중량",
+      value: machine.weight,
+      isSelected: true,
+      unit: "kg",
+    },
+    {
+      optionname: "횟수",
+      value: machine.repeat,
+      isSelected: false,
+      unit: "회",
+    },
+    {
+      optionname: "세트 수",
+      value: machine.set,
+      isSelected: false,
+      unit: "세트",
+    },
+  ]);
 
-	const handleReady = () => {
-		return myDivision.filter((division) => division.isSelected).length;
-	};
+  // option 인덱스
+  const [currentIdx, setCurrentIdx] = useState(0);
 
-	const handleSelect = (idx) => {
-		const newArr = [...myDivision];
-		newArr[idx].isSelected = !newArr[idx].isSelected;
-		setMyDivsion(newArr);
-		setIsReady(false);
-		if (handleReady()) {
-			setIsReady(true);
-		}
-	};
+  const handleReady = () => {
+    return myDivision.filter((division) => division.isSelected).length;
+  };
 
-	const handleOptionValue = (e) => {
-		const newArray = [...option];
-		newArray[currentIdx].value = e.target.value;
-		setOption(newArray);
-	};
+  const handleSelect = (idx) => {
+    const newArr = [...myDivision];
+    newArr[idx].isSelected = !newArr[idx].isSelected;
+    setMyDivsion(newArr);
+    setIsReady(false);
 
-	const handleModifyComplete = async () => {
-		setModifyMachineOption(false);
-	};
+    // 선택된 TextCheckbox의 갯수를 새로운 상태로 설정
+    const selectedCount = newArr.filter(
+      (division) => division.isSelected
+    ).length;
+    setIsReady(selectedCount > 0);
+  };
 
-	// 기존 루틴 받아오기(분할1 ~ 분할4)
-	const fetchData = async () => {
-		try {
-			const response = await TokenApi.get("myfit/routines/workout");
-			const newArr = [...response.data].map((obj, index) => ({
-				...obj,
-				isSelected: false,
-			}));
-			setMyDivsion(newArr);
-		} catch (err) { }
-	};
-	// 루틴에 운동 추가하기
-	const handleAdd = () => {
-		const submission = {
-			workoutIds: [Number(machine.workoutId)],
-			weight: option[0].value,
-			rep: option[1].value,
-			setCount: option[2].value,
-		};
-		console.log(submission)
-		myDivision.forEach((division) => {
-			if (division.isSelected) {
-				TokenApi.post(
-					`/myfit/routines/workout/${division.routineId}`,
-					submission
-				)
-					.then((response) => {
-						console.log(response);
-						alert("추가되었습니다!")
-						setRecommendAddModal(false);
-					})
-					.catch((err) => {
-						console.log(err);
-					});
-			}
-		});
-	};
+  const handleOptionValue = (e) => {
+    const newArray = [...option];
+    newArray[currentIdx].value = e.target.value;
+    setOption(newArray);
+  };
 
-	// 루틴이 잘 등록되었는지 확인
-	// const handleRoutine = () => {
-	//   myDivision.forEach((division) => {
-	//     if (division.isSelected) {
-	//       TokenApi.get(`myfit/routines/workout/${division.routineId}`)
-	//         .then((response) => {
-	//           console.log(response);
-	//         })
-	//         .catch((err) => {
-	//           console.log(err);
-	//         });
-	//     }
-	//   });
-	// };
+  const handleModifyComplete = async () => {
+    setModifyMachineOption(false);
+  };
 
-	useEffect(() => {
-		fetchData();
-	}, []);
+  // 기존 루틴 받아오기(분할1 ~ 분할4)
+  const fetchData = async () => {
+    try {
+      const response = await TokenApi.get("myfit/routines/workout");
+      const newArr = [...response.data].map((obj, index) => ({
+        ...obj,
+        isSelected: false,
+      }));
+      setMyDivsion(newArr);
+    } catch (err) {}
+  };
 
-	return (
-		<ModalBox>
-			<S.RecommendAddModalWrapper>
-				<div className="recommendAddModalTitleWrapper">
-					<span className="recommendAddModalTitle">내 운동에 추가하기</span>
-					<img
-						src={xbutton2}
-						className="recommendAddModalQuitBtn"
-						onClick={() => setRecommendAddModal(false)}
-						alt="운동 추천 모달 나가기 버튼"
-					/>
-				</div>
-				{modifyMachineOption ? (
-					<>
-						<S.ModifyOptionWrapper>
-							{option.map((op, idx) => {
-								return (
-									<S.ModifyOptionButton
-										isSelected={currentIdx === idx}
-										className="modifyOption"
-										onClick={(e) => setCurrentIdx(idx)}
-									>
-										{op.optionname}
-									</S.ModifyOptionButton>
-								);
-							})}
-						</S.ModifyOptionWrapper>
-						<S.ModifyOptionContent>
-							<input
-								className="modifyInput"
-								value={option[currentIdx].value}
-								onChange={handleOptionValue}
-							/>
-							<span className="modifyInputUnit">{option[currentIdx].unit}</span>
-						</S.ModifyOptionContent>
-					</>
-				) : (
-					<div className="recommendAddModalDivsionList">
-						{myDivision.map((item, index) => {
-							return (
-								<TextCheckbox
-									key={item.routineName}
-									handleClick={handleSelect}
-									isSelected={item.isSelected}
-									elementidx={index}
-								>
-									{item.routineName}
-								</TextCheckbox>
-							);
-						})}
-						<button className="recommendAddModalBtnWrapper">
-							<span
-								className="recommendAddModalModifyBtn"
-								onClick={() => setModifyMachineOption(true)}
-							>
-								추천 운동량 수정
-							</span>
-							<img src={rightarrow} alt="추천 운동량 수정 버튼 이미지" />
-						</button>
-					</div>
-				)}
-				{modifyMachineOption ? (
-					<MiddleButton isReady={true} handleSubmit={handleModifyComplete}>
-						수정 완료하고 돌아가기
-					</MiddleButton>
-				) : (
-					<>
-						<MiddleButton isReady={isReady} handleSubmit={handleAdd}>
-							추가하기
-						</MiddleButton>
+  // 루틴에 운동 추가하기
+  const handleAdd = () => {
+    const submission = {
+      workoutIds: [Number(machine.workoutId)],
+      weight: option[0].value,
+      rep: option[1].value,
+      setCount: option[2].value,
+    };
 
-						{/* <MiddleButton isReady={isReady} handleSubmit={handleRoutine}>
-              추가하기2
-            </MiddleButton> */}
-					</>
-				)}
-			</S.RecommendAddModalWrapper>
-		</ModalBox>
-	);
+    // Promise 배열을 저장할 변수
+    const promises = [];
+    const notifications = [];
+
+    myDivision.forEach((division) => {
+      console.log();
+      if (division.isSelected) {
+        const promise = TokenApi.post(
+          `/myfit/routines/workout/${division.routineId}`,
+          submission
+        );
+
+        promises.push(
+          promise
+            .then((response) => {
+              // 성공한 경우
+              console.log(response);
+              notifications.push(
+                `${division.routineName}에 운동이 추가되었습니다!`
+              );
+            })
+            .catch((error) => {
+              // 실패한 경우
+              const errorMessage = getLastError();
+              console.log(errorMessage);
+              notifications.push(`${division.routineName}에 ${errorMessage}`);
+            })
+        );
+      }
+    });
+
+    // 모든 Promise가 완료되면 실행될 함수
+    Promise.allSettled(promises).then(() => {
+      // 모든 요청이 완료되었을 때 알림창 띄우기
+      alert(notifications.join("\n"));
+      setRecommendAddModal(false);
+    });
+  };
+
+  useEffect(() => {
+    fetchData();
+  }, []);
+
+  return (
+    <ModalBox>
+      <S.RecommendAddModalWrapper>
+        <div className="recommendAddModalTitleWrapper">
+          <img
+            src={xbutton2}
+            className="recommendAddModalQuitBtn"
+            onClick={() => setRecommendAddModal(false)}
+            alt="운동 추천 모달 나가기 버튼"
+          />
+        </div>
+        {modifyMachineOption ? (
+          <div className="recommendAddModalDivsionList">
+            <span className="modifyOptionTitle">
+              먼저 추천 운동량을 수정해보세요
+            </span>
+            <p className="modifyOptionComment">
+              AI의 추천이 마음에 들면 수정하지 않아도 돼요
+            </p>
+            <S.ModifyOptionWrapper>
+              {option.map((op, idx) => {
+                return (
+                  <S.ModifyOptionButton
+                    isSelected={currentIdx === idx}
+                    className="modifyOption"
+                    onClick={(e) => setCurrentIdx(idx)}
+                  >
+                    {op.optionname}
+                  </S.ModifyOptionButton>
+                );
+              })}
+            </S.ModifyOptionWrapper>
+            <S.ModifyOptionContent>
+              <input
+                className="modifyInput"
+                value={option[currentIdx].value}
+                onChange={handleOptionValue}
+              />
+              <span className="modifyInputUnit">{option[currentIdx].unit}</span>
+            </S.ModifyOptionContent>
+          </div>
+        ) : (
+          <div className="recommendAddModalDivsionList">
+            <span className="recommendAddModalTitle">
+              {machine.koreanName}를(을) 추가할 <br />내 루틴을 선택해주세요
+            </span>
+            <div className="divisionListComment">여러 개 선택할 수 있어요</div>
+            <div className="divisionList">
+              {myDivision.map((item, index) => {
+                return (
+                  <SmallFontTextCheckbox
+                    key={item.routineName}
+                    handleClick={handleSelect}
+                    isSelected={item.isSelected}
+                    elementidx={index}
+                    disabled={routineContainment[index]} // routineContainment에 따라 버튼 비활성화
+                  >
+                    {item.routineName}
+                  </SmallFontTextCheckbox>
+                );
+              })}
+            </div>
+          </div>
+        )}
+        {modifyMachineOption ? (
+          <MiddleButton isReady={true} handleSubmit={handleModifyComplete}>
+            적용하고 다음
+          </MiddleButton>
+        ) : (
+          <>
+            <SemiMiddleButton
+              isReady={isReady}
+              handleSubmit={handleAdd}
+              selectedCount={handleReady()}
+            >
+              추가하기
+            </SemiMiddleButton>
+          </>
+        )}
+      </S.RecommendAddModalWrapper>
+    </ModalBox>
+  );
 };
 
 export default RecommendAddModal;

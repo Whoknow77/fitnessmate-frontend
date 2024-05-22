@@ -1,11 +1,14 @@
 import * as S from "../StyledSignup";
 import { useNavigate } from "react-router-dom";
 import rightarrow from "../../../assets/images/rightarrow.svg";
+import clickCategory from "../../../assets/images/clickCategory.svg";
+import clickNoneCategory from "../../../assets/images/clickNoneCategory.svg";
 import { MiddleButton, BeforeButton } from "../../../components/";
 import { useRecoilState } from "recoil";
 import { validationState } from "../../../recoil/atom";
 import { useEffect, useState } from "react";
 import { userPostAPI } from "../../../apis/API";
+import { BodyCompositionInput } from "../../../components";
 import {
   FilterPriceSlide,
   FilterPriceRangeWrap,
@@ -33,6 +36,15 @@ const SignupBodyFigure = () => {
 
   // 체형 옵션 배열
   const [isCategorySelect, setIsCategorySelect] = useState(false);
+
+  const [isCategory, setIsCategory] = useState(true);
+  const isCategoryButton = () => {
+    setIsCategory(true);
+  };
+  const isCategoryNoneButton = () => {
+    setIsCategory(false);
+    setIsReady(false);
+  };
 
   // balance 바
   const [rangeValue, setRangeValue] = useState(
@@ -63,12 +75,6 @@ const SignupBodyFigure = () => {
     );
   };
 
-  useEffect(() => {
-    if (handleValidate()) {
-      setIsReady(true);
-    }
-  }, [isValidState]);
-
   // balanace 50%로 초기화
   useEffect(() => {
     setIsValidState((pre) => ({
@@ -95,6 +101,7 @@ const SignupBodyFigure = () => {
       bodyFat: [categorylist[idx][1][0], true],
       muscleMass: [categorylist[idx][1][1], true],
     }));
+    setIsReady(true);
   };
 
   const handleBackPage = (e) => {
@@ -142,93 +149,129 @@ const SignupBodyFigure = () => {
       }
     }
   };
+
+  useEffect(() => {
+    if (handleValidate()) {
+      setIsReady(true);
+    }
+  }, [isValidState]);
+
   return (
-    <S.SignupContainer>
-      <S.SignupTitle status="3">
-        <div className="statusBar">
-          <div className="statusBar2"></div>
-        </div>
-        체형 정보를 입력해주세요
-      </S.SignupTitle>
-      <S.SignupUpdonwBalanceWrapper>
-        <div className="updownBalanceBox">
-          <span className="updownBalanceTitle">
-            상/하체 균형을 조절해주세요
-          </span>
-          <div className="updownBalanceBar">
-            <span className="updownBalanceBarTitle">{rangeText}</span>
-            <div className="updownBalanceBarContent">
-              <div className="balanceRatioBox">
-                <span className="balanceRatio">상체 비중</span>
-                <span className="balanceRatioPercent2">{rangeValue * 10}%</span>
-              </div>
-              <div className="balnaceBar">
-                <FilterPriceSlide>
-                  <FilterPriceSlideInner
-                    rangePercent={Number(rangeValue) * 10}
-                  />
-                </FilterPriceSlide>
-                <FilterPriceRangeWrap>
-                  <FilterPriceRange
-                    type="range"
-                    min={1}
-                    max={9}
-                    step="1"
-                    value={rangeValue}
-                    onChange={(e) => {
-                      prcieRangeValueHandler(e);
-                    }}
-                  />
-                </FilterPriceRangeWrap>
-              </div>
-              <div className="balanceRatioBox">
-                <span className="balanceRatio">하체 비중</span>
-                <span className="balanceRatioPercent">
-                  {100 - rangeValue * 10}%
-                </span>
+    <>
+      <S.SignupContainer>
+        <S.SignupTitle status="3">
+          <div className="statusBar">
+            <div className="statusBar2"></div>
+          </div>
+          체형 정보를 입력해주세요
+        </S.SignupTitle>
+        <S.SignupUpdonwBalanceWrapper>
+          <div className="updownBalanceBox">
+            <span className="updownBalanceTitle">
+              상/하체 균형을 조절해주세요
+            </span>
+            <div className="updownBalanceBar">
+              <span className="updownBalanceBarTitle">{rangeText}</span>
+              <div className="updownBalanceBarContent">
+                <div className="balanceRatioBox">
+                  <span className="balanceRatio">상체 비중</span>
+                  <span className="balanceRatioPercent2">
+                    {rangeValue * 10}%
+                  </span>
+                </div>
+                <div className="balnaceBar">
+                  <FilterPriceSlide>
+                    <FilterPriceSlideInner
+                      rangePercent={Number(rangeValue) * 10}
+                    />
+                  </FilterPriceSlide>
+                  <FilterPriceRangeWrap>
+                    <FilterPriceRange
+                      type="range"
+                      min={1}
+                      max={9}
+                      step="1"
+                      value={rangeValue}
+                      onChange={(e) => {
+                        prcieRangeValueHandler(e);
+                      }}
+                    />
+                  </FilterPriceRangeWrap>
+                </div>
+                <div className="balanceRatioBox">
+                  <span className="balanceRatio">하체 비중</span>
+                  <span className="balanceRatioPercent">
+                    {100 - rangeValue * 10}%
+                  </span>
+                </div>
               </div>
             </div>
           </div>
-          <span className="bodyfigureText">체형을 선택해주세요</span>
-        </div>
-        <S.SignupTextContainer>
-          {categorylist?.map((item, index) => {
-            return (
-              <MiddleTextCheckbox
-                key={index}
-                handleClick={handleClick}
-                isSelected={isCategorySelect[index]}
-                elementidx={index}
+          {isCategory ? (
+            <S.SignupTextContainer>
+              <span className="bodyfigureText">체형을 선택해주세요</span>
+              <button className="categoryButton">
+                <img src={clickCategory} alt="선택된 체형입력 방식" />
+                직접 입력하기
+              </button>
+              <S.BodyCompositionInputList>
+                <BodyCompositionInput name="muscleMass">
+                  골격근량
+                </BodyCompositionInput>
+                <BodyCompositionInput name="bodyFat">
+                  체지방량
+                </BodyCompositionInput>
+              </S.BodyCompositionInputList>
+              <div className="informationBodyComposition">
+                <p className="titleInformation">어떻게 알 수 있나요?</p>
+                <p className="contentInformation">
+                  골격근량과 체지방량은 In-body 기계를 통해 측정 가능해요
+                </p>
+              </div>
+              <button
+                className="categoryNoneButton"
+                onClick={isCategoryNoneButton}
               >
-                {item[0]}
-              </MiddleTextCheckbox>
-            );
-          })}
-        </S.SignupTextContainer>
-        <div className="directButtonContainer">
-          <button
-            className="directbutton"
-            onClick={(e) => {
-              e.preventDefault();
-              navigate(`${currenturl}/direct`);
-            }}
-          >
-            골격근량, 체지방량 직접 입력
-            <img
-              src={rightarrow}
-              className="rightArrow"
-              alt="직접 입력하기 버튼 이미지"
-            />
-          </button>
-        </div>
-        <S.ButtonContainer>
-          <BeforeButton handleSubmit={handleBackPage} />
-          <MiddleButton handleSubmit={handleSubmit} isReady={isReady}>
-            회원가입 완료
-          </MiddleButton>
-        </S.ButtonContainer>
-      </S.SignupUpdonwBalanceWrapper>
-    </S.SignupContainer>
+                <img src={clickNoneCategory} alt="선택된 체형입력 방식" />
+                유형으로 선택하기
+              </button>
+            </S.SignupTextContainer>
+          ) : (
+            <S.SignupTextContainer>
+              <span className="bodyfigureText">체형을 선택해주세요</span>
+              <button className="categoryNoneButton" onClick={isCategoryButton}>
+                <img src={clickNoneCategory} alt="선택된 체형입력 방식" />
+                직접 입력하기
+              </button>
+              <button className="categoryButton">
+                <img src={clickCategory} alt="선택된 체형입력 방식" />
+                유형으로 선택하기
+              </button>
+              <S.BodyCompositionList>
+                {categorylist?.map((item, index) => {
+                  return (
+                    <MiddleTextCheckbox
+                      key={index}
+                      handleClick={handleClick}
+                      isSelected={isCategorySelect[index]}
+                      elementidx={index}
+                    >
+                      {item[0]}
+                    </MiddleTextCheckbox>
+                  );
+                })}
+              </S.BodyCompositionList>
+            </S.SignupTextContainer>
+          )}
+        </S.SignupUpdonwBalanceWrapper>
+      </S.SignupContainer>
+      <S.ButtonContainer>
+        <BeforeButton handleSubmit={handleBackPage} />
+        <MiddleButton handleSubmit={handleSubmit} isReady={isReady}>
+          회원가입 완료
+        </MiddleButton>
+      </S.ButtonContainer>
+    </>
   );
 };
 

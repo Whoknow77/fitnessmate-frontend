@@ -25,6 +25,9 @@ const RecommendMachineResult = () => {
   const [videoLink, setVideoLink] = useState(null);
   const [currentIdx, setCureentIdx] = useState(0);
   const [recommendAddModal, setRecommendAddModal] = useState(false);
+  // 선택된 루틴에 속한 운동
+  const [routineWorkout, setRoutineWorkout] = useState([]);
+  const [routineContainment, setRoutineContainment] = useState([]);
 
   const handlecMachineClick = (idx) => {
     setCureentIdx(idx);
@@ -49,9 +52,6 @@ const RecommendMachineResult = () => {
     };
   }, []);
 
-  // 루틴 목록
-  // const [routinesData, setRoutinesData] = useState({ data: [] });
-
   const fetchData = async () => {
     try {
       const response = await TokenApi.get("user/private");
@@ -65,15 +65,59 @@ const RecommendMachineResult = () => {
       setuserName(response.data.userName);
       setBodyPart(recommendState.requestedBodyParts);
 
-      // 루틴 안에 속해 있는지 확인하기 위해
-      // const routinesResponse = await TokenApi.get("/myfit/routines/workout");
-      // if (routinesResponse.data && routinesResponse.data.length > 0) {
-      //   console.log(routinesResponse);
-      // }
+      // 루틴 목록
+      const routinesResponse = await TokenApi.get("myfit/routines/workout");
+
+      // 초기화
+      const initialRoutineWorkout = new Array(
+        routinesResponse.data.length
+      ).fill(0);
+
+      const initialRoutineContainment = Array.from(
+        { length: recommendState.recommends.length },
+        () => Array(routinesResponse.data.length).fill(false)
+      );
+
+      for (let i = 0; i < routinesResponse.data.length; i++) {
+        const routinesWorkoutResult = await TokenApi.get(
+          `myfit/routines/workout/${routinesResponse.data[i].routineId}`
+        );
+
+        routinesWorkoutResult.data.forEach((workout) => {
+          recommendState.recommends.forEach((recommend, idx) => {
+            if (workout.workoutId === recommend.workoutId) {
+              initialRoutineWorkout[idx] += 1;
+              // 루틴에 운동이 포함되어 있으면 true로 설정
+              initialRoutineContainment[idx][i] = true;
+            }
+          });
+        });
+      }
+      setRoutineContainment(initialRoutineContainment);
+      setRoutineWorkout(initialRoutineWorkout);
     } catch (error) {
-      localStorage.clear();
+      console.error(error);
+      // localStorage.clear();
     }
   };
+
+  // RecommendAddModal에서 운동이 추가되면
+  // RecommendMachineResult 컴포넌트가 실시간으로 상태를 업데이트
+  useEffect(() => {
+    fetchData();
+
+    // 커스텀 이벤트 리스너 추가
+    const handleWorkoutAdded = () => {
+      fetchData();
+    };
+
+    window.addEventListener("workoutAdded", handleWorkoutAdded);
+
+    // 컴포넌트가 언마운트될 때 이벤트 리스너 제거
+    return () => {
+      window.removeEventListener("workoutAdded", handleWorkoutAdded);
+    };
+  }, [recommendAddModal]);
 
   const goHome = () => {
     navigate("/");
@@ -90,12 +134,13 @@ const RecommendMachineResult = () => {
     const updatedIsOpenArray = [...isOpenArray];
     updatedIsOpenArray[idx] = !updatedIsOpenArray[idx];
     setIsOpenArray(updatedIsOpenArray);
+    console.log(routineContainment);
   };
 
   useEffect(() => {
     fetchData();
-    console.log(recommendState);
-  }, [currentIdx]);
+  }, []);
+
   return (
     <>
       <S.RecommendResultBackground />
@@ -126,15 +171,12 @@ const RecommendMachineResult = () => {
               <p className="recommendKeywordTitle">적용된 추천 키워드</p>
               <div className="recommendKeywordContainer">
                 <div className="recommendKeyword">운동 추천</div>
-                {bodyPart.map((part, index) => {
-                  return (
-                    <div key={index} className="recommendKeyword">
-                      {part}
-                    </div>
-                  );
-                })}
                 <div className="recommendKeyword">
-                  {machineList}가지의 운동 기구
+                  {bodyPart.map((part, index) => {
+                    return (
+                      <>{index === bodyPart?.length - 1 ? part : `${part}, `}</>
+                    );
+                  })}
                 </div>
               </div>
             </div>
@@ -169,12 +211,14 @@ const RecommendMachineResult = () => {
                       </S.RecommendMainTopLeftWrapper>
                       <S.RecommendMainTopRightWrapper>
                         <div className="alreadyRoutine">
+                          {isNaN(routineWorkout[idx]) ? 0 : routineWorkout[idx]}
                           개 루틴에 이미 추가됨
                         </div>
                         <div
                           className="recommendMainBtn"
                           onClick={() => {
                             setRecommendAddModal(true);
+                            handlecMachineClick(idx);
                           }}
                         >
                           <img
@@ -259,6 +303,7 @@ const RecommendMachineResult = () => {
           <RecommendAddModal
             setRecommendAddModal={setRecommendAddModal}
             machine={recommendState.recommends[currentIdx]}
+            routineContainment={routineContainment[currentIdx]} // 해당 운동의 루틴 포함 여부만 전달
           />
         )}
       </S.RecommendMachineResultContainer>

@@ -4,7 +4,6 @@ import theme from "../../styles/theme";
 export const GuideModalWrapper = styled.div`
   display: flex;
   width: 388px;
-  height: 318px;
   padding: 24px;
   border-radius: 16px;
   background: ${theme.Neutral0};
@@ -13,7 +12,6 @@ export const GuideModalWrapper = styled.div`
   transform: translate(-50%, -50%);
   position: relative;
   flex-direction: column;
-  justify-content: space-between;
 
   .guideModalTitle {
     color: ${theme.Neutral990};
@@ -21,6 +19,7 @@ export const GuideModalWrapper = styled.div`
     font-weight: 600;
     line-height: 130%;
     letter-spacing: -0.44px;
+    margin-bottom: 12px;
   }
 
   .middleModalArea {
@@ -29,6 +28,7 @@ export const GuideModalWrapper = styled.div`
     grid-column-gap: 40px;
     grid-row-gap: 12px;
     grid-template-columns: 41px 1fr;
+    margin-bottom: 24px;
 
     .middleModalTitle {
       grid-column: 1;

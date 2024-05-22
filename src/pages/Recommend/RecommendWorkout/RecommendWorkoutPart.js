@@ -136,7 +136,7 @@ const RecommendWorkoutPart = () => {
       </TextCheckboxContainer>
       <RecommendButtonContainer isover={isover}>
         <BeforeArrowButton handleClick={handleBackPage} isLoading={isLoading} />
-        <span className="readyWarning">5개 이상 선택할 수 없습니다</span>
+        <span className="readyWarning">4개까지 선택할 수 있습니다</span>
         <AfterArrowButton handleClick={handleNextPage} isReady={isReady}>
           다음
         </AfterArrowButton>

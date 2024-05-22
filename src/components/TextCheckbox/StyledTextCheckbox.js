@@ -86,57 +86,71 @@ export const SmallTextCheckboxWrapper = styled(TextCheckboxWrapper)`
 `;
 
 export const SmallFontTextCheckboxWrapper = styled.button`
-  width: 100%;
-  height: 48px;
-  display: flex;
-  padding: 8px 14px;
-  transition: all 0.1s ease-out;
-  background: ${({ theme }) => theme.Neutral200};
-  border-radius: 10px;
-  justify-content: space-between;
-  align-items: center;
+  .smallfontTextCheckboxArea {
+    width: 100%;
+    height: 48px;
+    display: flex;
+    padding: 8px 14px;
+    transition: all 0.1s ease-out;
+    background: ${({ theme }) => theme.Neutral200};
+    border-radius: 10px;
+    justify-content: space-between;
+    align-items: center;
 
-  border: 2px solid
-    ${({ theme, isSelected }) =>
-      isSelected ? theme.Brand600 : theme.Neutral300};
-
-  .choice-article {
-    // 텍스트가 새로운 줄로 넘어가지 않게됨
-    white-space: nowrap;
-    // 텍스트가 요소를 넘어갈 경우 숨기
-    overflow: hidden;
-    // 글자가 길어질 경우 ...으로 표시
-    text-overflow: ellipsis;
-    transition: all 0.3s ease-out;
-    color: ${({ isSelected, theme }) =>
-      isSelected ? theme.Brand600 : theme.Neutral800};
-    font-size: 16px;
-    font-weight: 500;
-  }
-
-  .check-background {
-    transition: all 0.3s ease-out;
-    fill: ${({ isSelected, theme }) =>
-      isSelected ? theme.Brand600 : theme.Neutral200};
-  }
-
-  .check-shape {
-    transition: all 0.3s ease-out;
-    fill: ${({ isSelected, theme }) =>
-      isSelected ? theme.Neutral0 : theme.Gray30};
-  }
-  &:hover {
     border: 2px solid
-      ${({ isSelected, theme }) => (isSelected ? theme.Brand600 : theme.Gray30)};
-
-    .check-shape {
-      fill: ${({ isSelected, theme }) =>
-        isSelected ? theme.Neutral0 : theme.Neutral990};
-    }
+      ${({ theme, isSelected }) =>
+        isSelected ? theme.Brand600 : theme.Neutral300};
 
     .choice-article {
+      // 텍스트가 새로운 줄로 넘어가지 않게됨
+      white-space: nowrap;
+      // 텍스트가 요소를 넘어갈 경우 숨기
+      overflow: hidden;
+      // 글자가 길어질 경우 ...으로 표시
+      text-overflow: ellipsis;
+      transition: all 0.3s ease-out;
       color: ${({ isSelected, theme }) =>
-        isSelected ? theme.Brand600 : theme.Neutral990};
+        isSelected ? theme.Brand600 : theme.Neutral800};
+      font-size: 16px;
+      font-weight: 500;
+    }
+
+    .check-background {
+      transition: all 0.3s ease-out;
+      fill: ${({ isSelected, theme }) =>
+        isSelected ? theme.Brand600 : theme.Neutral200};
+    }
+
+    .check-shape {
+      transition: all 0.3s ease-out;
+      fill: ${({ isSelected, theme }) =>
+        isSelected ? theme.Neutral0 : theme.Gray30};
+    }
+    &:hover {
+      border: 2px solid
+        ${({ isSelected, theme }) =>
+          isSelected ? theme.Brand600 : theme.Gray30};
+
+      .check-shape {
+        fill: ${({ isSelected, theme }) =>
+          isSelected ? theme.Neutral0 : theme.Neutral990};
+      }
+
+      .choice-article {
+        color: ${({ isSelected, theme }) =>
+          isSelected ? theme.Brand600 : theme.Neutral990};
+      }
+    }
+  }
+
+  .smallfontTextCheckboxArea[disabled] {
+    cursor: auto;
+    opacity: 0.2;
+
+    &:hover {
+      .check-shape {
+        fill: none;
+      }
     }
   }
 `;

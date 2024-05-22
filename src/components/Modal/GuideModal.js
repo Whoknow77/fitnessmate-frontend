@@ -56,9 +56,6 @@ const GuideModal = () => {
       <S.GuideModalWrapper>
         <span className="guideModalTitle">아래의 신체 정보로 추천할까요?</span>
         <div className="middleModalArea">
-          <span className="middleModalTitle">성별</span>
-          <p className="middleModalContent">{sex}</p>
-
           <span className="middleModalTitle">키</span>
           <p className="middleModalContent">{height}</p>
 

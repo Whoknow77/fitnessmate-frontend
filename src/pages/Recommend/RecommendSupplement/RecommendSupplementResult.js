@@ -1,5 +1,5 @@
-import * as S from "./../StyledRecommend";
-import theme from "./../../../styles/theme";
+import * as S from "./StyledRecommend";
+import theme from "../../../styles/theme";
 import { useEffect, useState } from "react";
 import { useRecoilState } from "recoil";
 import { supplementRecommendState } from "../../../recoil/atom";
@@ -109,7 +109,7 @@ const RecommendSupplementResult = () => {
       setuserName(response2.data.userName);
       console.log(supplementRecommendState);
     } catch (error) {
-      localStorage.clear();
+      // localStorage.clear();
     }
 
     if (
@@ -199,6 +199,7 @@ const RecommendSupplementResult = () => {
 
   // 내 보조제에 추가
   const handleAdd = () => {
+    console.log("이거", toggleServingValue);
     if (isServingValue === true) {
       const res = toggleServingValue.supplementId;
       console.log(res);
@@ -213,7 +214,7 @@ const RecommendSupplementResult = () => {
     } else {
       const res = toggleValue.units[0].supplementId;
       console.log(res);
-      TokenApi.post(`/myfit/routines/supplement/${res}`)
+      TokenApi.post(`/myfit/routines/supplement`, { supplementIds: [res] })
         .then((response) => {
           console.log(response);
         })
@@ -236,7 +237,7 @@ const RecommendSupplementResult = () => {
           ftcolor={theme.Neutral990}
           ftweight="700"
         >
-          {userName}님의 운동 추천결과
+          {userName}님의 보조제 추천결과
           <br />
           <S.RecommendTitle ftsize="24px" ftcolor={theme.Neutral900}>
             {userName}님의 신체 정보를 모두 고려했어요.
@@ -258,7 +259,7 @@ const RecommendSupplementResult = () => {
                           setIsServingValue(false);
                         }}
                       >
-                        {supplement.koreanName}
+                        {supplement.koreanName.replace(/\s*\([^)]*\)/g, "")}
                       </S.RecommendNavbarItem>
                     );
                   }

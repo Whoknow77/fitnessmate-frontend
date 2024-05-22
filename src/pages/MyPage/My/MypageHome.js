@@ -19,6 +19,8 @@ import pulsImg from "../../../assets/images/routineAdd.svg";
 import penIcon from "../../../assets/images/penIcon.svg";
 import changeIdx from "../../../assets/images/change_circle.svg";
 import deleteIcon from "../../../assets/images/delete.svg";
+import itemMore from "../../../assets/images/Frame820.svg";
+import videoArrow from "../../../assets/images/videoArrow.svg";
 
 import ToggleSwitch from "./toggle";
 import TokenApi from "../../../apis/TokenApi";
@@ -53,9 +55,16 @@ const Mypagehome = () => {
   // 루틴 목록 여부
   const [isRoutine, setIsRoutine] = useState(false);
   // 선택된 루틴
-  const [btnActive, setBtnActive] = useState("");
+  const [btnActive, setBtnActive] = useState();
   // 선택된 루틴에 속한 운동
   const [routineWorkout, setRoutineWorkout] = useState([]);
+  // drag & drop 을 위한 운동 리스트 복사본
+  const [itemList, setItemList] = useState([]);
+  // 운동 설명 비디오
+  const [videoLink, setVideoLink] = useState(null);
+
+  // 내 보조제
+  const [mySupplements, setMySupplements] = useState([]);
 
   // 기본 상태 세팅
 
@@ -82,7 +91,14 @@ const Mypagehome = () => {
         const routinesWorkoutResult = await TokenApi.get(
           `myfit/routines/workout/${routinesResponse.data[0].routineId}`
         );
-        setRoutineWorkout(routinesWorkoutResult);
+        setItemList(routinesWorkoutResult.data);
+        setRoutineWorkout(routinesWorkoutResult.data);
+
+        // 내 보조제 리스트 조회
+        const mySupplement = await TokenApi.get("/myfit/routines/supplement");
+        setMySupplements(mySupplement);
+        console.log(mySupplement.data.supplements.length);
+        console.log(mySupplement);
       } else {
         setIsRoutine(false);
       }
@@ -95,7 +111,16 @@ const Mypagehome = () => {
     fetchData();
   }, [routinesData.length]);
 
-  // 루틴 조작
+  const getSupplement = async (routinesArray) => {
+    const mySupplement = await TokenApi.get("/myfit/routines/supplement");
+    setMySupplements(mySupplement);
+  };
+
+  useEffect(() => {
+    getSupplement();
+  }, [mySupplements.length]);
+
+  // 첫 루틴 만들기
 
   const fixRoutines = async (routinesArray) => {
     try {
@@ -117,33 +142,74 @@ const Mypagehome = () => {
       {
         routineId: -1,
         routineIndex: 0,
-        routineName: "루틴 1",
+        routineName: "가슴 집중 DAY",
       },
       {
         routineId: -1,
         routineIndex: 1,
-        routineName: "루틴 2",
+        routineName: " 집중 DAY",
       },
       {
         routineId: -1,
         routineIndex: 2,
-        routineName: "루틴 3",
+        routineName: "어깨 집중 DAY",
       },
       {
         routineId: -1,
         routineIndex: 3,
-        routineName: "루틴 4",
+        routineName: "하체 집중 DAY",
       },
     ];
 
     fixRoutines(firstRoutines);
   };
 
+  // 새로운 루틴 만들기
+  const addNewRoutine = async () => {
+    // routinesData.data에서 가장 큰 routineIndex 찾기
+    const maxRoutineIndex = Math.max(
+      ...routinesData.data.map((item) => item.routineIndex)
+    );
+
+    // 기존 루틴 데이터와 새로운 루틴 데이터를 하나의 배열로 결합
+    const routinesForServer = [
+      ...routinesData.data.map((item) => ({
+        routineId: item.routineId,
+        routineIndex: item.routineIndex,
+        routineName: item.routineName,
+      })),
+      {
+        routineId: -1,
+        routineIndex: maxRoutineIndex + 1,
+        routineName: "새로운 루틴",
+      },
+    ];
+
+    console.log(routinesData);
+    fixRoutines(routinesForServer);
+  };
+
   // 루틴 active 변화시키기
 
-  const onClickChangeBtnActive = (idx) => {
+  const onClickChangeBtnActive = async (idx) => {
     setBtnActive(idx);
   };
+
+  const changeWorkout = async () => {
+    try {
+      const routinesWorkoutResult = await TokenApi.get(
+        `myfit/routines/workout/${routinesData.data[btnActive].routineId}`
+      );
+      setRoutineWorkout(routinesWorkoutResult.data);
+      setItemList(routinesWorkoutResult.data);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  useEffect(() => {
+    changeWorkout();
+  }, [btnActive]);
 
   // 루틴 삭제하기
 
@@ -163,10 +229,61 @@ const Mypagehome = () => {
     setIsRoutineFixOpen("");
   };
 
-  // 임의 제작
-  const howabout = () => {
-    console.log(routineWorkout.data);
-    console.log(list);
+  // 루틴 수정하기
+
+  // 루틴 수정 여부
+  const [isRoutineFix, setIsRoutineFix] = useState(false);
+  // 특정 루틴 수정
+  const [activeItemId, setActiveItemId] = useState(null);
+
+  // isClicked를 통해 검색창 클릭 여부에 따라 스타일 다르게 함
+  const [isClicked, setIsClicked] = useState(false);
+
+  const [searchvalue, setSearchValue] = useState("루틴 이름");
+
+  const inputRef = useRef(null); // ref 생성
+  const inputButtonRef = useRef(null); // ref 생성
+  const handleCloseInput = () => {
+    setIsRoutineFix(false);
+  };
+  OutSideClick(inputButtonRef, handleCloseInput);
+
+  const fixThisRoutineName = (e) => {
+    setActiveItemId(e.routineId);
+    // 클릭된 div가 속한 루틴의 정보 추출
+    const { routineName } = e;
+    setSearchValue(routineName);
+
+    // input으로 변경
+    setIsRoutineFix(true);
+
+    // 모달 닫히기
+    setIsRoutineFixOpen("");
+  };
+
+  const handleChange = (e) => {
+    setSearchValue(e.target.value);
+  };
+
+  useEffect(() => {
+    // isRoutineFix가 true이고, input 요소가 존재하며, isClicked가 true일 때 포커스를 설정합니다.
+    if (isRoutineFix && inputRef.current && isClicked) {
+      inputRef.current.focus();
+    }
+  }, [isRoutineFix, isClicked]);
+
+  const handleEnter = (e) => {
+    if (e.key === "Enter") {
+      const updatedRoutinesData = routinesData.data.map((item) => {
+        if (item.routineId === activeItemId) {
+          item.routineName = searchvalue;
+        }
+        return item;
+      });
+      fixRoutines(updatedRoutinesData);
+      // 모달 닫히기
+      setIsRoutineFix(false);
+    }
   };
 
   // Routine Modal
@@ -175,17 +292,6 @@ const Mypagehome = () => {
 
   const onClickFixRoutine = async (routineId) => {
     setIsRoutineFixOpen(routineId);
-
-    try {
-      // 해당 루틴에 속한 운동 리스트를 가져오기 위해 API 요청
-      const routinesWorkout = await TokenApi.get(
-        `/myfit/routines/workout/${routineId}`
-      );
-      setRoutineWorkout(routinesWorkout);
-      console.log(routineWorkout);
-    } catch (error) {
-      console.error(error);
-    }
   };
 
   const modalRef = useRef(null);
@@ -196,20 +302,10 @@ const Mypagehome = () => {
 
   // Drag & Drop
 
-  // dnd 더미데이터
-  const [list, setList] = useState([
-    "시티드 머신 로우",
-    "행잉 레그레이즈",
-    "머신 풀 오버",
-    "케틀벨 로우",
-    "힙어브덕션",
-    "덤벨 플라이",
-  ]);
-  // React state to track order of items
-  const [itemList, setItemList] = useState(list);
-
-  // Function to update list on drop
-  const handleDrop = (droppedItem) => {
+  // 2. 여기서 순서를 바꿀 때, 그냥 routineWorkout을 가져왔더니 아래 map의 순서를 유지하려고 해서
+  // itemList라는 배열 복사본을 만들어서 실제 사용자가 하는 동안에
+  const handleDrop = async (droppedItem) => {
+    console.log(droppedItem);
     // Ignore drop outside droppable container
     if (!droppedItem.destination) return;
     var updatedList = [...itemList];
@@ -217,9 +313,70 @@ const Mypagehome = () => {
     const [reorderedItem] = updatedList.splice(droppedItem.source.index, 1);
     // Add dropped item
     updatedList.splice(droppedItem.destination.index, 0, reorderedItem);
+
+    console.log(updatedList);
+
+    const workout = {
+      myWorkoutIndex: droppedItem.destination.index + 1,
+      weight: updatedList[droppedItem.destination.index].weight,
+      rep: updatedList[droppedItem.destination.index].rep,
+      setCount: updatedList[droppedItem.destination.index].setCount,
+    };
+
+    // 3. 여기서 바뀐 배열을
+    try {
+      const newRoutines = await TokenApi.post(
+        `myfit/routines/workout/update/${updatedList[droppedItem.destination.index].myWorkoutId}`,
+        workout
+      );
+      console.log("이거", newRoutines);
+    } catch (error) {
+      console.error(error);
+    }
+
     // Update State
     setItemList(updatedList);
   };
+
+  const deleteWorkout = async () => {
+    console.log(routineWorkout);
+    console.log(itemList);
+  };
+
+  const newRoutineWorkout = async () => {
+    try {
+      const routinesWorkoutResult = await TokenApi.get(
+        `myfit/routines/workout/${routinesData.data[btnActive].routineId}`
+      );
+      setRoutineWorkout(routinesWorkoutResult.data);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  // 카드 자세히 보기 상태 배열 : 카드 각각의 열림 상태를 관리하기 위해 배열로
+  const [isOpenArray, setIsOpenArray] = useState(
+    new Array(itemList.length).fill(false)
+  );
+
+  // 카드 자세히 보기 상태 변경
+  const handleInformationOpenClick = async (idx) => {
+    // 해당 카드의 isOpen 상태를 토글
+    const updatedIsOpenArray = [...isOpenArray];
+    updatedIsOpenArray[idx] = !updatedIsOpenArray[idx];
+    setIsOpenArray(updatedIsOpenArray);
+
+    // 운동 설명 비디오 링크 가져오기
+    const response = await userWorkoutAPI.get(`${itemList[idx].workoutId}`);
+    const videoId = response.data.videoLink.split("=")[1];
+    setVideoLink(`https://www.youtube.com/embed/${videoId}`);
+  };
+
+  useEffect(() => {
+    newRoutineWorkout();
+  }, [itemList]);
+
+  // console.log(workout);
 
   return (
     <>
@@ -227,7 +384,9 @@ const Mypagehome = () => {
       <S.MypageContainer>
         <div className="MypageHomeArea">
           <S.MypageTopContainer>
-            <span className="mypageTitle">루틴 관리</span>
+            <span className="mypageTitle" onClick={deleteWorkout}>
+              내 루틴
+            </span>
             <div className="mypageTopContent">
               <div className="myInformation">
                 <div className="myTopInformation">
@@ -248,12 +407,13 @@ const Mypagehome = () => {
                       <img
                         src={addRoutine}
                         alt="루틴 추가 더하기 아이콘"
-                        onClick={howabout}
+                        onClick={addNewRoutine}
                       />
                     </button>
                     {/* 루틴 목록을 map으로 불러오되, .data 붙여가며 더 들어가지 말고 딱 이 정도에서 혹시 map이 없을 경우만 앞에 작성하여 대비하기 */}
                     {routinesData.data?.map((item) => (
                       <button
+                        ref={inputButtonRef}
                         key={item.routineId} // 모달을 각각 열 수 있도록 각 루틴에 대한 고유한 키 부여
                         name={item.routineName}
                         id={item.routineId}
@@ -263,7 +423,25 @@ const Mypagehome = () => {
                           onClickChangeBtnActive(item.routineIndex)
                         }
                       >
-                        <p className="routineName">{item.routineName}</p>
+                        {isRoutineFix && activeItemId === item.routineId ? (
+                          <S.inputContent
+                            ref={inputRef} // ref를 입력 창에 연결
+                            className="routineName"
+                            value={searchvalue}
+                            isClicked={isClicked}
+                            onChange={handleChange}
+                            onKeyDown={handleEnter}
+                            onFocus={() => {
+                              setIsClicked(true);
+                            }}
+                            onBlur={() => {
+                              setIsClicked(false);
+                            }}
+                            autoFocus
+                          />
+                        ) : (
+                          <p className="routineName">{item.routineName}</p>
+                        )}
                         {/* 각 루틴별 더보기 이미지 fill 제어를 위해 svg 데리고옴 */}
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
@@ -298,7 +476,10 @@ const Mypagehome = () => {
                             ref={modalRef}
                             open={isRoutineFixOpen === item.routineId}
                           >
-                            <div className="routineFixModalButton">
+                            <div
+                              className="routineFixModalButton"
+                              onClick={() => fixThisRoutineName(item)}
+                            >
                               <img
                                 className="routineFixModalIcon"
                                 src={penIcon}
@@ -375,19 +556,13 @@ const Mypagehome = () => {
                     ref={provided.innerRef}
                   >
                     <div className="item-container">
-                      <div className="numArea">
-                        {itemList.map((item, index) => (
-                          <div className="workoutNum">
-                            <div className="numCircle">{index + 1}</div>
-                            <div className="line"></div>
-                          </div>
-                        ))}
-                      </div>
-                      <div className="numArea">
-                        {itemList.map((item, index) => (
+                      <div className="numArea2">
+                        {itemList?.map((item, index) => (
                           <Draggable
                             key={item}
-                            draggableId={item}
+                            // 1. 문자열만 가능해서 이렇게 해주되, 식별하기 위함이라 myWorkoutId 등을 사용하려 했으나
+                            // 그럼 순서가 바뀌어도 각 요소가 가진 숫자가 그대로인데, dnd는 오름차순이어야만 함. 때문에 index로 설정
+                            draggableId={`${index}`}
                             index={index}
                           >
                             {(provided) => (
@@ -396,17 +571,139 @@ const Mypagehome = () => {
                                 ref={provided.innerRef}
                                 {...provided.dragHandleProps}
                                 {...provided.draggableProps}
+                                isOpenArray={isOpenArray[index]}
                               >
-                                <div className="workoutCardContent" draggable>
-                                  <p className="workoutName">{item}</p>
-                                </div>
-                                <img
-                                  className="cardHandler"
-                                  src={cardHandler}
-                                  alt="운동 움직일 핸들링 버튼"
+                                <div
+                                  className={`workoutNum ${index === itemList.length - 1 ? "last-item" : ""}`}
                                   key={index}
+                                  isOpenArray={isOpenArray[index]}
+                                >
+                                  <div className="numCircle">{index + 1}</div>
+                                  <div className="line"></div>
+                                </div>
+                                <div
+                                  className="recommendCard"
+                                  isOpenArray={isOpenArray[index]}
                                   draggable
-                                />
+                                >
+                                  <div className="recommendCardContent">
+                                    <S.RecommendMainTopWrapper
+                                      isOpenArray={isOpenArray[index]}
+                                    >
+                                      <S.RecommendMainTopLeftWrapper>
+                                        <S.RecommendMainWorkout>
+                                          {item.workoutName}
+                                        </S.RecommendMainWorkout>
+                                        <S.RecommendMainBodyPart>
+                                          {item.bodyParts.map(
+                                            (bodyPart, index) => (
+                                              <p
+                                                className="item_BodyPart"
+                                                key={index}
+                                              >
+                                                {index ===
+                                                item.bodyParts?.length - 1
+                                                  ? bodyPart
+                                                  : `${bodyPart}, `}
+                                              </p>
+                                            )
+                                          )}
+                                        </S.RecommendMainBodyPart>
+                                      </S.RecommendMainTopLeftWrapper>
+                                      <S.RecommendMainTopRightWrapper>
+                                        <div className="amountContent">
+                                          <div className="amountItem">
+                                            <p className="amountTitle">중량</p>
+                                            <span className="amountText">
+                                              {item.weight === null
+                                                ? 0
+                                                : item.weight}
+                                              <p className="amountUnit">kg</p>
+                                            </span>
+                                          </div>
+                                          <div className="amountItem">
+                                            <p className="amountTitle">횟수</p>
+                                            <span className="amountText">
+                                              {item.rep === null ? 0 : item.rep}
+                                              <p className="amountUnit">회</p>
+                                            </span>
+                                          </div>
+                                          <div className="amountItem">
+                                            <p className="amountTitle">
+                                              세트 수
+                                            </p>
+                                            <span className="amountText">
+                                              {item.setCount === null
+                                                ? 0
+                                                : item.setCount}
+                                              <p className="amountUnit">세트</p>
+                                            </span>
+                                          </div>
+                                        </div>
+                                        <div
+                                          className="recommendMainBtn"
+                                          onClick={() => {}}
+                                        >
+                                          <img
+                                            className="recommendMainBtnImg"
+                                            src={itemMore}
+                                            alt="내 운동 더보기"
+                                          />
+                                        </div>
+                                      </S.RecommendMainTopRightWrapper>
+                                    </S.RecommendMainTopWrapper>
+                                    <S.RecommendMainMiddleWrapper
+                                      isOpenArray={isOpenArray[index]}
+                                    >
+                                      <div className="recommendMainContent">
+                                        <S.RecommendDescriptionWrapper>
+                                          {item.description}
+                                        </S.RecommendDescriptionWrapper>
+                                        <S.RecommendVideoWrapper>
+                                          <img
+                                            src={item.imgPath}
+                                            className="fitnessImg"
+                                            alt="운동종류 이미지"
+                                          ></img>
+                                          <div
+                                            className="goTopRecommendVideo"
+                                            onClick={() => {
+                                              window.open(videoLink);
+                                            }}
+                                          >
+                                            <img
+                                              src={videoArrow}
+                                              className="videoArrow"
+                                              alt="영상 재생 화살표 아이콘"
+                                            ></img>
+                                          </div>
+                                        </S.RecommendVideoWrapper>
+                                      </div>
+                                    </S.RecommendMainMiddleWrapper>
+                                  </div>
+
+                                  <S.RecommendMoreButton
+                                    isOpenArray={isOpenArray[index]}
+                                    onClick={() =>
+                                      handleInformationOpenClick(index)
+                                    }
+                                  >
+                                    {isOpenArray[index] ? (
+                                      <p className="informationText">접기</p>
+                                    ) : (
+                                      <p className="informationText">
+                                        자세히 보기
+                                      </p>
+                                    )}
+                                  </S.RecommendMoreButton>
+                                  <img
+                                    className="cardHandler"
+                                    src={cardHandler}
+                                    alt="운동 움직일 핸들링 버튼"
+                                    key={index}
+                                    draggable
+                                  />
+                                </div>
                               </div>
                             )}
                           </Draggable>
@@ -420,6 +717,26 @@ const Mypagehome = () => {
             </DragDropContext>
           </S.MypageMiddleContainer>
         </div>
+        {mySupplements?.data?.supplements?.length > 0 && (
+          <div className="SupplementArea">
+            <p className="supplementTitle">내 보조제</p>
+            {mySupplements?.data?.supplements?.map((item, index) => (
+              <div className="supplementItem" key={item.mySupplementId}>
+                <img
+                  src={item.imageURL}
+                  className="supplementImg"
+                  alt="보조제 이미지"
+                />
+                <div className="supplementContent">
+                  <span className="item_workoutName">
+                    {item.supplementName.replace(/\s*\([^)]*\)/g, "")}
+                  </span>
+                  <p className="item_flavor-source">{item.flavor}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        )}
       </S.MypageContainer>
     </>
   );

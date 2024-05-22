@@ -1,4 +1,4 @@
-import * as S from "../../../../components/Modal/StyledRecommendAddModal";
+import * as S from "./StyledAddWorkoutModal";
 import xbutton from "../../../../assets/images/black-xbutton.svg";
 import { useEffect, useState } from "react";
 import SemiMiddleButton from "../../../../components/Button/SemiMiddleButton";
@@ -8,9 +8,10 @@ import TokenApi from "../../../../apis/TokenApi";
 import { ModalBox } from "../../../../components/Modal/StyledEmailModal";
 import { getLastError } from "../../../../apis/TokenApi";
 
-const AddWorkoutModal = ({ setRecommendAddModal, workoutId }) => {
+const AddWorkoutModal = ({ setRecommendAddModal, workoutId, workoutName }) => {
   // my페이지에서는 저장된 값을 가져옴
   const [myDivision, setMyDivsion] = useState([]);
+  const [isContain, setIsContain] = useState([]);
   const [isReady, setIsReady] = useState(false);
 
   const handleReady = () => {
@@ -28,6 +29,7 @@ const AddWorkoutModal = ({ setRecommendAddModal, workoutId }) => {
       (division) => division.isSelected
     ).length;
     setIsReady(selectedCount > 0);
+    console.log(isContain);
   };
 
   // 기존 루틴 받아오기(분할1 ~ 분할4)
@@ -39,6 +41,23 @@ const AddWorkoutModal = ({ setRecommendAddModal, workoutId }) => {
         isSelected: false,
       }));
       setMyDivsion(newArr);
+
+      // 초기화
+      const initialRoutineWorkout = new Array(response.data.length).fill(false);
+      console.log(initialRoutineWorkout);
+      for (let i = 0; i < response.data.length; i++) {
+        const routinesWorkoutResult = await TokenApi.get(
+          `myfit/routines/workout/${response.data[i].routineId}`
+        );
+        routinesWorkoutResult.data.forEach((workout) => {
+          if (workout.workoutId === workoutId) {
+            console.log(workout.workoutId, workoutId);
+            initialRoutineWorkout[i] = true;
+          }
+        });
+      }
+
+      setIsContain(initialRoutineWorkout);
     } catch (err) {}
   };
 
@@ -102,8 +121,8 @@ const AddWorkoutModal = ({ setRecommendAddModal, workoutId }) => {
             />
           </div>
           <span className="recommendAddModalTitle">
-            <p className="firstTitle">데드리프트를 추가할</p>
-            <p className="secondTitle">내 운동 목록을 선택해주세요</p>
+            <p className="firstTitle">{workoutName}를(을) 추가할</p>
+            <p className="secondTitle">내 루틴을 선택해주세요</p>
           </span>
         </div>
         <div className="middleModalArea">
@@ -116,6 +135,7 @@ const AddWorkoutModal = ({ setRecommendAddModal, workoutId }) => {
                   handleClick={handleSelect}
                   isSelected={item.isSelected}
                   elementidx={index}
+                  disabled={isContain[index]}
                 >
                   {item.routineName}
                 </SmallFontTextCheckbox>

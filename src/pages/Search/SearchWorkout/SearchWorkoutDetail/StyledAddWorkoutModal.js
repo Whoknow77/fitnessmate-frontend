@@ -1,11 +1,12 @@
 import styled from "styled-components";
-import theme from "../../styles/theme";
+import theme from "../../../../styles/theme";
 
 export const RecommendAddModalWrapper = styled.div`
   display: flex;
   width: 388px;
-  height: auto;
+  height: 539px;
   padding: 20px;
+  justify-content: space-between;
   border-radius: 16px;
   background: ${theme.Neutral0};
   top: 50%;
@@ -15,62 +16,61 @@ export const RecommendAddModalWrapper = styled.div`
   flex-direction: column;
   .recommendAddModalTitleWrapper {
     display: flex;
-    margin-bottom: 8px;
-    justify-content: flex-end;
-    .recommendAddModalQuitBtn {
-      cursor: pointer;
-      width: 24px;
-      height: 24px;
-      padding: 4.8px;
-    }
-  }
-  .recommendAddModalDivsionList {
-    display: flex;
     flex-direction: column;
+    gap: 8px;
+    .quitBtnArea {
+      display: flex;
+      justify-content: flex-end;
+      width: 100%;
+      .recommendAddModalQuitBtn {
+        cursor: pointer;
+      }
+    }
     .recommendAddModalTitle {
       color: ${theme.Neutral990};
-      font-family: Pretendard;
-      font-size: 20px;
-      font-style: normal;
-      font-weight: 600;
-      line-height: 140%;
-      letter-spacing: -0.4px;
-      margin-bottom: 25.5px;
     }
-    .divisionListComment {
-      color: ${theme.Neutral800};
-      font-family: Pretendard;
-      font-size: 16px;
-      font-style: normal;
+    .recommendAddModalTitle .firstTitle {
       font-weight: 500;
-      line-height: 140%;
-      letter-spacing: -0.32px;
-      margin-bottom: 14px;
+      font-size: 22px;
+      letter-spacing: -0.44px;
+      line-height: 30.8px;
     }
-    .divisionList {
+    .recommendAddModalTitle .secondTitle {
+      font-weight: 600;
+      font-size: 22px;
+      letter-spacing: -0.44px;
+      line-height: 30.8px;
+    }
+  }
+  .middleModalArea {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    .middleModalTitle {
+      font-weight: 500;
+      color: ${theme.Neutral800};
+      font-size: 16px;
+      letter-spacing: -0.32px;
+      line-height: 22.4px;
+    }
+    .recommendAddModalDivsionList {
       display: flex;
       flex-direction: column;
       gap: 8px;
-      margin-bottom: 25.5px;
-    }
-    .modifyOptionTitle {
-      color: ${theme.Neutral990};
-      font-family: Pretendard;
-      font-size: 20px;
-      font-style: normal;
-      font-weight: 600;
-      line-height: 140%; /* 28px */
-      letter-spacing: -0.4px;
-    }
-    .modifyOptionComment {
-      color: ${theme.Neutral900};
-      font-family: Pretendard;
-      font-size: 15px;
-      font-style: normal;
-      font-weight: 500;
-      line-height: 140%; /* 21px */
-      letter-spacing: -0.3px;
-      margin-bottom: 80px;
+      .recommendAddModalBtnWrapper {
+        display: flex;
+        padding: 10px;
+        justify-content: flex-end;
+        width: 100%;
+        align-items: center;
+        gap: 10px;
+        .recommendAddModalModifyBtn {
+          color: ${theme.Brand600};
+          font-size: 18px;
+          font-weight: 700;
+          letter-spacing: -0.36px;
+        }
+      }
     }
   }
 `;
@@ -101,7 +101,7 @@ export const ModifyOptionButton = styled.button`
 `;
 
 export const ModifyOptionContent = styled.div`
-  margin-bottom: 120px;
+  margin-bottom: 80px;
   display: flex;
   gap: 8px;
   justify-content: center;

@@ -27,10 +27,10 @@ function NavModal({ children, userName, setuserName }) {
       console.log(res);
       setuserName(null);
       localStorage.clear();
-      // 로그아웃하면서 새로고침을 할 이유가 생기면 주석 풀기
-      // window.location.reload();
       // 로그아웃하면 홈으로 돌아가도록
       navigate("/");
+      // 로그아웃하면서 새로고침을 할 이유가 생기면 주석 풀기
+      window.location.reload();
     } catch (err) {
       // 로그아웃이 잘 안됐던 이유가 오류시에도 로컬 스토리지를 없애는 코드를 넣어야 해서였을까?
       localStorage.clear();

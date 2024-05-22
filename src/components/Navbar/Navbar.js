@@ -2,7 +2,7 @@
 
 import React, { useEffect, useState } from "react";
 import * as S from "./StyledNavbar";
-import { useNavigate, useLocation } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import NavModal from "./NavModal";
 import TokenApi from "../../apis/TokenApi";
 import LoginModal from "../Modal/LoginModal";
@@ -11,7 +11,6 @@ import logoimg from "../../assets/images/logo.png";
 
 const Navbar = () => {
   const navigate = useNavigate();
-  const location = useLocation();
   const [userName, setuserName] = useState(null);
   const [isLoginModal, setIsLoginModal] = useState(false);
   const [isCancleModal, setIsCancleModal] = useState(false);
@@ -49,31 +48,48 @@ const Navbar = () => {
     window.location.reload();
   };
   const handleMyPage = () => {
-    navigate("mypage");
+    if (window.location.href.includes("signup")) {
+      setIsCancleModal(true);
+    } else {
+      if (userName) {
+        navigate("mypage");
+      } else {
+        setIsLoginModal(true);
+      }
+    }
   };
-  // const handleMyPage = () => {
-  // 	if (window.location.href.includes("signup")) {
-  // 		setIsCancleModal(true);
-  // 	} else {
-  // 		if (userName) {
-  // 			navigate("mypage");
-  // 		} else {
-  // 			setIsLoginModal(true);
-  // 		}
-  // 	}
-  // };
+
+  // 브라우저의 새로고침 감지
+  useEffect(() => {
+    // 브라우저의 새로고침 감지
+    const handleBeforeUnload = (e) => {
+      e.preventDefault();
+      if (window.location.href.includes("signup")) {
+        localStorage.setItem("refreshed", "true");
+      }
+    };
+
+    if (window.location.href.includes("signup")) {
+      window.addEventListener("beforeunload", handleBeforeUnload);
+    }
+
+    return () => {
+      if (window.location.href.includes("signup")) {
+        window.removeEventListener("beforeunload", handleBeforeUnload);
+      }
+    };
+  }, [navigate]);
 
   const handleRecommend = () => {
-    navigate("recommend");
-    // if (window.location.href.includes("signup")) {
-    //   setIsCancleModal(true);
-    // } else {
-    //   if (userName) {
-    //     navigate("recommend");
-    //   } else {
-    //     setIsLoginModal(true);
-    //   }
-    // }
+    if (window.location.href.includes("signup")) {
+      setIsCancleModal(true);
+    } else {
+      if (userName) {
+        navigate("recommend");
+      } else {
+        setIsLoginModal(true);
+      }
+    }
   };
 
   // 토큰이 만료되고 새로고침을 누르면 로그인이 풀린다.
@@ -91,38 +107,12 @@ const Navbar = () => {
     } catch (error) {}
   };
 
-  // 추천 중간 이탈 모달창 시도
-  // useEffect(() => {
-  //   fetchData();
-  //   if (window.location.href.includes("recommend")) {
-  //     setIsRecommend(true);
-  //   }
-  // }, [window.location.href]);
-
-  // ------------ 회원가입 중간 이탈 모달창 시도 ------------
-  // useEffect(() => {
-  //   if (location.pathname.includes("signup")) {
-  //     setIsCancleModal(true);
-  //   }
-  // }, [location.pathname]);
-
-  // 브라우저의 새로고침 감지
-  // useEffect(() => {
-  //   // 브라우저의 새로고침 감지
-  //   const handleBeforeUnload = (e) => {
-  //     e.preventDefault();
-  //     if (window.location.href.includes("signup")) {
-  //       setIsCancleModal(true);
-  //       e.returnValue = ""; // 경고창 표시 방지
-  //     }
-  //   };
-
-  //   return () => {
-  //     if (window.location.href.includes("signup")) {
-  //       window.removeEventListener("beforeunload", handleBeforeUnload);
-  //     }
-  //   };
-  // }, [navigate, setIsCancleModal]);
+  useEffect(() => {
+    fetchData();
+    if (window.location.href.includes("recommend")) {
+      setIsRecommend(true);
+    }
+  }, [window.location.href]);
 
   return (
     <S.NavSection isHomePage={isHomePage}>
