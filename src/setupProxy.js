@@ -3,7 +3,7 @@ module.exports = (app) => {
 	app.use(
 		createProxyMiddleware("/api", {
 			target:
-				"http://43.200.20.25:8080",
+				"http://43.202.36.104:8080",
 			changeOrigin: true,
 			pathRewrite: { "^/api": "" },
 		})
